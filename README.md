@@ -1,6 +1,5 @@
 # Installation
-This README assumes that you have install a configured your server with a
-working Apache/Nginx. The stack should be optimized to run a Drupal site.
+This README assumes that you have a server with a working Apache/Nginx. The stack should be optimized to run a Drupal site.
 
 ## Dependencies
 * [Drush 6.1.0](https://github.com/drush-ops/drush)
@@ -36,7 +35,7 @@ quit
 
 Now you can sign into Loop as `admin` with password `admin` – remember to change this!
 
-By default only the core features are enabled so you should visit the features overview and enable any additional features you would need.
+By default only the core features are enabled, so you should visit the features overview and enable any additional features you would need.
 
 
 ### Setup for development
@@ -92,7 +91,7 @@ As an alternative to manually creating terms, you can install the module [Loop t
 
 ## Installing Apache Solr
 
-These script below will
+The script below will
 
 * install Apache Solr 4.9.1 (as a Tomcat servlet) running on port 8983 and
 * create a Solr core named "loop"
