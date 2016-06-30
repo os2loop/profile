@@ -394,7 +394,7 @@ class DITAParser implements ParserInterface {
     // Process each child and add to Index as children.
     foreach ($xml->children() as $child) {
       $node_type = $child->getName();
-      if ($node_type == 'topichead') {
+      if ($node_type == 'topichead' || $node_type == 'topicref') {
         $children[] = $this->traverseNode($child, $path_to_directory, $index_node_id, $object_references, $xref_references);
       }
     }
