@@ -124,6 +124,14 @@ class DITAParser implements ParserInterface {
       // Get the reference to the topicref file.
       $href = $node['href'];
 
+      // Strip any fragment identifier
+      $href = preg_replace('@#.*$@', '', $href);
+
+      $file_path = $path_to_directory . '/' . $href;
+      if (!file_exists($file_path)) {
+        return NULL;
+      }
+
       // Load body of topic into DOM.
       $body = simplexml_load_file($path_to_directory . '/' . $href)->body;
       $domnode = dom_import_simplexml($body[0]);
