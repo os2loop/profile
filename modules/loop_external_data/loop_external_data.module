@@ -638,8 +638,9 @@ function _loop_external_data_fix_references_leaf($loop_leaf, $references) {
   foreach ($as as $a) {
     $href = $a->getAttribute('href');
 
-    $ref = $references[$href];
-    if (isset($ref)) {
+    // The href may be external and therefore not be in (internal) references.
+    if (isset($references[$href])) {
+      $ref = $references[$href];
       $new_path = '/node/' . $ref['nid'];
 
       $a->setAttribute('href', $new_path);

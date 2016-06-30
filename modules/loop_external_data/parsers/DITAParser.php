@@ -221,13 +221,25 @@ class DITAParser implements ParserInterface {
       foreach ($xpath->query('//xref') as $xref) {
         // External links have the scope attribute set to external.
         $scope = $xref->getAttribute('scope');
+        // Not all external links have scope="external".
+        if (preg_match('@^([a-z]+:/)?/@', $xref->getAttribute('href'))) {
+          $scope = 'external';
+        }
 
         if ($scope != 'external') {
           $xhref = dirname($href) . '/' . $xref->getAttribute('href');
-          $next_index = count($xref_references);
 
           $xhref = explode('#', $xhref);
-          $xref_references[$this->collapsePath($xhref[0])] = $next_index;
+
+          // Check if we have seen this internal reference before.
+          // If not, add it to the internal references list.
+          $path = $this->collapsePath($xhref[0]);
+          if (isset($xref_references[$path])) {
+            $next_index = $xref_references[$path];
+          } else {
+            $next_index = count($xref_references);
+            $xref_references[$path] = $next_index;
+          }
 
           // Check for empty content, insert title from references topic as text.
           if ($xref->nodeValue === '') {
