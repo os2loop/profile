@@ -175,7 +175,7 @@ projects[saml_sp][download][branch] = "7.x-2.x"
 ; SAML SP bugfixes:
 projects[saml_sp][patch][] = "https://www.drupal.org/files/issues/nameid-correction.patch"
 projects[saml_sp][patch][] = "https://www.drupal.org/files/issues/2649478-saml_sp-validation_of_signed_elements_fails-2.patch"
-projects[saml_sp][patch][] = "https://www.drupal.org/files/issues/saml_sp_fix_make.patch"
+projects[saml_sp][patch][] = "https://www.drupal.org/files/issues/saml_sp_remove_make_file.patch"
 ; Custom SAML SP hooks
 projects[saml_sp][patch][] = "https://raw.githubusercontent.com/os2loop/profile/master/patches/saml_sp_drupal_login-alter_user_hooks.patch"
 
@@ -288,7 +288,8 @@ libraries[php-saml][directory_name] = "php-saml"
 libraries[php-saml][destination] = "libraries"
 
 libraries[xmlseclibs][download][type] = "git"
-libraries[xmlseclibs][download][url] = "https://github.com/Maks3w/xmlseclibs.git"
+libraries[xmlseclibs][download][url] = "https://github.com/robrichards/xmlseclibs.git"
+libraries[xmlseclibs][download][branch] = "1.3.2"
 libraries[xmlseclibs][directory_name] = "xmlseclibs"
 libraries[xmlseclibs][destination] = "libraries"
 
