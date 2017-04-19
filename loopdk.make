@@ -147,7 +147,7 @@ projects[page_title][subdir] = "contrib"
 projects[page_title][version] = "2.7"
 
 projects[panels][subdir] = "contrib"
-projects[panels][version] = "3.5"
+projects[panels][version] = "3.6"
 
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.3"
