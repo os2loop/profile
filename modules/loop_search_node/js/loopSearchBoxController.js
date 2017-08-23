@@ -210,13 +210,6 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       // Hide suggestions.
       $scope.suggestToggle(false);
 
-      // If this is not the search page redirect to the search page with the
-      // query.
-      if (window.location.pathname != '/search') {
-        window.location = '/search#/#text=' + $scope.query.text;
-        return;
-      }
-
       // Reset pager.
       if ($scope.query.hasOwnProperty('pager')) {
         $scope.query.pager = angular.copy(CONFIG.provider.pager);

@@ -93,6 +93,10 @@
   }
 }
 
+.search-result--block {
+  margin-bottom: 1.5em;
+}
+
 .search-result--link {
   display: block;
   margin-bottom: .5em;
@@ -133,7 +137,6 @@
     @extend %icon-before;
   }
 }
-
 
 .search-result--meta-data {
   margin-bottom: $margin-bottom;

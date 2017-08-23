@@ -3419,6 +3419,9 @@ a.question--term {
     margin-bottom: 0;
     padding-bottom: 0; }
 
+.search-result--block {
+  margin-bottom: 1.5em; }
+
 .search-result--link {
   display: block;
   margin-bottom: .5em; }

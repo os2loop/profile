@@ -17,6 +17,7 @@ function loop_preprocess_page(&$variables) {
     }
     else if (module_exists('search_node_page')) {
       $variables['search'] = module_invoke('search_node_page', 'block_view', 'search_node_search_box');
+      $variables['search']['result'] = module_invoke('search_node_page', 'block_view', 'search_node_search_result');
     }
     else {
       $variables['search'] = module_invoke('search', 'block_view', 'form');
