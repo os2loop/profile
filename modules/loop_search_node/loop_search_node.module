@@ -55,9 +55,7 @@ function loop_search_node_no_results() {
  * It's used in the "no result" submit form.
  */
 function loop_search_node_init() {
-  if (current_path() == 'search') {
-    drupal_add_library('system', 'ui.autocomplete');
-  }
+  drupal_add_library('system', 'ui.autocomplete');
 }
 
 /**

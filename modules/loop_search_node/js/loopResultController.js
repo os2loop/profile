@@ -16,6 +16,9 @@ angular.module('searchResultApp').controller('loopResultController', ['CONFIG', 
     // process. E.g display spinner.
     $scope.searching = false;
 
+    // Used to ensure "no-results" is not shown before first search.
+    $scope.no_hits_yet = true;
+
     // Check if the provider supports an pager.
     if (CONFIG.provider.hasOwnProperty('pager')) {
       // Add pager information to the scope.
@@ -48,6 +51,8 @@ angular.module('searchResultApp').controller('loopResultController', ['CONFIG', 
      */
     $scope.hits = [];
     communicatorService.$on('hits', function onHits(event, data) {
+      $scope.no_hits_yet = false;
+
       // Ensure that hits titles are stream lined.
       var hits = data.hits;
       for (var i in hits.results) {

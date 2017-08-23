@@ -146,18 +146,7 @@ if (isset($primary_menu_block['content'])): ?>
 <?php endif; ?>
 
 <?php if (isset($search['result'])): ?>
-	<div id="block-system-main" class="block block-system search-result--block">
-		<div class="content">
-			<div class="contextual-links-region">  <div class="layout-full-width">
-					<div class="layout--inner">
-						<div class="layout-element-alpha">
-							<?php print render($search['result']); ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<?php print render($search['result']); ?>
 <?php endif; ?>
 
 <?php if ($breadcrumb): ?>
