@@ -5,15 +5,6 @@
  */
 
 /**
- * Implements hook_ctools_plugin_api().
- */
-function loop_search_node_settings_ctools_plugin_api($module = NULL, $api = NULL) {
-  if ($module == "page_manager" && $api == "pages_default") {
-    return array("version" => "1");
-  }
-}
-
-/**
  * Implements hook_default_search_api_index().
  */
 function loop_search_node_settings_default_search_api_index() {
@@ -155,6 +146,7 @@ function loop_search_node_settings_default_search_api_index() {
         "field_external_link:url" : { "type" : "uri" },
         "field_keyword:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_profession:name" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_subject" : { "type" : "integer", "entity_type" : "taxonomy_term" },
         "field_subject:name" : { "type" : "text" },
         "nid" : { "type" : "integer" },
         "search_api_language" : { "type" : "string" },
