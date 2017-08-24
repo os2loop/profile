@@ -13,6 +13,12 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     $scope.searchBtnText = 'Search';
     $scope.searching = false;
 
+    // Handle toggling of the search filter.
+    $scope.isFiltersShown = false;
+    $scope.toggleFilter = function () {
+      $scope.isFiltersShown = !$scope.isFiltersShown;
+    };
+
     /**
      * Expose the Drupal.t() function to angular templates.
      *
@@ -63,15 +69,8 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       // Start the search request.
       searchProxyService.search($scope.query).then(
         function (data) {
-          // Updated filters.
-          searchProxyService.getFilters().then(
-            function (filters) {
-              $scope.filters = filters;
-            },
-            function (reason) {
-              console.error(reason);
-            }
-          );
+          // Update filter counts.
+          $scope.selectedFilterCount = countSelectedFilters();
 
           // Send results.
           $scope.searchBtnText = 'Search';
@@ -143,17 +142,6 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
 
           // Execute the search.
           search();
-        }
-        else {
-          // Get filters based on search content (maybe slow).
-          searchProxyService.getFilters().then(
-            function (filters) {
-              $scope.filters = filters;
-            },
-            function (reason) {
-              console.error(reason);
-            }
-          );
         }
       }
 
@@ -361,6 +349,69 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
         }
       );
     }
+
+    /**
+     * Simply count the number of selected filters.
+     *
+     * @return {number}
+     *   The number of selected filters.
+     */
+    function countSelectedFilters() {
+      var count = 0;
+
+      if ($scope.query.hasOwnProperty('filters') && $scope.query.filters.hasOwnProperty('taxonomy')) {
+        for (var i in $scope.query.filters.taxonomy) {
+          if (i === 'type') {
+            // Skip the special type filter.
+            continue;
+          }
+          for (var j in $scope.query.filters.taxonomy[i]) {
+            if ($scope.query.filters.taxonomy[i][j]) {
+              count++;
+            }
+          }
+        }
+      }
+
+      return count
+    }
+
+    /**
+     * Filter based on content type.
+     *
+     * @param type
+     *   The type to filter on.
+     */
+    $scope.filterType = function filterType(type) {
+      if (!$scope.query.hasOwnProperty('filters')) {
+        $scope.query['filters'] = { };
+      }
+      if (!$scope.query.filters.hasOwnProperty('taxonomy')) {
+        $scope.query.filters['taxonomy'] = { };
+      }
+
+      switch (type) {
+        case 'all':
+          delete $scope.query.filters['taxonomy']['type'];
+          break;
+
+        case 'docs':
+          $scope.query.filters['taxonomy']['type'] = {
+            'loop_documents_document': true,
+            'loop_documents_collection': true,
+            'external_sources': true
+          };
+          break;
+
+        case 'posts':
+          $scope.query.filters['taxonomy']['type'] = {
+            'post': true
+          };
+          break;
+      }
+
+      $scope.searchClicked();
+    };
 
     /**
      * Resets the current search to default.

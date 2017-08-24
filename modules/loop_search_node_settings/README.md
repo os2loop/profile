@@ -199,6 +199,18 @@ This is the mappings/configuration used inside serarch node.
         "raw": true,
         "geopoint": false,
         "field": "field_subject"
+      },
+      {
+        "type": "string",
+        "country": "DK",
+        "language": "da",
+        "default_analyzer": "string_index",
+        "default_indexer": "not_analyzed",
+        "sort": false,
+        "indexable": true,
+        "raw": true,
+        "geopoint": false,
+        "field": "type"
       }
     ],
     "dates": [
