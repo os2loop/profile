@@ -27,64 +27,24 @@
 
             <!-- Suggestions -->
             <span data-ng-if="suggestionExists() && suggestions.show == true" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: block; right: auto;" class="tt-dropdown-menu">
-              <!-- type ==  'loop_documents_collection' -->
-              <div data-ng-if="suggestions.loop_documents_collection.length" class="tt-dataset-0">
-                <h3 class="tt-suggestion-header">{{ Drupal.t('Documents collection', {}, { 'context': 'angular' }) }}</h3>
+              <div data-ng-if="suggestions.hits.length" class="tt-dataset-0">
                 <span style="display: block;" class="tt-suggestions">
-                  <div data-ng-repeat="hit in suggestions.loop_documents_collection" class="tt-suggestion">
+                  <div data-ng-repeat="hit in suggestions.hits" class="tt-suggestion">
                     <a href="{{ hit.url }}" data-ng-bind-html="hit.title"></a>
                   </div>
                 </span>
               </div>
-
-              <div class="tt-dataset-1"></div>
-
-              <!-- type ==  'loop_documents_document' -->
-              <div data-ng-if="suggestions.loop_documents_document.length" class="tt-dataset-0">
-                <h3 class="tt-suggestion-header">{{ Drupal.t('Documents', {}, { 'context': 'angular' }) }}</h3>
-                <span style="display: block;" class="tt-suggestions">
-                  <div data-ng-repeat="hit in suggestions.loop_documents_document" class="tt-suggestion">
-                    <a href="{{ hit.url }}" data-ng-bind-html="hit.title"></a>
-                  </div>
-                </span>
-              </div>
-
-              <div class="tt-dataset-1"></div>
-
-              <!-- type ==  'external_sources' -->
-              <div data-ng-if="suggestions.external_sources.length" class="tt-dataset-0">
-                <h3 class="tt-suggestion-header">{{ Drupal.t('Tutorials and external documents', {}, { 'context': 'angular' }) }}</h3>
-                <span style="display: block;" class="tt-suggestions">
-                  <div data-ng-repeat="hit in suggestions.external_sources" class="tt-suggestion">
-                    <a href="{{ hit.url }}" data-ng-bind-html="hit.title"></a>
-                  </div>
-                </span>
-              </div>
-
-              <div class="tt-dataset-1"></div>
-
-              <!-- type == 'post' -->
-              <div data-ng-if="suggestions.post.length" class="tt-dataset-2">
-                <h3 class="tt-suggestion-header">{{ Drupal.t('Questions', {}, { 'context': 'angular' }) }}</h3>
-                <span style="display: block;" class="tt-suggestions">
-                  <div data-ng-repeat="hit in suggestions.post" class="tt-suggestion">
-                    <a href="{{ hit.url }}" data-ng-bind-html="hit.title"></a>
-                  </div>
-                </span>
-              </div>
-              <div class="tt-dataset-3"></div>
             </span>
-
           </span>
         </div>
         <input class="search-box-block--button js-hide-suggest" data-ng-disabled="searching" type="submit" data-ng-click="searchClicked()" value="{{ Drupal.t(searchBtnText, {}, { 'context': 'angular' }) }}">
 
         <div class="search--filters">
-          <span class="filter-type" data-ng-class="{'is-active': true}" data-ng-click="filterType('all')">{{ Drupal.t('All', {}, { 'context': 'angular' }) }}</span>
-          <span class="filter-type" data-ng-class="{'is-active': false}" data-ng-click="filterType('docs')">{{ Drupal.t('Documents', {}, { 'context': 'angular' }) }}</span>
-          <span class="filter-type" data-ng-class="{'is-active': false}" data-ng-click="filterType('posts')">{{ Drupal.t('Posts', {}, { 'context': 'angular' }) }}</span>
+          <span class="filter-type" data-ng-click="filterType('all')">{{ Drupal.t('All', {}, { 'context': 'angular' }) }}</span>
+          <span class="filter-type" data-ng-click="filterType('docs')">{{ Drupal.t('Documents', {}, { 'context': 'angular' }) }}</span>
+          <span class="filter-type" data-ng-click="filterType('posts')">{{ Drupal.t('Posts', {}, { 'context': 'angular' }) }}</span>
 
-          <span class="filter-type expandable" data-ng-class="{'is-active': false}" data-ng-click="toggleFilter()">
+          <span class="filter-type" data-ng-class="{'is-active': isFiltersShown}" data-ng-click="toggleFilter()">
             <span data-ng-if="selectedFilterCount > 0">{{ selectedFilterCount }} {{ Drupal.t('selected subjects', {}, { 'context': 'angular' }) }}</span>
             <span data-ng-if="selectedFilterCount === 0">{{ Drupal.t('Filter on subjects', {}, { 'context': 'angular' }) }}</span>
           </span>

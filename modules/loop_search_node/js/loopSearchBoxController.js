@@ -12,6 +12,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     // Set default search button text and state.
     $scope.searchBtnText = 'Search';
     $scope.searching = false;
+    $scope.selectedFilterCount = 0;
 
     // Handle toggling of the search filter.
     $scope.isFiltersShown = false;
@@ -93,10 +94,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       // Set suggestion to empty.
       $scope.suggestions = {
         'show': false,
-        'post': [],
-        'external_sources': [],
-        'loop_documents_collection': [],
-        'loop_documents_document': []
+        'hits': []
       };
 
       // Get filters.
@@ -210,12 +208,6 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
      * Auto-complete callback.
      */
     $scope.autocomplete = function autocomplete() {
-      // Update suggestion box.
-      _suggestionSearch('external_sources');
-      _suggestionSearch('loop_documents_collection');
-      _suggestionSearch('loop_documents_document');
-      _suggestionSearch('post');
-
       if (CONFIG.provider.hasOwnProperty('autocomplete')) {
         $scope.autocompleteString = '';
         if ($scope.query.text.length >= CONFIG.provider.autocomplete.minChars) {
@@ -225,6 +217,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
                 // Use regex to ensure cases (letters) are matched.
                 var re = new RegExp('^' + $scope.query.text, 'i');
                 var res = data.results[0][CONFIG.provider.autocomplete.field];
+                $scope.suggestions.hits = data.results;
                 $scope.autocompleteString = res.replace(re, $scope.query.text);
               }
               else {
@@ -266,10 +259,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           // Page may have been reload and no suggestions fetched. So try to execute
           // the current search.
           if (!$scope.suggestionExists()) {
-            _suggestionSearch('external_sources');
-            _suggestionSearch('loop_documents_collection');
-            _suggestionSearch('loop_documents_document');
-            _suggestionSearch('post');
+            // ?????
           }
 
           $scope.autocompleteString = $scope.autocompletePrevString;
@@ -284,71 +274,8 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
      *  If they do true else false.
      */
     $scope.suggestionExists = function suggestionExists() {
-      return ($scope.suggestions['post'].length || $scope.suggestions['external_sources'].length || $scope.suggestions['loop_documents_collection'].length || $scope.suggestions['loop_documents_document'].length);
+      return $scope.suggestions['hits'].length;
     };
-
-    /**
-     * Helper function to get search suggestions.
-     *
-     * @param type
-     *   The content type to get suggestions for.
-     *
-     * @private
-     */
-    function _suggestionSearch(type) {
-      var query = {
-        index: '',
-        query: {
-          filtered: {
-            query: {
-              multi_match: {
-                query: $scope.query.text,
-                fields: CONFIG.provider.fields,
-                analyzer: 'string_search'
-              }
-            },
-            filter: {
-              bool: {
-                must: {
-                  term: {
-                    'type': type
-                  }
-                }
-              }
-            }
-          }
-        },
-        size: 5,
-        highlight: {
-          pre_tags : [ "<strong>" ],
-          post_tags : [ "</strong>" ],
-          fields: {
-            title: {}
-          }
-        }
-      };
-
-      // Start the search request.
-      searchProxyService.rawQuerySearch(query).then(
-        function (data) {
-          var suggestions = [];
-
-          for (var i = 0; i < data.results.length; i++) {
-            var current = data.results[i];
-            suggestions.push({
-              'title': current.hasOwnProperty('_highlight') ? current._highlight.title[0] : current.title,
-              'url': current.url
-            });
-          }
-
-          // Filter results based on types.
-          $scope.suggestions[type] = suggestions;
-        },
-        function (reason) {
-          console.error(reason);
-        }
-      );
-    }
 
     /**
      * Simply count the number of selected filters.
