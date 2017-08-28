@@ -98,6 +98,35 @@ function loop_notification_default_message_type() {
       ]
     }
   }');
+  $items['comment_changed'] = entity_import('message_type', '{
+    "name" : "comment_changed",
+    "description" : "Comment changed",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : {
+      "token options" : { "clear" : 0 },
+      "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
+    },
+    "language" : "da",
+    "arguments" : null,
+    "message_text" : {
+      "da" : [
+        {
+          "value" : "Et svar til sp\\u00f8rgsm\\u00e5let: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E er blevet \\u00e6ndret",
+          "format" : "html",
+          "safe_value" : "Et svar til sp\\u00f8rgsm\\u00e5let: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E er blevet \\u00e6ndret"
+        }
+      ],
+      "en" : [
+        {
+          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
+          "format" : "html",
+          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
+        }
+      ]
+    }
+  }');
   $items['node_added'] = entity_import('message_type', '{
     "name" : "node_added",
     "description" : "Node added",
