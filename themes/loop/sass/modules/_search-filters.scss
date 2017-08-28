@@ -1,0 +1,144 @@
+/**
+ *
+ * Search filters
+ *
+ */
+
+
+/* Placeholders related to this document
+   ========================================================================== */
+%search-filters-label {
+  background: #fff;
+  border: 2px solid #5dc26d;
+  color: #5dc26d;
+  cursor: pointer;
+  flex: 1 0 auto;
+  margin: 2em 0;
+  padding: .5em;
+  text-align: center;
+}
+
+
+/* Search filters
+   ========================================================================== */
+.search-filters {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &--type {
+    display: flex;
+    flex: 0 0 100%;
+
+    @include breakpoint($breakpoint-4) {
+      flex: 0 0 60%;
+    }
+  }
+
+  &--subject-wrapper {
+    display: flex;
+    flex: 0 0 100%;
+
+    @include breakpoint($breakpoint-4) {
+      flex: 0 1 20%;
+    }
+  }
+
+  &--subjects {
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 100%;
+    padding: 1em 2em;
+    position: relative;
+
+    @include border-radius($border-radius);
+  }
+
+  &--subjects-item {
+    box-sizing: border-box;
+    display: flex;
+    height: 60px;
+    flex: 1 0 100%;
+    padding-bottom: 1em;
+    padding-left: 21px;
+    padding-right: 2em;
+    padding-top: 1em;
+
+    
+    input[type=checkbox] {
+      @include checkbox();
+    }
+
+    @include breakpoint(800px) {
+      flex: 0 1 50%;
+    }
+
+    @include breakpoint(1000px) {
+      flex: 0 1 33%;
+    }
+
+    input {
+      margin-left: -21px;
+    }
+  }
+
+  &--label {
+    @extend %search-filters-label;
+
+    &:first-child {
+      border-right: 0;
+
+      @include border-radius($border-radius 0 0 $border-radius);
+    }
+
+    &:last-child {
+      border-left: 0;
+
+      @include border-radius(0 $border-radius $border-radius 0);
+    }
+
+    &.is-active {
+      background: #5dc26d;
+      color: #fff;
+    }
+  }
+
+  &--arrow {
+    position: absolute;
+    top:-30px;
+    right: 80px;
+    height: 30px;
+    width: 30px;
+    display: block;
+
+    &-inner {
+      border-width: 15px;
+      border-style: solid;
+      border-color: transparent;
+      border-bottom-color: #fff;
+    }
+  }
+  
+  &--icon-dropdown {
+    position: absolute;
+    top: .85em;
+    right: 1em;
+    max-width: .85em;
+  }
+
+  &--subject-wrapper-label {
+    position: relative;
+
+    @extend %search-filters-label;
+
+    @include border-radius($border-radius);
+  }
+
+  &--action {
+    width: 100%;
+
+    @extend .button--action;
+  }
+}

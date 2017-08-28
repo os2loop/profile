@@ -37,26 +37,32 @@
             </span>
           </span>
         </div>
-        <input class="search-box-block--button js-hide-suggest" data-ng-disabled="searching" type="submit" data-ng-click="searchClicked()" value="{{ Drupal.t(searchBtnText, {}, { 'context': 'angular' }) }}">
+        <input class="search-box-block--button is-search-node js-hide-suggest" data-ng-disabled="searching" type="submit" data-ng-click="searchClicked()" value="{{ Drupal.t(searchBtnText, {}, { 'context': 'angular' }) }}">
 
-        <div class="search--filters">
-          <span class="filter-type" data-ng-click="filterType('all')">{{ Drupal.t('All', {}, { 'context': 'angular' }) }}</span>
-          <span class="filter-type" data-ng-click="filterType('docs')">{{ Drupal.t('Documents', {}, { 'context': 'angular' }) }}</span>
-          <span class="filter-type" data-ng-click="filterType('posts')">{{ Drupal.t('Posts', {}, { 'context': 'angular' }) }}</span>
+        <div class="search-filters">
+          <div class="search-filters--type">
+            <span class="search-filters--label" data-ng-class="{'is-active': filterActive==='all'}" data-ng-click="filterType('all')">{{ Drupal.t('All', {}, { 'context': 'angular' }) }}</span>
+            <span class="search-filters--label" data-ng-class="{'is-active': filterActive==='docs'}" data-ng-click="filterType('docs')">{{ Drupal.t('Documents', {}, { 'context': 'angular' }) }}</span>
+            <span class="search-filters--label" data-ng-class="{'is-active': filterActive==='posts'}" data-ng-click="filterType('posts')">{{ Drupal.t('Posts', {}, { 'context': 'angular' }) }}</span>
+          </div>
 
-          <span class="filter-type" data-ng-class="{'is-active': isFiltersShown}" data-ng-click="toggleFilter()">
-            <span data-ng-if="selectedFilterCount > 0">{{ selectedFilterCount }} {{ Drupal.t('selected subjects', {}, { 'context': 'angular' }) }}</span>
-            <span data-ng-if="selectedFilterCount === 0">{{ Drupal.t('Filter on subjects', {}, { 'context': 'angular' }) }}</span>
+          <span class="search-filters--subject-wrapper" data-ng-class="{'is-active': isFiltersShown}" data-ng-click="toggleFilter()">
+            <span class="search-filters--subject-wrapper-label">
+              <span data-ng-if="selectedFilterCount > 0">{{ selectedFilterCount }} {{ Drupal.t('selected subjects', {}, { 'context': 'angular' }) }}</span>
+              <span data-ng-if="selectedFilterCount === 0">{{ Drupal.t('Filter on subjects', {}, { 'context': 'angular' }) }}</span>
+              <img class="search-filters--icon-dropdown" src="/profiles/loopdk/themes/loop/images/nav-arrow-down-icon.png">
+            </span>
           </span>
 
           <!-- Filters -->
-          <div data-ng-show="isFiltersShown" class="filters" data-ng-repeat="(id, filter) in filters['taxonomy']">
-            <span data-ng-repeat="(key, item) in filter.items">
+          <div data-ng-show="isFiltersShown" class="search-filters--subjects" data-ng-repeat="(id, filter) in filters['taxonomy']">
+            <div class="search-filters--arrow"><div class="search-filters--arrow-inner"></div></div>
+            <span class="search-filters--subjects-item" data-ng-repeat="(key, item) in filter.items">
               <input id="{{ key }}" type="checkbox" data-ng-model="query.filters['taxonomy'][id][key]" data-ng-click="searchClicked()">
               <label for="{{ key }}">{{ item.value }}</label>
             </span>
 
-            <span data-ng-click="toggleFilter()" class="button">{{ Drupal.t('Filter', {}, { 'context': 'angular' }) }}</span>
+            <span data-ng-click="toggleFilter()" class="search-filters--action">{{ Drupal.t('Filter', {}, { 'context': 'angular' }) }}</span>
           </div>
         </div>
       </div>

@@ -317,6 +317,8 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
         $scope.query.filters['taxonomy'] = { };
       }
 
+      $scope.filterActive = type;
+
       switch (type) {
         case 'all':
           delete $scope.query.filters['taxonomy']['type'];

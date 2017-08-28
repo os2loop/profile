@@ -66,6 +66,16 @@
     @extend .button--deactivated;
   }
 
+  &.is-search-node {
+    bottom: auto;
+    top: auto;
+
+    @include breakpoint($breakpoint-3) {
+      bottom: auto;
+      top: 24px;
+    }
+  }
+
   @include breakpoint($breakpoint-3) {
     position: absolute;
     bottom: 0;

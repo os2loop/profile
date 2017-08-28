@@ -824,7 +824,7 @@ label {
   margin-bottom: 0;
   margin-top: 1.5em; }
 
-.page-user .button--action:last-child, .page-user .form-submit:last-child, .page-user .block-follow-question .flag-action:last-child, .block-follow-question .page-user .flag-action:last-child, .page-user .search-box-block--button:last-child, .page-user .typeahead-block--button:last-child, .page-user .loop-documents--collection-print a:last-child, .loop-documents--collection-print .page-user a:last-child {
+.page-user .button--action:last-child, .page-user .form-submit:last-child, .page-user .block-follow-question .flag-action:last-child, .block-follow-question .page-user .flag-action:last-child, .page-user .search-box-block--button:last-child, .page-user .search-filters--action:last-child, .page-user .typeahead-block--button:last-child, .page-user .loop-documents--collection-print a:last-child, .loop-documents--collection-print .page-user a:last-child {
   margin-bottom: 0.75em; }
 
 .page-user .user-form--password-link {
@@ -841,7 +841,7 @@ label {
  *
  * @author magnify
  */
-.button--action, .form-submit, .block-follow-question .flag-action, .search-box-block--button, .typeahead-block--button, .loop-documents--collection-print a, .button--neutral, .user-profile-form #edit-field-user-image-und-0-upload-button, .comments--editor-actions .comments--editor-actions-edit, .question--editor-actions .question--editor-actions-edit, .edit-user--image-button-add, .button--warning, .comments--editor-actions .comments--editor-actions-delete, .block-follow-question .unflag-action, .question--editor-actions .question--editor-actions-delete, .edit-user--image-button-remove, .at-add-btn {
+.button--action, .form-submit, .block-follow-question .flag-action, .search-box-block--button, .search-filters--action, .typeahead-block--button, .loop-documents--collection-print a, .button--neutral, .user-profile-form #edit-field-user-image-und-0-upload-button, .comments--editor-actions .comments--editor-actions-edit, .question--editor-actions .question--editor-actions-edit, .edit-user--image-button-add, .button--warning, .comments--editor-actions .comments--editor-actions-delete, .block-follow-question .unflag-action, .question--editor-actions .question--editor-actions-delete, .edit-user--image-button-remove, .at-add-btn {
   display: inline-block;
   font-size: 1.25em;
   margin: 0 0.5em 0.5em 0;
@@ -856,20 +856,20 @@ label {
   -ms-border-radius: 0.4em;
   -o-border-radius: 0.4em;
   border-radius: 0.4em; }
-  .button--action:focus, .form-submit:focus, .block-follow-question .flag-action:focus, .search-box-block--button:focus, .typeahead-block--button:focus, .loop-documents--collection-print a:focus, .button--neutral:focus, .user-profile-form #edit-field-user-image-und-0-upload-button:focus, .comments--editor-actions .comments--editor-actions-edit:focus, .question--editor-actions .question--editor-actions-edit:focus, .edit-user--image-button-add:focus, .button--warning:focus, .comments--editor-actions .comments--editor-actions-delete:focus, .block-follow-question .unflag-action:focus, .question--editor-actions .question--editor-actions-delete:focus, .edit-user--image-button-remove:focus, .at-add-btn:focus, .button--action:hover, .form-submit:hover, .block-follow-question .flag-action:hover, .search-box-block--button:hover, .typeahead-block--button:hover, .loop-documents--collection-print a:hover, .button--neutral:hover, .user-profile-form #edit-field-user-image-und-0-upload-button:hover, .comments--editor-actions .comments--editor-actions-edit:hover, .question--editor-actions .question--editor-actions-edit:hover, .edit-user--image-button-add:hover, .button--warning:hover, .comments--editor-actions .comments--editor-actions-delete:hover, .block-follow-question .unflag-action:hover, .question--editor-actions .question--editor-actions-delete:hover, .edit-user--image-button-remove:hover, .at-add-btn:hover, .button--action:active, .form-submit:active, .block-follow-question .flag-action:active, .search-box-block--button:active, .typeahead-block--button:active, .loop-documents--collection-print a:active, .button--neutral:active, .user-profile-form #edit-field-user-image-und-0-upload-button:active, .comments--editor-actions .comments--editor-actions-edit:active, .question--editor-actions .question--editor-actions-edit:active, .edit-user--image-button-add:active, .button--warning:active, .comments--editor-actions .comments--editor-actions-delete:active, .block-follow-question .unflag-action:active, .question--editor-actions .question--editor-actions-delete:active, .edit-user--image-button-remove:active, .at-add-btn:active {
+  .button--action:focus, .form-submit:focus, .block-follow-question .flag-action:focus, .search-box-block--button:focus, .search-filters--action:focus, .typeahead-block--button:focus, .loop-documents--collection-print a:focus, .button--neutral:focus, .user-profile-form #edit-field-user-image-und-0-upload-button:focus, .comments--editor-actions .comments--editor-actions-edit:focus, .question--editor-actions .question--editor-actions-edit:focus, .edit-user--image-button-add:focus, .button--warning:focus, .comments--editor-actions .comments--editor-actions-delete:focus, .block-follow-question .unflag-action:focus, .question--editor-actions .question--editor-actions-delete:focus, .edit-user--image-button-remove:focus, .at-add-btn:focus, .button--action:hover, .form-submit:hover, .block-follow-question .flag-action:hover, .search-box-block--button:hover, .search-filters--action:hover, .typeahead-block--button:hover, .loop-documents--collection-print a:hover, .button--neutral:hover, .user-profile-form #edit-field-user-image-und-0-upload-button:hover, .comments--editor-actions .comments--editor-actions-edit:hover, .question--editor-actions .question--editor-actions-edit:hover, .edit-user--image-button-add:hover, .button--warning:hover, .comments--editor-actions .comments--editor-actions-delete:hover, .block-follow-question .unflag-action:hover, .question--editor-actions .question--editor-actions-delete:hover, .edit-user--image-button-remove:hover, .at-add-btn:hover, .button--action:active, .form-submit:active, .block-follow-question .flag-action:active, .search-box-block--button:active, .search-filters--action:active, .typeahead-block--button:active, .loop-documents--collection-print a:active, .button--neutral:active, .user-profile-form #edit-field-user-image-und-0-upload-button:active, .comments--editor-actions .comments--editor-actions-edit:active, .question--editor-actions .question--editor-actions-edit:active, .edit-user--image-button-add:active, .button--warning:active, .comments--editor-actions .comments--editor-actions-delete:active, .block-follow-question .unflag-action:active, .question--editor-actions .question--editor-actions-delete:active, .edit-user--image-button-remove:active, .at-add-btn:active {
     text-decoration: none; }
-  .button--action:last-child, .form-submit:last-child, .block-follow-question .flag-action:last-child, .search-box-block--button:last-child, .typeahead-block--button:last-child, .loop-documents--collection-print a:last-child, .button--neutral:last-child, .user-profile-form #edit-field-user-image-und-0-upload-button:last-child, .comments--editor-actions .comments--editor-actions-edit:last-child, .question--editor-actions .question--editor-actions-edit:last-child, .edit-user--image-button-add:last-child, .button--warning:last-child, .comments--editor-actions .comments--editor-actions-delete:last-child, .block-follow-question .unflag-action:last-child, .question--editor-actions .question--editor-actions-delete:last-child, .edit-user--image-button-remove:last-child, .at-add-btn:last-child {
+  .button--action:last-child, .form-submit:last-child, .block-follow-question .flag-action:last-child, .search-box-block--button:last-child, .search-filters--action:last-child, .typeahead-block--button:last-child, .loop-documents--collection-print a:last-child, .button--neutral:last-child, .user-profile-form #edit-field-user-image-und-0-upload-button:last-child, .comments--editor-actions .comments--editor-actions-edit:last-child, .question--editor-actions .question--editor-actions-edit:last-child, .edit-user--image-button-add:last-child, .button--warning:last-child, .comments--editor-actions .comments--editor-actions-delete:last-child, .block-follow-question .unflag-action:last-child, .question--editor-actions .question--editor-actions-delete:last-child, .edit-user--image-button-remove:last-child, .at-add-btn:last-child {
     margin: 0 0 0.5em; }
 
-.button--action, .form-submit, .block-follow-question .flag-action, .search-box-block--button, .typeahead-block--button, .loop-documents--collection-print a {
+.button--action, .form-submit, .block-follow-question .flag-action, .search-box-block--button, .search-filters--action, .typeahead-block--button, .loop-documents--collection-print a {
   background-color: #5dc26d;
   border: 1px solid #41ab51;
   color: #fff;
   text-shadow: 1px 1px 0 #33863f; }
-  .button--action:link, .form-submit:link, .block-follow-question .flag-action:link, .search-box-block--button:link, .typeahead-block--button:link, .loop-documents--collection-print a:link, .button--action:visited, .form-submit:visited, .block-follow-question .flag-action:visited, .search-box-block--button:visited, .typeahead-block--button:visited, .loop-documents--collection-print a:visited {
+  .button--action:link, .form-submit:link, .block-follow-question .flag-action:link, .search-box-block--button:link, .search-filters--action:link, .typeahead-block--button:link, .loop-documents--collection-print a:link, .button--action:visited, .form-submit:visited, .block-follow-question .flag-action:visited, .search-box-block--button:visited, .search-filters--action:visited, .typeahead-block--button:visited, .loop-documents--collection-print a:visited {
     color: #fff;
     text-decoration: none; }
-  .button--action:hover, .form-submit:hover, .block-follow-question .flag-action:hover, .search-box-block--button:hover, .typeahead-block--button:hover, .loop-documents--collection-print a:hover {
+  .button--action:hover, .form-submit:hover, .block-follow-question .flag-action:hover, .search-box-block--button:hover, .search-filters--action:hover, .typeahead-block--button:hover, .loop-documents--collection-print a:hover {
     background-color: #41ab51; }
 
 .button--neutral, .user-profile-form #edit-field-user-image-und-0-upload-button, .comments--editor-actions .comments--editor-actions-edit, .question--editor-actions .question--editor-actions-edit, .edit-user--image-button-add {
@@ -3393,6 +3393,13 @@ a.question--term {
   width: 100%; }
   .search-box-block--button:last-child {
     margin: 0 !important; }
+  .search-box-block--button.is-search-node {
+    bottom: auto;
+    top: auto; }
+    @media only screen and (min-width: 28em) {
+      .search-box-block--button.is-search-node {
+        bottom: auto;
+        top: 24px; } }
   @media only screen and (min-width: 28em) {
     .search-box-block--button {
       position: absolute;
@@ -3458,6 +3465,137 @@ a.question--term {
 
 .search-result--meta-data-date {
   min-width: 13em; }
+
+/**
+ *
+ * Search filters
+ *
+ */
+/* Placeholders related to this document
+   ========================================================================== */
+.search-filters--label, .search-filters--subject-wrapper-label {
+  background: #fff;
+  border: 2px solid #5dc26d;
+  color: #5dc26d;
+  cursor: pointer;
+  flex: 1 0 auto;
+  margin: 2em 0;
+  padding: .5em;
+  text-align: center; }
+
+/* Search filters
+   ========================================================================== */
+.search-filters {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  .search-filters--type {
+    display: flex;
+    flex: 0 0 100%; }
+    @media only screen and (min-width: 43em) {
+      .search-filters--type {
+        flex: 0 0 60%; } }
+  .search-filters--subject-wrapper {
+    display: flex;
+    flex: 0 0 100%; }
+    @media only screen and (min-width: 43em) {
+      .search-filters--subject-wrapper {
+        flex: 0 1 20%; } }
+  .search-filters--subjects {
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 100%;
+    padding: 1em 2em;
+    position: relative;
+    -webkit-border-radius: 0.4em;
+    -moz-border-radius: 0.4em;
+    -ms-border-radius: 0.4em;
+    -o-border-radius: 0.4em;
+    border-radius: 0.4em; }
+  .search-filters--subjects-item {
+    box-sizing: border-box;
+    display: flex;
+    height: 60px;
+    flex: 1 0 100%;
+    padding-bottom: 1em;
+    padding-left: 21px;
+    padding-right: 2em;
+    padding-top: 1em; }
+    .search-filters--subjects-item input[type=checkbox] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      flex: 0 0 20px;
+      align-self: center;
+      display: block;
+      height: 20px;
+      padding: 5px;
+      margin-right: .5em;
+      border: 2px solid #41ab51;
+      border-radius: .3em; }
+      .search-filters--subjects-item input[type=checkbox]:focus {
+        border-color: #41ab51; }
+      .search-filters--subjects-item input[type=checkbox]:checked {
+        border: 2px solid #41ab51;
+        background-color: #41ab51;
+        background-image: url("../icons/check.svg");
+        background-repeat: no-repeat;
+        background-size: 15px 15px;
+        background-position: center center; }
+      .search-filters--subjects-item input[type=checkbox]:focus {
+        outline: none; }
+    @media only screen and (min-width: 800px) {
+      .search-filters--subjects-item {
+        flex: 0 1 50%; } }
+    @media only screen and (min-width: 1000px) {
+      .search-filters--subjects-item {
+        flex: 0 1 33%; } }
+    .search-filters--subjects-item input {
+      margin-left: -21px; }
+  .search-filters--label:first-child {
+    border-right: 0;
+    -webkit-border-radius: 0.4em 0 0 0.4em;
+    -moz-border-radius: 0.4em 0 0 0.4em;
+    -ms-border-radius: 0.4em 0 0 0.4em;
+    -o-border-radius: 0.4em 0 0 0.4em;
+    border-radius: 0.4em 0 0 0.4em; }
+  .search-filters--label:last-child {
+    border-left: 0;
+    -webkit-border-radius: 0 0.4em 0.4em 0;
+    -moz-border-radius: 0 0.4em 0.4em 0;
+    -ms-border-radius: 0 0.4em 0.4em 0;
+    -o-border-radius: 0 0.4em 0.4em 0;
+    border-radius: 0 0.4em 0.4em 0; }
+  .search-filters--label.is-active {
+    background: #5dc26d;
+    color: #fff; }
+  .search-filters--arrow {
+    position: absolute;
+    top: -30px;
+    right: 80px;
+    height: 30px;
+    width: 30px;
+    display: block; }
+    .search-filters--arrow-inner {
+      border-width: 15px;
+      border-style: solid;
+      border-color: transparent;
+      border-bottom-color: #fff; }
+  .search-filters--icon-dropdown {
+    position: absolute;
+    top: .85em;
+    right: 1em;
+    max-width: .85em; }
+  .search-filters--subject-wrapper-label {
+    position: relative;
+    -webkit-border-radius: 0.4em;
+    -moz-border-radius: 0.4em;
+    -ms-border-radius: 0.4em;
+    -o-border-radius: 0.4em;
+    border-radius: 0.4em; }
+  .search-filters--action {
+    width: 100%; }
 
 /**
  * Tag
