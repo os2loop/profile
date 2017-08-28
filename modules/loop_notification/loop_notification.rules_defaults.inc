@@ -9,6 +9,28 @@
  */
 function loop_notification_default_rules_configuration() {
   $items = array();
+  $items['loop_notification_autosubscribe_node_comment_author'] = entity_import('rules_config', '{ "loop_notification_autosubscribe_node_comment_author" : {
+      "LABEL" : "Autosubscribe node comment author",
+      "PLUGIN" : "reaction rule",
+      "OWNER" : "rules",
+      "REQUIRES" : [ "flag", "rules", "comment" ],
+      "ON" : { "comment_insert" : [] },
+      "DO" : [
+        { "flag_flagnode" : {
+            "flag" : "subscribe_node",
+            "node" : [ "comment:node" ],
+            "flagging_user" : [ "comment:author" ],
+            "permission_check" : "0"
+          }
+        },
+        { "entity_fetch" : {
+            "USING" : { "type" : "node", "id" : [ "comment:node:nid" ] },
+            "PROVIDE" : { "entity_fetched" : { "entity_fetched" : "Fetched entity" } }
+          }
+        }
+      ]
+    }
+  }');
   $items['loop_notification_create_notification_on_node_create'] = entity_import('rules_config', '{ "loop_notification_create_notification_on_node_create" : {
       "LABEL" : "Create notification on node create",
       "PLUGIN" : "rule set",

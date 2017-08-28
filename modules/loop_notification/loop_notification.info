@@ -38,6 +38,7 @@ features[message_type][] = node_added
 features[message_type][] = node_edited
 features[page_manager_pages][] = messages
 features[page_manager_pages][] = user_notifications
+features[rules_config][] = loop_notification_autosubscribe_node_comment_author
 features[rules_config][] = loop_notification_create_notification_on_node_create
 features[rules_config][] = loop_notification_create_notification_on_node_edit
 features[rules_config][] = loop_notification_send_mail
