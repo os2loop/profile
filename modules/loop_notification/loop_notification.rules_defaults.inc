@@ -31,6 +31,45 @@ function loop_notification_default_rules_configuration() {
       ]
     }
   }');
+  $items['loop_notification_create_notification_on_comment_edit'] = entity_import('rules_config', '{ "loop_notification_create_notification_on_comment_edit" : {
+      "LABEL" : "Create notification on comment edit",
+      "PLUGIN" : "rule set",
+      "OWNER" : "rules",
+      "REQUIRES" : [ "rules" ],
+      "USES VARIABLES" : {
+        "active_user_object" : { "label" : "Active user objject", "type" : "user" },
+        "comment_author" : { "label" : "comment_author", "type" : "user" },
+        "comment" : { "label" : "comment", "type" : "comment" }
+      },
+      "RULES" : [
+        { "RULE" : {
+            "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } },
+            "IF" : [
+              { "NOT data_is" : { "data" : [ "active-user-object" ], "value" : [ "comment-author" ] } }
+            ],
+            "DO" : [
+              { "entity_create" : {
+                  "USING" : {
+                    "type" : "message",
+                    "param_type" : "comment_added_to_post",
+                    "param_user" : [ "active-user-object" ]
+                  },
+                  "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } }
+                }
+              },
+              { "data_set" : {
+                  "data" : [ "entity-created:field-message-node-reference" ],
+                  "value" : [ "comment:node" ]
+                }
+              },
+              { "entity_save" : { "data" : [ "entity-created" ], "immediate" : 1 } }
+            ],
+            "LABEL" : "Create notification"
+          }
+        }
+      ]
+    }
+  }');
   $items['loop_notification_create_notification_on_node_create'] = entity_import('rules_config', '{ "loop_notification_create_notification_on_node_create" : {
       "LABEL" : "Create notification on node create",
       "PLUGIN" : "rule set",
@@ -130,6 +169,36 @@ function loop_notification_default_rules_configuration() {
               "from_mail" : "[site:mail]",
               "subject" : "Nyt svar til sp\\u00f8rgsm\\u00e5let [node:title]",
               "body" : "\\u003Ch2\\u003ENyt svar til sp\\u00f8rgsm\\u00e5let [node:title]\\u003C\\/h2\\u003E\\r\\n\\u003Cp\\u003EK\\u00e6re [user:field-first-name] [user:field-last-name]\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003EDer er kommet nyt svar til sp\\u00f8rgsm\\u00e5let \\u003Ca href=\\u0022\\/node\\/[node:nid]\\u0022\\u003E[node:title]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003EMed venlig hilsen\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003E[site:name]\\u003C\\/p\\u003E\\r\\n\\u003Cbr\\/\\u003E\\r\\n\\u003Cbr\\/\\u003E\\r\\n\\u003Cp\\u003EDette er en automatisk meddelelse fra [site:name]\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003EDu kan styre dine abonnementer fra din \\u003Ca href=\\u0022\\/user\\/[user:uid]\\/notifications\\u0022\\u003Ebrugerprofil\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n\\u003Cbr\\/\\u003E\\r\\n\\u003Cbr\\/\\u003E\\r\\n\\u003Cp\\u003EHUSK! Du ikke kan f\\u00e5 adgang via linket i mailen, hvis det er mere end 21 dage siden du har logget ind i Loop.\\u003C\\/p\\u003E\\r\\n\\u003C\\/p\\u003EDu kan altid hurtigt logge ind i Loop ved hj\\u00e6lp af genvejen i journalen, via knappen i baren med bogm\\u00e6rke i Internet Explorer, eller via linket p\\u00e5 portalen: \\u003Ca href=\\u0022http:\\/\\/www.sundhedogomsorg.dk\\/da\\/Vaerktoejer\\/LOOP.aspx\\u0022\\u003Ehttp:\\/\\/www.sundhedogomsorg.dk\\/da\\/Vaerktoejer\\/LOOP.aspx\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n",
+              "attachments" : [ "" ],
+              "language" : [ "" ]
+            },
+            "PROVIDE" : { "send_status" : { "send_status" : "Send status" } }
+          }
+        }
+      ]
+    }
+  }');
+  $items['loop_notification_send_mail_to_subscribers_on_comment_edit'] = entity_import('rules_config', '{ "loop_notification_send_mail_to_subscribers_on_comment_edit" : {
+      "LABEL" : "Send mail to subscribers on comment edit",
+      "PLUGIN" : "rule",
+      "OWNER" : "rules",
+      "REQUIRES" : [ "rules", "mimemail" ],
+      "USES VARIABLES" : {
+        "node" : { "label" : "node", "type" : "node" },
+        "user" : { "label" : "user", "type" : "user" },
+        "comment" : { "label" : "comment", "type" : "comment" }
+      },
+      "IF" : [
+        { "NOT data_is" : { "data" : [ "user:uid" ], "value" : [ "comment:author:uid" ] } }
+      ],
+      "DO" : [
+        { "mimemail" : {
+            "USING" : {
+              "key" : "Mail on message creation",
+              "to" : "[user:mail]",
+              "from_mail" : "[site:mail]",
+              "subject" : "Nyt svar til sp\\u00f8rgsm\\u00e5let [node:title]",
+              "body" : "\\u003Ch2\\u003EEt svar til sp\\u00f8rgsm\\u00e5let [node:title] er blevet oprettet\\u003C\\/h2\\u003E\\r\\n\\u003Cp\\u003EK\\u00e6re [user:field-first-name] [user:field-last-name]\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003EEt svar til sp\\u00f8rgsm\\u00e5let \\u003Ca href=\\u0022\\/node\\/[node:nid]\\u0022\\u003E[node:title]\\u003C\\/a\\u003E er blevet \\u00e6ndret.\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003EMed venlig hilsen\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003E[site:name]\\u003C\\/p\\u003E\\r\\n\\u003Cbr\\/\\u003E\\r\\n\\u003Cbr\\/\\u003E\\r\\n\\u003Cp\\u003EDette er en automatisk meddelelse fra [site:name]\\u003C\\/p\\u003E\\r\\n\\u003Cp\\u003EDu kan styre dine abonnementer fra din \\u003Ca href=\\u0022\\/user\\/[user:uid]\\/notifications\\u0022\\u003Ebrugerprofil\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n\\u003Cbr\\/\\u003E\\r\\n\\u003Cbr\\/\\u003E\\r\\n\\u003Cp\\u003EHUSK! Du ikke kan f\\u00e5 adgang via linket i mailen, hvis det er mere end 21 dage siden du har logget ind i Loop.\\u003C\\/p\\u003E\\r\\n\\u003C\\/p\\u003EDu kan altid hurtigt logge ind i Loop ved hj\\u00e6lp af genvejen i journalen, via knappen i baren med bogm\\u00e6rke i Internet Explorer, eller via linket p\\u00e5 portalen: \\u003Ca href=\\u0022http:\\/\\/www.sundhedogomsorg.dk\\/da\\/Vaerktoejer\\/LOOP.aspx\\u0022\\u003Ehttp:\\/\\/www.sundhedogomsorg.dk\\/da\\/Vaerktoejer\\/LOOP.aspx\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n",
               "attachments" : [ "" ],
               "language" : [ "" ]
             },
