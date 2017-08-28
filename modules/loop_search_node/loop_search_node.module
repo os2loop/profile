@@ -329,6 +329,11 @@ function _loop_search_node_box_settings() {
         'boolean' => array(),
       ),
     ),
+    'filters' => array(
+      'type' => array(
+        'field_subject' => 'or',
+      ),
+    ),
     'sorting' => array(
       'field' => array(),
       'order' => array(),
