@@ -54,7 +54,7 @@ function loop_notification_config_form($form) {
 /**
  * Implements hook_node_insert().
  *
- * Invoke rules components when saving a node.
+ * Invoke rules components when creating a new node.
  */
 function loop_notification_node_insert($node) {
   _loop_notification_notify_users($node, 'insert');
@@ -72,10 +72,19 @@ function loop_notification_node_update($node) {
 /**
  * Implements hook_comment_insert().
  *
- * Invoke rules components when updating a comment
+ * Invoke rules components when creating a new comment.
  */
 function loop_notification_comment_insert($comment) {
   _loop_notification_notify_users(node_load($comment->nid), 'insert', $comment);
+}
+
+/**
+ * Implements hook_comment_update().
+ *
+ * Invoke rules components when updating a comment.
+ */
+function loop_notification_comment_update($comment) {
+  _loop_notification_notify_users(node_load($comment->nid), 'update', $comment);
 }
 
 /**
@@ -159,11 +168,19 @@ function _loop_notification_find_users($node) {
  *   A comment if the action was triggered by a new or updated comment.
  */
 function _loop_notification_notify_user($user, $node, $action, $author, $comment = NULL) {
-  // Create message and mail on comment created.
+  // Create messages and mails related to comment actions.
   if ($comment) {
-    // Fetch the parent node of the comment.
-    rules_invoke_component('rules_create_notification', $user, $author, $comment);
-    rules_invoke_component('loop_notification_send_mail', $node, $user, $comment);
+    if ($action == 'insert') {
+      // Insert comment notification.
+      rules_invoke_component('rules_create_notification', $user, $author, $comment);
+      rules_invoke_component('loop_notification_send_mail', $node, $user, $comment);
+    }
+    else {
+      // Update comment notification.
+      rules_invoke_component('loop_notification_create_notification_on_comment_edit', $user, $author, $comment);
+      rules_invoke_component('loop_notification_send_mail_to_subscribers_on_comment_edit', $node, $user, $comment);
+    }
+
   }
   // Create messages and mails related to node actions.
   else {
