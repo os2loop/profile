@@ -12,7 +12,7 @@ include_once 'loop_taxonomy.features.inc';
  * Modify the array of message recipients during notification send.
  */
 function loop_taxonomy_loop_notification_message_recipient_alter(&$users, $node) {
-  // Fetch users who flagged a subject on the node.
+  // Fetch users who have flagged a subject on a node.
   foreach($node->field_subject[LANGUAGE_NONE]['0'] as $value) {
     $query = db_select('flagging', 'f')
       ->fields('f', array('uid'));
@@ -21,7 +21,6 @@ function loop_taxonomy_loop_notification_message_recipient_alter(&$users, $node)
     $query->condition('f.entity_type', 'taxonomy_term','=');
 
     $result = $query->execute()->fetchCol();
-
-    $users += $result;
+    $users = array_merge($result, $users);
   }
 }

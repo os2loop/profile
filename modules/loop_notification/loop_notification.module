@@ -92,7 +92,7 @@ function loop_notification_loop_notification_message_recipient_alter(&$users, $n
   $query->condition('f.entity_type', 'node','=');
 
   $result = $query->execute()->fetchCol();
-  $users += $result;
+  $users = array_merge($result, $users);
 }
 
 /**
@@ -111,7 +111,7 @@ function _loop_notification_notify_users($node, $action, $comment = NULL) {
     $users = _loop_notification_find_users($node);
 
     // Only load the entity_author once.
-    $author = user_load($node->uid);
+    $author = ($comment ? user_load($comment->uid) : user_load($node->uid));
 
     // Notify all subscribed users.
     foreach ($users as $user) {
@@ -168,10 +168,14 @@ function _loop_notification_notify_user($user, $node, $action, $author, $comment
   // Create messages and mails related to node actions.
   else {
     if ($action == 'insert') {
-      // Insert notification
+      // Insert node notification.
+      rules_invoke_component('loop_notification_create_notification_on_node_create', $user, $author, $node);
+      rules_invoke_component('loop_notification_send_mail_to_subscribers_on_node_create', $node, $user, $node);
     }
     else {
-      // Update notification
+      // Update node notification
+      rules_invoke_component('loop_notification_create_notification_on_node_edit', $user, $author, $node);
+      rules_invoke_component('loop_notification_send_mail_to_subscribers_on_node_edit', $node, $user, $node);
     }
   }
 }
@@ -187,5 +191,5 @@ function _loop_notification_notify_user($user, $node, $action, $author, $comment
  */
 function _loop_notification_check_content_type($node) {
   $allowed_types = variable_get('loop_notification_content_types');
-  return in_array($node->type, $allowed_types);
+  return !empty($allowed_types[$node->type]);
 }
