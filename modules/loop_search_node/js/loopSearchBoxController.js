@@ -59,6 +59,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     function search() {
       // Send info to results that a new search have started.
       communicatorService.$emit('searching', {});
+      window.scrollTo(0, 0);
 
       // Add sorting to the search query. It's added here to make it possible to
       // override or add sorting in search queries from the UI. If it was added
