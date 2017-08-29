@@ -55,14 +55,17 @@
           </span>
 
           <!-- Filters -->
-          <div data-ng-show="isFiltersShown" class="search-filters--subjects" data-ng-repeat="(id, filter) in filters['taxonomy']">
-            <div class="search-filters--arrow"><div class="search-filters--arrow-inner"></div></div>
-            <span class="search-filters--subjects-item" data-ng-repeat="(key, item) in filter.items">
-              <input id="{{ key }}" type="checkbox" data-ng-model="query.filters['taxonomy'][id][key]" data-ng-click="searchClicked()">
-              <label for="{{ key }}">{{ item.value }}</label>
-            </span>
-
-            <span data-ng-click="toggleFilter()" class="search-filters--action">{{ Drupal.t('Filter', {}, { 'context': 'angular' }) }}</span>
+          <div data-ng-show="isFiltersShown" >
+            <div class="search-filters--subjects">
+              <div class="search-filters--arrow"><div class="search-filters--arrow-inner"></div></div>
+              <div class="search-filters--subjects-inner" data-ng-repeat="(id, filter) in filters['taxonomy']">
+                <span class="search-filters--subjects-item" data-ng-repeat="(key, item) in filter.items">
+                  <input id="{{ key }}" type="checkbox" data-ng-model="query.filters['taxonomy'][id][key]" data-ng-click="searchClicked()">
+                  <label for="{{ key }}">{{ item.value }}</label>
+                </span>
+              </div>
+              <span data-ng-click="toggleFilter()" class="search-filters--action">{{ Drupal.t('Filter', {}, { 'context': 'angular' }) }}</span>
+            </div>
           </div>
         </div>
       </div>

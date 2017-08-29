@@ -13,6 +13,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     $scope.searchBtnText = 'Search';
     $scope.searching = false;
     $scope.selectedFilterCount = 0;
+    $scope.filterActive = 'all';
 
     // Handle toggling of the search filter.
     $scope.isFiltersShown = false;

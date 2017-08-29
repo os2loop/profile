@@ -1,0 +1,94 @@
+/**
+ *
+ * Search node results.
+ *
+ */
+
+$post-type-color: #41658A;
+$post-type-color-text: $white;
+$document-type-color: #B05B63;
+$document-type-color-text: $white;
+
+/* Search node results
+   ========================================================================== */
+
+.search-node-result {
+
+  &--item {
+    padding: 2em;
+    border-bottom: 1px solid $gray-light;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  &--data-wrapper {
+    width:100%;
+  }
+
+  &--meta-data-date {
+    color: $gray;
+    font-size: .9em;
+    margin-bottom: 1.5em;
+  }
+
+  &--meta-data-type {
+    background: $document-type-color;
+    color: $document-type-color-text;
+    cursor: pointer;
+    display: inline-block;
+    font-size: .9em;
+    margin-bottom: 1.5em;
+    padding: .2em .8em;
+
+    &.is-post {
+      background: $post-type-color;
+      color: $post-type-color-text;
+    }
+
+    @include border-radius($border-radius);
+  }
+
+  &--subject {
+    background: $white;
+    border: 1px solid $green;
+    color: inherit;
+    cursor: pointer;
+    display: inline-block;
+    font-size: .9em;
+    margin-bottom: 1.5em;
+    padding: .2em .8em;
+
+    @include border-radius($border-radius);
+  }
+
+  &--comments {
+    color: $gray;
+    font-size: .9em;
+    margin-bottom: 2em;
+
+
+    &:before {
+      @extend %icon-comment;
+      @extend %icon-before;
+    }
+
+    &:link {
+      color: $gray;
+      text-decoration: none;
+    }
+
+    &:visited {
+      color: $gray;
+    }
+
+    &:hover {
+      color: $gray;
+    }
+
+    &:focus {
+      color: $gray;
+    }
+  }
+}
