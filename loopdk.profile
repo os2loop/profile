@@ -480,9 +480,8 @@ function loopdk_load_handlebars() {
 
 /**
  * Implements hook_menu().
- * Add a loop config administration page.
  *
- * @return array
+ * Add a loop config administration page.
  */
 function loopdk_menu() {
   $items = array();

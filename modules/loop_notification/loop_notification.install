@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Update and install hooks related to notifications.
+ */
 
 /**
  * Enable notifications for post type as default.
