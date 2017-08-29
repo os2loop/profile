@@ -120,7 +120,7 @@ function _loop_notification_notify_users($node, $action, $comment = NULL) {
     $users = _loop_notification_find_users($node);
 
     // Only load the entity_author once.
-    $author = ($comment ? user_load($comment->uid) : user_load($node->uid));
+    $author = $comment ? user_load($comment->uid) : user_load($node->uid);
 
     // Notify all subscribed users.
     foreach ($users as $user) {
