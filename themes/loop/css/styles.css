@@ -4358,21 +4358,71 @@ a.question--term.taxonomy-keyword {
 .dashboard--content-overview-text {
   font-size: 1.2em; }
 
-.node-subscription,
-.taxonomy-subscription {
-  margin-bottom: 1.5em; }
-  .node-subscription .view-header,
-  .taxonomy-subscription .view-header {
-    font-size: 1.5em; }
-  .node-subscription .user-profile--notification-actions,
-  .taxonomy-subscription .user-profile--notification-actions {
-    margin-bottom: 0; }
-  .node-subscription .view-content,
-  .taxonomy-subscription .view-content {
-    margin-top: 0.25em; }
+.view-loop-user-subscriptions,
+.view-loop-user-taxonomy-subscriptions {
+  margin-bottom: 2em; }
+  .view-loop-user-subscriptions .view-header,
+  .view-loop-user-taxonomy-subscriptions .view-header {
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1.5em;
+    font-weight: bold; }
+  .view-loop-user-subscriptions .view-content,
+  .view-loop-user-taxonomy-subscriptions .view-content {
+    display: flex;
+    flex-wrap: wrap; }
+    .view-loop-user-subscriptions .view-content .subscriptions--item,
+    .view-loop-user-taxonomy-subscriptions .view-content .subscriptions--item {
+      margin: 1em 0; }
 
-.taxonomy-subscription .view-content .views-field a {
-  color: #ff6138; }
+.view-loop-user-taxonomy-subscriptions .subscriptions--item {
+  flex: 0 0 100%; }
+  @media only screen and (min-width: 1000px) {
+    .view-loop-user-taxonomy-subscriptions .subscriptions--item {
+      flex: 0 1 50%; } }
+
+.view-loop-user-subscriptions .subscriptions--item {
+  flex: 0 0 100%;
+  margin: 1em 0; }
+
+.subscriptions--item .flag-link-toggle {
+  color: #737373;
+  text-decoration: none; }
+  .subscriptions--item .flag-link-toggle::before {
+    background-size: 16px;
+    background-repeat: no-repeat;
+    text-align: center;
+    background-position: 2px;
+    vertical-align: middle;
+    content: '';
+    height: 20px;
+    width: 20px;
+    border: 1px solid #41ab51;
+    display: inline-block;
+    margin-right: .5em;
+    -webkit-border-radius: 0.4em;
+    -moz-border-radius: 0.4em;
+    -ms-border-radius: 0.4em;
+    -o-border-radius: 0.4em;
+    border-radius: 0.4em; }
+
+.subscriptions--item .unflag-action:before {
+  background-image: url("../icons/check.svg");
+  background-color: #41ab51; }
+
+.subscriptions--item .flag-message {
+  background-color: #d6ff9a;
+  box-sizing: border-box;
+  display: block;
+  margin-top: 1em;
+  padding: .5em 1em;
+  width: 80%;
+  -webkit-border-radius: 0.4em;
+  -moz-border-radius: 0.4em;
+  -ms-border-radius: 0.4em;
+  -o-border-radius: 0.4em;
+  border-radius: 0.4em; }
 
 /**
  * Documents module
