@@ -285,40 +285,6 @@ function loop_notification_default_rules_configuration() {
       ]
     }
   }');
-  $items['rules_create_message'] = entity_import('rules_config', '{ "rules_create_message" : {
-      "LABEL" : "Create message",
-      "PLUGIN" : "reaction rule",
-      "OWNER" : "rules",
-      "REQUIRES" : [ "flag", "rules", "comment" ],
-      "ON" : { "comment_insert" : [] },
-      "DO" : [
-        { "flag_fetch_users_node" : {
-            "USING" : { "flag" : "subscribe_node", "node" : [ "comment:node" ] },
-            "PROVIDE" : { "users" : { "users" : "Users who flagged" } }
-          }
-        },
-        { "LOOP" : {
-            "USING" : { "list" : [ "users" ] },
-            "ITEM" : { "list_item" : "Current list item" },
-            "DO" : [
-              { "component_rules_create_notification" : {
-                  "active_user_object" : [ "list-item" ],
-                  "comment_author" : [ "comment:author" ],
-                  "comment" : [ "comment" ]
-                }
-              },
-              { "component_loop_notification_send_mail" : {
-                  "node" : [ "comment:node" ],
-                  "user" : [ "list-item" ],
-                  "comment" : [ "comment" ]
-                }
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }');
   $items['rules_create_notification'] = entity_import('rules_config', '{ "rules_create_notification" : {
       "LABEL" : "Create notification on comment create",
       "PLUGIN" : "rule set",

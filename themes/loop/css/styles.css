@@ -3475,7 +3475,7 @@ a.question--term {
    ========================================================================== */
 .search-filters--label, .search-filters--subject-wrapper-label {
   background: #fff;
-  border: 2px solid #41ab51;
+  border: 1px solid #41ab51;
   color: #41ab51;
   cursor: pointer;
   flex: 1 0 auto;
@@ -3533,7 +3533,7 @@ a.question--term {
         height: 20px;
         padding: 5px;
         margin-right: .5em;
-        border: 2px solid #41ab51;
+        border: 1px solid #41ab51;
         border-radius: .3em; }
         .search-filters--subjects-item input[type=checkbox]:focus {
           border-color: #41ab51; }

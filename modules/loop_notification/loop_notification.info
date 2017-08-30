@@ -49,7 +49,6 @@ features[rules_config][] = loop_notification_send_mail_to_subscribers_on_comment
 features[rules_config][] = loop_notification_send_mail_to_subscribers_on_node_create
 features[rules_config][] = loop_notification_send_mail_to_subscribers_on_node_edit
 features[rules_config][] = rules_autosubscribe_node_post_author
-features[rules_config][] = rules_create_message
 features[rules_config][] = rules_create_notification
 features[rules_config][] = rules_remove_subscription
 features[rules_config][] = rules_set_message_read
