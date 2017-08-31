@@ -13,7 +13,6 @@
   color: $green;
   cursor: pointer;
   flex: 1 0 auto;
-  margin: 2em 0;
   padding: .5em;
   text-align: center;
 }
@@ -22,13 +21,26 @@
 /* Search filters
    ========================================================================== */
 .search-filters {
+  background: $gray-lightest;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-bottom: 2em;
+  padding: 0 1.25em;
+
+  @include border-radius(0 0 $border-radius $border-radius);
+
+  &--search-box {
+    background: $gray-lightest;
+    padding: 2em 1.25em;
+
+    @include border-radius($border-radius $border-radius 0 0 );
+  }
 
   &--type {
     display: flex;
     flex: 0 0 100%;
+    margin: 2em 0;
 
     @include breakpoint($breakpoint-4) {
       flex: 0 0 60%;
@@ -38,6 +50,7 @@
   &--subject-wrapper {
     display: flex;
     flex: 0 0 100%;
+    margin: 2em 0;
 
     @include breakpoint($breakpoint-4) {
       flex: 0 1 35%;
@@ -48,6 +61,7 @@
     background: $white;
     box-sizing: border-box;
     flex: 0 0 100%;
+    margin-bottom: 1.25em;
     padding: 1em 2em;
     position: relative;
 
@@ -145,5 +159,33 @@
 
     padding:.4em 0 .5em;
     width: 100%;
+  }
+
+  // Sorting
+  &--sort {
+    align-items: center;
+    background: $gray-lightest;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: 1.25em;
+
+    @include border-radius($border-radius $border-radius 0 0 );
+
+    &-text {
+      color: $gray-dark;
+      font-weight: bold;
+      flex: 0 0 auto;
+    }
+
+    &-labels{
+      display: flex;
+      margin-left: 1.5em;
+      flex: 0 0 auto;
+    }
+
+    .search-filters--label {
+      font-size: .85em;
+    }
   }
 }

@@ -129,7 +129,7 @@ if (isset($primary_menu_block['content'])): ?>
   </div>
 </header>
 
-<?php if (isset($page['pagetop'])): ?>
+<?php if (!empty($page['pagetop'])): ?>
   <div class="section">
     <div class="layout-frontpage">
         <?php print render($page['pagetop']); ?>
@@ -138,7 +138,7 @@ if (isset($primary_menu_block['content'])): ?>
 <?php endif; ?>
 
 <?php if (isset($search)): ?>
-  <div class="typeahead-block">
+  <div class="typeahead-block is-node-search">
     <div class="typeahead-block--wrapper">
       <?php print render($search['content']); ?>
     </div>

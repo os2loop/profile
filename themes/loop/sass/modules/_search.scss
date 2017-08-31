@@ -54,6 +54,7 @@
 
 .search-box-block--button {
   @extend .button--action;
+
   margin: 0;
   height: 65px;
   width: 100%;
@@ -69,10 +70,16 @@
   &.is-search-node {
     bottom: auto;
     top: auto;
+    width: 90%;
+    margin: 1em auto;
+    display: block;
 
     @include breakpoint($breakpoint-3) {
       bottom: auto;
-      top: 24px;
+      top: 56px;
+      right: 20px;
+      width:auto;
+      margin: 0;
     }
   }
 
@@ -105,6 +112,10 @@
 
 .search-result--block {
   margin-bottom: 1.5em;
+
+  .layout-full-width {
+    @include border-radius(0);
+  }
 }
 
 .search-result--link {
