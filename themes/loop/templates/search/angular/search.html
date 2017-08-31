@@ -71,9 +71,9 @@
       <div class="search-filters--sort">
         <div class="search-filters--sort-text">{{ Drupal.t('Sort results', { }, { 'context': 'angular' }) }}</div>
         <div class="search-filters--sort-labels">
-          <span class="search-filters--label">{{ Drupal.t('Newest first', {}, { 'context': 'angular' }) }}</span>
-          <span class="search-filters--label">{{ Drupal.t('Oldest first', {}, { 'context': 'angular' }) }}</span>
-          <span class="search-filters--label">{{ Drupal.t('Alphabetical', {}, { 'context': 'angular' }) }}</span>
+          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='desc'}" data-ng-click="sortOrder('desc')">{{ Drupal.t('Newest first', {}, { 'context': 'angular' }) }}</span>
+          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='asc'}" data-ng-click="sortOrder('asc')">{{ Drupal.t('Oldest first', {}, { 'context': 'angular' }) }}</span>
+          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='alpha'}" data-ng-click="sortOrder('alpha')">{{ Drupal.t('Alphabetical', {}, { 'context': 'angular' }) }}</span>
         </div>
       </div>
     </div>

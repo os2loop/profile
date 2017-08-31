@@ -14,6 +14,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     $scope.searching = false;
     $scope.selectedFilterCount = 0;
     $scope.filterActive = 'all';
+    $scope.sortActive = 'desc';
 
     // Handle toggling of the search filter.
     $scope.isFiltersShown = false;
@@ -110,7 +111,10 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       // Init the query object.
       $scope.query = {
         'text': '',
-        'filters': {}
+        'filters': {},
+        'sort':  {
+          'created': 'desc'
+        }
       };
 
       // Check if any intervals have been configured.
@@ -342,6 +346,35 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           };
           break;
       }
+
+      $scope.searchClicked();
+    };
+
+    /**
+     * Set the sort order for current search.
+     *
+     * @param order
+     *   The order to sort.
+     */
+    $scope.sortOrder = function sortOrder(order) {
+      $scope.sortActive = order;
+
+      switch (order) {
+        case 'desc':
+        case 'asc':
+          $scope.query['sort'] = {
+            'created': order
+          };
+          break;
+
+        case 'alpha':
+          $scope.query['sort'] = {
+            'title': 'asc'
+          };
+          break;
+      }
+
+
 
       $scope.searchClicked();
     };
