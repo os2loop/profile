@@ -15,6 +15,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     $scope.selectedFilterCount = 0;
     $scope.filterActive = 'all';
     $scope.sortActive = 'desc';
+    $scope.showSort = false;
 
     // Handle toggling of the search filter.
     $scope.isFiltersShown = false;
@@ -81,6 +82,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           // Send results.
           $scope.searchBtnText = 'Search';
           $scope.searching = false;
+          $scope.showSort = true;
           communicatorService.$emit('hits', {"hits": data});
         },
         function (reason) {

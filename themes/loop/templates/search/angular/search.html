@@ -68,7 +68,7 @@
           </div>
         </div>
       </div>
-      <div class="search-filters--sort">
+      <div class="search-filters--sort" data-ng-if="showSort">
         <div class="search-filters--sort-text">{{ Drupal.t('Sort results', { }, { 'context': 'angular' }) }}</div>
         <div class="search-filters--sort-labels">
           <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='desc'}" data-ng-click="sortOrder('desc')">{{ Drupal.t('Newest first', {}, { 'context': 'angular' }) }}</span>
