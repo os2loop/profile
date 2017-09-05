@@ -13,14 +13,21 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     $scope.searchBtnText = 'Search';
     $scope.searching = false;
     $scope.selectedFilterCount = 0;
-    $scope.filterActive = 'all';
-    $scope.sortActive = 'desc';
+    $scope.filterActive = 'docs';
+    $scope.sortActive = '';
     $scope.showSort = false;
 
     // Handle toggling of the search filter.
     $scope.isFiltersShown = false;
     $scope.toggleFilter = function () {
       $scope.isFiltersShown = !$scope.isFiltersShown;
+    };
+
+    // Defines the document filter type.
+    var documentFilter = {
+      'loop_documents_document': true,
+      'loop_documents_collection': true,
+      'external_sources': true
     };
 
     /**
@@ -59,6 +66,8 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
      * Execute the search and emit the results.
      */
     function search() {
+      console.log($scope.query);
+
       // Send info to results that a new search have started.
       communicatorService.$emit('searching', {});
 
@@ -113,9 +122,10 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       // Init the query object.
       $scope.query = {
         'text': '',
-        'filters': {},
-        'sort':  {
-          'created': 'desc'
+        'filters': {
+          'taxonomy': {
+            'type': documentFilter
+          }
         }
       };
 
@@ -135,6 +145,9 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       if (state.hasOwnProperty('query')) {
         // Query found in state, so execute that search.
         $scope.query = state.query;
+
+        // @TODO: Set correct active classes.
+
         search();
       }
       else {
@@ -178,6 +191,22 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     }
 
     /**
+     * Update search result after filter request from result controller.
+     *
+     * @param {object} data
+     *   The filter and selection made as strings.
+     */
+    function filterUpdated(data) {
+      $scope.query.text = '';
+
+      delete $scope.query.filters['taxonomy'][data['filter']];
+      $scope.query.filters['taxonomy'][data['filter']] = {};
+      $scope.query.filters['taxonomy'][data['filter']][data['selection']] = true;
+
+      search();
+    }
+
+    /**
      * Communication listener for pager changes from the search results
      * application.
      */
@@ -189,6 +218,22 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       else {
         $scope.$apply(function () {
           pagerUpdated(data);
+        });
+      }
+    });
+
+    /**
+     * Update the search to filter on the selected filter in the results
+     * controller.
+     */
+    communicatorService.$on('filterUpdate', function (event, data) {
+      var phase = this.$root.$$phase;
+      if (phase === '$apply' || phase === '$digest') {
+          filterUpdated(data);
+      }
+      else {
+        $scope.$apply(function () {
+          filterUpdated(data);
         });
       }
     });
@@ -335,11 +380,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           break;
 
         case 'docs':
-          $scope.query.filters['taxonomy']['type'] = {
-            'loop_documents_document': true,
-            'loop_documents_collection': true,
-            'external_sources': true
-          };
+          $scope.query.filters['taxonomy']['type'] = documentFilter;
           break;
 
         case 'posts':
@@ -374,9 +415,14 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
             'title': 'asc'
           };
           break;
+
+        default:
+          // Remove sort order and default to score order from ES.
+          if ($scope.query.hasOwnProperty('sort')) {
+            delete $scope.query['sort'];
+          }
+          break;
       }
-
-
 
       $scope.searchClicked();
     };
