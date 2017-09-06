@@ -14,7 +14,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     $scope.searching = false;
     $scope.selectedFilterCount = 0;
     $scope.filterActive = 'docs';
-    $scope.sortActive = '';
+    $scope.sortActive = 'default';
     $scope.showSort = false;
 
     // Handle toggling of the search filter.

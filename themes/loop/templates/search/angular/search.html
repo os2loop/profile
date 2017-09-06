@@ -60,7 +60,7 @@
             <div class="search-filters--arrow"><div class="search-filters--arrow-inner"></div></div>
             <div class="search-filters--subjects-inner" data-ng-repeat="(id, filter) in filters['taxonomy']">
               <span class="search-filters--subjects-item" data-ng-repeat="(key, item) in filter.items">
-                <input id="{{ key }}" type="checkbox" data-ng-model="query.filters['taxonomy'][id][key]" data-ng-click="searchClicked()">
+                <input id="{{ key }}" type="checkbox" data-ng-model="query.filters['taxonomy'][id][key]">
                 <label for="{{ key }}">{{ item.value }}</label>
               </span>
             </div>
@@ -71,8 +71,9 @@
       <div class="search-filters--sort" data-ng-if="showSort">
         <div class="search-filters--sort-text">{{ Drupal.t('Sort results', { }, { 'context': 'angular' }) }}</div>
         <div class="search-filters--sort-labels">
-          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='desc'}" data-ng-click="sortOrder('desc')">{{ Drupal.t('Newest first', {}, { 'context': 'angular' }) }}</span>
-          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='asc'}" data-ng-click="sortOrder('asc')">{{ Drupal.t('Oldest first', {}, { 'context': 'angular' }) }}</span>
+          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='default'}" data-ng-click="sortOrder('default')">{{ Drupal.t('Best match', {}, { 'context': 'angular' }) }}</span>
+          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='desc'}" data-ng-click="sortOrder('desc')">{{ Drupal.t('Newest', {}, { 'context': 'angular' }) }}</span>
+          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='asc'}" data-ng-click="sortOrder('asc')">{{ Drupal.t('Oldest', {}, { 'context': 'angular' }) }}</span>
           <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='alpha'}" data-ng-click="sortOrder('alpha')">{{ Drupal.t('Alphabetical', {}, { 'context': 'angular' }) }}</span>
         </div>
       </div>
