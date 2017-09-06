@@ -16,11 +16,26 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     $scope.filterActive = 'docs';
     $scope.sortActive = 'default';
     $scope.showSort = false;
+    $scope.newSubjects = false;
 
-    // Handle toggling of the search filter.
+    /**
+     * Handle toggling of the search filter.
+     */
     $scope.isFiltersShown = false;
     $scope.toggleFilter = function () {
       $scope.isFiltersShown = !$scope.isFiltersShown;
+
+      if ($scope.newSubjects) {
+        $scope.newSubjects = false;
+        $scope.searchClicked(true);
+      }
+    };
+
+    /**
+     * Set flag when new subject filters are selected.
+     */
+    $scope.filterNewSelection = function filterNewSelection() {
+      $scope.newSubjects = true;
     };
 
     // Defines the document filter type.
@@ -64,15 +79,20 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
 
     /**
      * Execute the search and emit the results.
+     *
+     * @param {boolean} scrollToTop
+     *   If TRUE the page i scrolled to the top else not.
      */
-    function search() {
+    function search(scrollToTop) {
       console.log($scope.query);
 
       // Send info to results that a new search have started.
       communicatorService.$emit('searching', {});
 
       // Scroll to top.
-      window.scrollTo(0, 0);
+      if (scrollToTop) {
+        window.scrollTo(0, 0);
+      }
 
       // Add sorting to the search query. It's added here to make it possible to
       // override or add sorting in search queries from the UI. If it was added
@@ -173,7 +193,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           $scope.filterActive = 'all';
         }
 
-        search();
+        search(true);
       }
       else {
         // Check if the provider supports an pager.
@@ -187,7 +207,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           $scope.query.text = angular.copy(CONFIG.initialQueryText);
 
           // Execute the search.
-          search();
+          search(false);
         }
       }
 
@@ -212,7 +232,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
         'size': data.size,
         'page': data.page
       };
-      search();
+      search(true);
     }
 
     /**
@@ -228,7 +248,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       $scope.query.filters['taxonomy'][data['filter']] = {};
       $scope.query.filters['taxonomy'][data['filter']][data['selection']] = true;
 
-      search();
+      search(true);
     }
 
     /**
@@ -268,8 +288,11 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
      *
      * Simple wrapper for search that resets the pager before executing the
      * search.
+     *
+     * @param {boolean} scrollToTop
+     *   If TRUE the page i scrolled to the top else not.
      */
-    $scope.searchClicked = function searchClicked() {
+    $scope.searchClicked = function searchClicked(scrollToTop) {
       $scope.searchBtnText = 'Searching...';
       $scope.searching = true;
 
@@ -281,7 +304,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
         $scope.query.pager = angular.copy(CONFIG.provider.pager);
       }
 
-      search();
+      search(scrollToTop);
     };
 
     /**
@@ -415,7 +438,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           break;
       }
 
-      $scope.searchClicked();
+      $scope.searchClicked(false);
     };
 
     /**
@@ -449,7 +472,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           break;
       }
 
-      $scope.searchClicked();
+      $scope.searchClicked(false);
     };
 
     /**
@@ -465,7 +488,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       if (CONFIG.hasOwnProperty('initialQueryText')) {
         $scope.query.text = angular.copy(CONFIG.initialQueryText);
 
-        search();
+        search(true);
       }
       else {
         // No initial query.
