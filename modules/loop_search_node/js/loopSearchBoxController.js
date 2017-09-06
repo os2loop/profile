@@ -146,7 +146,32 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
         // Query found in state, so execute that search.
         $scope.query = state.query;
 
-        // @TODO: Set correct active classes.
+        // Correct active classes in UI based on query for filters.
+        if ($scope.query.hasOwnProperty('filters') && $scope.query.filters.hasOwnProperty('taxonomy') && $scope.query.filters.taxonomy.hasOwnProperty('type')) {
+          for (var type in $scope.query.filters.taxonomy.type) {
+            if ($scope.query.filters.taxonomy.type[type]) {
+              switch (type) {
+                case 'loop_documents_document':
+                case 'loop_documents_collection':
+                case 'external_sources':
+                  $scope.filterActive = 'docs';
+                  break;
+
+                case 'post':
+                  $scope.filterActive = 'post';
+                  break;
+
+                default:
+                  $scope.filterActive = 'all';
+                  break;
+              }
+            }
+
+          }
+        }
+        else {
+          $scope.filterActive = 'all';
+        }
 
         search();
       }
@@ -383,7 +408,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           $scope.query.filters['taxonomy']['type'] = documentFilter;
           break;
 
-        case 'posts':
+        case 'post':
           $scope.query.filters['taxonomy']['type'] = {
             'post': true
           };
