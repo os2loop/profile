@@ -3618,6 +3618,8 @@ a.question--term {
     top: .85em;
     right: 1em;
     max-width: .85em; }
+  .search-filters--subjects-wrapper {
+    width: 100%; }
   .search-filters--subject-wrapper-label {
     position: relative;
     -webkit-border-radius: 0.4em;
