@@ -10,22 +10,39 @@
 .search-node-result {
 
   &--item {
-    padding: 2em;
-    border-bottom: 1px solid $gray-light;
+    padding: 2em 0;
+    border-top: 1px solid $gray-light;
 
-    &:last-child {
-      border-bottom: 0;
+    &-content {
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 
+  &--link {
+    display: block;
+    margin-bottom: 1em;
+  }
+
   &--data-wrapper {
-    width:100%;
+    flex: 0 0 100%;
+    padding-right: 2em;
+
+    @include breakpoint($breakpoint-4) {
+      flex: 0 0 auto;
+    }
   }
 
   &--meta-data-date {
     color: $gray;
     font-size: .9em;
-    margin-bottom: 1.5em;
+    flex: 0 0 100%;
+    margin-bottom: 1em;
+    padding-right: 2em;
+
+    @include breakpoint($breakpoint-4) {
+      flex: 0 0 auto;
+    }
   }
 
   &--meta-data-type {
@@ -34,34 +51,35 @@
     cursor: pointer;
     display: inline-block;
     font-size: .9em;
-    margin-bottom: 1.5em;
-    padding: .2em .8em;
+    margin-bottom: 1em;
+    padding: .1em .7em;
 
     &.is-post {
       background: $post-type-color;
       color: $post-type-color-text;
     }
 
-    @include border-radius($border-radius);
+    @include border-radius(1em);
   }
 
   &--subject {
     background: $white;
-    border: 1px solid $green;
+    border: 1px solid $gray;
     color: inherit;
     cursor: pointer;
     display: inline-block;
     font-size: .9em;
-    margin-bottom: 1.5em;
-    padding: .2em .8em;
+    margin-bottom: 1em;
+    padding: .1em .7em;
 
-    @include border-radius($border-radius);
+    @include border-radius(1em);
   }
 
   &--comments {
     color: $gray;
+    display: block;
     font-size: .9em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 
 
     &:before {
