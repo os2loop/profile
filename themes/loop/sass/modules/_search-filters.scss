@@ -74,14 +74,7 @@
     }
 
     &-item {
-      box-sizing: border-box;
-      display: flex;
-      height: 60px;
       flex: 1 0 100%;
-
-      input[type=checkbox] {
-        @include checkbox();
-      }
 
       @include breakpoint(800px) {
         flex: 0 1 50%;
@@ -90,17 +83,23 @@
       @include breakpoint(1000px) {
         flex: 0 1 33%;
       }
-
-      input {
-        margin-left: -21px;
-      }
-
+      
       &-inner {
-        display: inline-block;
+        box-sizing: border-box;
+        display: flex;
+        height: 60px;
         padding-bottom: 1em;
         padding-left: 21px;
         padding-right: 2em;
         padding-top: 1em;
+
+        input[type=checkbox] {
+          @include checkbox();
+        }
+
+        input {
+          margin-left: -21px;
+        }
       }
     }
   }

@@ -3546,46 +3546,45 @@ a.question--term {
       display: flex;
       flex-wrap: wrap; }
     .search-filters--subjects-item {
-      box-sizing: border-box;
-      display: flex;
-      height: 60px;
       flex: 1 0 100%; }
-      .search-filters--subjects-item input[type=checkbox] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        flex: 0 0 20px;
-        align-self: center;
-        display: block;
-        height: 20px;
-        padding: 5px;
-        margin-right: .5em;
-        border: 1px solid #41ab51;
-        border-radius: .3em; }
-        .search-filters--subjects-item input[type=checkbox]:focus {
-          border-color: #41ab51; }
-        .search-filters--subjects-item input[type=checkbox]:checked {
-          border: 2px solid #41ab51;
-          background-color: #41ab51;
-          background-image: url("../icons/check.svg");
-          background-repeat: no-repeat;
-          background-size: 15px 15px;
-          background-position: center center; }
-        .search-filters--subjects-item input[type=checkbox]:focus {
-          outline: none; }
       @media only screen and (min-width: 800px) {
         .search-filters--subjects-item {
           flex: 0 1 50%; } }
       @media only screen and (min-width: 1000px) {
         .search-filters--subjects-item {
           flex: 0 1 33%; } }
-      .search-filters--subjects-item input {
-        margin-left: -21px; }
       .search-filters--subjects-item-inner {
-        display: inline-block;
+        box-sizing: border-box;
+        display: flex;
+        height: 60px;
         padding-bottom: 1em;
         padding-left: 21px;
         padding-right: 2em;
         padding-top: 1em; }
+        .search-filters--subjects-item-inner input[type=checkbox] {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          flex: 0 0 20px;
+          align-self: center;
+          display: block;
+          height: 20px;
+          padding: 5px;
+          margin-right: .5em;
+          border: 1px solid #41ab51;
+          border-radius: .3em; }
+          .search-filters--subjects-item-inner input[type=checkbox]:focus {
+            border-color: #41ab51; }
+          .search-filters--subjects-item-inner input[type=checkbox]:checked {
+            border: 2px solid #41ab51;
+            background-color: #41ab51;
+            background-image: url("../icons/check.svg");
+            background-repeat: no-repeat;
+            background-size: 15px 15px;
+            background-position: center center; }
+          .search-filters--subjects-item-inner input[type=checkbox]:focus {
+            outline: none; }
+        .search-filters--subjects-item-inner input {
+          margin-left: -21px; }
   .search-filters--label:first-child {
     border-right: 0;
     -webkit-border-radius: 0.4em 0 0 0.4em;
