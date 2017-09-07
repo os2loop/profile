@@ -3549,11 +3549,7 @@ a.question--term {
       box-sizing: border-box;
       display: flex;
       height: 60px;
-      flex: 1 0 100%;
-      padding-bottom: 1em;
-      padding-left: 21px;
-      padding-right: 2em;
-      padding-top: 1em; }
+      flex: 1 0 100%; }
       .search-filters--subjects-item input[type=checkbox] {
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -3584,6 +3580,12 @@ a.question--term {
           flex: 0 1 33%; } }
       .search-filters--subjects-item input {
         margin-left: -21px; }
+      .search-filters--subjects-item-inner {
+        display: inline-block;
+        padding-bottom: 1em;
+        padding-left: 21px;
+        padding-right: 2em;
+        padding-top: 1em; }
   .search-filters--label:first-child {
     border-right: 0;
     -webkit-border-radius: 0.4em 0 0 0.4em;
