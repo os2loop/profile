@@ -50,7 +50,7 @@ This is the mappings/configuration used inside serarch node.
         "language": "da",
         "default_analyzer": "string_index",
         "default_indexer": "analyzed",
-        "sort": false,
+        "sort": true,
         "indexable": true,
         "raw": false,
         "geopoint": false,

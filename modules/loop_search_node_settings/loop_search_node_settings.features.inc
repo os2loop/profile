@@ -135,8 +135,8 @@ function loop_search_node_settings_default_search_api_index() {
       "cron_limit" : "50",
       "search_node_indexes" : "833bc3ffdcd187e4bf72945e7fe4a08d",
       "fields" : {
-        "body:summary" : { "type" : "text" },
-        "body:value" : { "type" : "text" },
+        "body:summary" : { "type" : "text", "boost" : "5.0" },
+        "body:value" : { "type" : "text", "boost" : "5.0" },
         "changed" : { "type" : "date" },
         "comment_count" : { "type" : "integer" },
         "comments" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "comment" },

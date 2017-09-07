@@ -13,12 +13,36 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     $scope.searchBtnText = 'Search';
     $scope.searching = false;
     $scope.selectedFilterCount = 0;
-    $scope.filterActive = 'all';
+    $scope.filterActive = 'docs';
+    $scope.sortActive = 'default';
+    $scope.showSort = false;
+    $scope.newSubjects = false;
 
-    // Handle toggling of the search filter.
+    /**
+     * Handle toggling of the search filter.
+     */
     $scope.isFiltersShown = false;
     $scope.toggleFilter = function () {
       $scope.isFiltersShown = !$scope.isFiltersShown;
+
+      if ($scope.newSubjects) {
+        $scope.newSubjects = false;
+        $scope.searchClicked(true);
+      }
+    };
+
+    /**
+     * Set flag when new subject filters are selected.
+     */
+    $scope.filterNewSelection = function filterNewSelection() {
+      $scope.newSubjects = true;
+    };
+
+    // Defines the document filter type.
+    var documentFilter = {
+      'loop_documents_document': true,
+      'loop_documents_collection': true,
+      'external_sources': true
     };
 
     /**
@@ -55,13 +79,20 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
 
     /**
      * Execute the search and emit the results.
+     *
+     * @param {boolean} scrollToTop
+     *   If TRUE the page i scrolled to the top else not.
      */
-    function search() {
+    function search(scrollToTop) {
+      console.log($scope.query);
+
       // Send info to results that a new search have started.
       communicatorService.$emit('searching', {});
 
       // Scroll to top.
-      window.scrollTo(0, 0);
+      if (scrollToTop) {
+        window.scrollTo(0, 0);
+      }
 
       // Add sorting to the search query. It's added here to make it possible to
       // override or add sorting in search queries from the UI. If it was added
@@ -80,6 +111,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           // Send results.
           $scope.searchBtnText = 'Search';
           $scope.searching = false;
+          $scope.showSort = true;
           communicatorService.$emit('hits', {"hits": data});
         },
         function (reason) {
@@ -110,7 +142,11 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       // Init the query object.
       $scope.query = {
         'text': '',
-        'filters': {}
+        'filters': {
+          'taxonomy': {
+            'type': documentFilter
+          }
+        }
       };
 
       // Check if any intervals have been configured.
@@ -129,7 +165,35 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       if (state.hasOwnProperty('query')) {
         // Query found in state, so execute that search.
         $scope.query = state.query;
-        search();
+
+        // Correct active classes in UI based on query for filters.
+        if ($scope.query.hasOwnProperty('filters') && $scope.query.filters.hasOwnProperty('taxonomy') && $scope.query.filters.taxonomy.hasOwnProperty('type')) {
+          for (var type in $scope.query.filters.taxonomy.type) {
+            if ($scope.query.filters.taxonomy.type[type]) {
+              switch (type) {
+                case 'loop_documents_document':
+                case 'loop_documents_collection':
+                case 'external_sources':
+                  $scope.filterActive = 'docs';
+                  break;
+
+                case 'post':
+                  $scope.filterActive = 'post';
+                  break;
+
+                default:
+                  $scope.filterActive = 'all';
+                  break;
+              }
+            }
+
+          }
+        }
+        else {
+          $scope.filterActive = 'all';
+        }
+
+        search(true);
       }
       else {
         // Check if the provider supports an pager.
@@ -143,7 +207,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           $scope.query.text = angular.copy(CONFIG.initialQueryText);
 
           // Execute the search.
-          search();
+          search(false);
         }
       }
 
@@ -168,7 +232,23 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
         'size': data.size,
         'page': data.page
       };
-      search();
+      search(true);
+    }
+
+    /**
+     * Update search result after filter request from result controller.
+     *
+     * @param {object} data
+     *   The filter and selection made as strings.
+     */
+    function filterUpdated(data) {
+      $scope.query.text = '';
+
+      delete $scope.query.filters['taxonomy'][data['filter']];
+      $scope.query.filters['taxonomy'][data['filter']] = {};
+      $scope.query.filters['taxonomy'][data['filter']][data['selection']] = true;
+
+      search(true);
     }
 
     /**
@@ -188,12 +268,31 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     });
 
     /**
+     * Update the search to filter on the selected filter in the results
+     * controller.
+     */
+    communicatorService.$on('filterUpdate', function (event, data) {
+      var phase = this.$root.$$phase;
+      if (phase === '$apply' || phase === '$digest') {
+          filterUpdated(data);
+      }
+      else {
+        $scope.$apply(function () {
+          filterUpdated(data);
+        });
+      }
+    });
+
+    /**
      * Search click handler.
      *
      * Simple wrapper for search that resets the pager before executing the
      * search.
+     *
+     * @param {boolean} scrollToTop
+     *   If TRUE the page i scrolled to the top else not.
      */
-    $scope.searchClicked = function searchClicked() {
+    $scope.searchClicked = function searchClicked(scrollToTop) {
       $scope.searchBtnText = 'Searching...';
       $scope.searching = true;
 
@@ -205,7 +304,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
         $scope.query.pager = angular.copy(CONFIG.provider.pager);
       }
 
-      search();
+      search(scrollToTop);
     };
 
     /**
@@ -329,21 +428,51 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
           break;
 
         case 'docs':
-          $scope.query.filters['taxonomy']['type'] = {
-            'loop_documents_document': true,
-            'loop_documents_collection': true,
-            'external_sources': true
-          };
+          $scope.query.filters['taxonomy']['type'] = documentFilter;
           break;
 
-        case 'posts':
+        case 'post':
           $scope.query.filters['taxonomy']['type'] = {
             'post': true
           };
           break;
       }
 
-      $scope.searchClicked();
+      $scope.searchClicked(false);
+    };
+
+    /**
+     * Set the sort order for current search.
+     *
+     * @param order
+     *   The order to sort.
+     */
+    $scope.sortOrder = function sortOrder(order) {
+      $scope.sortActive = order;
+
+      switch (order) {
+        case 'desc':
+        case 'asc':
+          $scope.query['sort'] = {
+            'created': order
+          };
+          break;
+
+        case 'alpha':
+          $scope.query['sort'] = {
+            'title': 'asc'
+          };
+          break;
+
+        default:
+          // Remove sort order and default to score order from ES.
+          if ($scope.query.hasOwnProperty('sort')) {
+            delete $scope.query['sort'];
+          }
+          break;
+      }
+
+      $scope.searchClicked(false);
     };
 
     /**
@@ -359,7 +488,7 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       if (CONFIG.hasOwnProperty('initialQueryText')) {
         $scope.query.text = angular.copy(CONFIG.initialQueryText);
 
-        search();
+        search(true);
       }
       else {
         // No initial query.

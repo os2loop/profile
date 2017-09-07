@@ -47,6 +47,21 @@ angular.module('searchResultApp').controller('loopResultController', ['CONFIG', 
     };
 
     /**
+     * Send filter selection event to search controller.
+     *
+     * @param {string} filter
+     *   The field/filter to use.
+     * @param {string} selection
+     *   The selected term to filter on.
+     */
+    $scope.filterUpdate = function filterUpdate(filter, selection) {
+      communicatorService.$emit('filterUpdate', {
+        'filter': filter,
+        'selection': selection
+      });
+    };
+
+    /**
      * Handle search results hits from the search box application.
      */
     $scope.hits = [];
