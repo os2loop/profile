@@ -22,6 +22,25 @@
 /* Add boxsizing polyfill
    ================================================================================================================== */
 /**
+ * Breakpoints
+ *
+ * Should contain breakpoint variables and breakpoints related mixins
+ *
+ * @author magnify
+ */
+/* Breakpoints
+   *
+   * These are only examples, change/add/remove so they match your needs
+   *
+   ================================================================================================================== */
+/* Mixins
+   *
+   * Use this mixin to change styling for your rulesets depending on a breakpoint (width)
+   *
+   * Usage example: @include breakpoint($breakpoint-x)
+   *
+   ================================================================================================================== */
+/**
  * Theme variables
  *
  * @author magnify
@@ -1199,6 +1218,9 @@ label {
     display: table; }
   .header:after {
     clear: both; }
+  @media only screen and (min-width: 43em) {
+    .header {
+      padding-left: calc(100vw - 100%); } }
 
 .header--inner {
   position: relative;
@@ -1236,6 +1258,9 @@ label {
 .layout-full-width, .layout-frontpage, .layout-dashboard, .layout-default, .layout-default-inverted, .layout-alternative, .layout-no-wrapper {
   overflow: hidden;
   margin-bottom: 0; }
+  @media only screen and (min-width: 43em) {
+    .layout-full-width, .layout-frontpage, .layout-dashboard, .layout-default, .layout-default-inverted, .layout-alternative, .layout-no-wrapper {
+      padding-left: calc(100vw - 100%); } }
   .layout-full-width .layout--inner:last-child, .layout-frontpage .layout--inner:last-child, .layout-dashboard .layout--inner:last-child, .layout-default .layout--inner:last-child, .layout-default-inverted .layout--inner:last-child, .layout-alternative .layout--inner:last-child, .layout-no-wrapper .layout--inner:last-child {
     margin-bottom: 0; }
 
@@ -3782,6 +3807,9 @@ a.question--term.taxonomy-keyword {
   z-index: 1;
   position: relative;
   margin-top: -1.5em; }
+  @media only screen and (min-width: 43em) {
+    .typeahead-block {
+      padding-left: calc(100vw - 100%); } }
   .typeahead-block .form-item {
     border: 0;
     margin-bottom: 0;
