@@ -3507,12 +3507,36 @@ a.question--term {
    ========================================================================== */
 .search-filters--label, .search-filters--subject-wrapper-label {
   background: #fff;
-  border: 1px solid #41ab51;
+  border-top: 1px solid #41ab51;
+  border-bottom: 1px solid #41ab51;
+  border-right: 1px solid #41ab51;
   color: #41ab51;
   cursor: pointer;
   flex: 1 0 auto;
   padding: .5em;
   text-align: center; }
+  .search-filters--label:first-child, .search-filters--subject-wrapper-label:first-child {
+    border-left: 1px solid #41ab51;
+    -webkit-border-radius: 0.4em 0 0 0.4em;
+    -moz-border-radius: 0.4em 0 0 0.4em;
+    -ms-border-radius: 0.4em 0 0 0.4em;
+    -o-border-radius: 0.4em 0 0 0.4em;
+    border-radius: 0.4em 0 0 0.4em; }
+  .search-filters--label:last-child, .search-filters--subject-wrapper-label:last-child {
+    -webkit-border-radius: 0 0.4em 0.4em 0;
+    -moz-border-radius: 0 0.4em 0.4em 0;
+    -ms-border-radius: 0 0.4em 0.4em 0;
+    -o-border-radius: 0 0.4em 0.4em 0;
+    border-radius: 0 0.4em 0.4em 0; }
+  .search-filters--label:first-child:last-child, .search-filters--subject-wrapper-label:first-child:last-child {
+    -webkit-border-radius: 0.4em;
+    -moz-border-radius: 0.4em;
+    -ms-border-radius: 0.4em;
+    -o-border-radius: 0.4em;
+    border-radius: 0.4em; }
+  .is-active.search-filters--label, .is-active.search-filters--subject-wrapper-label {
+    background: #41ab51;
+    color: #fff; }
 
 /* Search filters
    ========================================================================== */
@@ -3605,23 +3629,6 @@ a.question--term {
             outline: none; }
         .search-filters--subjects-item-inner input {
           margin-left: -21px; }
-  .search-filters--label:first-child {
-    border-right: 0;
-    -webkit-border-radius: 0.4em 0 0 0.4em;
-    -moz-border-radius: 0.4em 0 0 0.4em;
-    -ms-border-radius: 0.4em 0 0 0.4em;
-    -o-border-radius: 0.4em 0 0 0.4em;
-    border-radius: 0.4em 0 0 0.4em; }
-  .search-filters--label:last-child {
-    border-left: 0;
-    -webkit-border-radius: 0 0.4em 0.4em 0;
-    -moz-border-radius: 0 0.4em 0.4em 0;
-    -ms-border-radius: 0 0.4em 0.4em 0;
-    -o-border-radius: 0 0.4em 0.4em 0;
-    border-radius: 0 0.4em 0.4em 0; }
-  .search-filters--label.is-active {
-    background: #41ab51;
-    color: #fff; }
   .search-filters--arrow {
     position: absolute;
     top: -30px;
