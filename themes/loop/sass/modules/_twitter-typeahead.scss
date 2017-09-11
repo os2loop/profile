@@ -10,11 +10,6 @@
   @extend %set-max-width-and-center-element;
   @extend %basic-element-styling;
 
-  // Prevent small jit.
-  @include breakpoint($breakpoint-4) {
-    padding-left: calc(100vw - 100%);
-  }
-
   z-index: 1;
   position: relative;
 
