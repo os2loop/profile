@@ -3776,7 +3776,7 @@ a.question--term {
 .pager li[title="First Page"] {
   display: inline; }
 
-.pager li[title="Next Page"] {
+.pager li[title="Last Page"] {
   display: inline; }
 
 /**
