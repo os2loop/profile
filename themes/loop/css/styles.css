@@ -3797,6 +3797,8 @@ a.question--term {
   -ms-border-radius: 0.4em;
   -o-border-radius: 0.4em;
   border-radius: 0.4em; }
+  .comments--user-page-comments-new:link, .question--term:link, .question--user-page-nodes-new:link, .external-sources--term:link, .at-term:link, .comments--user-page-comments-new:visited, .question--term:visited, .question--user-page-nodes-new:visited, .external-sources--term:visited, .at-term:visited, .comments--user-page-comments-new:hover, .question--term:hover, .question--user-page-nodes-new:hover, .external-sources--term:hover, .at-term:hover, .comments--user-page-comments-new:active, .question--term:active, .question--user-page-nodes-new:active, .external-sources--term:active, .at-term:active {
+    text-decoration: none; }
 
 .tag--list-description {
   margin-bottom: .5em;
