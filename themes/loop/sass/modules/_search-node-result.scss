@@ -105,3 +105,21 @@
     }
   }
 }
+
+.pager {
+  ul {
+
+  }
+
+  li {
+    display: none;
+  }
+
+  li[title="First Page"] {
+    display: inline;
+  }
+
+  li[title="Next Page"] {
+    display: inline;
+  }
+}

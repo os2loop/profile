@@ -3763,6 +3763,15 @@ a.question--term {
   .search-node-result--comments:focus {
     color: #b3b3b3; }
 
+.pager li {
+  display: none; }
+
+.pager li[title="First Page"] {
+  display: inline; }
+
+.pager li[title="Next Page"] {
+  display: inline; }
+
 /**
  * Tag
  *
