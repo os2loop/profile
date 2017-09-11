@@ -47,3 +47,5 @@ settings[term_background_color] = #ff6138
 settings[term_hover_background_color] = #eb3000
 settings[keyword_background_color] = #007700
 settings[keyword_hover_background_color] = #006600
+settings[content_type_label_color_default] = #41658A
+settings[content_type_label_color_post] = #41658A

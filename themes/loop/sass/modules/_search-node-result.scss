@@ -46,16 +46,16 @@
   }
 
   &--meta-data-type {
-    background: $document-type-color;
-    color: $document-type-color-text;
+    background: $document-type-color;/*! setting:content_type_label_color_default */
+    color: $document-type-color-text;/*! setting:content_type_label_text_color_default */
     display: inline-block;
     font-size: .9em;
     margin-bottom: 1em;
     padding: .1em .7em;
 
     &.is-post {
-      background: $post-type-color;
-      color: $post-type-color-text;
+      background: $post-type-color;/*! setting:content_type_label_color_post */
+      color: $post-type-color-text;/*! setting:content_type_label_text_color_post */
     }
 
     @include border-radius(1em);
