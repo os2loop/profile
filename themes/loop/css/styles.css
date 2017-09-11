@@ -3773,10 +3773,10 @@ a.question--term {
     .pager li {
       display: inline; } }
 
-.pager li[title="First Page"] {
+.pager li[title="Previous Page"] {
   display: inline; }
 
-.pager li[title="Last Page"] {
+.pager li[title="Next Page"] {
   display: inline; }
 
 /**
