@@ -3763,6 +3763,9 @@ a.question--term {
   .search-node-result--comments:focus {
     color: #b3b3b3; }
 
+.pager ul {
+  padding: 0; }
+
 .pager li {
   display: none; }
   @media only screen and (min-width: 43em) {
