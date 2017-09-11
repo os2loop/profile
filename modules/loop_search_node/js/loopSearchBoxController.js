@@ -84,8 +84,6 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
      *   If TRUE the page i scrolled to the top else not.
      */
     function search(scrollToTop) {
-      console.log($scope.query);
-
       // Send info to results that a new search have started.
       communicatorService.$emit('searching', {});
 
