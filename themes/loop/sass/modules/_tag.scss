@@ -17,14 +17,6 @@
   font-size: 85%;
 
   @include border-radius($border-radius);
-
-  &:link,
-  &:visited,
-  &:hover,
-  &:active {
-    color: $white;
-    text-decoration: none;
-  }
 }
 
 
