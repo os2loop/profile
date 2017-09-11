@@ -15,6 +15,11 @@
   z-index: 1;
   background-color: $green;/*! setting:header_color */
   @include zen-grid-container();
+
+  // Prevent small jit.
+  @include breakpoint($breakpoint-4) {
+    padding-left: calc(100vw - 100%);
+  }
 }
 
 .header--inner {
@@ -25,6 +30,9 @@
   min-height: 5em;
   padding-right: 1em;
   padding-left: 1em;
+
+
+
 }
 
 
@@ -67,6 +75,11 @@
 
   overflow: hidden;
   margin-bottom: 0;
+
+  // Prevent small jit.
+  @include breakpoint($breakpoint-4) {
+    padding-left: calc(100vw - 100%);
+  }
 
   .layout--inner:last-child {
     margin-bottom: 0;
