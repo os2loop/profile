@@ -11,7 +11,7 @@
   margin-bottom: .25em;
   padding: .1em 1em;
 
-  background-color: $red;
+  background-color: $white;
   color: $white;
   cursor: pointer;
   font-size: 85%;
@@ -24,10 +24,6 @@
   &:active {
     color: $white;
     text-decoration: none;
-  }
-
-  &:hover {
-    background-color: darken($red, 15%);
   }
 }
 

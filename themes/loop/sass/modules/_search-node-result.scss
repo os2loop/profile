@@ -71,7 +71,7 @@
     margin-bottom: 1em;
     padding: .1em .7em;
 
-    @include border-radius(1em);
+    @include border-radius($border-radius);
   }
 
   &--comments {
