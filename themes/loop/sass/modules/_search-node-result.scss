@@ -112,7 +112,7 @@
 
   li {
     display: none;
-    @include breakpoint($breakpoint-4) {
+    @include breakpoint(1000px) {
       display: inline;
     }
   }
