@@ -109,20 +109,17 @@
 .pager {
 
   li {
+    display: none;
     @include breakpoint($breakpoint-4) {
-      display: none;
+      display: inline;
     }
   }
 
   li[title="First Page"] {
-    @include breakpoint($breakpoint-4) {
-      display: inline;
-    }
+    display: inline;
   }
 
   li[title="Next Page"] {
-    @include breakpoint($breakpoint-4) {
-      display: inline;
-    }
+    display: inline;
   }
 }
