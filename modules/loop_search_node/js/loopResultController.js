@@ -154,6 +154,9 @@ angular.module('searchResultApp').controller('loopResultController', ['CONFIG', 
         Drupal.settings.autocomplete_deluxe = response.data.settings[1].data.autocomplete_deluxe;
         jQuery.getScript(response.data.settings[0], function() {
           Drupal.attachBehaviors();
+
+          // Copy question text into the form.
+          document.getElementById('edit-field-description-und-0-value').innerHTML = document.getElementById('loop-search-field').value;
         });
       });
     }
