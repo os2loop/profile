@@ -3718,7 +3718,9 @@ a.question--term {
 
 .search-node-result--meta-data-type {
   background: #B05B63;
+  /* setting:content_type_label_color_default */
   color: #fff;
+  /* setting:content_type_label_text_color_default */
   display: inline-block;
   font-size: .9em;
   margin-bottom: 1em;
@@ -3730,7 +3732,9 @@ a.question--term {
   border-radius: 1em; }
   .search-node-result--meta-data-type.is-post {
     background: #41658A;
-    color: #fff; }
+    /* setting:content_type_label_color_post */
+    color: #fff;
+    /* setting:content_type_label_text_color_post */ }
 
 .search-node-result--subject {
   background: #fff;
