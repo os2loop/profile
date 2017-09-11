@@ -3763,14 +3763,17 @@ a.question--term {
   .search-node-result--comments:focus {
     color: #b3b3b3; }
 
-.pager li {
-  display: none; }
+@media only screen and (min-width: 43em) {
+  .pager li {
+    display: none; } }
 
-.pager li[title="First Page"] {
-  display: inline; }
+@media only screen and (min-width: 43em) {
+  .pager li[title="First Page"] {
+    display: inline; } }
 
-.pager li[title="Next Page"] {
-  display: inline; }
+@media only screen and (min-width: 43em) {
+  .pager li[title="Next Page"] {
+    display: inline; } }
 
 /**
  * Tag
