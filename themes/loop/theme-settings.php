@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/template.php';
+
 /**
  * @file
  * Theme setting callbacks for the loop theme.
