@@ -10,12 +10,9 @@
 function loop_notification_update_7001() {
   $value = array(
     'external_sources' => 0,
-    'index' => 0,
     'instruction' => 0,
-    'leaf' => 0,
     'post' => 'post',
     'page' => 0,
-    'tree' => 0,
   );
 
   variable_set('loop_notification_content_types', $value);
