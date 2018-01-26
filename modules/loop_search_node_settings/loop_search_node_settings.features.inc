@@ -156,28 +156,29 @@ function loop_search_node_settings_default_search_api_index() {
         "url" : { "type" : "uri" }
       },
       "data_alter_callbacks" : {
-        "location" : { "status" : 0, "weight" : "-50", "settings" : { "field_name" : "" } },
         "exclude" : {
           "status" : 0,
           "weight" : "-50",
           "settings" : { "fields" : { "name" : "", "values" : "" } }
         },
+        "location" : { "status" : 0, "weight" : "-50", "settings" : { "field_name" : "" } },
         "search_api_alter_bundle_filter" : {
           "status" : 0,
           "weight" : "-10",
           "settings" : { "default" : "1", "bundles" : [] }
         },
-        "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
         "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
-        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
+        "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] },
         "search_api_alter_language_control" : {
           "status" : 0,
           "weight" : "0",
           "settings" : { "lang_field" : "", "languages" : [] }
-        }
+        },
+        "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
+        "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
+        "search_api_metatag_alter_callback" : { "status" : 0, "weight" : "0", "settings" : [] }
       },
       "processors" : {
         "search_api_case_ignore" : {
@@ -186,13 +187,13 @@ function loop_search_node_settings_default_search_api_index() {
           "settings" : { "fields" : { "title" : true } }
         },
         "search_api_html_filter" : {
-          "status" : 0,
+          "status" : 1,
           "weight" : "10",
           "settings" : {
-            "fields" : { "title" : true },
+            "fields" : { "title" : true, "body:value" : true },
             "title" : 0,
             "alt" : 1,
-            "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
+            "tags" : ""
           }
         },
         "search_api_transliteration" : {
@@ -227,7 +228,25 @@ function loop_search_node_settings_default_search_api_index() {
             "excerpt" : 1,
             "excerpt_length" : "256",
             "exclude_fields" : [],
-            "highlight" : "always"
+            "highlight" : "always",
+            "highlight_partial" : 0
+          }
+        },
+        "search_api_porter_stemmer" : {
+          "status" : 0,
+          "weight" : "35",
+          "settings" : {
+            "fields" : {
+              "title" : true,
+              "body:value" : true,
+              "body:summary" : true,
+              "field_keyword:name" : true,
+              "field_subject:name" : true,
+              "field_description:value" : true,
+              "field_profession:name" : true,
+              "comments:comment_body:value" : true
+            },
+            "exceptions" : "texan=texa"
           }
         }
       }
