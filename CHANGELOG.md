@@ -1,6 +1,6 @@
 # GDPR loop Changelog
 
-## GDPR loop 1.8.4
+## GDPR loop 1.8.5
 * Changed order of comments
 
 ## GDPR loop 1.8.4
