@@ -1,4 +1,9 @@
-# Loop Changelog
+# GDPR loop Changelog
+
+## GDPR loop 1.8.3
+* Fork from https://github.com/os2loop/profile
+* Changed dependency setup for loop_dashboard
+* Added itk_siteimprove module
 
 ## Loop 1.8.0
 * Rebooted changelog
