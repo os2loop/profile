@@ -1,6 +1,9 @@
 # GDPR loop Changelog
 
 ## GDPR loop 1.8.4
+* Changed order of comments
+
+## GDPR loop 1.8.4
 * Removed dependency on secure permissions in loop saml
 
 ## GDPR loop 1.8.3
