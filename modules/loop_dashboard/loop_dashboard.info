@@ -6,7 +6,6 @@ dependencies[] = libraries
 dependencies[] = loop_admin
 dependencies[] = loop_flag
 dependencies[] = loop_navigation
-dependencies[] = loop_permissions
 dependencies[] = loop_post
 dependencies[] = loop_user
 features[ctools][] = page_manager:pages_default:1
