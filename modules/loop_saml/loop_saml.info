@@ -5,4 +5,3 @@ package = Loop
 project = loop_saml
 dependencies[] = saml_sp
 dependencies[] = saml_sp_drupal_login
-dependencies[] = secure_permissions
