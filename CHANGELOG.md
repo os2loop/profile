@@ -1,5 +1,8 @@
 # GDPR loop Changelog
 
+## GDPR loop 1.8.4
+* Removed dependency on secure permissions in loop saml
+
 ## GDPR loop 1.8.3
 * Fork from https://github.com/os2loop/profile
 * Changed dependency setup for loop_dashboard
