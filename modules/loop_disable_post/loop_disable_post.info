@@ -1,0 +1,6 @@
+name = Loop disable post
+description = Removes most traces of posts in the system without disabling the loop post module.
+core = 7.x
+package = Loop
+dependencies[] = loop_post
+scripts[] = js/loop_disable_post.js

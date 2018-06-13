@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Delete traces of post content type and related functionality.
+ */
+
+/**
+ * Implements hook_menu_alter().
+ */
+function loop_disable_post_menu_alter(&$items) {
+  $items['node/add/post']['access callback'] = '_loop_disable_post_deny_access';
+  $items['editor/dashboard/questions']['access callback'] = '_loop_disable_post_deny_access';
+  $items['editor/dashboard/replies']['access callback'] = '_loop_disable_post_deny_access';
+  $items['editor/dashboard/user-statistics']['access callback'] = '_loop_disable_post_deny_access';
+  $items['editor/dashboard/abuse']['access callback'] = '_loop_disable_post_deny_access';
+}
+
+/**
+ * Helper function for denying access to specific menu items.
+ *
+ * @return bool
+ *   The access permission.
+ */
+function _loop_disable_post_deny_access() {
+  return FALSE;
+}

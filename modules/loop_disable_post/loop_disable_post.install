@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Actions to take during install and uninstall of this module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Remove menu items and change search filter template.
+ */
+function loop_disable_post_install() {
+  // Remove menu items.
+  $menu_items = array(
+    array(
+      'name' => 'main-menu',
+      'path' => 'node/add/post',
+    ),
+  );
+
+  foreach ($menu_items as $item) {
+    $menu_name = $item['name'];
+    $menu_path = $item['path'];
+    _loop_disable_post_delete_menu_item($menu_name, $menu_path);
+  }
+
+  // Change searchbox.
+  $search_box_settings = variable_get('search_node_page_search_box');
+  $new_search_box_location = '/profiles/loopdk/modules/loop_disable_post/templates/search.html';
+  $search_box_settings['templates']['box'] = $new_search_box_location;
+  variable_set('search_node_page_search_box', $search_box_settings);
+}
+
+/**
+ * Helper function for deleting a menu item.
+ *
+ * @param string $menu_name
+ *   Machine name of the menu the item is located in.
+ * @param string $menu_path
+ *   The path of the menu item.
+ */
+function _loop_disable_post_delete_menu_item($menu_name, $menu_path) {
+  $menu_info = db_select('menu_links', 'ml')
+    ->condition('ml.link_path', $menu_path)
+    ->condition('ml.menu_name', $menu_name)
+    ->fields('ml', array('mlid', 'plid'))
+    ->execute()
+    ->fetchAll();
+
+  foreach ($menu_info as $key => $value) {
+    menu_link_delete($menu_info[$key]->mlid);
+  }
+}

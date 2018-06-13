@@ -1,6 +1,10 @@
 # Loop Changelog
 
 ## Loop 1.8.0
+* LOOP-555: Added loop_disable_post module
+* Cleaned up code documentation
+
+## Loop 1.8.0
 * Rebooted changelog
 * LOOP-519: Grouped menu items
 * LOOP-504: Uninstall loop external data and cleanup
