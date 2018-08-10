@@ -11,7 +11,7 @@
 function loop_preprocess_page(&$variables) {
   global $user;
   $arg = arg();
-  if (user_is_logged_in()) {
+  if (user_access('access content')) {
     // Prepare system search block for page.tpl.
     if (module_exists('search_api_page')) {
       $variables['search'] = module_invoke('search_api_page', 'block_view', 'default');
