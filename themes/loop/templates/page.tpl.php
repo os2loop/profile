@@ -156,7 +156,7 @@ if (isset($primary_menu_block['content'])): ?>
   <div id="breadcrumb"><?php print $breadcrumb; ?></div>
 <?php endif; ?>
 
-<?php if (user_access('access content')) : ?>
+<?php if (user_is_anonymous() && arg(0) == 'user') : ?>
   <div class="layout-no-wrapper">
     <div class="layout--inner">
       <h1>
