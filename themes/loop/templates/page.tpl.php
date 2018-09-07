@@ -208,6 +208,13 @@ if (isset($primary_menu_block['content'])): ?>
     <?php print $messages; ?>
   <?php endif; ?>
   <?php print render($page['content']); ?>
+  <?php if (!empty($page['login'])): ?>
+    <div class="layout-no-wrapper">
+      <div class="layout--inner">
+        <?php print render($page['login']); ?>
+      </div>
+    </div>
+  <?php endif; ?>
 <?php endif;?>
 
 <footer class="footer">
