@@ -1,5 +1,8 @@
 # Loop Changelog
 
+## Loop 1.8.3
+* Removed access configuration for anonymous users
+
 ## Loop 1.8.0
 * Rebooted changelog
 * LOOP-519: Grouped menu items

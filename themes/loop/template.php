@@ -11,7 +11,7 @@
 function loop_preprocess_page(&$variables) {
   global $user;
   $arg = arg();
-  if (user_is_logged_in()) {
+  if (user_access('access content')) {
     // Prepare system search block for page.tpl.
     if (module_exists('search_api_page')) {
       $variables['search'] = module_invoke('search_api_page', 'block_view', 'default');
@@ -186,7 +186,7 @@ function loop_preprocess_block(&$variables) {
   }
 
   // Are we dealing with the access denied or page not found block?
-  if ($variables['user']->uid == 0 && !in_array(arg(0), array('user', 'loop_saml_redirect')) && $variables['is_front'] == FALSE) {
+  if (!user_access('access content') && !in_array(arg(0), array('user', 'loop_saml_redirect')) && $variables['is_front'] == FALSE) {
     if ($variables['block']->module == 'system' && $variables['block']->delta == 'main') {
       $variables['content'] = '<div class="messages error">' . $variables['content'] . '</div>';
     }

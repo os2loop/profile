@@ -156,7 +156,7 @@ if (isset($primary_menu_block['content'])): ?>
   <div id="breadcrumb"><?php print $breadcrumb; ?></div>
 <?php endif; ?>
 
-<?php if (user_is_anonymous()): ?>
+<?php if (user_is_anonymous() && arg(0) == 'user') : ?>
   <div class="layout-no-wrapper">
     <div class="layout--inner">
       <h1>
@@ -208,6 +208,13 @@ if (isset($primary_menu_block['content'])): ?>
     <?php print $messages; ?>
   <?php endif; ?>
   <?php print render($page['content']); ?>
+  <?php if (!empty($page['login'])): ?>
+    <div class="layout-no-wrapper">
+      <div class="layout--inner">
+        <?php print render($page['login']); ?>
+      </div>
+    </div>
+  <?php endif; ?>
 <?php endif;?>
 
 <footer class="footer">
