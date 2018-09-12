@@ -1,5 +1,8 @@
 # Loop Changelog
 
+## Loop 1.8.5
+* Added anonymous permissions to secure permissions.
+
 ## Loop 1.8.4
 * Removed saml block from features
 
