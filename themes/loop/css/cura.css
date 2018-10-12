@@ -3878,6 +3878,7 @@ a.question--term {
   font-size: .85em; }
 
 a.question--term.taxonomy-keyword {
+  color: #fff;
   background-color: #44c8f5;
   /* setting:keyword_background_color */ }
   a.question--term.taxonomy-keyword:hover {
