@@ -158,7 +158,13 @@ angular.module('searchResultApp').controller('loopResultController', ['CONFIG', 
           // Make auto-complete deluxe work (hackish).
           Drupal.settings.autocomplete_deluxe = data.settings[1].data.autocomplete_deluxe;
           jQuery.getScript('/' + data.settings[0]).done(function (script, textStatus) {
-            Drupal.attachBehaviors();
+            try {
+              // This may throw an exception due to location.hash
+              // being used in jQuery.find
+              // ("#/#text=hat%2520og%2520briller&pager=0:8", say, is
+              // not a valid selector).
+              Drupal.attachBehaviors();
+            } catch (ex) {}
 
             // Copy question text into the form.
             document.getElementById('edit-field-description-und-0-value').innerHTML = document.getElementById('loop-search-field').value;
