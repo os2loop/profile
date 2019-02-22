@@ -230,6 +230,9 @@ projects[shurly][version] = "1.4"
 projects[simplesamlphp_auth][subdir] = "contrib"
 projects[simplesamlphp_auth][version] = "2.0-alpha2"
 
+projects[siteimprove][subdir] = "contrib"
+projects[siteimprove][version] = "1.0"
+
 projects[special_menu_items][subdir] = "contrib"
 projects[special_menu_items][version] = "2.0"
 
