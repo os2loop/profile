@@ -99,7 +99,7 @@ projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.3"
 
 projects[link][subdir] = "contrib"
-projects[link][version] = "1.4"
+projects[link][version] = "1.6"
 
 projects[logintoboggan][subdir] = "contrib"
 projects[logintoboggan][version] = "1.5"
@@ -111,7 +111,7 @@ projects[mailsystem][subdir] = "contrib"
 projects[mailsystem][version] = "2.34"
 
 projects[media][subdir] = "contrib"
-projects[media][version] = "2.4"
+projects[media][version] = "2.21"
 
 projects[menu_admin_per_menu][subdir] = "contrib"
 projects[menu_admin_per_menu][version] = "1.1"
