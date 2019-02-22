@@ -217,8 +217,10 @@ if (isset($primary_menu_block['content'])): ?>
   <?php endif; ?>
 <?php endif;?>
 
-<footer class="footer">
-  <div class="section">
-    <?php print render($page['footer']); ?>
-  </div>
-</footer>
+<?php if (isset($page['footer'])): ?>
+  <footer class="footer layout-default layout-spacing-top layout-spacing-bottom">
+    <div class="section">
+      <?php print render($page['footer']); ?>
+    </div>
+  </footer>
+<?php endif;?>

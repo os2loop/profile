@@ -1279,6 +1279,14 @@ label {
     .logo--image {
       max-width: 16em; } }
 
+/* Spacing
+   ================================================================================================================== */
+.layout-spacing-top {
+  margin-top: 1.5em !important; }
+
+.layout-spacing-bottom {
+  margin-bottom: 1.5em !important; }
+
 /* Layouts
    ================================================================================================================== */
 .layout-full-width, .layout-frontpage, .layout-dashboard, .layout-default, .layout-default-inverted, .layout-alternative, .layout-no-wrapper {
@@ -1752,6 +1760,16 @@ label {
 .layout-no-wrapper .layout-element-epsilon {
   padding-left: 0;
   padding-right: 0; }
+
+footer .block {
+  float: left;
+  width: 100%; }
+  @media only screen and (min-width: 45em) {
+    footer .block {
+      width: 33%; }
+      footer .block:last-child {
+        float: right;
+        text-align: right; } }
 
 /**
  * Navigation

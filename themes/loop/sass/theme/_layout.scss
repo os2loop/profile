@@ -56,6 +56,15 @@
   }
 }
 
+/* Spacing
+   ================================================================================================================== */
+.layout-spacing-top {
+  margin-top: $margin-bottom!important;
+}
+
+.layout-spacing-bottom {
+  margin-bottom: $margin-bottom!important;
+}
 
 
 /* Layouts
@@ -341,3 +350,20 @@
     @include zen-nested-container;
   }
 }
+
+footer {
+  .block {
+    float: left;
+    width: 100%;
+
+    @include breakpoint(45em) {
+      width: 33%;
+
+      &:last-child {
+        float: right;
+        text-align: right;
+      }
+    }
+  }
+}
+
