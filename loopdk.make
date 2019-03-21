@@ -168,7 +168,7 @@ projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.3"
 
 projects[path_breadcrumbs][subdir] = "contrib"
-projects[path_breadcrumbs][version] = "3.3"
+projects[path_breadcrumbs][version] = "3.4"
 
 projects[pcp][subdir] = "contrib"
 projects[pcp][version] = "1.7"
@@ -268,8 +268,8 @@ projects[view_unpublished][subdir] = "contrib"
 projects[view_unpublished][version] = "1.2"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.17"
-projects[views][patch][] = "https://drupal.org/files/views-make_destination_parameter_configurable-1239566-26.patch"
+projects[views][version] = "3.21"
+projects[views][patch][] = "https://www.drupal.org/files/issues/2018-06-05/views-make_destination_parameter_configurable-1239566-33.patch"
 
 projects[views_calc][subdir] = "contrib"
 projects[views_calc][version] = "1.1"
