@@ -245,6 +245,9 @@ projects[strongarm][version] = "2.0"
 projects[style_settings][subdir] = "contrib"
 projects[style_settings][version] = "2.0"
 
+projects[system_status][subdir] = "contrib"
+projects[system_status][version] = "3.3"
+
 projects[taxonomy_manager][subdir] = "contrib"
 projects[taxonomy_manager][version] = "1.0"
 
