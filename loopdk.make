@@ -147,7 +147,7 @@ projects[mimemail][subdir] = "contrib"
 projects[mimemail][version] = "1.1"
 
 projects[module_filter][subdir] = "contrib"
-projects[module_filter][version] = "2.0"
+projects[module_filter][version] = "2.2"
 
 projects[node_export][subdir] = "contrib"
 projects[node_export][version] = "3.0"
