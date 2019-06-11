@@ -172,6 +172,7 @@ projects[path_breadcrumbs][version] = "3.4"
 
 projects[pcp][subdir] = "contrib"
 projects[pcp][version] = "1.7"
+projects[pcp][patch][] = "https://www.drupal.org/files/issues/2018-10-09/pcp-fix_ambiguity_in_execution_added_curly_braces.patch"
 
 projects[phpwkhtmltopdf][subdir] = "contrib"
 projects[phpwkhtmltopdf][version] = "2.1"
