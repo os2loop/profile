@@ -15,7 +15,7 @@ projects[auto_entitylabel][subdir] = "contrib"
 projects[auto_entitylabel][version] = "1.4"
 
 projects[autocomplete_deluxe][subdir] = "contrib"
-projects[autocomplete_deluxe][version] = "2.2"
+projects[autocomplete_deluxe][version] = "2.3"
 
 projects[better_formats][subdir] = "contrib"
 projects[better_formats][version] = "1.0-beta2"
@@ -24,7 +24,7 @@ projects[comment_counter][subdir] = "contrib"
 projects[comment_counter][version] = "1.0-alpha1"
 
 projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "1.12"
+projects[ctools][version] = "1.15"
 
 projects[ckeditor_link][subdir] = "contrib"
 projects[ckeditor_link][version] = "2.4"
@@ -33,10 +33,10 @@ projects[date][subdir] = "contrib"
 projects[date][version] = "2.10"
 
 projects[diff][subdir] = "contrib"
-projects[diff][version] = "3.3"
+projects[diff][version] = "3.4"
 
 projects[elements][subdir] = "contrib"
-projects[elements][version] = "1.4"
+projects[elements][version] = "1.5"
 
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.9"
@@ -54,7 +54,7 @@ projects[facetapi][subdir] = "contrib"
 projects[facetapi][version] = "1.5"
 
 projects[features][subdir] = "contrib"
-projects[features][version] = "2.10"
+projects[features][version] = "2.11"
 
 projects[features_extra][subdir] = "contrib"
 projects[features_extra][version] = "1.0"
@@ -63,19 +63,19 @@ projects[features_override][subdir] = "contrib"
 projects[features_override][version] = "2.0-rc3"
 
 projects[field_group][subdir] = "contrib"
-projects[field_group][version] = "1.5"
+projects[field_group][version] = "1.6"
 
 projects[file_entity][subdir] = "contrib"
-projects[file_entity][version] = "2.0"
+projects[file_entity][version] = "2.25"
 
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "3.9"
 
 projects[globalredirect][subdir] = "contrib"
-projects[globalredirect][version] = "1.5"
+projects[globalredirect][version] = "1.6"
 
 projects[google_analytics][subdir] = "contrib"
-projects[google_analytics][version] = "2.4"
+projects[google_analytics][version] = "2.6"
 
 projects[google_analytics_counter][subdir] = "contrib"
 projects[google_analytics_counter][version] = "3.3"
@@ -84,7 +84,7 @@ projects[html5_tools][subdir] = "contrib"
 projects[html5_tools][version] = "1.3"
 
 projects[i18n][subdir] = "contrib"
-projects[i18n][version] = "1.17"
+projects[i18n][version] = "1.26"
 
 projects[i18nviews][subdir] = "contrib"
 projects[i18nviews][version] = "3.0-alpha1"
@@ -93,10 +93,10 @@ projects[jquery_update][subdir] = "contrib"
 projects[jquery_update][version] = "3.0-alpha5"
 
 projects[l10n_update][subdir] = "contrib"
-projects[l10n_update][version] = "1.1"
+projects[l10n_update][version] = "2.2"
 
 projects[libraries][subdir] = "contrib"
-projects[libraries][version] = "2.3"
+projects[libraries][version] = "2.5"
 
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.6"
@@ -105,10 +105,10 @@ projects[logintoboggan][subdir] = "contrib"
 projects[logintoboggan][version] = "1.5"
 
 projects[memcache][subdir] = "contrib"
-projects[memcache][version] = "1.5"
+projects[memcache][version] = "1.6"
 
 projects[mailsystem][subdir] = "contrib"
-projects[mailsystem][version] = "2.34"
+projects[mailsystem][version] = "2.35"
 
 projects[media][subdir] = "contrib"
 projects[media][version] = "2.21"
@@ -117,13 +117,13 @@ projects[menu_admin_per_menu][subdir] = "contrib"
 projects[menu_admin_per_menu][version] = "1.1"
 
 projects[menu_attributes][subdir] = "contrib"
-projects[menu_attributes][version] = "1.0-rc3"
+projects[menu_attributes][version] = "1.0"
 
 projects[menu_block][subdir] = "contrib"
-projects[menu_block][version] = "2.7"
+projects[menu_block][version] = "2.8"
 
 projects[menu_token][subdir] = "contrib"
-projects[menu_token][version] = "1.0-beta5"
+projects[menu_token][version] = "1.0-beta7"
 
 projects[menu_position][subdir] = "contrib"
 projects[menu_position][version] = "1.2"
@@ -132,7 +132,7 @@ projects[menu_view_unpublished][subdir] = "contrib"
 projects[menu_view_unpublished][version] = "1.0-beta3"
 
 projects[metatag][subdir] = "contrib"
-projects[metatag][version] = "1.21"
+projects[metatag][version] = "1.25"
 
 projects[message][subdir] = "contrib"
 projects[message][version] = "1.12"
@@ -150,7 +150,7 @@ projects[module_filter][subdir] = "contrib"
 projects[module_filter][version] = "2.2"
 
 projects[node_export][subdir] = "contrib"
-projects[node_export][version] = "3.0"
+projects[node_export][version] = "3.1"
 
 projects[node_limit][subdir] = "contrib"
 projects[node_limit][version] = "1.0-alpha5"
@@ -172,6 +172,7 @@ projects[path_breadcrumbs][version] = "3.4"
 
 projects[pcp][subdir] = "contrib"
 projects[pcp][version] = "1.7"
+projects[pcp][patch][] = "https://www.drupal.org/files/issues/2018-10-09/pcp-fix_ambiguity_in_execution_added_curly_braces.patch"
 
 projects[phpwkhtmltopdf][subdir] = "contrib"
 projects[phpwkhtmltopdf][version] = "2.1"
@@ -186,7 +187,7 @@ projects[role_delegation][subdir] = "contrib"
 projects[role_delegation][version] = "1.1"
 
 projects[rules][subdir] = "contrib"
-projects[rules][version] = "2.10"
+projects[rules][version] = "2.12"
 
 projects[saml_sp][subdir] = "contrib"
 projects[saml_sp][version] = "2.2"
@@ -195,10 +196,10 @@ projects[saml_sp][patch][] = "https://raw.githubusercontent.com/os2loop/profile/
 projects[saml_sp][patch][] = "https://raw.githubusercontent.com/os2loop/profile/master/patches/saml_sp_remove_make_file.patch"
 
 projects[search_api][subdir] = "contrib"
-projects[search_api][version] = "1.21"
+projects[search_api][version] = "1.26"
 
 projects[search_api_page][subdir] = "contrib"
-projects[search_api_page][version] = "1.3"
+projects[search_api_page][version] = "1.5"
 
 projects[search_api_solr][subdir] = "contrib"
 projects[search_api_solr][version] = "1.14"
@@ -216,7 +217,7 @@ projects[search_node_page][type] = "module"
 projects[search_node_page][subdir] = "contrib"
 projects[search_node_page][download][type] = "git"
 projects[search_node_page][download][url] = "http://github.com/search-node/search_node_page.git"
-projects[search_node_page][download][tag] = "7.x-1.3.4"
+projects[search_node_page][download][tag] = "7.x-1.3.5"
 
 projects[secure_permissions][subdir] = "contrib"
 projects[secure_permissions][version] = "1.6"
@@ -271,20 +272,20 @@ projects[view_unpublished][subdir] = "contrib"
 projects[view_unpublished][version] = "1.2"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.21"
+projects[views][version] = "3.22"
 projects[views][patch][] = "https://www.drupal.org/files/issues/2018-06-05/views-make_destination_parameter_configurable-1239566-33.patch"
 
 projects[views_calc][subdir] = "contrib"
 projects[views_calc][version] = "1.1"
 
 projects[views_bulk_operations][subdir] = "contrib"
-projects[views_bulk_operations][version] = "3.4"
+projects[views_bulk_operations][version] = "3.5"
 
 projects[views_flag_refresh][subdir] = "contrib"
 projects[views_flag_refresh][version] = "1.3"
 
 projects[wysiwyg][subdir] = "contrib"
-projects[wysiwyg][version] = "2.4"
+projects[wysiwyg][version] = "2.5"
 
 ; Libraries
 libraries[angular][download][type] = "get"
