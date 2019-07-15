@@ -11,17 +11,20 @@
 function loop_preprocess_page(&$variables) {
   global $user;
   $arg = arg();
-  if (user_access('access content')) {
-    // Prepare system search block for page.tpl.
-    if (module_exists('search_api_page')) {
-      $variables['search'] = module_invoke('search_api_page', 'block_view', 'default');
-    }
-    elseif (module_exists('search_node_page')) {
-      $variables['search'] = module_invoke('search_node_page', 'block_view', 'search_node_search_box');
-      $variables['search']['result'] = module_invoke('search_node_page', 'block_view', 'search_node_search_result');
-    }
-    else {
-      $variables['search'] = module_invoke('search', 'block_view', 'form');
+
+  if (_loop_show_content_search()) {
+    if (user_access('access content')) {
+      // Prepare system search block for page.tpl.
+      if (module_exists('search_api_page')) {
+        $variables['search'] = module_invoke('search_api_page', 'block_view', 'default');
+      }
+      elseif (module_exists('search_node_page')) {
+        $variables['search'] = module_invoke('search_node_page', 'block_view', 'search_node_search_box');
+        $variables['search']['result'] = module_invoke('search_node_page', 'block_view', 'search_node_search_result');
+      }
+      else {
+        $variables['search'] = module_invoke('search', 'block_view', 'form');
+      }
     }
   }
 
@@ -1181,4 +1184,32 @@ function loop_preprocess_html(&$vars) {
     'weight' => 999,
     'preprocess' => FALSE,
   ));
+}
+
+/**
+ * Decide if content search box should be shown on current page.
+ *
+ * @return bool
+ *   The if and only if the content search box should be shown.
+ */
+function _loop_show_content_search() {
+  $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
+  $pages = theme_get_setting('content_search_pages') ?? '';
+
+  // Compare the lowercase internal and lowercase path alias (if any).
+  $page_match = drupal_match_path($path, $pages);
+  if ($path != $_GET['q']) {
+    $page_match = $page_match || drupal_match_path($_GET['q'], $pages);
+  }
+
+  $match_type = theme_get_setting('content_search_visibility') ?? 'exclude';
+  if ($match_type == 'include') {
+    return $page_match;
+  }
+  elseif (!empty($pages)) {
+    return !$page_match;
+  }
+  else {
+    return FALSE;
+  }
 }
