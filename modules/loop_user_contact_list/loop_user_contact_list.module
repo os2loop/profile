@@ -2,5 +2,7 @@
 
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Loop user contact list feature.
  */
+
+include_once 'loop_user_contact_list.features.inc';
