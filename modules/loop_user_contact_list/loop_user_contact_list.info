@@ -1,0 +1,11 @@
+name = Loop user contact list
+description = Contact list
+core = 7.x
+package = Loop
+dependencies[] = features
+dependencies[] = list
+dependencies[] = loop_user
+dependencies[] = options
+features[features_api][] = api:2
+features[field_base][] = field_show_in_contact_list
+features[field_instance][] = user-user-field_show_in_contact_list
