@@ -87,6 +87,7 @@ function loop_user_contact_list_views_default_views() {
   $handler->display->display_options['fields']['field_phone_number']['id'] = 'field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['table'] = 'field_data_field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['field'] = 'field_phone_number';
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
   /* Filter criterion: User: Active */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'users';
@@ -101,11 +102,21 @@ function loop_user_contact_list_views_default_views() {
   $handler->display->display_options['filters']['field_show_in_contact_list_value']['value'] = array(
     1 => '1',
   );
+  $handler->display->display_options['filters']['field_show_in_contact_list_value']['group'] = 1;
+  /* Filter criterion: User: Show in public contact list (field_show_in_contact_list_publi) */
+  $handler->display->display_options['filters']['field_show_in_contact_list_publi_value']['id'] = 'field_show_in_contact_list_publi_value';
+  $handler->display->display_options['filters']['field_show_in_contact_list_publi_value']['table'] = 'field_data_field_show_in_contact_list_publi';
+  $handler->display->display_options['filters']['field_show_in_contact_list_publi_value']['field'] = 'field_show_in_contact_list_publi_value';
+  $handler->display->display_options['filters']['field_show_in_contact_list_publi_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_show_in_contact_list_publi_value']['group'] = 1;
   /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
   $handler->display->display_options['filters']['combine']['field'] = 'combine';
   $handler->display->display_options['filters']['combine']['operator'] = 'contains';
+  $handler->display->display_options['filters']['combine']['group'] = 1;
   $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
   $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
   $handler->display->display_options['filters']['combine']['expose']['label'] = 'Search';
