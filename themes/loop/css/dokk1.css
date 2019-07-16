@@ -4709,6 +4709,32 @@ a.question--term.taxonomy-keyword {
   margin-bottom: 0; }
 
 /**
+ * Contact list module
+ */
+.view-loop-user-contact-list #edit-search-wrapper {
+  position: relative; }
+  .view-loop-user-contact-list #edit-search-wrapper [type="submit"] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+
+.view-loop-user-contact-list th a {
+  color: inherit; }
+
+.view-loop-user-contact-list th img {
+  vertical-align: baseline; }
+
+.view-loop-user-contact-list td {
+  vertical-align: top; }
+  .view-loop-user-contact-list td a {
+    color: inherit;
+    text-decoration: none; }
+
+/**
  * Active Tags module
  *
  * https://drupal.org/project/active_tags
