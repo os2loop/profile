@@ -37,20 +37,22 @@ function loop_user_contact_list_views_default_views() {
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['style_options']['columns'] = array(
-    'mail' => 'mail',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
+    'mail' => 'mail',
     'field_phone_number' => 'field_phone_number',
+    'field_organization' => 'field_organization',
+    'field_job_title' => 'field_job_title',
+    'field_profession' => 'field_profession',
+    'field_area_of_expertise' => 'field_area_of_expertise',
+    'field_location_place' => 'field_location_place',
+    'field_location_address' => 'field_location_address',
+    'field_location_postal_code' => 'field_location_postal_code',
+    'field_location_city' => 'field_location_city',
+    'nothing' => 'nothing',
   );
   $handler->display->display_options['style_options']['default'] = 'field_last_name';
   $handler->display->display_options['style_options']['info'] = array(
-    'mail' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_first_name' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -65,9 +67,73 @@ function loop_user_contact_list_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'mail' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_phone_number' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_organization' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_job_title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_profession' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_area_of_expertise' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_location_place' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_location_address' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_location_postal_code' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_location_city' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -95,6 +161,16 @@ function loop_user_contact_list_views_default_views() {
   $handler->display->display_options['fields']['field_phone_number']['id'] = 'field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['table'] = 'field_data_field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['field'] = 'field_phone_number';
+  /* Field: User: Organization */
+  $handler->display->display_options['fields']['field_organization']['id'] = 'field_organization';
+  $handler->display->display_options['fields']['field_organization']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['fields']['field_organization']['field'] = 'field_organization';
+  $handler->display->display_options['fields']['field_organization']['element_label_colon'] = FALSE;
+  /* Field: User: Job title */
+  $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['element_label_colon'] = FALSE;
   /* Field: Field: Profession */
   $handler->display->display_options['fields']['field_profession']['id'] = 'field_profession';
   $handler->display->display_options['fields']['field_profession']['table'] = 'field_data_field_profession';
@@ -107,11 +183,6 @@ function loop_user_contact_list_views_default_views() {
   $handler->display->display_options['fields']['field_area_of_expertise']['field'] = 'field_area_of_expertise';
   $handler->display->display_options['fields']['field_area_of_expertise']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_area_of_expertise']['delta_offset'] = '0';
-  /* Field: User: Job title */
-  $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
-  $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
-  $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
-  $handler->display->display_options['fields']['field_job_title']['element_label_colon'] = FALSE;
   /* Field: User: Place / Department */
   $handler->display->display_options['fields']['field_location_place']['id'] = 'field_location_place';
   $handler->display->display_options['fields']['field_location_place']['table'] = 'field_data_field_location_place';

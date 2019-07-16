@@ -25,8 +25,7 @@ function loop_user_contact_list_field_group_info() {
     'weight' => '54',
     'children' => array(
       0 => 'field_show_in_contact_list',
-      1 => 'field_show_in_contact_list_authe',
-      2 => 'field_show_in_contact_list_publi',
+      1 => 'field_show_in_contact_list_publi',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

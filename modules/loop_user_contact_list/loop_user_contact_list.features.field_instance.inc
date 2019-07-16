@@ -11,6 +11,70 @@
 function loop_user_contact_list_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'user-user-field_organization'.
+  $field_instances['user-user-field_organization'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_organization',
+    'label' => 'Organization',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'editor' => 'editor',
+          'html' => 'html',
+          'mime_mail_filter' => 'mime_mail_filter',
+          'plain_text' => 'plain_text',
+          'simple' => 'simple',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'editor' => array(
+              'weight' => 0,
+            ),
+            'html' => array(
+              'weight' => -10,
+            ),
+            'mime_mail_filter' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+            'simple' => array(
+              'weight' => -10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 50,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_show_in_contact_list'.
   $field_instances['user-user-field_show_in_contact_list'] = array(
     'bundle' => 'user',
@@ -88,6 +152,7 @@ function loop_user_contact_list_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('If checked, the user information will be shown publicly (to non-authenticated users).');
+  t('Organization');
   t('Show in contact list');
   t('Show in public contact list');
 
