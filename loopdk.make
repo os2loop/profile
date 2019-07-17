@@ -113,6 +113,9 @@ projects[mailsystem][version] = "2.35"
 projects[media][subdir] = "contrib"
 projects[media][version] = "2.21"
 
+projects[media_oembed][subdir] = "contrib"
+projects[media_oembed][version] = "2.7"
+
 projects[menu_admin_per_menu][subdir] = "contrib"
 projects[menu_admin_per_menu][version] = "1.1"
 
