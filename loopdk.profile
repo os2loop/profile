@@ -236,18 +236,15 @@ function loopdk_import_translation() {
  * Install contribute modules translations.
  */
 function loopdk_import_contrib_translation() {
-  // Build batch with l10n_update module.
-  $history = l10n_update_get_history();
-  module_load_include('check.inc', 'l10n_update');
-  $available = l10n_update_available_releases();
-  $updates = l10n_update_build_updates($history, $available);
+  module_load_include('inc', 'l10n_update', 'l10n_update.translation');
+  module_load_include('inc', 'l10n_update', 'l10n_update.fetch');
 
-  // Fire of the batch.
-  module_load_include('batch.inc', 'l10n_update');
-  $updates = _l10n_update_prepare_updates($updates, NULL, array());
-  $batch = l10n_update_batch_multiple($updates, LOCALE_IMPORT_KEEP);
+  // Update all projects.
+  $projects = array();
+  $langcodes = array('da');
+  $options = _l10n_update_default_update_options();
 
-  return $batch;
+  return l10n_update_batch_fetch_build($projects, $langcodes, $options);
 }
 
 /**
