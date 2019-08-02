@@ -8,6 +8,7 @@ dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = file
 dependencies[] = image
+dependencies[] = i18n_taxonomy
 dependencies[] = link
 dependencies[] = loop_taxonomy
 dependencies[] = strongarm
