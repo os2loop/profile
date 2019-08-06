@@ -1182,3 +1182,45 @@ function loop_preprocess_html(&$vars) {
     'preprocess' => FALSE,
   ));
 }
+
+/**
+ * Implements hook_preprocess_media_oembed().
+ */
+function loop_preprocess_media_oembed(&$variables) {
+  if (isset($variables['type']) && 'video' === $variables['type']) {
+    $width = $variables['width'];
+    $height = $variables['height'];
+
+    $gcd = _loop_gcd($width, $height);
+    $ratio = [$width / $gcd, $height / $gcd];
+
+    $variables['wrapper_class_names'][] = 'video-wrapper';
+
+    if ([16, 9] === $ratio) {
+      $variables['wrapper_class_names'][] = 'video-wrapper-16-9';
+    }
+  }
+}
+
+/**
+ * Compute greatest common denominator.
+ */
+function _loop_gcd($a, $b) {
+  $a = abs($a);
+  $b = abs($b);
+  if ($a < $b) {
+    list($b, $a) = [$a, $b];
+  }
+  if (0 === $b) {
+    return $a;
+  }
+
+  $r = $a % $b;
+  while ($r > 0) {
+    $a = $b;
+    $b = $r;
+    $r = $a % $b;
+  }
+
+  return $b;
+}
