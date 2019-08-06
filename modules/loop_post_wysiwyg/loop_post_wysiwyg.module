@@ -35,8 +35,13 @@ function loop_post_wysiwyg_form_comment_form_alter(&$form) {
  * can use the WYSIWYG editor.
  */
 function loop_post_wysiwyg_secure_permissions($role) {
-  $permissions = array('authenticated user' => 'use text format editor');
-  if (isset($permissions[$role])) {
-    return $permissions[$role];
-  }
+  $permissions = array(
+    'authenticated user' => array(
+      'use text format editor',
+      'access media browser',
+      'add media from remote sources',
+    ),
+  );
+
+  return isset($permissions[$role]) ? $permissions[$role] : NULL;
 }

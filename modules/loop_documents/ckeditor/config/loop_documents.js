@@ -140,20 +140,8 @@ CKEDITOR.stylesSet.add('loop_documents', []);
 CKEDITOR.editorConfig = function (config) {
     config.skin = 'moono';
 
-    config.toolbar = [
-        [ 'Format', '-', 'Bold', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent' ],
-        [ 'Link', 'Unlink' ],
-        [ 'media', 'mediaBrowser', 'drupal_path' ],
-        [ 'Templates' ],
-        [ 'Source' ],
-        [ 'Proofread' ]
-    ];
-
     config.linkShowAdvancedTab = false;
     config.linkShowTargetTab = false;
-
-    // Allow body text (p) and two heading levels (h2, h3)
-    config.format_tags = 'p;h2;h3';
 
     config.stylesSet = 'loop_documents';
     config.templates = 'loop_documents';

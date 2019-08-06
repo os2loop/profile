@@ -48,6 +48,7 @@ function loop_documents_secure_permissions($role) {
       'access content overview',
       'view the administration theme',
       'access media browser',
+      'add media from remote sources',
       'access ckeditor link',
       'create files',
       'create loop_documents_document content',
@@ -85,6 +86,7 @@ function loop_documents_secure_permissions($role) {
     $permissions['document collection editor'],
     array(
       'administer loop_documents settings',
+      'administer media oembed',
     )
   );
 

@@ -48,6 +48,8 @@ function loop_documents_install() {
   foreach ($menu_items as $item) {
     menu_link_save($item);
   }
+
+  loop_documents_reset_editor_configuration();
 }
 
 /**

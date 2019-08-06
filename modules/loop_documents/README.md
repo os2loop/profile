@@ -42,3 +42,16 @@ drush php-eval 'node_access_rebuild();'
 A few setting are available on the configuration page
 *Administration » Configuration » Content authoring »
 Loop documents settings* (/admin/config/content/loop_documents)
+
+# Text formats and wysiwyg profiles
+
+This module provides (and depends on) a text format and a wysiwyg profile, both
+named `loop_documents`. These are created when the module is installed and can
+be modified to fit specific needs on a site.
+
+If neeed be, the editor configuration can be reset by running the `drush`
+command `loop-documents-reset-editor-configuration`:
+
+```sh
+drush loop-documents-reset-editor-configuration
+```
