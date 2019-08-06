@@ -97,4 +97,32 @@ function loop_form_system_theme_settings_alter(&$form, &$form_state) {
     '#description' => t("Show logout button when logged via SAML"),
   );
 
+  $form['content_search'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Content search'),
+    '#collapsible' => FALSE,
+    '#description' => t('Settings determining when to show the content search box'),
+  );
+
+  $form['content_search']['content_search_visibility'] = array(
+    '#type' => 'radios',
+    '#options' => array(
+      'exclude' => t('All pages except those listed'),
+      'include' => t('Only the listed pages'),
+    ),
+    '#default_value' => theme_get_setting('content_search_visibility') ?: 'exclude',
+  );
+
+  $form['content_search']['content_search_pages'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Pages'),
+    '#default_value' => theme_get_setting('content_search_pages') ?: 'contacts',
+    '#description' => t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.",
+                        array(
+                          '%blog' => 'blog',
+                          '%blog-wildcard' => 'blog/*',
+                          '%front' => '<front>',
+                        )),
+  );
+
 }

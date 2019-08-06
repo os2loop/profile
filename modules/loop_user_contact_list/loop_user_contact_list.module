@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Code for the Loop user contact list feature.
+ */
+
+include_once 'loop_user_contact_list.features.inc';
+
+/**
+ * Implements hook_form_alter().
+ */
+function loop_user_contact_list_form_alter(&$form, &$form_state, $form_id) {
+  if ('user_profile_form' === $form_id) {
+    if (isset($form['field_show_in_contact_list_publi'], $form['field_show_in_contact_list'])) {
+      // Enable field "Show in public contact list" only if "Show in contact
+      // list" is checked.
+      $form['field_show_in_contact_list_publi']['#states'] = [
+        'enabled' => [
+          ':input[name="field_show_in_contact_list[und]"]' => ['checked' => TRUE],
+        ],
+      ];
+    }
+  }
+}

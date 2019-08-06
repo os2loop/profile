@@ -210,7 +210,7 @@ if (isset($primary_menu_block['content'])): ?>
   <?php print render($page['content']); ?>
 <?php endif;?>
 
-<?php if (isset($page['footer'])): ?>
+<?php if (!empty($page['footer'])): ?>
   <footer class="footer layout-default layout-spacing-top layout-spacing-bottom">
     <div class="section">
       <?php print render($page['footer']); ?>
