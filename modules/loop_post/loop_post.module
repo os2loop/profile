@@ -69,6 +69,12 @@ function loop_post_form_alter(&$form, &$form_state, $form_id) {
  * already been submitted.
  */
 function loop_post_form_validate(&$form, &$form_state) {
+  // Only check "node" entities of type "post".
+  if (!isset($form['#entity_type']) || 'node' !== $form['#entity_type']
+      || !isset($form['#bundle']) || 'post' !== $form['#bundle']) {
+    return;
+  }
+
   if (form_get_errors()) {
     return;
   }
