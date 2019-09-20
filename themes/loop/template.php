@@ -718,7 +718,6 @@ function loop_form_comment_form_alter(&$form) {
  * The user profile form.
  */
 function loop_form_user_profile_form_alter(&$form) {
-  $form['account']['status']['#access'] = FALSE;
   $form['account']['#prefix'] = '<fieldset class="field-group-fieldset">';
   $form['account']['#suffix'] = '</fieldset>';
   $form['redirect']['#access'] = FALSE;
