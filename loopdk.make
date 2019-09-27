@@ -20,6 +20,9 @@ projects[autocomplete_deluxe][version] = "2.3"
 projects[better_formats][subdir] = "contrib"
 projects[better_formats][version] = "1.0-beta2"
 
+projects[captcha][subdir] = "contrib"
+projects[captcha][version] = "1.5"
+
 projects[comment_counter][subdir] = "contrib"
 projects[comment_counter][version] = "1.0-alpha1"
 
@@ -182,6 +185,9 @@ projects[phpwkhtmltopdf][version] = "2.1"
 
 projects[publishcontent][subdir] = "contrib"
 projects[publishcontent][version] = "1.4"
+
+projects[recaptcha][subdir] = "contrib"
+projects[recaptcha][version] = "2.3"
 
 projects[redirect][subdir] = "contrib"
 projects[redirect][version] = "1.0-rc3"
