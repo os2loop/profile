@@ -9,7 +9,7 @@ projects[abuse][download][url] = "http://git.drupal.org/project/abuse.git"
 projects[abuse][download][branch] = "7.x-1.x-dev"
 
 projects[admin_views][subdir] = "contrib"
-projects[admin_views][version] = "1.6"
+projects[admin_views][version] = "1.7"
 
 projects[auto_entitylabel][subdir] = "contrib"
 projects[auto_entitylabel][version] = "1.4"
@@ -54,7 +54,7 @@ projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.5"
 
 projects[facetapi][subdir] = "contrib"
-projects[facetapi][version] = "1.5"
+projects[facetapi][version] = "1.6"
 
 projects[features][subdir] = "contrib"
 projects[features][version] = "2.11"
@@ -81,7 +81,7 @@ projects[google_analytics][subdir] = "contrib"
 projects[google_analytics][version] = "2.6"
 
 projects[google_analytics_counter][subdir] = "contrib"
-projects[google_analytics_counter][version] = "3.3"
+projects[google_analytics_counter][version] = "3.4"
 
 projects[html5_tools][subdir] = "contrib"
 projects[html5_tools][version] = "1.3"
@@ -96,13 +96,13 @@ projects[jquery_update][subdir] = "contrib"
 projects[jquery_update][version] = "3.0-alpha5"
 
 projects[l10n_update][subdir] = "contrib"
-projects[l10n_update][version] = "2.2"
+projects[l10n_update][version] = "2.3"
 
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.5"
 
 projects[link][subdir] = "contrib"
-projects[link][version] = "1.6"
+projects[link][version] = "1.7"
 
 projects[logintoboggan][subdir] = "contrib"
 projects[logintoboggan][version] = "1.5"
@@ -193,7 +193,7 @@ projects[redirect][subdir] = "contrib"
 projects[redirect][version] = "1.0-rc3"
 
 projects[role_delegation][subdir] = "contrib"
-projects[role_delegation][version] = "1.1"
+projects[role_delegation][version] = "1.2"
 
 projects[rules][subdir] = "contrib"
 projects[rules][version] = "2.12"
@@ -211,7 +211,7 @@ projects[search_api_page][subdir] = "contrib"
 projects[search_api_page][version] = "1.5"
 
 projects[search_api_solr][subdir] = "contrib"
-projects[search_api_solr][version] = "1.14"
+projects[search_api_solr][version] = "1.15"
 
 projects[search_api_spellcheck][subdir] = "contrib"
 projects[search_api_spellcheck][version] = "1.0"
@@ -244,7 +244,7 @@ projects[siteimprove][subdir] = "contrib"
 projects[siteimprove][version] = "1.0"
 
 projects[special_menu_items][subdir] = "contrib"
-projects[special_menu_items][version] = "2.0"
+projects[special_menu_items][version] = "2.1"
 
 projects[statistics_counter][subdir] = "contrib"
 projects[statistics_counter][version] = "1.4"
@@ -269,7 +269,7 @@ projects[transliteration][subdir] = "contrib"
 projects[transliteration][version] = "3.2"
 
 projects[uuid][subdir] = "contrib"
-projects[uuid][version] = "1.2"
+projects[uuid][version] = "1.3"
 
 projects[uuid_features][subdir] = "contrib"
 projects[uuid_features][version] = "1.0-rc1"
@@ -281,7 +281,7 @@ projects[view_unpublished][subdir] = "contrib"
 projects[view_unpublished][version] = "1.2"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.22"
+projects[views][version] = "3.23"
 projects[views][patch][] = "https://www.drupal.org/files/issues/2018-06-05/views-make_destination_parameter_configurable-1239566-33.patch"
 
 projects[views_calc][subdir] = "contrib"
@@ -294,7 +294,7 @@ projects[views_flag_refresh][subdir] = "contrib"
 projects[views_flag_refresh][version] = "1.3"
 
 projects[wysiwyg][subdir] = "contrib"
-projects[wysiwyg][version] = "2.5"
+projects[wysiwyg][version] = "2.6"
 
 ; Libraries
 libraries[angular][download][type] = "get"
