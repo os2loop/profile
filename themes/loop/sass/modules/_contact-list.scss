@@ -1,0 +1,49 @@
+/**
+Contact list display.
+ */
+
+.view-loop-user-contact-list {
+  .view-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 100%;
+    height: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+
+    @include breakpoint(600px) {
+      flex: 0 1 50%;
+    }
+
+    @include breakpoint(1200px) {
+      flex: 0 1 25%;
+    }
+  }
+
+  .views-field-field-user-image {
+    margin-bottom: 1em;
+    max-width: 250px;
+
+    img {
+      border: 1px solid #999;
+    }
+  }
+
+  .views-field-nothing-1 {
+    font-weight: bold;
+  }
+
+  .views-field-field-job-title {
+    margin-bottom: .5em;
+  }
+
+  .views-field-field-phone-number {
+    margin-bottom: .5em;
+  }
+}
