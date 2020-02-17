@@ -4790,7 +4790,10 @@ Contact list display.
       flex: 0 1 25%; } }
 
 .view-loop-user-contact-list .views-field-field-user-image {
+  margin-bottom: 1em;
   max-width: 250px; }
+  .view-loop-user-contact-list .views-field-field-user-image img {
+    border: 1px solid #999; }
 
 .view-loop-user-contact-list .views-field-nothing-1 {
   font-weight: bold; }
