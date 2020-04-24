@@ -21,7 +21,7 @@ projects[better_formats][subdir] = "contrib"
 projects[better_formats][version] = "1.0-beta2"
 
 projects[captcha][subdir] = "contrib"
-projects[captcha][version] = "1.5"
+projects[captcha][version] = "1.7"
 
 projects[comment_counter][subdir] = "contrib"
 projects[comment_counter][version] = "1.0-alpha1"
@@ -69,7 +69,7 @@ projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.6"
 
 projects[file_entity][subdir] = "contrib"
-projects[file_entity][version] = "2.25"
+projects[file_entity][version] = "2.27"
 
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "3.9"
@@ -114,7 +114,7 @@ projects[mailsystem][subdir] = "contrib"
 projects[mailsystem][version] = "2.35"
 
 projects[media][subdir] = "contrib"
-projects[media][version] = "2.21"
+projects[media][version] = "2.26"
 
 projects[media_oembed][subdir] = "contrib"
 projects[media_oembed][version] = "2.7"
@@ -138,7 +138,7 @@ projects[menu_view_unpublished][subdir] = "contrib"
 projects[menu_view_unpublished][version] = "1.0-beta3"
 
 projects[metatag][subdir] = "contrib"
-projects[metatag][version] = "1.25"
+projects[metatag][version] = "1.27"
 
 projects[message][subdir] = "contrib"
 projects[message][version] = "1.12"
@@ -272,7 +272,7 @@ projects[uuid][subdir] = "contrib"
 projects[uuid][version] = "1.3"
 
 projects[uuid_features][subdir] = "contrib"
-projects[uuid_features][version] = "1.0-rc1"
+projects[uuid_features][version] = "1.0-rc2"
 
 projects[variable][subdir] = "contrib"
 projects[variable][version] = "2.5"
@@ -281,7 +281,7 @@ projects[view_unpublished][subdir] = "contrib"
 projects[view_unpublished][version] = "1.2"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.23"
+projects[views][version] = "3.24"
 projects[views][patch][] = "https://www.drupal.org/files/issues/2018-06-05/views-make_destination_parameter_configurable-1239566-33.patch"
 
 projects[views_calc][subdir] = "contrib"
