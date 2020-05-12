@@ -2,17 +2,17 @@
 
 /**
  * @file
- * Auto-complete Apache Solr search module.
+ * Loop search db.
  */
 
 /**
  * Implements hook_requirements().
  */
-function loop_search_requirements($phase) {
+function loop_search_db_requirements($phase) {
   $requirements = [];
   if ($phase === 'install') {
-    $this_module = 'loop_search';
-    $those_modules = ['loop_search_db', 'loop_search_node'];
+    $this_module = 'loop_search_db';
+    $those_modules = ['loop_search', 'loop_search_node'];
     foreach ($those_modules as $that_module) {
       if (module_exists($that_module)) {
         $requirements[$this_module] = [
@@ -31,7 +31,7 @@ function loop_search_requirements($phase) {
  *
  * Check jQuery version.
  */
-function loop_search_install() {
+function loop_search_db_install() {
   // Check jQuery version.
   $jquery_version = variable_get('jquery_update_jquery_version', 1.5);
 
