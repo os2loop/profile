@@ -207,6 +207,9 @@ projects[saml_sp][patch][] = "https://raw.githubusercontent.com/os2loop/profile/
 projects[search_api][subdir] = "contrib"
 projects[search_api][version] = "1.26"
 
+projects[search_api_db][subdir] = "contrib"
+projects[search_api_db][version] = "1.7"
+
 projects[search_api_page][subdir] = "contrib"
 projects[search_api_page][version] = "1.5"
 

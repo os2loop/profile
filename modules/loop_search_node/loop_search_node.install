@@ -12,12 +12,14 @@ function loop_search_node_requirements($phase) {
   $requirements = [];
   if ($phase === 'install') {
     $this_module = 'loop_search_node';
-    $that_module = 'loop_search';
-    if (module_exists($that_module)) {
-      $requirements[$this_module] = [
-        'description' => t('Cannot install "%this_module" when "%that_module" is installed.', ['%this_module' => $this_module, '%that_module' => $that_module]),
-        'severity' => REQUIREMENT_ERROR,
-      ];
+    $those_modules = ['loop_search', 'loop_search_db'];
+    foreach ($those_modules as $that_module) {
+      if (module_exists($that_module)) {
+        $requirements[$this_module] = [
+          'description' => t('Cannot install "%this_module" when "%that_module" is installed.', ['%this_module' => $this_module, '%that_module' => $that_module]),
+          'severity' => REQUIREMENT_ERROR,
+        ];
+      }
     }
   }
 
