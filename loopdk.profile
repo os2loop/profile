@@ -73,6 +73,19 @@ function loopdk_module_selection_form($form, &$form_state) {
     }
   }
 
+  // Note: We have to use a key that is not a module name.
+  $form['addons']['search_module'] = array(
+    '#type' => 'select',
+    '#title' => t('Search'),
+    '#description' => t('Pick an optional search module to install'),
+    '#options' => array(
+      'loop_search_db' => t('Database search'),
+      'loop_search' => t('SOLR search'),
+      'loop_search_node' => t('Search Node'),
+    ),
+    '#empty_value' => '',
+  );
+
   $form['addons']['translation'] = array(
     '#type' => 'checkbox',
     '#title' => t('Danish translation'),
@@ -111,6 +124,11 @@ function loopdk_module_selection_form_submit($form, &$form_state) {
     $dependency_modules[] = 'loop_user_related_content_profession';
     $dependency_modules[] = 'loop_user_related_content_competence';
   }
+
+  if (!empty($form_state['values']['search_module'])) {
+    $dependency_modules[] = $form_state['values']['search_module'];
+  }
+
   module_enable($dependency_modules);
 }
 
