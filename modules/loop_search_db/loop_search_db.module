@@ -5,8 +5,6 @@
  * Loop search db.
  */
 
-include_once 'loop_search_db.features.inc';
-
 /**
  * Implements hook_menu().
  */
