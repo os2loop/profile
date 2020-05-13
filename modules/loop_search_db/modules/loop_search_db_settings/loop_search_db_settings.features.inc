@@ -2,13 +2,13 @@
 
 /**
  * @file
- * loop_search_db.features.inc
+ * loop_search_db_settings.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function loop_search_db_ctools_plugin_api($module = NULL, $api = NULL) {
+function loop_search_db_settings_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "facetapi" && $api == "facetapi_defaults") {
     return array("version" => "1");
   }
@@ -17,7 +17,7 @@ function loop_search_db_ctools_plugin_api($module = NULL, $api = NULL) {
 /**
  * Implements hook_default_search_api_index().
  */
-function loop_search_db_default_search_api_index() {
+function loop_search_db_settings_default_search_api_index() {
   $items = array();
   $items['loop_search_db_index'] = entity_import('search_api_index', '{
     "name" : "Post",
@@ -156,35 +156,9 @@ function loop_search_db_default_search_api_index() {
 }
 
 /**
- * Implements hook_default_search_api_page().
- */
-function loop_search_db_default_search_api_page() {
-  $items = array();
-  $items['loop_search_db_page'] = entity_import('search_api_page', '{
-    "index_id" : "loop_search_db_index",
-    "path" : "search",
-    "name" : "Database",
-    "machine_name" : "loop_search_db_page",
-    "description" : "",
-    "options" : {
-      "mode" : "terms",
-      "fields" : [],
-      "max_length" : "128",
-      "per_page" : "10",
-      "result_page_search_form" : 1,
-      "get_per_page" : 0,
-      "view_mode" : "search_api_page_result",
-      "empty_behavior" : "blocks"
-    },
-    "enabled" : "1"
-  }');
-  return $items;
-}
-
-/**
  * Implements hook_default_search_api_server().
  */
-function loop_search_db_default_search_api_server() {
+function loop_search_db_settings_default_search_api_server() {
   $items = array();
   $items['loop_search_db_server'] = entity_import('search_api_server', '{
     "name" : "Database",

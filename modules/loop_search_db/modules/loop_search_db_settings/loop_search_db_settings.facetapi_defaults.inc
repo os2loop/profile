@@ -2,13 +2,13 @@
 
 /**
  * @file
- * loop_search_db.facetapi_defaults.inc
+ * loop_search_db_settings.facetapi_defaults.inc
  */
 
 /**
  * Implements hook_facetapi_default_facet_settings().
  */
-function loop_search_db_facetapi_default_facet_settings() {
+function loop_search_db_settings_facetapi_default_facet_settings() {
   $export = array();
 
   $facet = new stdClass();
