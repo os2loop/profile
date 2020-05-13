@@ -79,9 +79,11 @@ function loopdk_module_selection_form($form, &$form_state) {
     '#title' => t('Search'),
     '#description' => t('Pick an optional search module to install'),
     '#options' => array(
-      'loop_search_db' => t('Database search'),
+      // We install the defaults settings modules which in turn will install
+      // the required search module(s).
+      'loop_search_db_settings' => t('Database search'),
+      'loop_search_node_settings' => t('Search Node'),
       'loop_search' => t('SOLR search'),
-      'loop_search_node' => t('Search Node'),
     ),
     '#empty_value' => '',
   );
