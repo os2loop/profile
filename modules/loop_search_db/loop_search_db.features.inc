@@ -6,6 +6,15 @@
  */
 
 /**
+ * Implements hook_ctools_plugin_api().
+ */
+function loop_search_db_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "facetapi" && $api == "facetapi_defaults") {
+    return array("version" => "1");
+  }
+}
+
+/**
  * Implements hook_default_search_api_index().
  */
 function loop_search_db_default_search_api_index() {
@@ -17,7 +26,8 @@ function loop_search_db_default_search_api_index() {
     "server" : "loop_search_db_server",
     "item_type" : "node",
     "options" : {
-      "index_directly" : 1,
+      "datasource" : { "bundles" : [] },
+      "index_directly" : 0,
       "cron_limit" : "50",
       "fields" : {
         "body:summary" : { "type" : "text" },
@@ -34,18 +44,14 @@ function loop_search_db_default_search_api_index() {
         "type" : { "type" : "string" }
       },
       "data_alter_callbacks" : {
-        "location" : { "status" : 0, "weight" : "-50", "settings" : { "field_name" : "" } },
-        "exclude" : {
-          "status" : 0,
-          "weight" : "-50",
-          "settings" : { "fields" : { "name" : "", "values" : "" } }
-        },
         "search_api_alter_bundle_filter" : {
           "status" : 1,
           "weight" : "-10",
           "settings" : {
             "default" : "0",
             "bundles" : {
+              "loop_documents_document" : "loop_documents_document",
+              "loop_documents_collection" : "loop_documents_collection",
               "external_sources" : "external_sources",
               "instruction" : "instruction",
               "post" : "post"
@@ -57,11 +63,6 @@ function loop_search_db_default_search_api_index() {
         "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
         "search_api_alter_add_hierarchy" : { "status" : 0, "weight" : "0", "settings" : { "fields" : [] } },
-        "search_api_alter_language_control" : {
-          "status" : 0,
-          "weight" : "0",
-          "settings" : { "lang_field" : "", "languages" : [] }
-        },
         "search_api_alter_node_access" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_node_status" : { "status" : 1, "weight" : "0", "settings" : [] }
       },
@@ -71,8 +72,8 @@ function loop_search_db_default_search_api_index() {
           "weight" : "0",
           "settings" : { "fields" : {
               "field_keyword:name" : true,
-              "field_profession:name" : true,
               "field_subject:name" : true,
+              "field_profession:name" : true,
               "comments:comment_body:value" : true
             }
           }
@@ -83,8 +84,8 @@ function loop_search_db_default_search_api_index() {
           "settings" : {
             "fields" : {
               "field_keyword:name" : true,
-              "field_profession:name" : true,
               "field_subject:name" : true,
+              "field_profession:name" : true,
               "comments:comment_body:value" : true
             },
             "title" : 0,
@@ -99,8 +100,8 @@ function loop_search_db_default_search_api_index() {
           "settings" : {
             "fields" : {
               "field_keyword:name" : true,
-              "field_profession:name" : true,
               "field_subject:name" : true,
+              "field_profession:name" : true,
               "comments:comment_body:value" : true
             },
             "spaces" : "[^[:alnum:]]",
@@ -124,10 +125,10 @@ function loop_search_db_default_search_api_index() {
               "title" : true,
               "body:value" : true,
               "body:summary" : true,
-              "field_description:value" : true,
               "field_keyword:name" : true,
-              "field_profession:name" : true,
               "field_subject:name" : true,
+              "field_description:value" : true,
+              "field_profession:name" : true,
               "comments:comment_body:value" : true
             },
             "exceptions" : "texan=texa"
@@ -173,8 +174,7 @@ function loop_search_db_default_search_api_page() {
       "result_page_search_form" : 1,
       "get_per_page" : 0,
       "view_mode" : "search_api_page_result",
-      "language_filter" : [],
-      "empty_behavior" : ""
+      "empty_behavior" : "blocks"
     },
     "enabled" : "1"
   }');
