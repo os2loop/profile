@@ -14,20 +14,6 @@ function loop_permissions_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'secure_permissions_active';
-  $strongarm->value = 1;
-  $export['secure_permissions_active'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'secure_permissions_disable_forms';
-  $strongarm->value = 1;
-  $export['secure_permissions_disable_forms'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'secure_permissions_show_permissions_page';
   $strongarm->value = 1;
   $export['secure_permissions_show_permissions_page'] = $strongarm;
