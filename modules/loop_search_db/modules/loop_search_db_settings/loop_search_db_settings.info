@@ -18,4 +18,5 @@ features[facetapi][] = search_api@loop_search_db_index::type
 features[facetapi][] = search_api@loop_search_db_index:block:field_subject:name
 features[features_api][] = api:2
 features[search_api_index][] = loop_search_db_index
+features[search_api_page][] = default
 features[search_api_server][] = loop_search_db_server

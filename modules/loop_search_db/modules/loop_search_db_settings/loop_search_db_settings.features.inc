@@ -156,6 +156,32 @@ function loop_search_db_settings_default_search_api_index() {
 }
 
 /**
+ * Implements hook_default_search_api_page().
+ */
+function loop_search_db_settings_default_search_api_page() {
+  $items = array();
+  $items['default'] = entity_import('search_api_page', '{
+    "index_id" : "loop_search_db_index",
+    "path" : "search",
+    "name" : "Database",
+    "machine_name" : "default",
+    "description" : "",
+    "options" : {
+      "mode" : "terms",
+      "fields" : [],
+      "max_length" : "128",
+      "per_page" : "10",
+      "result_page_search_form" : 1,
+      "get_per_page" : 0,
+      "view_mode" : "search_api_page_result",
+      "empty_behavior" : "blocks"
+    },
+    "enabled" : "1"
+  }');
+  return $items;
+}
+
+/**
  * Implements hook_default_search_api_server().
  */
 function loop_search_db_settings_default_search_api_server() {
