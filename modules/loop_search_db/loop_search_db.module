@@ -135,9 +135,9 @@ function loop_search_db_init() {
  */
 function loop_search_db_theme() {
   return array(
-    'loop_search_db_theme' => array(
+    'loop_search_db_form' => array(
       'render element' => 'form',
-      'template' => 'loop-search--form',
+      'template' => 'loop-search-db--form',
     ),
   );
 }
@@ -186,4 +186,79 @@ function loop_search_db_form_search_api_page_search_form_alter(&$form) {
       }
     }
   }
+
+  // Perform a search to get facets.
+  $page = search_api_page_load($default_page_id);
+  // Make sure that we actually get results.
+  $empty_behavior = $page->options['empty_behavior'];
+  $page->options['empty_behavior'] = 'results';
+  require_once drupal_get_path('module', 'search_api_page').'/search_api_page.pages.inc';
+  $result = search_api_page_search_execute($page);
+  $page->options['empty_behavior'] = $empty_behavior;
+
+  if (isset($result['search_api_facets'])) {
+    $facets = $result['search_api_facets'];
+    if (isset($facets['type'])) {
+      $form['#facets']['type'] = $facets['type'];
+    }
+    if (isset($facets['field_subject:name'])) {
+      $form['#facets']['field_subject:name'] = $facets['field_subject:name'];
+    }
+  }
+  $form['#theme'] = ['loop_search_db_form'];
+}
+
+function loop_search_db_get_active_filters($facet) {
+  $query = drupal_get_query_parameters();
+  $filters = isset($query['f']) && is_array($query['f']) ? $query['f'] : [];
+  return array_filter($filters, function ($filter) use ($facet) {
+    return 0 === strpos(urldecode($filter), $facet.':');
+  });
+}
+
+function loop_search_db_facet_link($text, $facet, $value = null, $options = []) {
+  $path = current_path();
+  $options += [
+    'query' => loop_search_db_get_facet_query($facet, $value),
+  ];
+  if (loop_search_db_facet_is_active($facet, $value)) {
+    $options['attributes']['class'][] = 'is-active';
+  }
+
+  return l($text, $path, $options);
+}
+
+function loop_search_db_facet_is_active($facet, $value = null) {
+  $query = drupal_get_query_parameters();
+  $filters = isset($query['f']) && is_array($query['f']) ? $query['f'] : [];
+
+  $stuff = array_filter($filters, function ($filter) use ($facet, $value) {
+    return 0 === strpos($filter, $facet.':'.$value);
+  });
+
+  return null === $value ? 0 === count($stuff) : count($stuff) > 0;
+}
+
+function loop_search_db_get_facet_query($facet, $value = null) {
+  $query = drupal_get_query_parameters();
+  $filters = isset($query['f']) && is_array($query['f']) ? $query['f'] : [];
+  $done = false;
+  foreach ($filters as $key => $filter) {
+    if (0 === strpos($filter, $facet.':')) {
+      if (null === $value) {
+        unset($filters[$key]);
+      }
+      else {
+        $filters[$key] = $facet.':'.$value;
+      }
+      $done = true;
+      break;
+    }
+  }
+  if (!$done) {
+    $filters[] = $facet.':'.$value;
+  }
+  $query['f'] = $filters;
+
+  return $query;
 }

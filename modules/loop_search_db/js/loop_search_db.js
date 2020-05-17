@@ -81,5 +81,14 @@ jQuery(document).ready(function($) {
 
     return a.hostname;
   }
-});
 
+  $('.search-filters--subjects-wrapper').toggle(false)
+  $('.search-filters--subject-wrapper').on('click', function () {
+    var $target = $('.search-filters--subjects-wrapper')
+    $target.toggle($target.is(":hidden"))
+  })
+
+  $('.search-filters--action').on('click', function () {
+    alert('apply filters')
+  })
+});
