@@ -42,26 +42,25 @@
  * @see template_preprocess_search_api_page_result()
  */
 ?>
-<?php $url['options']['attributes']['class'] = 'search-result--link';?>
-<div class="search-result--item">
-  <?php if ($info) : ?>
-    <div class="search-result--meta-data">
-      <div class="search-result--meta-data-date"><?php print 'Created ' . format_date($item->created, $type = 'medium'); ?></div>
-      <div class="search-result--meta-data-type">
-        <?php print t('Type'); ?>:
-        <?php if($item->type == 'leaf') : ?>
-          <?php print t('Guide'); ?>
-        <?php elseif ($item->type == 'post') : ?>
-          <?php print t('Question'); ?>
-        <?php else : ?>
-          <?php
-            // @codingStandardsIgnoreLine
-            print t($item->type);
-          ?>
-        <?php endif;?>
+<?php $url['options']['attributes']['class'] = 'search-result--link search-node-result--link';?>
+
+<div class="search-node-result--item">
+  <?php print $url ? l($title, $url['path'], $url['options'] + ['html' => TRUE]) : $title; ?>
+  <div class="search-node-result--item-content">
+    <div class="search-node-result--data-wrapper"><div class="search-node-result--meta-data-type is-<?php print $item->type; ?>"><?php print t($item->type); ?></div></div>
+
+    <?php if (isset($item->field_subject[$item->language][0]['tid'])): ?>
+      <?php $subject = taxonomy_term_load($item->field_subject[LANGUAGE_NONE][0]['tid']); ?>
+      <div class="search-node-result--data-wrapper-subject"><?php print t('Subject'); ?>:
+        <div class="search-node-result--subject" data-filter-update="<?php print htmlspecialchars(json_encode(['field_subject', $subject->name])); ?>"><?php print $subject->name; ?></div>
       </div>
+    <?php endif; ?>
+
+    <div class="search-node-result--meta-data-date">
+      <?php print format_date($item->created, 'custom', 'd. M Y'); ?>
     </div>
-  <?php endif; ?>
-  <?php print $url ? l($snippet, $url['path'], $url['options'] + ['html' => TRUE]) : $snippet; ?>
-  <?php print $url ? l(format_plural($item->comment_count, '1 answer', '@count answers'), $url['path'], ['attributes' => ['class' => ['search-result--comments']]]) : check_plain($item->comment_count); ?>
+    <div class="search-node-result--data-wrapper">
+      <?php print l(format_plural($item->comment_count, '1 answer', '@count answers'), $url['path'], ['attributes' => ['class' => ['search-result--comments']]]); ?>
+    </div>
+  </div>
 </div>
