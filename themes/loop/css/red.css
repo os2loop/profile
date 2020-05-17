@@ -956,7 +956,7 @@ label {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'loop-icons';
-    src: url('../font/loop-icons.svg?48744896#loop-icons') format('svg');
+    src: url('../icons/loop-icons.svg?48744896#loop-icons') format('svg');
   }
 }
 */

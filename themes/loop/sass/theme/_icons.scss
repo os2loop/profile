@@ -7,11 +7,11 @@
 
 @font-face {
   font-family: 'loop-icons';
-  src: url('../icons/loop-icons.eot?24139454');
-  src: url('../icons/loop-icons.eot?24139454#iefix') format('embedded-opentype'),
-  url('../icons/loop-icons.woff?24139454') format('woff'),
-  url('../icons/loop-icons.ttf?24139454') format('truetype'),
-  url('../icons/loop-icons.svg?24139454#loop-icons') format('svg');
+  src: url('#{$icons-font-base-path}/loop-icons.eot?24139454');
+  src: url('#{$icons-font-base-path}/loop-icons.eot?24139454#iefix') format('embedded-opentype'),
+  url('#{$icons-font-base-path}/loop-icons.woff?24139454') format('woff'),
+  url('#{$icons-font-base-path}/loop-icons.ttf?24139454') format('truetype'),
+  url('#{$icons-font-base-path}/loop-icons.svg?24139454#loop-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -22,7 +22,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'loop-icons';
-    src: url('../font/loop-icons.svg?48744896#loop-icons') format('svg');
+    src: url('#{$icons-font-base-path}/loop-icons.svg?48744896#loop-icons') format('svg');
   }
 }
 */
