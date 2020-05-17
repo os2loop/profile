@@ -54,3 +54,11 @@ As an alternative to manually creating terms, you can install the module [Loop t
 ## Search configuration
 
 @TODO
+
+## Loop skins
+
+Loop comes with a number af default skins used for styling the site and the
+active skin can be changed in the Loop theme settings
+(`/admin/appearance/settings/loop`). See [Building a custom
+skin](themes/loop/README.md#building-a-custom-skin) for instruction how to add
+your own custom skin if needed.
