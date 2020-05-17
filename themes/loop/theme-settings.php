@@ -30,9 +30,32 @@ function loop_form_system_theme_settings_alter(&$form, &$form_state) {
       'red' => t('Red'),
       'blue' => t('Blue'),
       'green' => t('Green'),
+      'custom' => t('Custom'),
     ),
     '#default_value' => theme_get_setting('loop_skin'),
     '#description'   => t('Choose a skin for the site.'),
+  );
+
+  $form['theme_settings']['loop_skin_custom'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Custom skin'),
+    '#states' => array(
+      'visible' => array(':input[name="loop_skin"]' => array('value' => 'custom')),
+    ),
+  );
+
+  $form['theme_settings']['loop_skin_custom']['loop_skin_custom_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Path to custom skin'),
+    '#description' => t('The path to the file you would like to use as your custom skin.'),
+    '#default_value' => theme_get_setting('loop_skin_custom_path'),
+  );
+
+  $form['theme_settings']['loop_skin_custom']['loop_skin_custom_upload'] = array(
+    '#type' => 'file',
+    '#title' => t('Upload custom skin'),
+    '#maxlength' => 40,
+    '#description' => t("If you don't have direct file access to the server, use this field to upload your custom skin."),
   );
 
   $form['login_settings'] = array(
@@ -121,4 +144,56 @@ function loop_form_system_theme_settings_alter(&$form, &$form_state) {
                         )),
   );
 
+  $form['#validate'][] = 'loop_form_system_theme_settings_validate';
+  $form['#submit'][] = 'loop_form_system_theme_settings_submit';
+}
+
+/**
+ * Validator for the system_theme_settings() form.
+ */
+function loop_form_system_theme_settings_validate(&$form, &$form_state) {
+  $validators = array('file_validate_extensions' => array('css'));
+
+  // Check for a new uploaded logo.
+  $file = file_save_upload('loop_skin_custom_upload', $validators);
+  if (isset($file)) {
+    // File upload was attempted.
+    if ($file) {
+      // Put the temporary file in form_values so we can save it on submit.
+      $form_state['values']['loop_skin_custom_upload'] = $file;
+    }
+    else {
+      // File upload failed.
+      form_set_error('loop_skin_custom_upload', t('The custom skin could not be uploaded.'));
+    }
+  }
+
+  // If the user provided a path for a custom skin, make sure a file
+  // exists at that path.
+  if (!empty($form_state['values']['loop_skin_custom_path'])) {
+    $path = _system_theme_settings_validate_path($form_state['values']['loop_skin_custom_path']);
+    if (!$path) {
+      form_set_error('loop_skin_custom_path', t('The custom skin path is invalid.'));
+    }
+  }
+}
+
+/**
+ * Process system_theme_settings() form submissions.
+ */
+function loop_form_system_theme_settings_submit(&$form, &$form_state) {
+  $values = &$form_state['values'];
+
+  // If the user uploaded a new custom skin, save it to a permanent location
+  // and use it in place of the default theme-provided file.
+  if (!empty($values['loop_skin_custom_upload'])) {
+    $file = $values['loop_skin_custom_upload'];
+    unset($values['loop_skin_custom_upload']);
+    $filename = file_unmanaged_copy($file->uri);
+    $values['loop_skin_custom_path'] = $filename;
+  }
+
+  if (!empty($values['loop_skin_custom_path'])) {
+    $values['loop_skin_custom_path'] = _system_theme_settings_validate_path($values['loop_skin_custom_path']);
+  }
 }

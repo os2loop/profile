@@ -1173,12 +1173,13 @@ function _loop_fetch_files($type, $entity) {
  * Override or insert variables into the html template.
  */
 function loop_preprocess_html(&$vars) {
-  $skin = theme_get_setting('loop_skin');
-  if (!$skin) {
-    $skin = 'styles';
+  $skin = theme_get_setting('loop_skin') ?: 'styles';
+  $skin_path = path_to_theme() . '/css/' . $skin . '.css';
+  if ('custom' === $skin) {
+    $skin_path = theme_get_setting('loop_skin_custom_path');
   }
 
-  drupal_add_css(path_to_theme() . '/css/' . $skin . '.css', array(
+  drupal_add_css($skin_path, array(
     'group' => CSS_THEME,
     'weight' => 999,
     'preprocess' => FALSE,
