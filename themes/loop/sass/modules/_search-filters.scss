@@ -221,3 +221,11 @@ a.search-filters--label {
   text-decoration: none;
   color: $green;
 }
+
+label.search-filters--label {
+  margin: 0;
+
+  input {
+    visibility: hidden;
+  }
+}

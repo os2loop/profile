@@ -31,7 +31,7 @@ function loop_search_db_settings_facetapi_default_facet_settings() {
     'flatten' => 0,
     'individual_parent' => 0,
     'query_type' => 'term',
-    'limit_active_items' => 1,
+    'limit_active_items' => 0,
     'default_true' => TRUE,
     'facet_search_ids' => array(),
     'exclude' => 0,

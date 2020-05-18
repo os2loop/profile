@@ -15,14 +15,22 @@
       </div>
 
       <div class="search-filters">
-        <div class="search-filters--type">
-          <?php print loop_search_db_facet_link(t('All'), 'type', NULL, ['attributes' => ['class' => ['search-filters--label']]]); ?>
-          <?php print loop_search_db_facet_link(t('Documents'), 'type', 'loop_documents_document', ['attributes' => ['class' => ['search-filters--label']]]); ?>
-          <?php print loop_search_db_facet_link(t('Posts'), 'type', 'post', ['attributes' => ['class' => ['search-filters--label']]]); ?>
-        </div>
+        <?php if (isset($form['#facets']['type'])): ?>
+          <div class="search-filters--type">
+            <?php foreach ($form['#facets']['type'] as $index => $facet): ?>
+              <?php $name = 'f[]'; ?>
+              <?php $text = trim($facet['filter'], '"'); ?>
+              <?php $value = $text ? urlencode('type').':'.$text : ''; ?>
+              <?php $checked = $facet['active'] ?? FALSE; ?>
+              <label class="search-filters--label <?php if ($checked) { print ' is-active '; } ?>"><?php print $facet['text'] ?? $facet['filter']; ?>
+                <input type="checkbox" name="<?php print $name; ?>" <?php if ($checked) { print ' checked '; } ?> value="<?php print htmlspecialchars($value) ?>"/>
+              </label>
+            <?php endforeach ?>
+          </div>
+        <?php endif ?>
 
         <?php if (isset($form['#facets']['field_subject:name'])): ?>
-          <span class="search-filters--subject-wrapper" data-ng-click="toggleFilter()">
+          <span class="search-filters--subject-wrapper">
             <span class="search-filters--subject-wrapper-label">
               <?php $active_filters = loop_search_db_get_active_filters('field_subject'); ?>
               <?php if (count($active_filters) > 0): ?>
@@ -38,16 +46,22 @@
             <div class="search-filters--subjects">
               <div class="search-filters--arrow"><div class="search-filters--arrow-inner"></div></div>
               <div class="search-filters--subjects-inner">
-                <?php foreach ($form['#facets']['field_subject:name'] as $facet): ?>
-                  <div class="search-filters--subjects-item" data-ng-repeat="(key, item) in filters['taxonomy']['field_subject'].items">
+                <?php foreach ($form['#facets']['field_subject:name'] as $index => $facet): ?>
+                  <?php $key = 'field_subject:name-'.$index; ?>
+                  <?php $name = 'f[]'; ?>
+                  <?php $text = $facet['filter']; ?>
+                  <?php $value = urlencode('field_subject:name').':'.$text; ?>
+                  <?php $checked = $facet['active'] ?? FALSE; ?>
+
+                  <div class="search-filters--subjects-item">
                     <span class="search-filters--subjects-item-inner">
-                      <input id="{{ key }}" type="checkbox" data-ng-model="query.filters['taxonomy']['field_subject'][key]" data-ng-click="filterNewSelection()">
-                      <label for="{{ key }}"><?php print $facet['filter']; ?></label>
+                      <input id="<?php print $key; ?>" type="checkbox" name="<?php print $name; ?>" <?php if ($checked) { print ' checked '; } ?> value="<?php print htmlspecialchars($value) ?>"/>
+                      <label for="<?php print $key; ?>"><?php print $text; ?></label>
                     </span>
                   </div>
                 <?php endforeach ?>
               </div>
-              <span data-ng-click="toggleFilter()" class="search-filters--action"><?php print t('Filter') ?></span>
+              <span class="search-filters--action"><?php print t('Filter') ?></span>
             </div>
           </div>
         <?php endif ?>
@@ -68,11 +82,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-<pre><?php
-//var_export(($form['#facets']));
-
-?></pre>
