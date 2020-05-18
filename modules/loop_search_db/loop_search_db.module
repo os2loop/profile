@@ -147,7 +147,7 @@ function loop_search_db_theme() {
  *
  * Alter search form for Twitter Typeahead.
  */
-function loop_search_db_form_search_api_page_search_form_alter(&$form) {
+function loop_search_db_form_search_api_page_search_form_alter(array &$form, array &$form_state) {
   // Fetch search page id.
   $default_page_id = db_query("SELECT id FROM {search_api_page} WHERE index_id = 'loop_search_db_index'")->fetchField();
 
@@ -187,78 +187,91 @@ function loop_search_db_form_search_api_page_search_form_alter(&$form) {
     }
   }
 
-  // Perform a search to get facets.
   $page = search_api_page_load($default_page_id);
-  // Make sure that we actually get results.
-  $empty_behavior = $page->options['empty_behavior'];
-  $page->options['empty_behavior'] = 'results';
-  require_once drupal_get_path('module', 'search_api_page').'/search_api_page.pages.inc';
-  $result = search_api_page_search_execute($page);
-  $page->options['empty_behavior'] = $empty_behavior;
+  // Get search term from query.
+  if (arg(0) === $page->path) {
+    $form['keys_' . $default_page_id]['#default_value'] = arg(1);
+  }
 
-  if (isset($result['search_api_facets'])) {
-    $facets = $result['search_api_facets'];
-    if (isset($facets['type'])) {
-      $form['#facets']['type'] = $facets['type'];
-    }
-    if (isset($facets['field_subject:name'])) {
-      $form['#facets']['field_subject:name'] = $facets['field_subject:name'];
+  // Add a submit function to handle facet filters in query string.
+  $form['#submit'][] = 'loop_search_db_search_form_submit';
+
+  // Load facets and values.
+  $index = search_api_index_load('loop_search_db_index');
+  $server = $index->server();
+  $facets = $server->options['indexes'][$index->machine_name];
+
+  $form['#facets']['type'] = [
+    [
+      'filter' => null,
+      'text' => t('All'),
+      'active' => false,
+    ],
+    [
+      'filter' => 'loop_documents_document',
+      'text' => t('Documents'),
+      'active' => in_array('loop_documents_document', loop_search_db_get_active_filters('type'), true),
+    ],
+    [
+      'filter' => 'post',
+      'text' => t('Posts'),
+      'active' => in_array('post', loop_search_db_get_active_filters('type'), true),
+    ],
+  ];
+  // The first type facet is active is no other facets are active.
+  $form['#facets']['type'][0]['active'] = empty(array_filter($form['#facets']['type'], function ($facet) {
+    return $facet['active'];
+  }));
+
+  foreach (['field_subject:name'] as $name) {
+    if (isset($facets[$name])) {
+      $facet = $facets[$name];
+      $query = db_select($facet['table'], 't')->distinct();
+      if (isset($facet['column'])) {
+        $query->fields('t', [$facet['column']])
+          ->orderBy($facet['column']);
+      } else {
+        $query->fields('t', ['word'])
+          ->condition('field_name', $name)
+          ->orderBy('word');
+      }
+      $options = $query
+        ->execute()
+        ->fetchCol();
+      $form['#facets'][$name] = array_map(static function ($option) use ($name) {
+        return [
+          'filter' => $option,
+          'active' => in_array($option, loop_search_db_get_active_filters($name), true),
+        ];
+      }, $options);
     }
   }
+
   $form['#theme'] = ['loop_search_db_form'];
 }
 
 function loop_search_db_get_active_filters($facet) {
   $query = drupal_get_query_parameters();
   $filters = isset($query['f']) && is_array($query['f']) ? $query['f'] : [];
-  return array_filter($filters, function ($filter) use ($facet) {
+  return array_map(function ($filter) use ($facet) {
+    return substr(urldecode($filter), strlen($facet)+1);
+  }, array_filter($filters, function ($filter) use ($facet) {
     return 0 === strpos(urldecode($filter), $facet.':');
-  });
+  }));
 }
 
-function loop_search_db_facet_link($text, $facet, $value = null, $options = []) {
-  $path = current_path();
-  $options += [
-    'query' => loop_search_db_get_facet_query($facet, $value),
-  ];
-  if (loop_search_db_facet_is_active($facet, $value)) {
-    $options['attributes']['class'][] = 'is-active';
-  }
-
-  return l($text, $path, $options);
-}
-
-function loop_search_db_facet_is_active($facet, $value = null) {
-  $query = drupal_get_query_parameters();
-  $filters = isset($query['f']) && is_array($query['f']) ? $query['f'] : [];
-
-  $stuff = array_filter($filters, function ($filter) use ($facet, $value) {
-    return 0 === strpos($filter, $facet.':'.$value);
-  });
-
-  return null === $value ? 0 === count($stuff) : count($stuff) > 0;
-}
-
-function loop_search_db_get_facet_query($facet, $value = null) {
-  $query = drupal_get_query_parameters();
-  $filters = isset($query['f']) && is_array($query['f']) ? $query['f'] : [];
-  $done = false;
-  foreach ($filters as $key => $filter) {
-    if (0 === strpos($filter, $facet.':')) {
-      if (null === $value) {
-        unset($filters[$key]);
-      }
-      else {
-        $filters[$key] = $facet.':'.$value;
-      }
-      $done = true;
-      break;
+/**
+ * Search page submit handler.
+ */
+function loop_search_db_search_form_submit(array $form, array &$form_state) {
+  if (isset($form_state['redirect'])) {
+    // Add any facet filters to the url query string.
+    $facet_filter = array_filter(drupal_get_query_parameters($_POST)['f'] ?? []);
+    if (!empty($facet_filter)) {
+      $form_state['redirect'] = [
+      $form_state['redirect'],
+        ['query' => ['f' => $facet_filter]],
+      ];
     }
   }
-  if (!$done) {
-    $filters[] = $facet.':'.$value;
-  }
-  $query['f'] = $filters;
-
-  return $query;
 }

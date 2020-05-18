@@ -106,8 +106,8 @@
 
   @include breakpoint($breakpoint-3) {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    top: 56px;
+    right: 20px;
 
     padding-top: .5em;
     padding-bottom: .65em;

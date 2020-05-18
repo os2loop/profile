@@ -88,7 +88,19 @@ jQuery(document).ready(function($) {
     $target.toggle($target.is(":hidden"))
   })
 
+  var applyFilters = function() {
+    var $form = $(this).closest('form')
+    $form.submit()
+  }
+
+  $('.search-filters--type :input').on('change', function () {
+    // Make sure that on the target is selected.
+    $('.search-filters--type :input').prop('checked', false)
+    $(this).prop('checked', true)
+    applyFilters.apply(this)
+  })
+
   $('.search-filters--action').on('click', function () {
-    alert('apply filters')
+    applyFilters.apply(this)
   })
 });

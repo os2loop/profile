@@ -49,7 +49,7 @@
   <div class="search-node-result--item-content">
     <div class="search-node-result--data-wrapper"><div class="search-node-result--meta-data-type is-<?php print $item->type; ?>"><?php print t($item->type); ?></div></div>
 
-    <?php if (isset($item->field_subject[$item->language][0]['tid'])): ?>
+    <?php if (isset($item->field_subject[LANGUAGE_NONE][0]['tid'])): ?>
       <?php $subject = taxonomy_term_load($item->field_subject[LANGUAGE_NONE][0]['tid']); ?>
       <div class="search-node-result--data-wrapper-subject"><?php print t('Subject'); ?>:
         <div class="search-node-result--subject" data-filter-update="<?php print htmlspecialchars(json_encode(['field_subject', $subject->name])); ?>"><?php print $subject->name; ?></div>
