@@ -49,10 +49,6 @@ in the Subject vocabulary before users can create new posts.
 
 Go to `/admin/structure/taxonomy` to add terms to the vocabularies.
 
-As an alternative to manually creating terms, you can install the module [Loop
-taxonomy terms (loop_taxonomy_terms)](/admin/modules#loop_content) and get the
-default Loop taxonomy terms.
-
 ## Search configuration
 
 @TODO
