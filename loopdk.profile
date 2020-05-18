@@ -31,6 +31,7 @@ function loopdk_form_install_configure_form_alter(&$form, $form_state) {
   $form['site_information']['site_name']['#default_value'] = 'Loop';
   $form['server_settings']['site_default_country']['#default_value'] = 'DK';
   $form['server_settings']['date_default_timezone']['#default_value'] = 'Europe/Copenhagen';
+  $form['update_notifications']['update_status_module']['#default_value'] = [FALSE, FALSE];
 }
 
 /**
@@ -51,7 +52,7 @@ function loopdk_module_selection_form($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => t('User pages'),
     '#description' => t('Include user display and user sub pages.'),
-    '#default_value' => TRUE,
+    '#default_value' => FALSE,
   );
 
   $all_modules = system_rebuild_module_data();
@@ -77,7 +78,7 @@ function loopdk_module_selection_form($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => t('Danish translation'),
     '#description' => t('Install and enable Danish translation.'),
-    '#default_value' => FALSE,
+    '#default_value' => TRUE,
   );
 
   $form['submit'] = array(

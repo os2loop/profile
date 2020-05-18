@@ -78,7 +78,6 @@ dependencies[] = loop_navigation
 dependencies[] = loop_admin
 dependencies[] = loop_frontend
 dependencies[] = loop_permissions
-dependencies[] = loop_search
 dependencies[] = loop_user
 dependencies[] = loop_dashboard
 dependencies[] = loop_external_sources_content

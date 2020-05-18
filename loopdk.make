@@ -255,9 +255,6 @@ projects[statistics_counter][version] = "1.4"
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
-projects[style_settings][subdir] = "contrib"
-projects[style_settings][version] = "2.0"
-
 projects[system_status][subdir] = "contrib"
 projects[system_status][version] = "3.3"
 
