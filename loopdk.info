@@ -81,7 +81,6 @@ dependencies[] = loop_permissions
 dependencies[] = loop_user
 dependencies[] = loop_dashboard
 dependencies[] = loop_friend_notification
-dependencies[] = loop_instruction
 dependencies[] = loop_profession_optional
 dependencies[] = loop_user_messages
 dependencies[] = loop_user_subscriptions
