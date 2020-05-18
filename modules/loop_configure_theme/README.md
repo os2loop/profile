@@ -1,1 +1,0 @@
-# Loop configure theme

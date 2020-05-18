@@ -1,9 +1,10 @@
 # Installation
 
-
 ## Requirements
 
-Loop is built on Drupal 7 and requires PHP 7.2. See [System requirements for Drupal 7](https://www.drupal.org/docs/7/system-requirements) for further details.
+Loop is built on Drupal 7 and requires PHP 7.2. See [System requirements for
+Drupal 7](https://www.drupal.org/docs/7/system-requirements) for further
+details.
 
 ## Building the profile
 
@@ -22,34 +23,35 @@ drush make --working-copy https://raw.github.com/os2loop/profile/master/drupal.m
 
 ## Installing Loop
 
-After running the make file you should install the site as any other Drupal website.
+After running the make file you can install the site as any other Drupal
+website, i.e. by using `drush site-install loopdk` or visiting the website and
+going through the regular Drupal installation process.
 
-First, create a database (`loop`) and a database user (`loop`) with access to the database or use an exiting database, e.g.
+By default only the core features are enabled so you should visit the features
+overview and enable any additional features you need.
 
-```sh
-mysql --user=root --password --host=localhost
-[enter root password]
-create database `loop`;
-create user 'loop'@'localhost' identified by 'loop';
-grant all privileges on `loop`.* to 'loop'@'localhost';
-quit
-```
+### Post-installation
 
-Then install Loop by visiting the website and going through the regular Drupal installation process.
+#### User pages
 
-By default only the core features are enabled so you should visit the features overview and enable any additional features you need.
+#### Search
 
 ### Important post-installation notes
 
-Check out the notes on the [Loop saml](modules/loop_saml/README.md) module if it's installed.
+Check out the notes on the [Loop saml](modules/loop_saml/README.md) module if
+it's installed.
 
 ## Adding taxonomies
 
-After installing the Loop profile you should create some taxomony terms in the vocabularies Keyword, Profession and Subject. At lease one term must be defined in the Subject vocabulary before users can create new posts.
+After installing the Loop profile you should create some taxomony terms in the
+vocabularies Keyword, Profession and Subject. At lease one term must be defined
+in the Subject vocabulary before users can create new posts.
 
 Go to `/admin/structure/taxonomy` to add terms to the vocabularies.
 
-As an alternative to manually creating terms, you can install the module [Loop taxonomy terms (loop_taxonomy_terms)](/admin/modules#loop_content) and get the default Loop taxonomy terms.
+As an alternative to manually creating terms, you can install the module [Loop
+taxonomy terms (loop_taxonomy_terms)](/admin/modules#loop_content) and get the
+default Loop taxonomy terms.
 
 ## Search configuration
 
