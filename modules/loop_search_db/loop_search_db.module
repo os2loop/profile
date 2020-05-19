@@ -218,34 +218,28 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
       'active' => in_array('post', loop_search_db_get_active_filters('type'), true),
     ],
   ];
-  // The first type facet is active is no other facets are active.
+  // The first type facet is active if no other facets are active.
   $form['#facets']['type'][0]['active'] = empty(array_filter($form['#facets']['type'], function ($facet) {
     return $facet['active'];
   }));
 
-  foreach (['field_subject:name'] as $name) {
-    if (isset($facets[$name])) {
-      $facet = $facets[$name];
-      $query = db_select($facet['table'], 't')->distinct();
-      if (isset($facet['column'])) {
-        $query->fields('t', [$facet['column']])
-          ->orderBy($facet['column']);
-      } else {
-        $query->fields('t', ['word'])
-          ->condition('field_name', $name)
-          ->orderBy('word');
-      }
-      $options = $query
-        ->execute()
-        ->fetchCol();
-      $form['#facets'][$name] = array_map(static function ($option) use ($name) {
-        return [
-          'filter' => $option,
-          'active' => in_array($option, loop_search_db_get_active_filters($name), true),
-        ];
-      }, $options);
-    }
-  }
+  $query = new EntityFieldQuery();
+  $result = $query
+    ->entityCondition('entity_type', 'taxonomy_term')
+    ->entityCondition('bundle', 'subject')
+    ->execute();
+  $terms = taxonomy_term_load_multiple(array_column($result['taxonomy_term'] ?? [], 'tid'));
+  usort($terms, static function ($a, $b) {
+    return $a->name <=> $b->name;
+  });
+
+  $facet_name ='field_subject:name';
+  $form['#facets'][$facet_name] = array_map(static function ($term) use ($facet_name) {
+    return [
+      'filter' => $term->name,
+      'active' => in_array($term->name, loop_search_db_get_active_filters($facet_name), true),
+    ];
+  }, $terms);
 
   $form['#theme'] = ['loop_search_db_form'];
 }
