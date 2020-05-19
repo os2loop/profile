@@ -48,32 +48,6 @@ function loopdk_module_selection_form($form, &$form_state) {
     '#collapsed' => FALSE,
   );
 
-  $form['addons']['user_pages'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('User pages'),
-    '#description' => t('Include user display and user sub pages.'),
-    '#default_value' => FALSE,
-  );
-
-  $all_modules = system_rebuild_module_data();
-  // Additional Loop modules to suggest installing:
-  // module name => install (default checkbox value)
-  $loop_modules = array(
-    'loop_configure_theme' => FALSE,
-    'loop_post_wysiwyg' => FALSE,
-  );
-  foreach ($loop_modules as $module => $install) {
-    if (isset($all_modules[$module])) {
-      $module_info = $all_modules[$module]->info;
-      $form['addons'][$module] = array(
-        '#type' => 'checkbox',
-        '#title' => $module_info['name'],
-        '#description' => $module_info['description'],
-        '#default_value' => $install,
-      );
-    }
-  }
-
   $form['addons']['translation'] = array(
     '#type' => 'checkbox',
     '#title' => t('Danish translation'),
@@ -94,25 +68,9 @@ function loopdk_module_selection_form($form, &$form_state) {
  * Formula submit function for Loop settings.
  */
 function loopdk_module_selection_form_submit($form, &$form_state) {
-  $dependency_modules = array();
-
   if ($form_state['values']['translation']) {
     variable_set('loopdk_install_translations', TRUE);
   }
-
-  $all_modules = system_rebuild_module_data();
-  foreach ($form_state['values'] as $module => $install) {
-    if (isset($all_modules[$module]) && $install) {
-      $dependency_modules[] = $module;
-    }
-  }
-
-  if ($form_state['values']['user_pages']) {
-    $dependency_modules[] = 'loop_user_page_views';
-    $dependency_modules[] = 'loop_user_related_content_profession';
-    $dependency_modules[] = 'loop_user_related_content_competence';
-  }
-  module_enable($dependency_modules);
 }
 
 /**
