@@ -1,0 +1,12 @@
+name = Loop search settings
+description = Default settings for Loop search
+core = 7.x
+package = Loop
+project = loop_search
+dependencies[] = entity
+dependencies[] = loop_search
+dependencies[] = search_api
+dependencies[] = search_api_solr
+features[features_api][] = api:2
+features[search_api_index][] = post
+features[search_api_server][] = default

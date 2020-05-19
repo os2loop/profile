@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Loop search default settings module.
+ */
+
+include_once 'loop_search_settings.features.inc';
