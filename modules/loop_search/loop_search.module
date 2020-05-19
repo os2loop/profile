@@ -5,8 +5,6 @@
  * Auto-complete Apache Solr search module.
  */
 
-include_once 'loop_search.features.inc';
-
 /**
  * Implements hook_menu().
  */

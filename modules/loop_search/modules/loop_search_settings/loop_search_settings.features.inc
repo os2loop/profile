@@ -1,13 +1,14 @@
 <?php
+
 /**
  * @file
- * loop_search.features.inc
+ * loop_search_settings.features.inc
  */
 
 /**
  * Implements hook_default_search_api_index().
  */
-function loop_search_default_search_api_index() {
+function loop_search_settings_default_search_api_index() {
   $items = array();
   $items['post'] = entity_import('search_api_index', '{
     "name" : "Post",
@@ -19,18 +20,18 @@ function loop_search_default_search_api_index() {
       "index_directly" : 1,
       "cron_limit" : "50",
       "fields" : {
-        "title" : { "type" : "text", "boost" : "2.0" },
-        "type" : { "type" : "string" },
-        "status" : { "type" : "integer" },
+        "body:summary" : { "type" : "text" },
+        "body:value" : { "type" : "text" },
         "comments" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "comment" },
-        "search_api_language" : { "type" : "string" },
+        "comments:comment_body:value" : { "type" : "list\\u003Ctext\\u003E" },
         "field_description:value" : { "type" : "text" },
         "field_keyword:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_profession:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_subject:name" : { "type" : "text" },
-        "comments:comment_body:value" : { "type" : "list\\u003Ctext\\u003E" },
-        "body:value" : { "type" : "text" },
-        "body:summary" : { "type" : "text" }
+        "search_api_language" : { "type" : "string" },
+        "status" : { "type" : "integer" },
+        "title" : { "type" : "text", "boost" : "2.0" },
+        "type" : { "type" : "string" }
       },
       "data_alter_callbacks" : {
         "search_api_alter_bundle_filter" : {
@@ -123,34 +124,9 @@ function loop_search_default_search_api_index() {
 }
 
 /**
- * Implements hook_default_search_api_page().
- */
-function loop_search_default_search_api_page() {
-  $items = array();
-  $items['default'] = entity_import('search_api_page', '{
-    "index_id" : "post",
-    "path" : "search",
-    "name" : "Default",
-    "machine_name" : "default",
-    "description" : "",
-    "options" : {
-      "mode" : "terms",
-      "fields" : [],
-      "per_page" : "10",
-      "result_page_search_form" : 1,
-      "get_per_page" : 0,
-      "view_mode" : "search_api_page_result",
-      "search_api_spellcheck" : 1
-    },
-    "enabled" : "1"
-  }');
-  return $items;
-}
-
-/**
  * Implements hook_default_search_api_server().
  */
-function loop_search_default_search_api_server() {
+function loop_search_settings_default_search_api_server() {
   $items = array();
   $items['default'] = entity_import('search_api_server', '{
     "name" : "Default",
