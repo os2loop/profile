@@ -45,3 +45,17 @@ function loop_post_wysiwyg_secure_permissions($role) {
 
   return isset($permissions[$role]) ? $permissions[$role] : NULL;
 }
+
+/**
+ * Implements hook_media_browser_plugins_alter().
+ */
+function loop_post_wysiwyg_media_browser_plugins_alter(&$plugins) {
+  global $user;
+
+  $library_plugin_id = 'media_default--media_browser_1';
+
+  // Only administrators should be allowed to use the media library.
+  if (!(user_access('administrator') || in_array('administrator', $user->roles, TRUE))) {
+    unset($plugins[$library_plugin_id]);
+  }
+}
