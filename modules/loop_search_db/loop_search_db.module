@@ -201,21 +201,23 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
   $server = $index->server();
   $facets = $server->options['indexes'][$index->machine_name];
 
+  // @TODO There must be a better way to pass this to the form template
+  // (i.e. without using the '#facets' hack).
   $form['#facets']['type'] = [
     [
-      'filter' => null,
+      'filter' => NULL,
       'text' => t('All'),
-      'active' => false,
+      'active' => FALSE,
     ],
     [
       'filter' => 'loop_documents_document',
       'text' => t('Documents'),
-      'active' => in_array('loop_documents_document', loop_search_db_get_active_filters('type'), true),
+      'active' => in_array('loop_documents_document', loop_search_db_get_active_filters('type'), TRUE),
     ],
     [
       'filter' => 'post',
       'text' => t('Posts'),
-      'active' => in_array('post', loop_search_db_get_active_filters('type'), true),
+      'active' => in_array('post', loop_search_db_get_active_filters('type'), TRUE),
     ],
   ];
   // The first type facet is active if no other facets are active.
@@ -233,24 +235,33 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
     return $a->name <=> $b->name;
   });
 
-  $facet_name ='field_subject:name';
+  $facet_name = 'field_subject:name';
   $form['#facets'][$facet_name] = array_map(static function ($term) use ($facet_name) {
     return [
       'filter' => $term->name,
-      'active' => in_array($term->name, loop_search_db_get_active_filters($facet_name), true),
+      'active' => in_array($term->name, loop_search_db_get_active_filters($facet_name), TRUE),
     ];
   }, $terms);
 
   $form['#theme'] = ['loop_search_db_form'];
 }
 
+/**
+ * Get filters that are currently active for a given facet.
+ *
+ * @param string $facet
+ *   The facet name.
+ *
+ * @return array
+ *   The currently active filters.
+ */
 function loop_search_db_get_active_filters($facet) {
   $query = drupal_get_query_parameters();
   $filters = isset($query['f']) && is_array($query['f']) ? $query['f'] : [];
   return array_map(function ($filter) use ($facet) {
-    return substr(urldecode($filter), strlen($facet)+1);
+    return substr(urldecode($filter), strlen($facet) + 1);
   }, array_filter($filters, function ($filter) use ($facet) {
-    return 0 === strpos(urldecode($filter), $facet.':');
+    return 0 === strpos(urldecode($filter), $facet . ':');
   }));
 }
 
@@ -263,7 +274,7 @@ function loop_search_db_search_form_submit(array $form, array &$form_state) {
     $facet_filter = array_filter(drupal_get_query_parameters($_POST)['f'] ?? []);
     if (!empty($facet_filter)) {
       $form_state['redirect'] = [
-      $form_state['redirect'],
+        $form_state['redirect'],
         ['query' => ['f' => $facet_filter]],
       ];
     }
