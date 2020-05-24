@@ -216,6 +216,9 @@ projects[search_api_page][version] = "1.5"
 projects[search_api_solr][subdir] = "contrib"
 projects[search_api_solr][version] = "1.15"
 
+projects[search_api_sorts][subdir] = "contrib"
+projects[search_api_sorts][version] = "1.7"
+
 projects[search_api_spellcheck][subdir] = "contrib"
 projects[search_api_spellcheck][version] = "1.0"
 

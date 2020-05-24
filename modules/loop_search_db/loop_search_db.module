@@ -243,6 +243,31 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
     ];
   }, $terms);
 
+  $form['#sorts'] = [
+    [
+      'text' => t('Best match'),
+      'field' => 'search_api_relevance',
+      'direction' => 'desc',
+    ],
+    [
+      'text' => t('Newest'),
+      'field' => 'created',
+      'direction' => 'desc',
+    ],
+    [
+      'text' => t('Oldest'),
+      'field' => 'created',
+      'direction' => 'asc',
+    ],
+  ];
+  // Add urls and active to sorts.
+  foreach ($form['#sorts'] as &$sort) {
+    $field = $sort['field'];
+    $direction = $sort['direction'];
+    $sort['active'] = _loop_search_is_sort_active($field, $direction);
+    $sort['url'] = _loop_search_get_sort_url($field, $direction);
+  }
+
   $form['#theme'] = ['loop_search_db_form'];
 }
 
@@ -279,4 +304,40 @@ function loop_search_db_search_form_submit(array $form, array &$form_state) {
       ];
     }
   }
+}
+
+/**
+ * Get url for sorting search results.
+ *
+ * @param string $field
+ *   The field to sort by.
+ * @param string $direction
+ *   The direction to sort in.
+ *
+ * @return string
+ *   The sort url.
+ */
+function _loop_search_get_sort_url($field, $direction) {
+  $query = drupal_get_query_parameters();
+  $query['sort'] = $field;
+  $query['order'] = $direction;
+
+  return url(current_path(), ['query' => $query]);
+}
+
+/**
+ * Decide if a given sorting is currently active.
+ *
+ * @param string $field
+ *   The field to sort by.
+ * @param string $direction
+ *   The direction to sort in.
+ *
+ * @return bool
+ *   Whether or not the given sorting is currently active.
+ */
+function _loop_search_is_sort_active($field, $direction) {
+  $query = drupal_get_query_parameters();
+
+  return ($query['sort'] ?? NULL) === $field && ($query['order'] ?? NULL) === $direction;
 }

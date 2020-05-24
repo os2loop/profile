@@ -34,6 +34,7 @@ function loop_search_db_settings_default_search_api_index() {
         "body:value" : { "type" : "text" },
         "comments" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "comment" },
         "comments:comment_body:value" : { "type" : "list\\u003Ctext\\u003E" },
+        "created" : { "type" : "date" },
         "field_description:value" : { "type" : "text" },
         "field_keyword:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_profession:name" : { "type" : "list\\u003Ctext\\u003E" },
@@ -259,11 +260,49 @@ function loop_search_db_settings_default_search_api_server() {
             "table" : "search_api_db_loop_search_db_index_text_1",
             "type" : "list\\u003Ctext\\u003E",
             "boost" : "1.0"
+          },
+          "created" : {
+            "table" : "search_api_db_loop_search_db_index",
+            "column" : "created",
+            "type" : "date",
+            "boost" : "1.0"
           }
         }
       }
     },
     "enabled" : "1"
+  }');
+  return $items;
+}
+
+/**
+ * Implements hook_default_search_api_sort().
+ */
+function loop_search_db_settings_default_search_api_sort() {
+  $items = array();
+  $items['loop_search_db_index__created'] = entity_import('search_api_sort', '{
+    "index_id" : "loop_search_db_index",
+    "field" : "created",
+    "name" : "Date created",
+    "enabled" : "1",
+    "weight" : "0",
+    "identifier" : "loop_search_db_index__created",
+    "default_sort" : "1",
+    "default_sort_no_terms" : "1",
+    "default_order" : "desc",
+    "options" : { "field_name" : "Date created" }
+  }');
+  $items['loop_search_db_index__search_api_relevance'] = entity_import('search_api_sort', '{
+    "index_id" : "loop_search_db_index",
+    "field" : "search_api_relevance",
+    "name" : "Relevance",
+    "enabled" : "1",
+    "weight" : "0",
+    "identifier" : "loop_search_db_index__search_api_relevance",
+    "default_sort" : "0",
+    "default_sort_no_terms" : "0",
+    "default_order" : "desc",
+    "options" : { "field_name" : "search_api_relevance" }
   }');
   return $items;
 }
