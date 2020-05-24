@@ -72,17 +72,16 @@
         </div>
       <?php endif ?>
 
-<?php if(0===1): ?>
-      <div class="search-filters--sort">
-        <div class="search-filters--sort-text"><?php print t('Sort results') ?></div>
-        <div class="search-filters--sort-labels">
-          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='default'}" data-ng-click="sortOrder('default')"><?php print t('Best match'); ?></span>
-          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='desc'}" data-ng-click="sortOrder('desc')"><?php print t('Newest'); ?></span>
-          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='asc'}" data-ng-click="sortOrder('asc')"><?php print t('Oldest'); ?></span>
-          <span class="search-filters--label" data-ng-class="{'is-active': sortActive==='alpha'}" data-ng-click="sortOrder('alpha')"><?php print t('Alphabetical'); ?></span>
+      <?php if (isset($form['#sorts'])): ?>
+        <div class="search-filters--sort">
+          <div class="search-filters--sort-text"><?php print t('Sort results') ?></div>
+          <div class="search-filters--sort-labels">
+            <?php foreach ($form['#sorts'] as $sort): ?>
+              <a href="<?php print $sort['url'] ?>" class="search-filters--label <?php print $sort['active'] ? ' is-active' : '' ?>"><?php print $sort['text']; ?></a>
+            <?php endforeach ?>
+          </div>
         </div>
-      </div>
-<?php endif ?>
+      <?php endif ?>
 
     </div>
   </div>
