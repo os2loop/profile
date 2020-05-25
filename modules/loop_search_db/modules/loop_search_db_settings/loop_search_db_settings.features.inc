@@ -84,8 +84,11 @@ function loop_search_db_settings_default_search_api_index() {
           "weight" : "10",
           "settings" : {
             "fields" : {
+              "body:value" : true,
+              "body:summary" : true,
               "field_keyword:name" : true,
               "field_subject:name" : true,
+              "field_description:value" : true,
               "field_profession:name" : true,
               "comments:comment_body:value" : true
             },
