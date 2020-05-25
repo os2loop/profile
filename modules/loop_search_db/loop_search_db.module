@@ -108,29 +108,6 @@ function loop_search_db_nodes() {
 }
 
 /**
- * Implements hook_init().
- *
- * Include search JS for every page load.
- */
-function loop_search_db_init() {
-  global $user;
-
-  // Check if it's a registered user.
-  if ($user->uid > 0) {
-    if (function_exists('loopdk_load_handlebars')) {
-      loopdk_load_handlebars();
-    }
-    drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/typeahead.bundle.js');
-    drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/loop_search_db.js', array(
-      'scoop' => 'header',
-      'weight' => 1000,
-    ));
-    drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/search.js');
-    drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/placeholders.js');
-  }
-}
-
-/**
  * Implements hook_theme().
  */
 function loop_search_db_theme() {
@@ -269,6 +246,18 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
   }
 
   $form['#theme'] = ['loop_search_db_form'];
+
+  // Load our custom js to enable autocomplete.
+  if (function_exists('loopdk_load_handlebars')) {
+    loopdk_load_handlebars();
+  }
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/typeahead.bundle.js');
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/loop_search_db.js', array(
+    'scoop' => 'header',
+    'weight' => 1000,
+  ));
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/search.js');
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/placeholders.js');
 }
 
 /**
