@@ -8,7 +8,8 @@ details.
 
 ## Building the profile
 
-Run this command to build the `loop` profile:
+[Install `drush`](https://docs.drush.org/en/8.x/) and run this command to build
+the `loopdk` profile (in the `htdocs` folder):
 
 ```sh
 drush make https://raw.github.com/os2loop/profile/master/drupal.make htdocs
@@ -34,7 +35,25 @@ overview and enable any additional features you need.
 
 #### User pages
 
+* [`loop_user_page_views`](modules/loop_user_page_views/README.md)
+* [`loop_user_related_content_profession`](modules/loop_user_related_content_profession/README.md)
+* [`loop_user_related_content_competence`](modules/loop_user_related_content_competence/README.md)
+
 #### Search
+
+Install one of the Loop search modules:
+
+* [`loop_search_db`](modules/loop_search_db/README.md)
+* [`loop_search`](modules/loop_search/README.md)
+* [`loop_search_node`](modules/loop_search_node/README.md)
+
+Go to `/admin/appearance/settings/loop` and save settings (you don't have to
+change anything).
+
+#### Miscellaneous
+
+* [`loop_post_wysiwyg`](modules/loop_post_wysiwyg/README.md)
+* [`loop_documents`](modules/loop_documents/README.md)
 
 ### Important post-installation notes
 
