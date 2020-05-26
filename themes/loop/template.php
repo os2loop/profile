@@ -672,18 +672,6 @@ function loop_form_views_exposed_form_alter(&$form) {
 
 /**
  * Implements hook_form_FORM_ID_alter().
- *
- * Adds custom class names and placeholder attribute and icon prefix to search
- * field.
- */
-function loop_form_search_api_page_search_form_default_alter(&$form) {
-  // Change title text and make sure the label is displayed.
-  $form['keys_1']['#title_display'] = 'before';
-  $form['keys_1']['#title'] = t('Search for an answer');
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
  */
 function loop_form_comment_form_alter(&$form) {
   $variables['user_obj'] = user_load($GLOBALS['user']->uid);
