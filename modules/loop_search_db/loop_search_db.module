@@ -137,7 +137,7 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
   $form['keys_' . $default_page_id]['#attributes']['style'] = "position: relative; vertical-align: top; background-color: transparent;";
 
   // Default placeholder.
-  $form['form']['keys_' . $default_page_id]['#attributes']['placeholder'] = t('E.g. "How do you document a subject"');
+  $form['keys_' . $default_page_id]['#attributes']['placeholder'] = t('E.g. "How do you document a subject"');
 
   // Yet again, some id and classes for Twitter Typehead.
   $form['keys_' . $default_page_id]['#attributes']['id'][] = 'typeahead';
