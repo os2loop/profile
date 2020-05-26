@@ -213,7 +213,7 @@ function loop_search_db_settings_default_search_api_server() {
             "boost" : "1.0"
           },
           "title" : {
-            "table" : "search_api_db_loop_search_db_index_text_1",
+            "table" : "search_api_db_loop_search_db_index_text",
             "type" : "text",
             "boost" : "2.0"
           },
@@ -224,43 +224,43 @@ function loop_search_db_settings_default_search_api_server() {
             "boost" : "1.0"
           },
           "comments" : {
-            "table" : "search_api_db_loop_search_db_index_comments_1",
+            "table" : "search_api_db_loop_search_db_index_comments",
             "column" : "value",
             "type" : "list\\u003Cinteger\\u003E",
             "boost" : "1.0"
           },
           "body:value" : {
-            "table" : "search_api_db_loop_search_db_index_text_1",
+            "table" : "search_api_db_loop_search_db_index_text",
             "type" : "text",
             "boost" : "1.0"
           },
           "body:summary" : {
-            "table" : "search_api_db_loop_search_db_index_text_1",
+            "table" : "search_api_db_loop_search_db_index_text",
             "type" : "text",
             "boost" : "1.0"
           },
           "field_description:value" : {
-            "table" : "search_api_db_loop_search_db_index_text_1",
+            "table" : "search_api_db_loop_search_db_index_text",
             "type" : "text",
             "boost" : "1.0"
           },
           "field_keyword:name" : {
-            "table" : "search_api_db_loop_search_db_index_text_1",
+            "table" : "search_api_db_loop_search_db_index_text",
             "type" : "list\\u003Ctext\\u003E",
             "boost" : "1.0"
           },
           "field_profession:name" : {
-            "table" : "search_api_db_loop_search_db_index_text_1",
+            "table" : "search_api_db_loop_search_db_index_text",
             "type" : "list\\u003Ctext\\u003E",
             "boost" : "1.0"
           },
           "field_subject:name" : {
-            "table" : "search_api_db_loop_search_db_index_text_1",
+            "table" : "search_api_db_loop_search_db_index_text",
             "type" : "text",
             "boost" : "1.0"
           },
           "comments:comment_body:value" : {
-            "table" : "search_api_db_loop_search_db_index_text_1",
+            "table" : "search_api_db_loop_search_db_index_text",
             "type" : "list\\u003Ctext\\u003E",
             "boost" : "1.0"
           },
