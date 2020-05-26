@@ -34,6 +34,19 @@ function loopdk_install() {
   // Enable User tracking in Google Analytics.
   variable_set('googleanalytics_trackuserid', 1);
 
+  // Don't show any errors.
+  variable_set('error_level', 0);
+
+  // Enable page cache for anonymous users.
+  variable_set('cache', 1);
+
+  // Compress cached pages.
+  variable_set('page_compression', 1);
+
+  // Preprocess assets.
+  variable_set('preprocess_css', 1);
+  variable_set('preprocess_js', 1);
+
   // Setup page not found.
   loopdk_page_not_found();
 
