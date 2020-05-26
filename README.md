@@ -47,8 +47,16 @@ Install one of the Loop search modules:
 * [`loop_search`](modules/loop_search/README.md)
 * [`loop_search_node`](modules/loop_search_node/README.md)
 
-Go to `/admin/appearance/settings/loop` and save settings (you don't have to
+Go to `/admin/structure/features/loop_search_db_settings`, check all boxes and
+click “Revert components”.
+
+To make the default search form show up on all pages, go to
+`/admin/appearance/settings/loop` and save the settings (you don't have to
 change anything).
+
+**Note**: After installing a search module you may want to go to
+`/admin/config/search/search_api` and delete the default search index (the one
+named “Default node index”) which is not used by Loop.
 
 #### Miscellaneous
 
