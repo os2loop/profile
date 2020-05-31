@@ -33,40 +33,80 @@ overview and enable any additional features you need.
 
 ### Post-installation
 
-#### User pages
+#### Permissions
 
-* [`loop_user_page_views`](modules/loop_user_page_views/README.md)
-* [`loop_user_related_content_profession`](modules/loop_user_related_content_profession/README.md)
-* [`loop_user_related_content_competence`](modules/loop_user_related_content_competence/README.md)
+To create default roles and permissions in Loop, go to
+/admin/config/people/secure_permissions and check “Disable permissions and roles
+forms” and “Load permissions from code” and click “Save settings”.
 
-#### Search
+Afterwards you can uncheck these settings if you want to manually change roles
+or permissions in Loop.
 
-Install one of the Loop search modules:
+**Note**: If you want to be able to see the items in the menu “Loop Primary
+Menu” when logged in as the admin user ([“user
+1”](https://www.drupal.org/docs/7/understanding-drupal/users-permissions-and-roles#s-associating-more-information-with-users)),
+you have to add the “administrator” role to the admin user (go to `/user/1/edit`
+to add this role).
 
-* [`loop_search_db`](modules/loop_search_db/README.md)
-* [`loop_search`](modules/loop_search/README.md)
-* [`loop_search_node`](modules/loop_search_node/README.md)
+#### Menus
 
-Go to `/admin/structure/features/loop_search_db_settings`, check all boxes and
-click “Revert components”.
+To make menus fall into place, go to `/admin/structure/features/loop_post`,
+check all boxes and click “Revert components”.
 
-To make the default search form show up on all pages, go to
-`/admin/appearance/settings/loop` and save the settings (you don't have to
-change anything).
+Drupal handles translations of menu links in peculiar way, so if the menu link
+“Create post” is not translated to Danish (“Opret spørgsmål”) you have to go to
+`/admin/structure/menu/manage/main-menu`, click “translate” (“oversæt”) next to
+the “Create post” item and translate the item to “Opret spørgsmål” or something
+similar.
+
+#### Optional Loop modules
+
+After installing the base Loop profile, you can install additional modules (go
+to `/admin/modules#loop` to see the full list).
+
+Some highlight are:
+
+##### User pages
+
+* [Loop user page views
+  (`loop_user_page_views`)](modules/loop_user_page_views/README.md): Holds
+  public views used on the users profile pages
+
+  After installing this module you may have to go to `/admin/structure/pages`
+  and click “Activate” in the “user_view” row.
+
+##### Search
+
+Loop comes with a number of search modules built on top of Drupal's [Search
+API](https://www.drupal.org/project/search_api)
+
+Install one of the Loop search modules to enable search in the site:
+
+* [Loop search database (loop_search_db)](modules/loop_search_db/README.md):
+  Search using the database
+  * Install Loop search database settings (loop_search_db_settings) to get the
+    default settings for the search module
+* [loop_search](modules/loop_search/README.md): Search using Solr
+  * Install Loop search settings (loop_search_settings) to get the default
+    settings for the search module
+* [loop_search_node](modules/loop_search_node/README.md): Search using [Search
+  node](https://github.com/search-node)
+  * Install Loop search node settings (loop_search_node_settings) to get the
+    default settings for the search module
 
 **Note**: After installing a search module you may want to go to
 `/admin/config/search/search_api` and delete the default search index (the one
 named “Default node index”) which is not used by Loop.
 
-#### Miscellaneous
+##### Miscellaneous
 
-* [`loop_post_wysiwyg`](modules/loop_post_wysiwyg/README.md)
-* [`loop_documents`](modules/loop_documents/README.md)
-
-### Important post-installation notes
-
-Check out the notes on the [Loop saml](modules/loop_saml/README.md) module if
-it's installed.
+* [Loop post wysiwyg (loop_post_wysiwyg)](modules/loop_post_wysiwyg/README.md):
+  Make posts/comments use WYSIWYG editor
+* [Loop documents (loop_documents)](modules/loop_documents/README.md): Documents
+  and document collections
+* [Loop SAML (loop_saml)](modules/loop_saml/README.md): Allow user to login via
+  a SAML IdP (Check out the [notes on the Loop saml
+  module](modules/loop_saml/README.md) if installing it).
 
 ## Adding taxonomies
 
