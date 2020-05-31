@@ -1,49 +1,33 @@
-Loop documents
-==============
+# Loop documents
 
 Documents and document collections.
 
-# Installation
+## Installation
 
-Activate the `loop_documents` module:
+Activate the `loop_documents` module.
 
-```
-drush --yes pm-enable loop_documents
-```
+### Post installation
 
-## Post installation
+Rebuild secure permissions (go to `/admin/reports/status/rebuild`).
 
-Rebuild secure permissions:
+#### PDF generation
 
-```
-drush secure-permissions-rebuild
-```
+This module requires [`wkhtmltopdf`](https://wkhtmltopdf.org/) [version
+0.12.5](https://github.com/wkhtmltopdf/wkhtmltopdf/releases/tag/0.12.5) to
+export content as PDF.
 
-*Note*: This may fail if the default site language is not English
-(en). To work around this do something like this:
+Make sure that `wkhtmltopdf` is installed on the server (see [“How do I use
+it?”](https://wkhtmltopdf.org/index.html)) and go to
+`/admin/config/content/entityprint` to check that “WkhtmlToPdf Location”
+contains to correct path to the `wkhtmltopdf` binary.
 
-```
-drush --yes pm-download drush_language
-# Remember current default language
-drupal_default_language=$(drush php-eval "echo language_default('language'), PHP_EOL;")
-drush language-default en
-drush secure-permissions-rebuild
-drush language-default en $drupal_default_language
-```
+## Settings
 
-You may also have to rebuild node access:
+A few setting are available on the configuration page *Administration »
+Configuration » Content authoring » Loop documents settings*
+(`/admin/config/content/loop_documents`)
 
-```
-drush php-eval 'node_access_rebuild();'
-```
-
-# Settings
-
-A few setting are available on the configuration page
-*Administration » Configuration » Content authoring »
-Loop documents settings* (/admin/config/content/loop_documents)
-
-# Text formats and wysiwyg profiles
+## Text formats and wysiwyg profiles
 
 This module provides (and depends on) a text format and a wysiwyg profile, both
 named `loop_documents`. These are created when the module is installed and can

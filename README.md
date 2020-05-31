@@ -103,7 +103,9 @@ named “Default node index”) which is not used by Loop.
 * [Loop post wysiwyg (loop_post_wysiwyg)](modules/loop_post_wysiwyg/README.md):
   Make posts/comments use WYSIWYG editor
 * [Loop documents (loop_documents)](modules/loop_documents/README.md): Documents
-  and document collections
+  and document collections. See [the module
+  documentation](modules/loop_documents/README.md) for important
+  post-installation instructions and requirements.
 * [Loop SAML (loop_saml)](modules/loop_saml/README.md): Allow user to login via
   a SAML IdP (Check out the [notes on the Loop saml
   module](modules/loop_saml/README.md) if installing it).
