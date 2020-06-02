@@ -109,6 +109,8 @@ named “Default node index”) which is not used by Loop.
 * [Loop SAML (loop_saml)](modules/loop_saml/README.md): Allow user to login via
   a SAML IdP (Check out the [notes on the Loop saml
   module](modules/loop_saml/README.md) if installing it).
+* [Loop user contact list](modules/loop_user_contact_list/README.md): Shows a
+  contact list
 
 ## Adding taxonomies
 
