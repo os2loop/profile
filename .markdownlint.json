@@ -1,0 +1,7 @@
+{
+  "//": "Configuration for MarkdownLint Command Line Interface [https://github.com/igorshubovych/markdownlint-cli#configuration]",
+  "default": true,
+  "line-length": {
+    "code_block_line_length": 180
+  }
+}

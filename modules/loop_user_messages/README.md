@@ -1,5 +1,6 @@
 # Loop user messages
 
-Show messages in the notifications menu ordered by 
-•	Unread messages
-•	Message archieve
+Show messages in the notifications menu ordered by
+
+* Unread messages
+* Message archieve

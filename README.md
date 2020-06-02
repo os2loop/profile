@@ -16,7 +16,7 @@ drush make https://raw.github.com/os2loop/profile/master/drupal.make htdocs
 ```
 
 If you want a developer version with _working copies_ of the Git repositories,
-run this command instead.
+run this command instead:
 
 ```sh
 drush make --working-copy https://raw.github.com/os2loop/profile/master/drupal.make htdocs
@@ -36,7 +36,7 @@ overview and enable any additional features you need.
 #### Permissions
 
 To create default roles and permissions in Loop, go to
-/admin/config/people/secure_permissions and check “Disable permissions and roles
+`/admin/config/people/secure_permissions` and check “Disable permissions and roles
 forms” and “Load permissions from code” and click “Save settings”.
 
 ```sh
