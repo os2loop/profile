@@ -39,8 +39,17 @@ To create default roles and permissions in Loop, go to
 /admin/config/people/secure_permissions and check “Disable permissions and roles
 forms” and “Load permissions from code” and click “Save settings”.
 
+```sh
+drush secure-permissions on
+drush secure-permissions-rebuild
+```
+
 Afterwards you can uncheck these settings if you want to manually change roles
 or permissions in Loop.
+
+```sh
+drush secure-permissions off
+```
 
 **Note**: If you want to be able to see the items in the menu “Loop Primary
 Menu” when logged in as the admin user ([“user
@@ -48,10 +57,18 @@ Menu” when logged in as the admin user ([“user
 you have to add the “administrator” role to the admin user (go to `/user/1/edit`
 to add this role).
 
+```sh
+drush user-add-role administrator admin
+```
+
 #### Menus
 
 To make menus fall into place, go to `/admin/structure/features/loop_post`,
 check all boxes and click “Revert components”.
+
+```sh
+drush --yes features-revert loop_post
+```
 
 Drupal handles translations of menu links in peculiar way, so if the menu link
 “Create post” is not translated to Danish (“Opret spørgsmål”) you have to go to
