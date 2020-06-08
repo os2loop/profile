@@ -69,7 +69,7 @@ projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.6"
 
 projects[file_entity][subdir] = "contrib"
-projects[file_entity][version] = "2.27"
+projects[file_entity][version] = "2.29"
 
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "3.9"
@@ -96,7 +96,7 @@ projects[jquery_update][subdir] = "contrib"
 projects[jquery_update][version] = "3.0-alpha5"
 
 projects[l10n_update][subdir] = "contrib"
-projects[l10n_update][version] = "2.3"
+projects[l10n_update][version] = "2.4"
 
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.5"
@@ -291,7 +291,7 @@ projects[views_calc][subdir] = "contrib"
 projects[views_calc][version] = "1.1"
 
 projects[views_bulk_operations][subdir] = "contrib"
-projects[views_bulk_operations][version] = "3.5"
+projects[views_bulk_operations][version] = "3.6"
 
 projects[views_flag_refresh][subdir] = "contrib"
 projects[views_flag_refresh][version] = "1.3"
