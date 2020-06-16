@@ -26,7 +26,6 @@ function loop_permissions_secure_permissions_roles() {
     'administrator',
     'documentation coordinator',
     'manager',
-    'external sources editor',
   );
 }
 
@@ -293,16 +292,6 @@ function loop_permissions_secure_permissions($role) {
       'View own URL stats',
       'view admin path',
       'view the administration theme',
-    ),
-    'external sources editor' => array(
-      'view admin path',
-      'access content overview',
-      'view the administration theme',
-      'create external_sources content',
-      'delete any external_sources content',
-      'delete own external_sources content',
-      'edit any external_sources content',
-      'edit own external_sources content',
     ),
   );
   if (isset($permissions[$role])) {
