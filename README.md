@@ -28,7 +28,11 @@ After running the make file you can install the site as any other Drupal
 website, i.e. by using `drush site-install loopdk` or visiting the website and
 going through the regular Drupal installation process.
 
-**Note**: During the installation you may experience the error “Call to undefined function field_attach_load()”. See https://www.drupal.org/project/drupal/issues/481758 for troubleshooting this error. Most notably, using a database name with a length less than 8 may remedy the problem.  
+**Note**: During the installation you may experience the error “Call to
+undefined function field_attach_load()”. See
+https://www.drupal.org/project/drupal/issues/481758 for troubleshooting this
+error. Most notably, using a database name with a length less than 8 may remedy
+the problem.
 
 By default only the core features are enabled so you should visit the features
 overview and enable any additional features you need.
@@ -72,9 +76,19 @@ check all boxes and click “Revert components”.
 drush --yes features-revert loop_post
 ```
 
+##### The “Create post” menu item
+
 Drupal handles translations of menu links in peculiar way, so if the menu link
-“Create post” is not translated to Danish (“Opret spørgsmål”) you have to go to
-`/admin/structure/menu/manage/main-menu`, click “translate” (“oversæt”) next to
+“Create post” is not translated to Danish (“Opret spørgsmål”) you have to do one
+of two things:
+
+If Danish is your default language and your see the menu item “Create post”, you
+must go to `/admin/structure/menu/manage/main-menu`, click “oversæt” and then
+“redigér” to change the menu item titel to “Opret spørgsmål”. Afterwards, you
+should translate the English menu item to “Create post”, say.
+
+If Danish is *not* your default language, you must go to
+`/admin/structure/menu/manage/main-menu`, click “translate” next to
 the “Create post” item and translate the item to “Opret spørgsmål” or something
 similar.
 
