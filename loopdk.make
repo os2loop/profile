@@ -77,12 +77,6 @@ projects[flag][version] = "3.9"
 projects[globalredirect][subdir] = "contrib"
 projects[globalredirect][version] = "1.6"
 
-projects[google_analytics][subdir] = "contrib"
-projects[google_analytics][version] = "2.6"
-
-projects[google_analytics_counter][subdir] = "contrib"
-projects[google_analytics_counter][version] = "3.4"
-
 projects[html5_tools][subdir] = "contrib"
 projects[html5_tools][version] = "1.3"
 
