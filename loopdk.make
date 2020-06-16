@@ -131,9 +131,6 @@ projects[menu_position][version] = "1.2"
 projects[menu_view_unpublished][subdir] = "contrib"
 projects[menu_view_unpublished][version] = "1.0-beta3"
 
-projects[metatag][subdir] = "contrib"
-projects[metatag][version] = "1.27"
-
 projects[message][subdir] = "contrib"
 projects[message][version] = "1.12"
 
@@ -157,9 +154,6 @@ projects[node_limit][version] = "1.0-alpha5"
 
 projects[oauth][subdir] = "contrib"
 projects[oauth][version] = "3.4"
-
-projects[page_title][subdir] = "contrib"
-projects[page_title][version] = "2.7"
 
 projects[panels][subdir] = "contrib"
 projects[panels][version] = "3.9"
