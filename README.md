@@ -76,14 +76,6 @@ check all boxes and click “Revert components”.
 drush --yes features-revert loop_post
 ```
 
-#### Notifications
-
-Loop can send out notifications when new content (questions, answers, documents)
-is added or existing content is updated.
-
-Go to `/admin/config/loop/notifications` to define which content types to send
-out notification for and to define mail notification templates.
-
 ##### The “Create post” menu item
 
 Drupal handles translations of menu links in peculiar way, so if the menu link
@@ -99,6 +91,14 @@ If Danish is *not* your default language, you must go to
 `/admin/structure/menu/manage/main-menu`, click “translate” next to
 the “Create post” item and translate the item to “Opret spørgsmål” or something
 similar.
+
+#### Notifications
+
+Loop can send out notifications when new content (questions, answers, documents)
+is added or existing content is updated.
+
+Go to `/admin/config/loop/notifications` to define which content types to send
+out notification for and to define mail notification templates.
 
 #### Optional Loop modules
 
