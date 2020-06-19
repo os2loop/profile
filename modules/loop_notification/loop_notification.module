@@ -336,3 +336,29 @@ function _loop_notification_check_content_type($node) {
   $allowed_types = variable_get('loop_notification_content_types');
   return !empty($allowed_types[$node->type]);
 }
+
+/**
+ * Implements hook_tokens().
+ */
+function loop_notification_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = [];
+  if ('node' === $type) {
+    $node = $data['node'];
+    foreach ($tokens as $name => $original) {
+      // Process tokens on the form [node:field|trim(max_length)].
+      if (preg_match('/^(?<field_name>[^|]+)\|trim\((?<max_length>\d+)\)$/', $name, $matches)) {
+        $field_name = $matches['field_name'];
+        $string = $node->{$field_name};
+        if (isset($string[LANGUAGE_NONE][0]['value'])) {
+          $string = $string[LANGUAGE_NONE][0]['value'];
+        }
+        $string = strip_tags($string);
+        $max_length = (int) $matches['max_length'];
+
+        $replacements[$original] = truncate_utf8($string, $max_length, TRUE, TRUE);
+      }
+    }
+  }
+
+  return $replacements;
+}
