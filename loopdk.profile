@@ -135,52 +135,26 @@ function loopdk_import_translation() {
   include_once DRUPAL_ROOT . '/includes/locale.inc';
   locale_add_language('da', NULL, NULL, NULL, '', NULL, TRUE, TRUE);
 
-  $operations = array();
+  // @TODO Get these from files in translations/.
+  $translation_groups = [
+    'default',
+    'facetapi',
+    'field',
+    'menu',
+    'panels',
+    'taxonomy',
+    'views',
+  ];
 
-  // Import our own translations.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'default',
-      '/profiles/loopdk/translations/default.da.po',
-    ),
-  );
-
-  // Import field translation group.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'field',
-      '/profiles/loopdk/translations/field.da.po',
-    ),
-  );
-
-  // Import menu translation group.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'menu',
-      '/profiles/loopdk/translations/menu.da.po',
-    ),
-  );
-
-  // Import panels translation group.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'panels',
-      '/profiles/loopdk/translations/panels.da.po',
-    ),
-  );
-
-  // Import views translation group.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'views',
-      '/profiles/loopdk/translations/views.da.po',
-    ),
-  );
+  $operations = array_map(static function ($translation_group) {
+    return [
+      '_loopdk_insert_translation',
+      [
+        $translation_group,
+        '/profiles/loopdk/translations/' . $translation_group . '.da.po',
+      ],
+    ];
+  }, $translation_groups);
 
   $batch = array(
     'title' => st('Installing translations'),
