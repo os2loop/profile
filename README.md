@@ -6,20 +6,22 @@ Loop is built on Drupal 7 and requires PHP 7.2. See [System requirements for
 Drupal 7](https://www.drupal.org/docs/7/system-requirements) for further
 details.
 
+See [Upgrading OS2Loop](UPGRADE.md) for upgrade instructions.
+
 ## Building the profile
 
 [Install `drush 8.x`](https://docs.drush.org/en/8.x/) and run this command to build
 the `loopdk` profile (in the `htdocs` folder):
 
 ```sh
-drush make https://raw.githubusercontent.com/os2loop/profile/release/covid-19/drupal.make htdocs
+drush make https://raw.githubusercontent.com/os2loop/profile/main/drupal.make htdocs
 ```
 
 If you want a developer version with _working copies_ of the Git repositories,
 run this command instead:
 
 ```sh
-drush make --working-copy https://raw.githubusercontent.com/os2loop/profile/release/covid-19/drupal.make htdocs
+drush make --working-copy https://raw.githubusercontent.com/os2loop/profile/main/drupal.make htdocs
 ```
 
 ## Installing Loop
