@@ -28,7 +28,9 @@
  */
 ?>
 <div class="<?php print $classes; ?>">
-  <?php // @FIXME: Get the title from the view itself ?>
+  <?php
+    // @FIXME: Get the title from the view itself
+  ?>
   <h1><?php echo t('Contacts') ?></h1>
 
   <?php print render($title_prefix); ?>

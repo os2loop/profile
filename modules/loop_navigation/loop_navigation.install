@@ -18,6 +18,6 @@ function loop_navigation_disable() {
     ->fetchField();
   menu_link_delete($mlid);
 
-  // Delete the menu that he feature provide.
+  // Delete the menu that the feature provides.
   menu_delete(array('menu_name' => 'menu-loop-primary-menu'));
 }

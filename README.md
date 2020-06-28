@@ -172,3 +172,22 @@ active skin can be changed in the Loop theme settings
 (`/admin/appearance/settings/loop`). See [Building a custom
 skin](themes/loop/README.md#building-a-custom-skin) for instruction how to add
 your own custom skin if needed.
+
+## Coding standards
+
+All custom code must follow the [Drupal Coding
+Standards](https://www.drupal.org/docs/develop/standards).
+
+Check the coding standard using [Coder](https://www.drupal.org/project/coder) by
+running
+
+```sh
+composer install
+composer coding-standards-check
+```
+
+Apply coding standards by running
+
+```sh
+composer coding-standards-apply
+```

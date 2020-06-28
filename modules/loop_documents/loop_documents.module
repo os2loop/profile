@@ -941,71 +941,72 @@ function loop_documents_reset_editor_configuration() {
   ];
 
   foreach ($formats as $format) {
-    filter_format_save((object)$format);
+    filter_format_save((object) $format);
   }
 }
 
 /**
  * Rebuild wysiwyg profiles.
  *
- * This is lifted from wysiwyg_features_rebuild
+ * This is lifted from wysiwyg_features_rebuild.
+ *
  * @see wysiwyg_features_rebuild
  */
 function _loop_documents_wysiwyg_rebuild(array $defaults) {
-    foreach ($defaults as $profile) {
-      $profile = is_object($profile) ? (array) $profile : $profile;
-      if (empty($profile['settings']['_profile_preferences'])) {
-        if (!empty($profile['preferences'])) {
-          $settings = &$profile['preferences'];
-        }
-        else {
-          // Importing an older profile, move state to its own section.
-          $settings = &$profile['settings'];
-        }
-
-        $preferences = array(
-          'add_to_summaries' => (!empty($settings['add_to_summaries']) ? $settings['add_to_summaries'] : FALSE),
-          'default' => $settings['default'],
-          'show_toggle' => $settings['show_toggle'],
-          'user_choose' => $settings['user_choose'],
-          'version' => (!empty($settings['version']) ? $settings['version'] : NULL),
-        );
-        unset($settings['add_to_summaries'],
-          $settings['default'],
-          $settings['show_toggle'],
-          $settings['user_choose'],
-          $settings['version'],
-          $profile['preferences']
-        );
-
-        if (!empty($settings['library'])) {
-          $preferences['library'] = $settings['library'];
-          unset($settings['library']);
-        }
-
-        $editor = wysiwyg_get_editor($profile['editor']);
-        if (empty($preferences['version']) && !empty($editor['installed'])) {
-          $preferences['version'] = $editor['installed version'];
-        }
-
-        $profile['settings']['_profile_preferences'] = $preferences;
+  foreach ($defaults as $profile) {
+    $profile = is_object($profile) ? (array) $profile : $profile;
+    if (empty($profile['settings']['_profile_preferences'])) {
+      if (!empty($profile['preferences'])) {
+        $settings = &$profile['preferences'];
+      }
+      else {
+        // Importing an older profile, move state to its own section.
+        $settings = &$profile['settings'];
       }
 
-      db_merge('wysiwyg')
-        ->key(array('format' => $profile['format']))
-        ->fields(array(
-          'editor' => $profile['editor'],
-          'settings' => serialize($profile['settings']),
-        ))
-        ->execute();
-      // Clear the editing caches.
-      if (module_exists('ctools')) {
-        ctools_include('object-cache');
-        ctools_object_cache_clear_all('wysiwyg_profile', 'format' . $profile['format']);
+      $preferences = array(
+        'add_to_summaries' => (!empty($settings['add_to_summaries']) ? $settings['add_to_summaries'] : FALSE),
+        'default' => $settings['default'],
+        'show_toggle' => $settings['show_toggle'],
+        'user_choose' => $settings['user_choose'],
+        'version' => (!empty($settings['version']) ? $settings['version'] : NULL),
+      );
+      unset($settings['add_to_summaries'],
+        $settings['default'],
+        $settings['show_toggle'],
+        $settings['user_choose'],
+        $settings['version'],
+        $profile['preferences']
+      );
+
+      if (!empty($settings['library'])) {
+        $preferences['library'] = $settings['library'];
+        unset($settings['library']);
       }
-      cache_clear_all('wysiwyg_profile:format' . $profile['format'], 'cache');
+
+      $editor = wysiwyg_get_editor($profile['editor']);
+      if (empty($preferences['version']) && !empty($editor['installed'])) {
+        $preferences['version'] = $editor['installed version'];
+      }
+
+      $profile['settings']['_profile_preferences'] = $preferences;
     }
-    wysiwyg_profile_cache_clear();
+
+    db_merge('wysiwyg')
+      ->key(array('format' => $profile['format']))
+      ->fields(array(
+        'editor' => $profile['editor'],
+        'settings' => serialize($profile['settings']),
+      ))
+      ->execute();
+    // Clear the editing caches.
+    if (module_exists('ctools')) {
+      ctools_include('object-cache');
+      ctools_object_cache_clear_all('wysiwyg_profile', 'format' . $profile['format']);
+    }
+    cache_clear_all('wysiwyg_profile:format' . $profile['format'], 'cache');
+  }
+  wysiwyg_profile_cache_clear();
 }
 
 /**

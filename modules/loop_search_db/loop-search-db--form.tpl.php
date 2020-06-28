@@ -18,7 +18,9 @@
         <div class="search-filters">
           <?php if (isset($form['#facets']['type'])): ?>
             <div class="search-filters--type">
-              <?php // @TODO We should propably use some theme function for this, right? ?>
+              <?php
+                // @TODO We should propably use some theme function for this, right?
+              ?>
               <?php foreach ($form['#facets']['type'] as $index => $facet): ?>
                 <?php $name = 'f[]'; ?>
                 <?php $text = trim($facet['filter'], '"'); ?>
@@ -49,7 +51,9 @@
               <div class="search-filters--subjects">
                 <div class="search-filters--arrow"><div class="search-filters--arrow-inner"></div></div>
                 <div class="search-filters--subjects-inner">
-                  <?php // @TODO We should propably use some theme function for this, right? ?>
+                  <?php
+                    // @TODO We should propably use some theme function for this, right?
+                  ?>
                   <?php foreach ($form['#facets']['field_subject:name'] as $index => $facet): ?>
                     <?php $key = 'field_subject:name-' . $index; ?>
                     <?php $name = 'f[]'; ?>

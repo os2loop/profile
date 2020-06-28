@@ -2,7 +2,7 @@
 
 /**
  * @file
- * loop_search_db_settings module.
+ * Loop_search_db_settings module.
  */
 
 include_once 'loop_search_db_settings.features.inc';

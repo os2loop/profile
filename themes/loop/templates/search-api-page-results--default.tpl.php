@@ -36,7 +36,12 @@
  */
 ?>
 
-<h1 class="page-title"><?php print t('Search results'); ?> <?php if ($result_count > 0): ?><span><?php printf('(%d)', $result_count); ?></span><?php endif; ?></h1>
+<h1 class="page-title">
+  <?php print t('Search results'); ?>
+  <?php if ($result_count > 0): ?>
+    <span><?php printf('(%d)', $result_count); ?></span>
+  <?php endif; ?>
+</h1>
 
 <div class="search-node-result">
 

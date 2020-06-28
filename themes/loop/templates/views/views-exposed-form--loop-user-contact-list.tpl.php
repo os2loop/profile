@@ -34,7 +34,9 @@
   <div class="views-exposed-widgets">
     <?php foreach ($widgets as $id => $widget): ?>
       <div id="<?php print $widget->id; ?>-wrapper" class="views-exposed-widget views-widget-<?php print $id; ?>">
-        <?php // Render just the search field and submit button ?>
+        <?php
+          // Render just the search field and submit button.
+        ?>
         <?php if ('edit-search' === $widget->id): ?>
           <?php print $widget->widget; ?>
           <?php print $button; ?>
