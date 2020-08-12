@@ -71,6 +71,17 @@ function itk_siteimprove_form(array $form, array &$form_state) {
     '#required' => FALSE,
     '#default_value' => variable_get('itk_siteimprove_excludes', 'admin/*'),
   ];
+  $form['cookieinformation'] = [
+    '#type' => 'details',
+    '#title' => t('Cookieinformation.com'),
+    '#group' => 'tabs',
+  ];
+  $form['cookieinformation']['itk_use_cookieinformation'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Check this if the site uses cookieinformation.com'),
+    '#required' => FALSE,
+    '#default_value' => variable_get('itk_use_cookieinformation', FALSE),
+  ];
 
   return system_settings_form($form);
 }
@@ -82,6 +93,7 @@ function itk_siteimprove_form(array $form, array &$form_state) {
  */
 function itk_siteimprove_preprocess_page(&$variables) {
   $key = variable_get('itk_siteimprove_key', '');
+  $use_cookie_information = variable_get('itk_use_cookieinformation', '');
 
   // Ignore if key is not set.
   if (!$key) {
@@ -108,6 +120,7 @@ function itk_siteimprove_preprocess_page(&$variables) {
     drupal_add_js(array(
       'itk_siteimprove' => array(
         'key' => $key,
+        'useCookieinformation' => boolval($use_cookie_information)
       ),
     ), 'setting');
   }
