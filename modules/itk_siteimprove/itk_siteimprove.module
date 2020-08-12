@@ -120,7 +120,7 @@ function itk_siteimprove_preprocess_page(&$variables) {
     drupal_add_js(array(
       'itk_siteimprove' => array(
         'key' => $key,
-        'useCookieinformation' => boolval($use_cookie_information)
+        'useCookieinformation' => boolval($use_cookie_information),
       ),
     ), 'setting');
   }
