@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Add cookieinformation functionality.
+ */
+
+/**
  * Implements hook_init().
  */
 function itk_cookieinformation_init() {
@@ -26,7 +31,7 @@ function itk_cookieinformation_preprocess_html_tag(&$vars) {
     }
 
     // Add consent check to google analytics.
-    if(strpos($vars['element']['#attributes']['src'], 'google_analytics/googleanalytics.js')) {
+    if (strpos($vars['element']['#attributes']['src'], 'google_analytics/googleanalytics.js')) {
       $src = $vars['element']['#attributes']['src'];
       $vars['element']['#attributes']['data-consent-src'] = $src;
       $vars['element']['#attributes']['src'] = '';
@@ -34,7 +39,7 @@ function itk_cookieinformation_preprocess_html_tag(&$vars) {
     }
 
     // Add consent check to google analytics inline script.
-    if(strpos($vars['element']['#value'], 'GoogleAnalyticsObject')) {
+    if (strpos($vars['element']['#value'], 'GoogleAnalyticsObject')) {
       $value = $vars['element']['#value'];
       $vars['element']['#value'] = "window.addEventListener('CookieInformationConsentGiven', function (event) { 
 if (CookieInformation.getConsentGivenFor('cookie_cat_marketing')) {" . $value . "} 

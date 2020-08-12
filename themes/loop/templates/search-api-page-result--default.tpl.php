@@ -49,7 +49,13 @@
   <div class="search-node-result--item-content">
     <div class="search-node-result--data-wrapper">
       <div class="search-node-result--meta-data-type is-<?php print $item->type; ?>">
+<<<<<<< HEAD
         <?php print t($item->type); // phpcs:ignore ?>
+=======
+        <?php
+// phpcs:ignore print t($item->type);.
+?>
+>>>>>>> hotfix/add-cookieinformation
       </div>
     </div>
 
