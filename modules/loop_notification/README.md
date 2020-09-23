@@ -12,3 +12,10 @@
 * Provides an alter hook to alter the list of users who should receive
   messages on node add/edit and comment add.
 * Provides admin page for configuring notifications on content types.
+
+## Using SMTP and HTML mails
+
+If you're using the smtp module to send notification emails containing HTML, you
+must install the `htmlmail` module and then go to
+`/admin/config/system/mailsystem` and select `LoopNotificationHtmlMail` for both
+"Site-wide default MailSystemInterface class" and "Mime Mail module class".

@@ -80,6 +80,9 @@ projects[globalredirect][version] = "1.6"
 projects[html5_tools][subdir] = "contrib"
 projects[html5_tools][version] = "1.3"
 
+projects[htmlmail][subdir] = "contrib"
+projects[htmlmail][version] = "2.71"
+
 projects[i18n][subdir] = "contrib"
 projects[i18n][version] = "1.27"
 
