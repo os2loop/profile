@@ -41,3 +41,7 @@ $metadata_values = array_map(function ($field_name) use ($document) {
     <?php echo $metadata_values['subject']; ?>
   </div>
 <?php endif ?>
+
+<div class="loop-documents--document-print">
+    <?php echo l(t('Print document'), 'entityprint/node/' . $document->nid); ?>
+</div>

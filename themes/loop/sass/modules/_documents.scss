@@ -89,7 +89,8 @@
     }
   }
 
-  &--collection-print {
+  &--collection-print,
+  &--document-print {
 
     a {
       @extend .button--action;
