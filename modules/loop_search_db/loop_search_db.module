@@ -9,20 +9,20 @@
  * Implements hook_menu().
  */
 function loop_search_db_menu() {
-  $items['loop_search_db_nodes'] = array(
+  $items['loop_search_db_nodes'] = [
     'title' => 'List nodes in JSON format',
     'page callback' => 'loop_search_db_nodes',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
-  );
+    'access arguments' => ['access content'],
+  ];
 
-  $items['loop_search_db/%/%'] = array(
+  $items['loop_search_db/%/%'] = [
     'title' => 'Search nodes in JSON format',
     'page callback' => 'loop_search_db_callback',
-    'page arguments' => array(1, 2),
+    'page arguments' => [1, 2],
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
-  );
+    'access arguments' => ['access content'],
+  ];
 
   return $items;
 }
@@ -54,12 +54,12 @@ function loop_search_db_callback($content_type, $terms) {
   // Execute the query.
   $query_result = $query->execute();
 
-  $data = array();
+  $data = [];
 
   // Build an array of results from the query results.
   foreach ($query_result['results'] as $result) {
     $node = $result['entity'];
-    $data[] = array(
+    $data[] = [
       // For better search, use strtolower.
       'value' => strtolower(trim(trim($node->title), '"')),
       // Fine human output.
@@ -68,7 +68,7 @@ function loop_search_db_callback($content_type, $terms) {
       'link' => '/' . drupal_get_path_alias('node/' . $node->nid),
       // For dupDetector.
       'id' => $node->nid,
-    );
+    ];
   }
 
   // Return as JSON.
@@ -83,15 +83,15 @@ function loop_search_db_callback($content_type, $terms) {
 function loop_search_db_nodes() {
   // Select nodes.
   $nodes = db_select('node', 'n')
-    ->fields('n', array('nid', 'title'))
+    ->fields('n', ['nid', 'title'])
     ->condition('status', 1)
     ->condition('type', 'post')
     ->execute();
 
   // Build nodes.
-  $data = array();
+  $data = [];
   foreach ($nodes as $node) {
-    $data[] = array(
+    $data[] = [
       // For better search, use strtolower.
       'value' => strtolower(trim(trim($node->title), '"')),
       // Fine human output.
@@ -100,7 +100,7 @@ function loop_search_db_nodes() {
       'link' => '/' . drupal_get_path_alias('node/' . $node->nid),
       // For dupDetector.
       'id' => $node->nid,
-    );
+    ];
   }
 
   // Return as JSON.
@@ -111,12 +111,12 @@ function loop_search_db_nodes() {
  * Implements hook_theme().
  */
 function loop_search_db_theme() {
-  return array(
-    'loop_search_db_form' => array(
+  return [
+    'loop_search_db_form' => [
       'render element' => 'form',
       'template' => 'loop-search-db--form',
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -256,10 +256,10 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
     loopdk_load_handlebars();
   }
   drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/typeahead.bundle.js');
-  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/loop_search_db.js', array(
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/loop_search_db.js', [
     'scoop' => 'header',
     'weight' => 1000,
-  ));
+  ]);
   drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/search.js');
   drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/placeholders.js');
 }

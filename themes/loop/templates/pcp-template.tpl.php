@@ -27,7 +27,7 @@
   <div class="block-module--inner">
     <h2 class="block-module--my-content-header"><?php print t('Finish your profile') ?></h2>
     <div class="<?php print 'pcp-' . $entity_type;?> <?php print 'pcp-' . $bundle; ?>">
-      <?php print t('!complete% Complete', array('!complete' => $current_percent)); ?>
+      <?php print t('!complete% Complete', ['!complete' => $current_percent]); ?>
 
       <div class="pcp-percent-bar-wrapper">
         <div class="pcp-percent-bar <?php print $entity_type . '-' . $bundle; ?>"></div>
@@ -36,10 +36,10 @@
 
     <?php if (isset($nextfield_name) && isset($next_percent)) :?>
         <span class="block--pcp-text">
-          <?php print t('Filling out <em>!empty-field</em> will bring your profile to !complete% complete', array(
+          <?php print t('Filling out <em>!empty-field</em> will bring your profile to !complete% complete', [
             '!empty-field' => l($nextfield_title, $next_path),
             '!complete' => $next_percent,
-          )); ?></span>
+          ]); ?></span>
     <?php endif;?>
   </div>
 </aside>

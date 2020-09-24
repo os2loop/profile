@@ -19,14 +19,14 @@ include_once 'loop_permissions.features.inc';
  *   An array defining all the roles for the site.
  */
 function loop_permissions_secure_permissions_roles() {
-  return array(
+  return [
     'anonymous user',
     'read only',
     'authenticated user',
     'administrator',
     'documentation coordinator',
     'manager',
-  );
+  ];
 }
 
 /**
@@ -42,14 +42,14 @@ function loop_permissions_secure_permissions_roles() {
  *   An array defining all the permissions for the site.
  */
 function loop_permissions_secure_permissions($role) {
-  $permissions = array(
-    'anonymous user' => array(
+  $permissions = [
+    'anonymous user' => [
       'access comments',
       'access content',
       'search content',
       'view files',
-    ),
-    'authenticated user' => array(
+    ],
+    'authenticated user' => [
       'access comments',
       'access content',
       'access search_api_page',
@@ -77,8 +77,8 @@ function loop_permissions_secure_permissions($role) {
       'use text format simple',
       'view own unpublished content',
       'view post access counter',
-    ),
-    'administrator' => array(
+    ],
+    'administrator' => [
       'access administration pages',
       'access all views',
       'access content overview',
@@ -214,8 +214,8 @@ function loop_permissions_secure_permissions($role) {
       'view pane admin links',
       'view revisions',
       'view the administration theme',
-    ),
-    'documentation coordinator' => array(
+    ],
+    'documentation coordinator' => [
       'access user profiles',
       'Administer abuse reports',
       'Administer all abuse reports',
@@ -236,8 +236,8 @@ function loop_permissions_secure_permissions($role) {
       'view revisions',
       'view admin path',
       'view the administration theme',
-    ),
-    'manager' => array(
+    ],
+    'manager' => [
       'access administration pages',
       'access contextual links',
       'access user profiles',
@@ -292,8 +292,8 @@ function loop_permissions_secure_permissions($role) {
       'View own URL stats',
       'view admin path',
       'view the administration theme',
-    ),
-  );
+    ],
+  ];
   if (isset($permissions[$role])) {
     return $permissions[$role];
   }

@@ -9,15 +9,15 @@
  * Implements hook_rules_evaluator_info().
  */
 function loop_notification_rules_evaluator_info() {
-  return array(
-    'loop_notification' => array(
+  return [
+    'loop_notification' => [
       'class' => 'LoopNotificationEvaluator',
-      'type' => array('text'),
+      'type' => ['text'],
       // Make sure that this evaluator runs before RulesTokenEvaluator which
       // actually replaces tokens with "node" and "user" values.
       'weight' => -100,
-    ),
-  );
+    ],
+  ];
 }
 
 /**

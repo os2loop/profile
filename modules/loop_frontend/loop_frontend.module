@@ -12,14 +12,14 @@ include_once 'loop_frontend.features.inc';
  */
 function loop_frontend_preprocess_html(&$variables) {
   // Load Respond.js library.
-  drupal_add_js(loop_frontend_get_library_file('respondjs', 'respond.min.js'), array(
+  drupal_add_js(loop_frontend_get_library_file('respondjs', 'respond.min.js'), [
     'type' => 'external',
     'scope' => 'header',
     'group' => JS_LIBRARY,
     'preprocess' => FALSE,
     'every_page' => TRUE,
     'weight' => -997,
-  ));
+  ]);
 }
 
 /**

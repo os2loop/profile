@@ -9,10 +9,10 @@
  * Implements hook_permissions_secure_permissions_roles().
  */
 function loop_documents_secure_permissions_roles() {
-  return array(
+  return [
     'document author',
     'document collection editor',
-  );
+  ];
 }
 
 /**
@@ -21,16 +21,16 @@ function loop_documents_secure_permissions_roles() {
  * Add permission to restrict access to certain admin paths.
  */
 function loop_documents_permission() {
-  $permissions = array(
-    'administer loop_documents settings' => array(
+  $permissions = [
+    'administer loop_documents settings' => [
       'title' => t('Administer Loop documents settings'),
       'description' => t('Administer Loop documents settings'),
-    ),
-    'view document admin menu' => array(
+    ],
+    'view document admin menu' => [
       'title' => t('View document admin menu'),
       'description' => t('Menu displaying links to specific backend pages related to document providers'),
-    ),
-  );
+    ],
+  ];
 
   return $permissions;
 }
@@ -39,12 +39,12 @@ function loop_documents_permission() {
  * Implements hook_secure_permissions().
  */
 function loop_documents_secure_permissions($role) {
-  $permissions = array(
-    'authenticated user' => array(
+  $permissions = [
+    'authenticated user' => [
       'entity print access bundle loop_documents_collection',
       'view files',
-    ),
-    'document author' => array(
+    ],
+    'document author' => [
       'access content overview',
       'view the administration theme',
       'access media browser',
@@ -57,12 +57,12 @@ function loop_documents_secure_permissions($role) {
       'use media wysiwyg',
       'use text format loop_documents',
       'view admin path',
-    ),
-  );
+    ],
+  ];
 
   $permissions['document collection editor'] = array_merge(
     $permissions['document author'],
-    array(
+    [
       'view document admin menu',
       'publish any loop_documents_collection content',
       'unpublish any loop_documents_collection content',
@@ -80,14 +80,14 @@ function loop_documents_secure_permissions($role) {
       'edit any image files',
       'menu view unpublished',
       'set revision date for content',
-    ));
+    ]);
 
   $permissions['administrator'] = array_merge(
     $permissions['document collection editor'],
-    array(
+    [
       'administer loop_documents settings',
       'administer media oembed',
-    )
+    ]
   );
 
   return isset($permissions[$role]) ? $permissions[$role] : NULL;

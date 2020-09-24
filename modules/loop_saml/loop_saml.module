@@ -9,14 +9,14 @@
  * Implements hook_menu().
  */
 function loop_saml_menu() {
-  $items = array();
+  $items = [];
 
-  $items['loop_saml_redirect'] = array(
+  $items['loop_saml_redirect'] = [
     'title' => 'Simple redirect page',
     'page callback' => 'loop_saml_redirect',
     'access callback' => TRUE,
     'type' => MENU_LOCAL_TASK,
-  );
+  ];
 
   return $items;
 }
@@ -31,9 +31,9 @@ function loop_saml_redirect() {
   }
 
   // Add i-frame that log out the user at adfs.
-  $output = array(
+  $output = [
     '#markup' => '<iframe src="https://adfs.aarhuskommune.dk/adfs/ls/?wa=wsignout1.0" frameborder="0" width="0px" height="0px"></iframe><p>' . t('Please wait while you are being logged out of the system.') . '</p>',
-  );
+  ];
 
   drupal_add_js(drupal_get_path('module', 'loop_saml') . '/js/loop_saml.js');
 
@@ -68,12 +68,12 @@ function loop_saml_saml_sp_post_update_user_alter($account, $attributes) {
  * Implements hook_theme().
  */
 function loop_saml_theme() {
-  return array(
-    'loop_saml_prefix_login' => array(
-      'variables' => array(),
+  return [
+    'loop_saml_prefix_login' => [
+      'variables' => [],
       'template' => 'templates/loop-saml--prefix-login',
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -82,11 +82,11 @@ function loop_saml_theme() {
  * Re-enable password field.
  */
 function loop_saml_form_user_profile_form_alter(&$form, &$form_state) {
-  $form['account']['pass'] = array(
+  $form['account']['pass'] = [
     '#type' => 'password_confirm',
     '#size' => 25,
     '#description' => t('To change the current user password, enter the new password in both fields.'),
-  );
+  ];
 
   if (isset($form['account']['mail']['#disabled'])) {
     unset($form['account']['mail']['#disabled']);
@@ -104,10 +104,10 @@ function loop_saml_form_user_profile_form_alter(&$form, &$form_state) {
 function _loop_saml_setup_account($account, array $attributes) {
   if (isset($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'][0],
             $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname'][0])) {
-    $names = array(
+    $names = [
       $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'][0],
       $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname'][0],
-    );
+    ];
   }
   else {
     $fullename = $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/displayname'][0];
@@ -152,6 +152,6 @@ function loop_saml_form_user_login_block_alter(&$form, &$form_state, $form_id) {
   if (current_path() !== 'user/login') {
     // We want to set the destination explicitly in drupal_goto().
     unset($_GET['destination']);
-    drupal_goto('user/login', array('query' => drupal_get_destination()));
+    drupal_goto('user/login', ['query' => drupal_get_destination()]);
   }
 }

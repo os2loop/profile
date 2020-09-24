@@ -9,7 +9,7 @@
  * Implements hook_install().
  */
 function loop_notification_install() {
-  $defaults = array(
+  $defaults = [
     'loop_notification_send_mail_subject' => 'Nyt svar til spørgsmålet “[node:title|trim(52)]”',
     'loop_notification_send_mail_body' => '<h2>Nyt svar til spørgsmålet [node:title]</h2>
 <p>Kære [user:field-first-name] [user:field-last-name]</p>
@@ -54,7 +54,7 @@ Du kan styre dine abonnementer fra din brugerprofil',
 <br />
 Dette er en automatisk meddelelse fra Loop, og kan ikke besvares.<br />
 Du kan styre dine abonnementer fra din brugerprofil',
-  );
+  ];
 
   foreach ($defaults as $key => $value) {
     variable_set($key, $value);
@@ -65,7 +65,7 @@ Du kan styre dine abonnementer fra din brugerprofil',
  * Enable notifications for post type as default.
  */
 function loop_notification_update_7001() {
-  $value = array(
+  $value = [
     'external_sources' => 0,
     'index' => 0,
     'instruction' => 0,
@@ -73,7 +73,7 @@ function loop_notification_update_7001() {
     'post' => 'post',
     'page' => 0,
     'tree' => 0,
-  );
+  ];
 
   variable_set('loop_notification_content_types', $value);
 }
@@ -82,9 +82,9 @@ function loop_notification_update_7001() {
  * Set default e-mail templates in configuration.
  */
 function loop_notification_update_7002() {
-  features_revert(array('loop_notification' => array('rules_config')));
+  features_revert(['loop_notification' => ['rules_config']]);
 
-  $defaults = array(
+  $defaults = [
     'loop_notification_send_mail_subject' => 'Nyt svar til spørgsmålet “[node:title|trim(52)]”',
     'loop_notification_send_mail_body' => '<h2>Nyt svar til spørgsmålet [node:title]</h2>
 <p>Kære [user:field-first-name] [user:field-last-name]</p>
@@ -129,7 +129,7 @@ Du kan styre dine abonnementer fra din brugerprofil',
 <br />
 Dette er en automatisk meddelelse fra Loop, og kan ikke besvares.<br />
 Du kan styre dine abonnementer fra din brugerprofil',
-  );
+  ];
 
   foreach ($defaults as $key => $value) {
     variable_set($key, $value);
@@ -140,13 +140,13 @@ Du kan styre dine abonnementer fra din brugerprofil',
  * Delete old user menu item.
  */
 function loop_notification_update_7003() {
-  $mlid = array();
+  $mlid = [];
   $path = 'user';
   $name = 'main-menu';
   $menu_info = db_select('menu_links', 'ml')
     ->condition('ml.link_path', $path)
     ->condition('ml.menu_name', $name)
-    ->fields('ml', array('mlid', 'plid'))
+    ->fields('ml', ['mlid', 'plid'])
     ->execute()
     ->fetchAll();
 

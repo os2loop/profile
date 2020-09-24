@@ -9,15 +9,15 @@
  * Implements hook_menu().
  */
 function itk_siteimprove_menu() {
-  $items = array();
+  $items = [];
 
-  $items['admin/config/system/itk-siteimprove'] = array(
+  $items['admin/config/system/itk-siteimprove'] = [
     'title' => 'ITK Siteimprove',
     'description' => 'Manage ITK Siteimprove settings.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('itk_siteimprove_form'),
-    'access arguments' => array('administer itk siteimprove'),
-  );
+    'page arguments' => ['itk_siteimprove_form'],
+    'access arguments' => ['administer itk siteimprove'],
+  ];
 
   return $items;
 }
@@ -29,12 +29,12 @@ function itk_siteimprove_menu() {
  *   An array defining a permission.
  */
 function itk_siteimprove_permission() {
-  return array(
-    'administer itk siteimprove' => array(
+  return [
+    'administer itk siteimprove' => [
       'title' => t('Administer ITK Siteimprove module'),
       'description' => t('Perform administration tasks related to ITK Siteimprove.'),
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -117,11 +117,11 @@ function itk_siteimprove_preprocess_page(&$variables) {
   // Inject script if allowed path.
   if ($trackPath) {
     drupal_add_js(drupal_get_path('module', 'itk_siteimprove') . '/js/itk-siteimprove.js', 'file');
-    drupal_add_js(array(
-      'itk_siteimprove' => array(
+    drupal_add_js([
+      'itk_siteimprove' => [
         'key' => $key,
-        'useCookieinformation' => boolval($use_cookie_information)
-      ),
-    ), 'setting');
+        'useCookieinformation' => boolval($use_cookie_information),
+      ],
+    ], 'setting');
   }
 }

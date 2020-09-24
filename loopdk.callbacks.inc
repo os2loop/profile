@@ -16,8 +16,8 @@
  *   The context of the batch job.
  */
 function _loopdk_enable_module($module, $module_name, array &$context) {
-  module_enable(array($module));
-  $context['message'] = st('Installed %module module.', array('%module' => $module_name));
+  module_enable([$module]);
+  $context['message'] = st('Installed %module module.', ['%module' => $module_name]);
 }
 
 /**
@@ -37,7 +37,7 @@ function _loopdk_insert_translation($type, $translation_file, array &$context) {
 
   _locale_import_po($file, 'da', LOCALE_IMPORT_OVERWRITE, $type);
 
-  $context['message'] = st('Installed %type translation.', array('%type' => $type));
+  $context['message'] = st('Installed %type translation.', ['%type' => $type]);
 }
 
 /**
@@ -53,10 +53,10 @@ function _loopdk_features_revert($feature) {
     foreach (array_keys($feature->info['features']) as $component) {
       if (features_hook($component, 'features_revert')) {
         // Revert each component (force).
-        features_revert(array($feature->name => array($component)));
+        features_revert([$feature->name => [$component]]);
       }
     }
   }
 
-  $context['message'] = st('Reverted %feature.', array('%feature' => $feature));
+  $context['message'] = st('Reverted %feature.', ['%feature' => $feature]);
 }
