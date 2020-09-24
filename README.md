@@ -141,6 +141,12 @@ Install one of the Loop search modules to enable search in the site:
 `/admin/config/search/search_api` and delete the default search index (the one
 named “Default node index”) which is not used by Loop.
 
+###### Showing the search block
+
+By default, the search block is displayed on all pages, but this can be changed
+in the Loop theme settings (`/admin/appearance/settings/loop`) under “Content
+search”.
+
 ##### Miscellaneous
 
 * [Loop post wysiwyg (loop_post_wysiwyg)](modules/loop_post_wysiwyg/README.md):
