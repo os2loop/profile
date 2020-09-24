@@ -28,7 +28,7 @@ function loop_post_form_node_form_alter(&$form, &$form_state) {
     // Set up profession field.
     if ($fetched_field_profession) {
       if (arg(1) == 'add') {
-        $form['field_profession'][LANGUAGE_NONE]['#default_value'] = array(0 => $fetched_field_profession['0']['tid']);
+        $form['field_profession'][LANGUAGE_NONE]['#default_value'] = [0 => $fetched_field_profession['0']['tid']];
       }
     }
 
@@ -81,15 +81,18 @@ function loop_post_form_validate(&$form, &$form_state) {
 
   $session_key = 'loop_post_form_validate_submitted';
   if (!isset($_SESSION[$session_key])) {
-    $_SESSION[$session_key] = array();
+    $_SESSION[$session_key] = [];
   }
 
   // "form_build_id" is a unique id for each form being built.
   $form_build_id = $form_state['values']['form_build_id'];
   if (isset($_SESSION[$session_key][$form_build_id]) && $_SESSION[$session_key][$form_build_id] === TRUE) {
     global $user;
-    watchdog('loop_post', 'Form !id already submitted (user: !user)', array('!id' => $form['#id'], '!user' => $user->name), WATCHDOG_INFO);
-    form_set_error('name]', t('This form has already been submitted. <a href="!url">OK</a>', array('!url' => current_path())));
+    watchdog('loop_post', 'Form !id already submitted (user: !user)', [
+      '!id' => $form['#id'],
+      '!user' => $user->name,
+    ], WATCHDOG_INFO);
+    form_set_error('name]', t('This form has already been submitted. <a href="!url">OK</a>', ['!url' => current_path()]));
   }
   else {
     $_SESSION[$session_key][$form_build_id] = TRUE;

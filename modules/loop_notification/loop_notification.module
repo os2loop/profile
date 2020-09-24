@@ -13,15 +13,15 @@ include_once 'loop_notification.features.inc';
  * A menu item linking to an administration form.
  */
 function loop_notification_menu() {
-  $items = array();
+  $items = [];
 
-  $items['admin/config/loop/notifications'] = array(
+  $items['admin/config/loop/notifications'] = [
     'title' => 'Loop notification settings',
     'description' => 'Settings related to the notification module.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('loop_notification_config_form'),
-    'access arguments' => array('access administration pages'),
-  );
+    'page arguments' => ['loop_notification_config_form'],
+    'access arguments' => ['access administration pages'],
+  ];
 
   return $items;
 }
@@ -34,106 +34,106 @@ function loop_notification_menu() {
 function loop_notification_config_form($form) {
   $checkboxes = node_type_get_names();
 
-  $form['loop_notification_wrapper'] = array(
+  $form['loop_notification_wrapper'] = [
     '#type' => 'fieldset',
     '#title' => 'Enable notifications',
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-  );
+  ];
 
-  $form['loop_notification_wrapper']['loop_notification_content_types'] = array(
+  $form['loop_notification_wrapper']['loop_notification_content_types'] = [
     '#type' => 'checkboxes',
     '#options' => $checkboxes,
     '#default_value' => variable_get('loop_notification_content_types'),
     '#title' => 'Select content types',
     '#description' => t('Select the content types where you want notifications enabled.'),
-  );
+  ];
 
-  $form['loop_notification_email_wrapper'] = array(
+  $form['loop_notification_email_wrapper'] = [
     '#type' => 'fieldset',
     '#title' => t('Loop e-mail templates'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#description' => t('Loop e-mail templates. See below for a list of available tokens.'),
-  );
+  ];
 
-  $form['loop_notification_email_wrapper']['info'] = array(
-    '#markup' => t('Sender name and e-mail are set in <a href="@url">Mime Mail settings</a>.', array('@url' => url('admin/config/system/mimemail'))),
+  $form['loop_notification_email_wrapper']['info'] = [
+    '#markup' => t('Sender name and e-mail are set in <a href="@url">Mime Mail settings</a>.', ['@url' => url('admin/config/system/mimemail')]),
     '#prefix' => '<p><em>',
     '#suffix' => '</em></p>',
-  );
+  ];
 
-  $form['loop_notification_email_wrapper']['templates'] = array(
+  $form['loop_notification_email_wrapper']['templates'] = [
     '#type' => 'vertical_tabs',
-  );
+  ];
 
-  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail'] = array(
+  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail'] = [
     '#type' => 'fieldset',
     '#title' => t('Send mail to subscribers'),
 
-    'loop_notification_send_mail_subject' => array(
+    'loop_notification_send_mail_subject' => [
       '#type' => 'textfield',
       '#default_value' => variable_get('loop_notification_send_mail_subject'),
       '#title' => t('Subject'),
-    ),
+    ],
 
-    'loop_notification_send_mail_body' => array(
+    'loop_notification_send_mail_body' => [
       '#type' => 'textarea',
       '#default_value' => variable_get('loop_notification_send_mail_body'),
       '#title' => t('Body'),
-    ),
-  );
+    ],
+  ];
 
-  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_comment_edit'] = array(
+  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_comment_edit'] = [
     '#type' => 'fieldset',
     '#title' => t('Send mail to subscribers on comment edit'),
 
-    'loop_notification_send_mail_to_subscribers_on_comment_edit_subject' => array(
+    'loop_notification_send_mail_to_subscribers_on_comment_edit_subject' => [
       '#type' => 'textfield',
       '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_comment_edit_subject'),
       '#title' => t('Subject'),
-    ),
+    ],
 
-    'loop_notification_send_mail_to_subscribers_on_comment_edit_body' => array(
+    'loop_notification_send_mail_to_subscribers_on_comment_edit_body' => [
       '#type' => 'textarea',
       '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_comment_edit_body'),
       '#title' => t('Body'),
-    ),
-  );
+    ],
+  ];
 
-  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_node_create'] = array(
+  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_node_create'] = [
     '#type' => 'fieldset',
     '#title' => t('Send mail to subscribers on node create'),
 
-    'loop_notification_send_mail_to_subscribers_on_node_create_subject' => array(
+    'loop_notification_send_mail_to_subscribers_on_node_create_subject' => [
       '#type' => 'textfield',
       '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_node_create_subject'),
       '#title' => t('Subject'),
-    ),
+    ],
 
-    'loop_notification_send_mail_to_subscribers_on_node_create_body' => array(
+    'loop_notification_send_mail_to_subscribers_on_node_create_body' => [
       '#type' => 'textarea',
       '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_node_create_body'),
       '#title' => t('Body'),
-    ),
-  );
+    ],
+  ];
 
-  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_node_edit'] = array(
+  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_node_edit'] = [
     '#type' => 'fieldset',
     '#title' => t('Send mail to subscribers on node edit'),
 
-    'loop_notification_send_mail_to_subscribers_on_node_edit_subject' => array(
+    'loop_notification_send_mail_to_subscribers_on_node_edit_subject' => [
       '#type' => 'textfield',
       '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_node_edit_subject'),
       '#title' => t('Subject'),
-    ),
+    ],
 
-    'loop_notification_send_mail_to_subscribers_on_node_edit_body' => array(
+    'loop_notification_send_mail_to_subscribers_on_node_edit_body' => [
       '#type' => 'textarea',
       '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_node_edit_body'),
       '#title' => t('Body'),
-    ),
-  );
+    ],
+  ];
 
   $form['loop_notification_email_wrapper']['tokens'] = _loop_notification_get_email_tokens();
 
@@ -146,31 +146,31 @@ function loop_notification_config_form($form) {
  * These are provided by the Rules module.
  */
 function _loop_notification_get_email_tokens() {
-  $render = RulesTokenEvaluator::help(array(
-    'site' => array(
+  $render = RulesTokenEvaluator::help([
+    'site' => [
       'type' => 'site',
       'label' => 'Site information',
       'description' => 'Site-wide settings and other global information.',
-      'property info alter' => array(
+      'property info alter' => [
         0 => 'RulesData',
         1 => 'addSiteMetadata',
-      ),
-      'property info' => array(),
+      ],
+      'property info' => [],
       'optional' => TRUE,
-    ),
-    'node' => array(
+    ],
+    'node' => [
       'label' => 'node',
       'type' => 'node',
-    ),
-    'user' => array(
+    ],
+    'user' => [
       'label' => 'user',
       'type' => 'user',
-    ),
-    'comment' => array(
+    ],
+    'comment' => [
       'label' => 'comment',
       'type' => 'comment',
-    ),
-  ));
+    ],
+  ]);
 
   return $render;
 }
@@ -219,8 +219,8 @@ function loop_notification_comment_update($comment) {
 function loop_notification_loop_notification_message_recipient_alter(&$users, $node) {
   // Fetch users who flagged the node.
   $query = db_select('flagging', 'f')
-    ->fields('f', array('uid'));
-  $query->innerJoin('flag', 'l', 'f.fid = l.fid', array());
+    ->fields('f', ['uid']);
+  $query->innerJoin('flag', 'l', 'f.fid = l.fid', []);
   $query->condition('f.entity_id', $node->nid, '=');
   $query->condition('f.entity_type', 'node', '=');
 
@@ -263,14 +263,14 @@ function _loop_notification_notify_users($node, $action, $comment = NULL) {
  *   The list of user entities that should receive the notification.
  */
 function _loop_notification_find_users($node) {
-  $user_ids = array();
+  $user_ids = [];
   // Allow other modules to modify the list of recipients.
   drupal_alter('loop_notification_message_recipient', $user_ids, $node);
 
   // Remove recurring users.
   $user_ids = array_unique($user_ids);
 
-  $users = array();
+  $users = [];
   foreach ($user_ids as $id) {
     // Load the user object.
     $users[] = user_load($id);
@@ -340,7 +340,7 @@ function _loop_notification_check_content_type($node) {
 /**
  * Implements hook_tokens().
  */
-function loop_notification_tokens($type, $tokens, array $data = array(), array $options = array()) {
+function loop_notification_tokens($type, $tokens, array $data = [], array $options = []) {
   $replacements = [];
   if ('node' === $type) {
     $node = $data['node'];

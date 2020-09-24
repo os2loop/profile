@@ -38,9 +38,9 @@
   <body>
     <?php
     $metadata_values = array_map(function ($field_name) use ($collection) {
-      $field = field_view_field('node', $collection, $field_name, array('label' => 'hidden'));
+      $field = \field_view_field $collection;
       return render($field);
-    }, array(
+    }, [
       'owner' => 'field_loop_documents_owner',
       'version' => 'field_loop_documents_version',
       'approver' => 'field_loop_documents_approver',
@@ -48,7 +48,7 @@
       'review_date' => 'field_loop_documents_review_date',
       'keyword' => 'field_keyword',
       'subject' => 'field_subject',
-    ));
+    ]);
     ?>
 
     <div class="metadata">

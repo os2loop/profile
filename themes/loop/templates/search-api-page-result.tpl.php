@@ -63,5 +63,5 @@
     </div>
   <?php endif; ?>
   <?php print $url ? l($title, $url['path'], $url['options']) : check_plain($title); ?>
-  <?php print $url ? l($item->comment_count . ' ' . t('Answers'), $url['path'], array('attributes' => array('class' => array('search-result--comments')))) : check_plain($item->comment_count); ?>
+  <?php print $url ? l($item->comment_count . ' ' . t('Answers'), $url['path'], ['attributes' => ['class' => ['search-result--comments']]]) : check_plain($item->comment_count); ?>
 </div>

@@ -18,7 +18,7 @@
 
   <!-- Exclude generated code -->
   <exclude-pattern>*\.features\.*</exclude-pattern>
-  <exclude-pattern>*\.(field_group|strongarm|pages_default|views_default|rules_defaults|path_breadcrumbs|variable)\.inc</exclude-pattern>
+  <exclude-pattern>*\.(field_group|strongarm|facetapi_defaults|pages_default|views_default|rules_defaults|path_breadcrumbs|variable)\.inc</exclude-pattern>
 
   <!-- Exclude built code -->
   <exclude-pattern>themes/loop/(css|mockups)/</exclude-pattern>
@@ -40,4 +40,5 @@
   <rule ref="Drupal">
     <exclude name="Drupal.InfoFiles.AutoAddedKeys.Project"/>
   </rule>
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
 </ruleset>

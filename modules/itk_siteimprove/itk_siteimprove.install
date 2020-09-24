@@ -11,7 +11,7 @@
  * Add warning about ITK Siteimprove setup.
  */
 function itk_siteimprove_requirements($phase) {
-  $requirements = array();
+  $requirements = [];
 
   if ($phase == 'runtime') {
     $t = get_t();
@@ -19,7 +19,7 @@ function itk_siteimprove_requirements($phase) {
 
     if ($key) {
       $value = $t('ITK Siteimprove settings');
-      $message = $t('ITK Siteimprove is running with key: @key', array('@key' => $key));
+      $message = $t('ITK Siteimprove is running with key: @key', ['@key' => $key]);
       $severity = REQUIREMENT_OK;
     }
     else {
@@ -28,12 +28,12 @@ function itk_siteimprove_requirements($phase) {
       $severity = REQUIREMENT_WARNING;
     }
 
-    $requirements['itk_siteimprove'] = array(
+    $requirements['itk_siteimprove'] = [
       'title' => $t('ITK Siteimprove'),
       'value' => $value,
       'description' => $message,
       'severity' => $severity,
-    );
+    ];
   }
 
   return $requirements;

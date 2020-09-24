@@ -13,23 +13,23 @@ include_once 'loop_search_node_settings.features.inc';
  * Add or between types in the type "filter".
  */
 function loop_search_node_settings_search_node_page_configuration_alter(&$conf, $configuration) {
-  $conf['provider']['filters']['taxonomy'][] = array(
+  $conf['provider']['filters']['taxonomy'][] = [
     'field' => 'type',
     'name' => 'Type',
     'type' => 'or',
-    'terms' => array(
-      'external_sources' => array(
+    'terms' => [
+      'external_sources' => [
         'value' => 'external_sources',
-      ),
-      'loop_documents_document' => array(
+      ],
+      'loop_documents_document' => [
         'value' => 'loop_documents_document',
-      ),
-      'loop_documents_collection' => array(
+      ],
+      'loop_documents_collection' => [
         'value' => 'loop_documents_collection',
-      ),
-      'post' => array(
+      ],
+      'post' => [
         'value' => 'post',
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 }

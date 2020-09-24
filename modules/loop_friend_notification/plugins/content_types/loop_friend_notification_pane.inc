@@ -5,7 +5,7 @@
  * Missing comment.
  */
 
-$plugin = array(
+$plugin = [
 // Just do this one, it is needed.
   'single' => TRUE,
 // A category to put this under.
@@ -22,9 +22,9 @@ $plugin = array(
 // (optional).
   'admin info' => 'loop_friend_notification_pane_custom_pane_admin_info',
 // Array of defaults for the settings form.
-  'defaults' => array(
+  'defaults' => [
     'text' => '',
-  ),
-// This is NEEDED to be able to use substitution strings in your pane.
+  ],
+  // This is NEEDED to be able to use substitution strings in your pane.
   'all contexts' => TRUE,
-);
+];

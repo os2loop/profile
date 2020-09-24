@@ -16,7 +16,10 @@ function loop_search_db_requirements($phase) {
     foreach ($those_modules as $that_module) {
       if (module_exists($that_module)) {
         $requirements[$this_module] = [
-          'description' => t('Cannot install "%this_module" when "%that_module" is installed.', ['%this_module' => $this_module, '%that_module' => $that_module]),
+          'description' => t('Cannot install "%this_module" when "%that_module" is installed.', [
+            '%this_module' => $this_module,
+            '%that_module' => $that_module,
+          ]),
           'severity' => REQUIREMENT_ERROR,
         ];
       }
