@@ -184,13 +184,20 @@ function loop_search_node_settings_default_search_api_index() {
           "settings" : { "fields" : { "title" : true } }
         },
         "search_api_html_filter" : {
-          "status" : 0,
+          "status" : 1,
           "weight" : "10",
           "settings" : {
-            "fields" : { "title" : true },
+            "fields" : {
+              "title" : true,
+              "comments" : true,
+              "body:value" : true,
+              "body:summary" : true,
+              "field_description:value" : true,
+              "comments:comment_body:value" : true
+            },
             "title" : 0,
             "alt" : 1,
-            "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
+            "tags" : ""
           }
         },
         "search_api_transliteration" : {
