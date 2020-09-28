@@ -134,8 +134,11 @@ Install one of the Loop search modules to enable search in the site:
     settings for the search module
 * [loop_search_node](modules/loop_search_node/README.md): Search using [Search
   node](https://github.com/search-node)
-  * Install Loop search node settings (loop_search_node_settings) to get the
-    default settings for the search module
+  * Install Loop search node settings
+    ([loop_search_node_settings](modules/loop_search_node_settings/README.md))
+    to get the default settings for the search module. Check out [the
+    instructions](modules/loop_search_node_settings/README.md) to configure and
+    fine-tune the module after installation.
 
 **Note**: After installing a search module you may want to go to
 `/admin/config/search/search_api` and delete the default search index (the one
