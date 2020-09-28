@@ -221,6 +221,7 @@ projects[search_node_page][subdir] = "contrib"
 projects[search_node_page][download][type] = "git"
 projects[search_node_page][download][url] = "http://github.com/search-node/search_node_page.git"
 projects[search_node_page][download][tag] = "7.x-1.3.5"
+projects[search_node_page][patch][] = "https://github.com/search-node/search_node_page/compare/7.x-1.3.5...rimi-itk:feature/pass-term-along.patch"
 
 projects[secure_permissions][subdir] = "contrib"
 projects[secure_permissions][version] = "1.6"

@@ -1,4 +1,4 @@
-1<!--
+<!--
   Default view for the search box.
 
   You should not change this but point to another custom template in the
@@ -46,28 +46,64 @@
           <span class="search-filters--label" data-ng-class="{'is-active': filterActive==='post'}" data-ng-click="filterType('post')">{{ Drupal.t('Posts', {}, { 'context': 'angular' }) }}</span>
         </div>
 
-        <span class="search-filters--subject-wrapper" data-ng-class="{'is-active': isFiltersShown}" data-ng-click="toggleFilter()">
-          <span class="search-filters--subject-wrapper-label">
+        <span class="search-filters--facets-wrapper" data-ng-class="{'is-active': isFiltersShown}" data-ng-click="toggleFilter()">
+          <span class="search-filters--facets-wrapper-label">
             <span data-ng-if="selectedFilterCount > 0">{{ selectedFilterCount }} {{ Drupal.t('selected subjects', {}, { 'context': 'angular' }) }}</span>
             <span data-ng-if="selectedFilterCount === 0">{{ Drupal.t('Filter on subjects', {}, { 'context': 'angular' }) }}</span>
           </span>
         </span>
 
         <!-- Filters -->
+        <div class="search-filters--facets" data-ng-show="isFiltersShown">
+          <div class="search-filters--arrow"><div class="search-filters--arrow-inner"></div></div>
+          <div class="search-filters--facets-inner">
 
-        <pre>[[[ {{ filters['taxonomy'] }}]]]</pre>
+            <section class="search-filters--facets-facet search-filters--facets-facet-subjects" data-ng-if="filters['taxonomy']['field_subject'].items">
+              <header>
+                <h1>{{ Drupal.t('Subjects') }}</h1>
+              </header>
 
-        <div class="search-filters--subjects-wrapper" data-ng-show="isFiltersShown" >
-          <div class="search-filters--subjects">
-            <div class="search-filters--arrow"><div class="search-filters--arrow-inner"></div></div>
-            <div class="search-filters--subjects-inner">
-              <div class="search-filters--subjects-item" data-ng-repeat="(key, item) in filters['taxonomy']['field_subject'].items">
-                <span class="search-filters--subjects-item-inner">
-                  <input id="{{ key }}" type="checkbox" data-ng-model="query.filters['taxonomy']['field_subject'][key]" data-ng-click="filterNewSelection()">
-                  <label for="{{ key }}">{{ item.value }}</label>
-                </span>
+              <div class="search-filters--facets-facet-items">
+                <div class="search-filters--facets-item search-filters--subjects-item" data-ng-repeat="item in filters['taxonomy']['field_subject'].items">
+                  <span class="search-filters--facets-item-inner search-filters--subjects-item-inner">
+                    <input id="{{ item.key }}" type="checkbox" data-ng-model="query.filters['taxonomy']['field_subject'][item.key]" data-ng-click="filterNewSelection()">
+                    <label for="{{ item.key }}">{{ item.value }}</label>
+                  </span>
+                  <div class="search-filters--facets-children" data-ng-if="item.children">
+                    <div class="search-filters--facets-item search-filters--subjects-item" data-ng-repeat="child in item.children">
+                      <div class="search-filters--facets-item-inner search-filters--subjects-item-inner">
+                        <input id="{{ child.key }}" type="checkbox" data-ng-model="query.filters['taxonomy']['field_subject'][child.key]" data-ng-click="filterNewSelection()">
+                        <label for="{{ child.key }}">{{ child.value }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </section>
+
+            <section class="search-filters--facets-facet search-filters--facets-facet-keywords" data-ng-if="filters['taxonomy']['field_keyword'].items">
+              <header>
+                <h1>{{ Drupal.t('Keywords') }}</h1>
+              </header>
+
+              <div class="search-filters--facets-facet-items">
+                <div class="search-filters--facets-item search-filters--keywords-item" data-ng-repeat="item in filters['taxonomy']['field_keyword'].items">
+                  <div class="search-filters--facets-item-inner search-filters--keywords-item-inner">
+                    <input id="{{ item.key }}" type="checkbox" data-ng-model="query.filters['taxonomy']['field_keyword'][item.key]" data-ng-click="filterNewSelection()">
+                    <label for="{{ item.key }}">{{ item.value }}</label>
+                    <div class="search-filters--facets-children" data-ng-if="item.children">
+                      <div class="search-filters--facets-item search-filters--keywords-item" data-ng-repeat="child in item.children">
+                        <div class="search-filters--facets-item-inner search-filters--keywords-item-inner">
+                          <input id="{{ child.key }}" type="checkbox" data-ng-model="query.filters['taxonomy']['field_keyword'][child.key]" data-ng-click="filterNewSelection()">
+                          <label for="{{ child.key }}">{{ child.value }}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <span data-ng-click="toggleFilter()" class="search-filters--action">{{ Drupal.t('Filter', {}, { 'context': 'angular' }) }}</span>
           </div>
         </div>
