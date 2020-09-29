@@ -262,6 +262,9 @@ projects[token][patch] = "https://www.drupal.org/files/issues/token-field_descri
 projects[transliteration][subdir] = "contrib"
 projects[transliteration][version] = "3.2"
 
+projects[user_import][subdir] = "contrib"
+projects[user_import][version] = "3.x-dev"
+
 projects[uuid][subdir] = "contrib"
 projects[uuid][version] = "1.3"
 

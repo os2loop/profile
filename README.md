@@ -155,6 +155,11 @@ named “Default node index”) which is not used by Loop.
 * [Loop user contact list](modules/loop_user_contact_list/README.md): Shows a
   contact list
 
+##### Other useful modules
+
+* The [user_import](https://www.drupal.org/project/user_import) module can be
+  installed and used for importing users from CSV files.
+
 ## Adding taxonomies
 
 After installing the Loop profile you should create some taxomony terms in the
