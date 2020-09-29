@@ -4618,6 +4618,19 @@ a.question--term.taxonomy-keyword {
     .view-loop-user-taxonomy-subscriptions .subscriptions--item {
       flex: 0 1 50%; } }
 
+.view-loop-user-taxonomy-subscriptions > .view-content > .item-list li {
+  list-style: none; }
+
+.view-loop-user-taxonomy-subscriptions > .view-content > .item-list > ul {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap; }
+  .view-loop-user-taxonomy-subscriptions > .view-content > .item-list > ul > li {
+    flex: 0 0 100%; }
+    @media only screen and (min-width: 1000px) {
+      .view-loop-user-taxonomy-subscriptions > .view-content > .item-list > ul > li {
+        flex: 0 1 50%; } }
+
 .view-loop-user-subscriptions .subscriptions--item {
   flex: 0 0 100%;
   margin: 1em 0; }
