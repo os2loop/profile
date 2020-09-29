@@ -166,10 +166,12 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
             }
 
             list.sort(function(t1, t2) {
-              if (t1.weight < t2.weight) {
+              var w1 = parseInt(t1.weight)
+              var w2 = parseInt(t2.weight)
+              if (w1 < w2) {
                 return -1;
-              } else if (t1.weight > t2.weight) {
-               return 1;
+              } else if (w1 > w2) {
+                return 1;
               }
               return 0;
             })
