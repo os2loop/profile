@@ -288,6 +288,9 @@ projects[views_bulk_operations][version] = "3.6"
 projects[views_flag_refresh][subdir] = "contrib"
 projects[views_flag_refresh][version] = "1.3"
 
+projects[views_tree][subdir] = "contrib"
+projects[views_tree][version] = "2.0"
+
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.6"
 
