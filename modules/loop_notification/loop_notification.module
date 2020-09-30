@@ -515,7 +515,7 @@ function _loop_notification_modified_comments($loop_notification_last_cron) {
  *   String of list element html.
  */
 function _loop_notification_create_list_element(StdClass $node) {
-  $link = l($node->title, $alias = drupal_get_path_alias('node/' . $node->nid));
+  $link = l($node->title, $alias = drupal_get_path_alias('node/' . $node->nid), ['absolute' => TRUE]);
 
   return '<li>' . $link . '</li>';
 }
