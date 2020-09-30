@@ -58,6 +58,7 @@ function loop_documents_field_group_info() {
     'weight' => '5',
     'children' => array(
       0 => 'field_loop_documents_author',
+      1 => 'field_revision_date',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
