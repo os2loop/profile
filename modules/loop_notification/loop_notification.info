@@ -60,3 +60,4 @@ features[variable][] = field_bundle_settings_message__node_added
 features[variable][] = field_bundle_settings_message__node_edited
 features[variable][] = flag_default_flag_status
 files[] = loop_notification.rules.inc
+files[] = includes/loop_notification.mail.inc

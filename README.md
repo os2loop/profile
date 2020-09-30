@@ -102,6 +102,10 @@ is added or existing content is updated.
 Go to `/admin/config/loop/notifications` to define which content types to send
 out notification for and to define mail notification templates.
 
+See [Using SMTP and HTML
+mails](modules/loop_notification/README.md#using-smtp-and-html-mails) if you're
+using the [smtp](https://www.drupal.org/project/smtp) module.
+
 #### Optional Loop modules
 
 After installing the base Loop profile, you can install additional modules (go
