@@ -65,7 +65,7 @@
 
               <div class="search-filters--facets-facet-items">
                 <div class="search-filters--facets-item search-filters--subjects-item" data-ng-repeat="item in filters['taxonomy']['field_subject'].items">
-                  <span class="search-filters--facets-item-inner search-filters--subjects-item-inner">
+                  <span class="search-filters--facets-item-inner search-filters--facets-item-depth-{{ item.depth }} search-filters--subjects-item-inner">
                     <input id="{{ item.key }}" type="checkbox" data-ng-model="query.filters['taxonomy']['field_subject'][item.key]" data-ng-click="filterNewSelection()">
                     <label for="{{ item.key }}">{{ item.value }}</label>
                   </span>
@@ -88,7 +88,7 @@
 
               <div class="search-filters--facets-facet-items">
                 <div class="search-filters--facets-item search-filters--keywords-item" data-ng-repeat="item in filters['taxonomy']['field_keyword'].items">
-                  <div class="search-filters--facets-item-inner search-filters--keywords-item-inner">
+                  <div class="search-filters--facets-item-inner search-filters--facets-item-depth-{{ item.depth }} search-filters--keywords-item-inner">
                     <input id="{{ item.key }}" type="checkbox" data-ng-model="query.filters['taxonomy']['field_keyword'][item.key]" data-ng-click="filterNewSelection()">
                     <label for="{{ item.key }}">{{ item.value }}</label>
                     <div class="search-filters--facets-children" data-ng-if="item.children">
