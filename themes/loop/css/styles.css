@@ -1421,6 +1421,21 @@ label {
     _overflow-y: visible;
     padding-left: 0; } }
 
+.layout-frontpage > div + div {
+  margin-top: 1.5em; }
+
+.layout-frontpage > div h2 {
+  font-size: 1em;
+  font-weight: bold; }
+
+.view-id-latest_news .views-row {
+  display: flex;
+  flex-wrap: wrap; }
+  .view-id-latest_news .views-row > div {
+    flex: 0 1 50%; }
+    .view-id-latest_news .views-row > div:last-child {
+      text-align: right; }
+
 .layout-dashboard .layout-element-alpha {
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 2em;
