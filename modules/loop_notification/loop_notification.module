@@ -561,10 +561,10 @@ function _loop_notification_handle_nodes($nid, array &$users_to_notify, array &$
       continue;
     }
 
-    // Defaults to once pr. week.
-    if (isset($user_notification_settings[$user->uid])) {
-      $user_notification_interval = isset($user_notification_settings[$user->uid]->update_interval) ? (int) $user_notification_settings[$user->uid]->update_interval : (variable_get('loop_notification_default_interval') ?: 60 * 60 * 24 * 7);
-    }
+    $user_notification_interval = isset($user_notification_settings[$user->uid]->update_interval)
+      ? (int) $user_notification_settings[$user->uid]->update_interval
+      // Default to once pr. day.
+      : (variable_get('loop_notification_default_interval') ?: 60 * 60 * 24);
 
     $last_user_notification = isset($loop_notification_last_user_notifications[$user->uid]) ? $loop_notification_last_user_notifications[$user->uid] : 0;
     if ($timestamp > $last_user_notification + $user_notification_interval) {
