@@ -3699,6 +3699,8 @@ a.question--term {
       @media only screen and (min-width: 1000px) {
         .search-filters--facets-item {
           flex: 0 1 33%; } }
+      .search-filters--facets-item-depth-0 {
+        font-weight: bold; }
       .search-filters--facets-item-inner {
         box-sizing: border-box;
         display: flex;
