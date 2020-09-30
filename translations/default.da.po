@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2020-06-19 12:50+0200\n"
-"PO-Revision-Date: 2020-06-19 12:50+0200\n"
+"POT-Creation-Date: 2020-09-30 14:50+0200\n"
+"PO-Revision-Date: 2020-09-30 14:50+0200\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -2391,7 +2391,7 @@ msgid "A certain key"
 msgstr "En bestemt nøgle"
 
 msgid "A collection of documents"
-msgstr "En samling af vejledninger"
+msgstr "En samling af dokumenter"
 
 msgid "A comment is viewed"
 msgstr "En kommentar bliver vist"
@@ -3514,7 +3514,7 @@ msgid "Add destination to the link"
 msgstr "Tilføj en destination til linket"
 
 msgid "Add document"
-msgstr "Tilføj vejledning"
+msgstr "Tilføj dokument"
 
 msgid "Add effect"
 msgstr "Tilføj effekt"
@@ -7724,6 +7724,10 @@ msgstr "Vælg dyr"
 msgid "Choose fields to combine for filtering"
 msgstr "Vælg felter som skal kombineres til brug ved filtrering"
 
+#: /user/198/notifications
+msgid "Choose how often you want to receive notifications."
+msgstr "Vælg hvor ofte du vil modtage notifikationer."
+
 msgid "Choose how users view dates and times:"
 msgstr "Vælg hvordan brugere ser datoer og tidspunker:"
 
@@ -8042,7 +8046,7 @@ msgid "Collection content"
 msgstr "Indhold af samling"
 
 msgid "Collection metadata"
-msgstr "Om samlingen"
+msgstr "Om dokumentsamlingen"
 
 msgid "Colombia"
 msgstr "Colombia"
@@ -8243,7 +8247,7 @@ msgid "Components"
 msgstr "Komponenter"
 
 msgid "Compose tips"
-msgstr "Vejledning"
+msgstr "Dokument"
 
 msgid "Compress cached pages."
 msgstr "Komprimér cachede sider."
@@ -8648,6 +8652,10 @@ msgstr "Kontaktformular"
 msgid "Contact forms"
 msgstr "Kontaktformularer"
 
+#: /admin/modules
+msgid "Contact list"
+msgstr "Medlemsliste"
+
 msgid "Contact settings"
 msgstr "Kontaktindstillinger"
 
@@ -8660,6 +8668,10 @@ msgid ""
 msgstr ""
 "Kontakt din systemadministrator eller udbyder for at få hjælp til at "
 "øge PHPs hukommelsesgrænse."
+
+#: /admin/structure/features/cleanup?token=2rR8u0--IUclUHuu8ARVgzmpZMLLxXMChelGqz0Y9E0
+msgid "Contacts"
+msgstr "Medlemmer"
 
 msgid "Container name"
 msgstr "Beholdernavn"
@@ -9281,7 +9293,7 @@ msgid "Create new"
 msgstr "Opret ny"
 
 msgid "Create new account"
-msgstr "Opret konto"
+msgstr "Anmod om konto"
 
 msgid "Create new blog entry"
 msgstr "Opret nyt blogindlæg"
@@ -9306,7 +9318,7 @@ msgstr "Opret indholdselementer af den samme type"
 
 #: /admin/structure/features
 msgid "Create post"
-msgstr "Opret spørgsmål"
+msgstr "Opret indlæg"
 
 #: /search/Fisk
 msgid "Create question"
@@ -9315,7 +9327,7 @@ msgstr "Opret spørgsmål"
 #: profiles/loopdk/themes/loop/templates/search/angular/result.html; profiles/loopdk/modules/loop_search_node/templates/angular/result.html
 msgctxt "angular"
 msgid "Create question"
-msgstr "Opret spørgsmål/observation"
+msgstr "Opret indlæg"
 
 msgid "Create variant"
 msgstr "Opret variant"
@@ -10915,6 +10927,7 @@ msgstr "Beskrivelse"
 msgid "Description of your site, included in each feed."
 msgstr "Beskrivelse af dit site. Inkluderes i hvert feed."
 
+#: ; misc/tableselect.js
 msgid "Deselect all rows in this table"
 msgstr "Fravælg alle rækker i tabellen"
 
@@ -11678,37 +11691,37 @@ msgid "Do nothing. Leave the old alias intact."
 msgstr "Ingen, bevar det eksisterende alias"
 
 msgid "Document"
-msgstr "Vejledning"
+msgstr "Dokument"
 
 msgid "Document collection"
-msgstr "Vejledningssamling"
+msgstr "Dokumentsamling"
 
 msgid "Document collection menu: @collection_title"
-msgstr "Vejledningssamlingsmenu: @collection_title"
+msgstr "Dokumentsamlingsmenu: @collection_title"
 
 msgid "Document collections"
-msgstr "Vejledningssamlinger"
+msgstr "Dokumentsamlinger"
 
 msgid "Document metadata"
-msgstr "Om vejledningen"
+msgstr "Om dokumentet"
 
 #: profiles/loopdk/modules/features/loop_search/loop_search.js; profiles/loopdk/modules/features/loop_external_data/js/search.js; profiles/loopdk/modules/loop_external_data/js/search.js
 msgid "Documents"
-msgstr "Vejledninger"
+msgstr "Dokumenter"
 
 #: profiles/loopdk/themes/loop/templates/search/angular/search.html; profiles/loopdk/modules/loop_search_node/templates/angular/search.html
 msgctxt "angular"
 msgid "Documents"
-msgstr "Vejledninger"
+msgstr "Dokumenter"
 
 #: /admin/index
 msgid "Documents and document collections"
-msgstr "Vejledninger og Vejledningssamlinger"
+msgstr "Dokumenter og Dokumentsamlinger"
 
 #: profiles/loopdk/themes/loop/templates/search/angular/search.html
 msgctxt "angular"
 msgid "Documents collection"
-msgstr "Vejledningssamlinger"
+msgstr "Dokumentsamlinger"
 
 msgid "Does not contain"
 msgstr "Indholder ikke"
@@ -11721,14 +11734,6 @@ msgstr "Starter ikke med"
 
 msgid "Doesn't exist"
 msgstr "Eksisterer ikke"
-
-#: /admin/content
-msgid "Dokument"
-msgstr "Vejledning"
-
-#: /admin/content
-msgid "Dokumentsamling"
-msgstr "Vejledningssamling"
 
 msgid "Dollar sign"
 msgstr "Dollartegn"
@@ -11917,6 +11922,10 @@ msgstr "Test kompatibel med drupal_system_listing()."
 msgid "Drupal system listing incompatible test"
 msgstr "Test ikke kompatibel med drupal_system_listing()."
 
+#: /batch?id=30&op=do
+msgid "Du følger ikke nogle spørgsmål"
+msgstr "Du følger ikke nogle indlæg"
+
 msgid "Duplicated argument %arg"
 msgstr "Gentaget argument %arg"
 
@@ -11959,7 +11968,7 @@ msgstr "F.eks. \"Hvordan dokumenterer man et emne\""
 #: profiles/loopdk/themes/loop/templates/search/angular/search.html; profiles/loopdk/modules/loop_search_node/templates/angular/search.html
 msgctxt "angular"
 msgid "E.g. search words such as fokusområde handlingsevaluering"
-msgstr "F.eks. med søgeord som \"produkt i OS2\""
+msgstr "F.eks. med søgeord som \"kontrakter\""
 
 msgid "E.g., @date"
 msgstr "F.eks. @date"
@@ -12306,7 +12315,7 @@ msgstr "Redigér dette view for at tilføje et display."
 
 #: /user/1/edit?pass-reset-token=6_C7KmXxtkhiqPXVt5cqG55ihefbcGgbMeUg0Qrcy2M
 msgid "Edit user"
-msgstr "Redigér bruger"
+msgstr "Rediger profil"
 
 msgid "Edit variable"
 msgstr "Redigér variabel"
@@ -12583,6 +12592,10 @@ msgstr "Aktivér netop tilføjede moduler"
 msgid "Enable newly added themes"
 msgstr "Aktivér netop tilføjede temaer"
 
+#: /user/198/notifications
+msgid "Enable notification"
+msgstr "Aktiver notifikationer"
+
 msgid "Enable or disable clean URLs for your site."
 msgstr "Aktivér eller deaktivér rene URLer på sitet."
 
@@ -12684,6 +12697,10 @@ msgstr ""
 
 msgid "Enable to override this field's links."
 msgstr "Tilsidesæt feltets links."
+
+#: /user/198/notifications
+msgid "Enable to receive an email with notification updates."
+msgstr "Aktiver notifikationer og modtag en e-mail ved opdateringer"
 
 msgid "Enable to remember the last selection made by the user."
 msgstr "Husk brugerens sidste valg."
@@ -14713,7 +14730,7 @@ msgid "Fluid width"
 msgstr "Flydende bredde"
 
 msgid "Follow question"
-msgstr "Følg spørgsmål"
+msgstr "Følg indlæg"
 
 msgid "Follow the user's language preference."
 msgstr "Følg brugerens sprogvalg."
@@ -15788,7 +15805,7 @@ msgid "Help"
 msgstr "Hjælp"
 
 msgid "Help a colleague"
-msgstr "Hjælp en kollega"
+msgstr "Hjælp en Kitos-kollega"
 
 msgid "Help is available on the following items:"
 msgstr "Der findes hjælp til følgende emner:"
@@ -17960,7 +17977,7 @@ msgstr ""
 
 #: profiles/loopdk/modules/loop_instruction/js/search.js
 msgid "Instruction"
-msgstr "Vejledning"
+msgstr "Dokument"
 
 msgid ""
 "Instructions to present to the user below this field on the editing "
@@ -18401,6 +18418,7 @@ msgstr "Nøgleordsrelevans"
 msgid "Keyword: %@keyword"
 msgstr "Nøgleord: %@keyword"
 
+#: ; profiles/loopdk/themes/loop/templates/search/angular/search.html
 msgid "Keywords"
 msgstr "Nøgleord"
 
@@ -19366,6 +19384,10 @@ msgstr "Lang tekst og resumé"
 
 msgid "Longitude"
 msgstr "Længdegrad"
+
+#: /user/198/notifications
+msgid "Loop notification user settings"
+msgstr "Indstil notifikationer"
 
 msgid "Lower case"
 msgstr "Små bogstaver"
@@ -20501,7 +20523,7 @@ msgid "My content"
 msgstr "Mit indhold"
 
 msgid "My questions"
-msgstr "Mine spørgsmål"
+msgstr "Mine indlæg"
 
 msgid "My recent content"
 msgstr "Mit seneste indhold"
@@ -21783,6 +21805,10 @@ msgstr "Bemærkninger:"
 msgid "Nothing"
 msgstr "Intet"
 
+#: /user/198/notifications
+msgid "Notification interval"
+msgstr "Notifikationsinterval"
+
 msgid "Notifications"
 msgstr "Notifikationer"
 
@@ -22067,6 +22093,14 @@ msgstr "Til-værdi"
 
 msgid "On-page localization form element."
 msgstr "Formular-element til on-page oversættelse."
+
+#: /user/198/notifications
+msgid "Once per day"
+msgstr "En gang dagligt"
+
+#: /user/198/notifications
+msgid "Once per week"
+msgstr "En gang ugentligt"
 
 msgid ""
 "Once you have defined a field, you can reuse it. For example, if you "
@@ -23723,7 +23757,7 @@ msgstr "Indlæg"
 #: profiles/loopdk/themes/loop/templates/search/angular/search.html; profiles/loopdk/modules/loop_search_node/templates/angular/search.html
 msgctxt "angular"
 msgid "Posts"
-msgstr "Spørgsmål"
+msgstr "Indlæg"
 
 msgid "Posts - least active first"
 msgstr "Indlæg - mindst aktive først"
@@ -23838,7 +23872,11 @@ msgid "Print"
 msgstr "Udskriv"
 
 msgid "Print collection"
-msgstr "Udskriv samling"
+msgstr "Download samling"
+
+#: /guiden-emner-i-kitos-loop
+msgid "Print document"
+msgstr "Download dokument"
 
 msgid "Printer-friendly version"
 msgstr "Printervenlig version"
@@ -24394,25 +24432,25 @@ msgid "Query will be generated and run using the Drupal database API."
 msgstr "Forespørgslen genereres og køres vha. Drupals database-API."
 
 msgid "Question"
-msgstr "Spørgsmål"
+msgstr "Indlæg"
 
 msgid "Question mark"
 msgstr "Spørgsmålstegn"
 
 #: profiles/loopdk/modules/features/loop_search/loop_search.js; profiles/loopdk/modules/features/loop_search/js/search.js; profiles/loopdk/modules/loop_search/js/search.js
 msgid "Questions"
-msgstr "Spørgsmål"
+msgstr "Indlæg"
 
 #: profiles/loopdk/themes/loop/templates/search/angular/search.html
 msgctxt "angular"
 msgid "Questions"
-msgstr "Spørgsmål"
+msgstr "Indlæg"
 
 msgid "Questions (sorted by latest)"
-msgstr "Spørgsmål (sorteret efter nyeste)"
+msgstr "Indlæg (sorteret efter nyeste)"
 
 msgid "Questions about"
-msgstr "Spørgsmål om"
+msgstr "Indlæg om"
 
 msgid "Quotation mark"
 msgstr "Citationstegn"
@@ -25533,6 +25571,10 @@ msgstr "Version"
 msgid "Revision ID"
 msgstr "Versions-ID"
 
+#: /
+msgid "Revision date"
+msgstr "Revisionsdato "
+
 msgid "Revision from %revision-date of @type %title has been deleted."
 msgstr "Version af @type %title fra %revision-date slettet."
 
@@ -25933,6 +25975,10 @@ msgstr "Gem format"
 msgid "Save language"
 msgstr "Gem sprog"
 
+#: /user/198/notifications
+msgid "Save notification settings"
+msgstr "Gem indstillinger"
+
 msgid "Save order"
 msgstr "Gem rækkefølge"
 
@@ -26056,12 +26102,12 @@ msgstr "Søgefelter"
 
 #: /
 msgid "Search for an answer"
-msgstr "Søg efter et svar"
+msgstr "Søg efter indhold"
 
 #: profiles/loopdk/themes/loop/templates/search/angular/search.html; profiles/loopdk/modules/loop_search_node/templates/angular/search.html
 msgctxt "angular"
 msgid "Search for an answer"
-msgstr "Søg efter et svar"
+msgstr "Søg efter indhold"
 
 msgid ""
 "Search for either of the two terms with uppercase <strong>OR</strong>. "
@@ -26315,6 +26361,7 @@ msgstr "Markér alt"
 msgid "Select all children"
 msgstr "Vælg alle underord"
 
+#: ; misc/tableselect.js
 msgid "Select all rows in this table"
 msgstr "Vælg alle rækker i tabellen"
 
@@ -27680,7 +27727,7 @@ msgstr "Sorteringsegenskab"
 #: profiles/loopdk/themes/loop/templates/search/angular/search.html; profiles/loopdk/modules/loop_search_node/templates/angular/search.html
 msgctxt "angular"
 msgid "Sort results"
-msgstr "Sortere resultat"
+msgstr "Sorter søgeresultater"
 
 msgid "Sort within each hierarchy level"
 msgstr "Sortér indenfor hvert niveau af hierarkiet"
@@ -27887,6 +27934,10 @@ msgstr "Sportsliga"
 
 msgid "Sports team"
 msgstr "Sportshold"
+
+#: /batch?id=30&op=do
+msgid "Spørgsmål du følger"
+msgstr "Indlæg du følger"
 
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
@@ -28461,7 +28512,7 @@ msgid "Tagalog"
 msgstr "Tagalog"
 
 msgid "Tags"
-msgstr "Tags"
+msgstr "Nøgleord"
 
 msgid "Tahitian"
 msgstr "Tahitiansk"
@@ -28978,6 +29029,17 @@ msgstr ""
 "Tak for din ansøgning om en konto. Din konto afventer godkendelse af "
 "en administrator.<br />I mellemtiden er din adgangskode og yderligere "
 "instruktioner blevet sendt til din e-mail-adresse."
+
+#: /user/register
+msgid ""
+"Thank you for applying for an account. Your account is currently "
+"pending approval by the site administrator.<br />Once it has been "
+"approved, you will receive an e-mail containing further instructions."
+msgstr ""
+"Tak for din tilmelding til Loop - OS2Kitos vidensdelingsværktøj.  Du "
+"vil modtage en kvittering i din mail. Din tilmelding afventer "
+"godkendelse fra Loops administrator.<br />Når din tilmelding er "
+"blevet godkendt, vil du modtage en mail med yderligere information. "
 
 #: /abuse/report/comment/163
 msgid "Thank you for your report."
@@ -35339,7 +35401,7 @@ msgid "This list shows all fields currently in use for easy reference."
 msgstr "Denne liste viser de felter, som er i brug i øjeblikket."
 
 msgid "This login can be used only once."
-msgstr "Dette logind kan kun bruges én gang."
+msgstr "Dette log-in kan kun bruges én gang."
 
 msgid ""
 "This module requires PHP version @php_required and is incompatible "
@@ -38216,7 +38278,7 @@ msgstr "Bruger med navn %name og adgangskode %pass oprettet"
 
 #: /user/4/edit
 msgid "User edit"
-msgstr "Redigér bruger"
+msgstr "Rediger profil"
 
 msgid "User edit form"
 msgstr "Brugerformular"
@@ -42214,7 +42276,7 @@ msgstr "info"
 
 #: /search/uenigheder
 msgid "instruction"
-msgstr "Vejledning"
+msgstr "Dokument"
 
 msgid "integer"
 msgstr "heltal"
@@ -42308,12 +42370,12 @@ msgstr "længere end"
 #: profiles/loopdk/themes/loop/templates/search/angular/result.html; profiles/loopdk/modules/loop_search_node/templates/angular/result.html
 msgctxt "angular"
 msgid "loop_documents_collection"
-msgstr "Vejledning"
+msgstr "Dokumentsamling"
 
 #: profiles/loopdk/themes/loop/templates/search/angular/result.html; profiles/loopdk/modules/loop_search_node/templates/angular/result.html
 msgctxt "angular"
 msgid "loop_documents_document"
-msgstr "Vejledning"
+msgstr "Dokument"
 
 msgid "mail"
 msgstr "mail"
@@ -42364,7 +42426,7 @@ msgstr "nye svar i valgte periode"
 
 #: /editor/dashboard/user-statistics
 msgid "new questions in the periode"
-msgstr "nye spørgsmål i valgte periode"
+msgstr "Nye indlæg i valgte periode"
 
 msgid "next"
 msgstr "næste"
@@ -42523,7 +42585,7 @@ msgstr "pm"
 #: profiles/loopdk/themes/loop/templates/search/angular/result.html; profiles/loopdk/modules/loop_search_node/templates/angular/result.html
 msgctxt "angular"
 msgid "post"
-msgstr "Spørgsmål"
+msgstr "Indlæg"
 
 #: profiles/loopdk/themes/loop/templates/search/angular/pager.html; profiles/loopdk/modules/loop_search_node/templates/angular/pager.html
 msgctxt "angular"
@@ -42632,6 +42694,11 @@ msgstr "sekunder"
 
 msgid "security"
 msgstr "sikkerhed"
+
+#: profiles/loopdk/modules/loop_search_node/templates/angular/search.html; profiles/loopdk/themes/loop/templates/search/angular/search.html
+msgctxt "angular"
+msgid "selected subjects"
+msgstr "valgt emne"
 
 #: /abuse/report/comment/161
 msgid "send"
