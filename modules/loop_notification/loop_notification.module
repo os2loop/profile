@@ -51,7 +51,7 @@ function loop_notification_user_form($form, &$form_state) {
   $form['loop_notification_notification_interval'] = [
     '#type' => 'radios',
     '#title' => t('Notification interval'),
-    '#default_value' => $record->update_interval ?: 60 * 60 * 24 * 7,
+    '#default_value' => $record->update_interval ?? 60 * 60 * 24,
     '#options' => $updateIntervals,
     '#description' => t('Choose how often you want to receive notifications.'),
     '#access' => TRUE,
