@@ -176,22 +176,21 @@
       font-size: 1em;
       font-weight: bold;
     }
+  }
+}
 
-    .view-id-latest_news {
-      .views-row {
-        display: flex;
-        flex-wrap: wrap;
+.view-id-latest_news {
+  .views-row {
+    display: flex;
+    flex-wrap: wrap;
 
-        > div {
-          flex: 0 1 50%;
+    > div {
+      flex: 0 1 50%;
 
-          &:last-child {
-            text-align: right;
-          }
-        }
+      &:last-child {
+        text-align: right;
       }
     }
-
   }
 }
 

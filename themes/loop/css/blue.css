@@ -1428,12 +1428,12 @@ label {
   font-size: 1em;
   font-weight: bold; }
 
-.layout-frontpage > div .view-id-latest_news .views-row {
+.view-id-latest_news .views-row {
   display: flex;
   flex-wrap: wrap; }
-  .layout-frontpage > div .view-id-latest_news .views-row > div {
+  .view-id-latest_news .views-row > div {
     flex: 0 1 50%; }
-    .layout-frontpage > div .view-id-latest_news .views-row > div:last-child {
+    .view-id-latest_news .views-row > div:last-child {
       text-align: right; }
 
 .layout-dashboard .layout-element-alpha {
