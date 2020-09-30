@@ -27,6 +27,28 @@
 		@include breakpoint(1000px) {
 			flex: 0 1 50%;
 		}
+  }
+
+  // Handle views_tree view formatter.
+  > .view-content > .item-list {
+    li {
+      list-style: none;
+    }
+
+    // Flex top level list items.
+    > ul {
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+
+      & > li {
+        flex: 0 0 100%;
+
+        @include breakpoint(1000px) {
+          flex: 0 1 50%;
+        }
+      }
+    }
 	}
 }
 

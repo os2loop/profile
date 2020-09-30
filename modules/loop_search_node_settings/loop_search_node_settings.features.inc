@@ -142,6 +142,7 @@ function loop_search_node_settings_default_search_api_index() {
         "created" : { "type" : "date" },
         "field_description:value" : { "type" : "text" },
         "field_external_link:url" : { "type" : "uri" },
+        "field_keyword" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_keyword:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_profession:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_subject" : { "type" : "integer", "entity_type" : "taxonomy_term" },
