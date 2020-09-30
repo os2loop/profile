@@ -110,7 +110,8 @@ function loop_notification_block_view($delta = '') {
   switch ($delta) {
     case 'loop_notification_settings_block':
       $block['subject'] = t('Loop notification user settings');
-      $block['content'] = drupal_render(drupal_get_form('loop_notification_user_form'));
+      $form = drupal_get_form('loop_notification_user_form');
+      $block['content'] = drupal_render($form);
       break;
   }
   return $block;
