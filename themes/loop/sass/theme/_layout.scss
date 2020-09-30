@@ -165,6 +165,34 @@
       padding-left: 0;
     }
   }
+
+  > div {
+    // Spacing between blocks.
+    & + div {
+      margin-top: 1.5em;
+    }
+
+    h2 {
+      font-size: 1em;
+      font-weight: bold;
+    }
+
+    .view-id-latest_news {
+      .views-row {
+        display: flex;
+        flex-wrap: wrap;
+
+        > div {
+          flex: 0 1 50%;
+
+          &:last-child {
+            text-align: right;
+          }
+        }
+      }
+    }
+
+  }
 }
 
 
@@ -366,4 +394,3 @@ footer {
     }
   }
 }
-
