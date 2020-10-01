@@ -1430,10 +1430,15 @@ label {
 
 .view-id-latest_news .views-row {
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: nowrap; }
   .view-id-latest_news .views-row > div {
-    flex: 0 1 50%; }
+    white-space: nowrap; }
+    .view-id-latest_news .views-row > div:first-child {
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis; }
     .view-id-latest_news .views-row > div:last-child {
+      flex-grow: 0;
       text-align: right; }
 
 .layout-dashboard .layout-element-alpha {

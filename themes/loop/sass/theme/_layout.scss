@@ -182,12 +182,21 @@
 .view-id-latest_news {
   .views-row {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 
     > div {
-      flex: 0 1 50%;
+      white-space: nowrap;
+
+      &:first-child {
+        flex-grow: 1;
+
+        // Show only one line of text.
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
       &:last-child {
+        flex-grow: 0;
         text-align: right;
       }
     }
