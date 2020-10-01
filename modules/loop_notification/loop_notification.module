@@ -567,7 +567,8 @@ function _loop_notification_handle_nodes($nid, array &$users_to_notify, array &$
       // Default to once pr. day.
       : (variable_get('loop_notification_default_interval') ?: 60 * 60 * 24);
 
-    $last_user_notification = isset($loop_notification_last_user_notifications[$user->uid]) ? $loop_notification_last_user_notifications[$user->uid] : 0;
+    // Make sure that a new user don't get notification from before the user was created.
+    $last_user_notification = $loop_notification_last_user_notifications[$user->uid] ?? $user->created;
     if ($timestamp > $last_user_notification + $user_notification_interval) {
       $users_to_notify[$user->uid][$node->nid] = $node->nid;
     }
