@@ -7,4 +7,4 @@
  * @ingroup views_templates
  */
 ?>
-<?php include drupal_get_path('module', 'views').'/theme/views-view-unformatted.tpl.php'; ?>
+<?php include drupal_get_path('module', 'views') . '/theme/views-view-unformatted.tpl.php'; ?>
