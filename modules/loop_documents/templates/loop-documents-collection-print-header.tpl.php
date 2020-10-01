@@ -1,4 +1,4 @@
-<?php
+<?php // @codingStandardsIgnoreFile
 
 /**
  * @file
@@ -38,7 +38,8 @@
   <body>
     <?php
     $metadata_values = array_map(function ($field_name) use ($collection) {
-      $field = \field_view_field $collection;
+      $field = field_view_field('node', $collection, $field_name, ['label' => 'hidden']);
+
       return render($field);
     }, [
       'owner' => 'field_loop_documents_owner',
