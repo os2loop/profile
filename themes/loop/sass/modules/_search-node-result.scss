@@ -26,6 +26,11 @@
     margin-bottom: 1em;
     line-height: 1em;
 
+    // Show only one line of text.
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
     &:hover {
       color: $green;
     }

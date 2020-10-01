@@ -3826,7 +3826,10 @@ label.search-filters--label {
   font-size: 18px;
   text-decoration: none;
   margin-bottom: 1em;
-  line-height: 1em; }
+  line-height: 1em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
   .search-node-result--link:hover {
     color: #ab419b; }
 
