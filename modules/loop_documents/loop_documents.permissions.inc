@@ -42,6 +42,7 @@ function loop_documents_secure_permissions($role) {
   $permissions = [
     'authenticated user' => [
       'entity print access bundle loop_documents_collection',
+      'entity print access bundle loop_documents_document',
       'view files',
     ],
     'document author' => [
