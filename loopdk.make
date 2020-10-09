@@ -268,6 +268,7 @@ projects[transliteration][version] = "3.2"
 
 projects[user_import][subdir] = "contrib"
 projects[user_import][version] = "3.x-dev"
+projects[user_import][patch][] = "https://raw.githubusercontent.com/os2loop/profile/release/patches/user_import-_user_import_publication_email.patch"
 
 projects[uuid][subdir] = "contrib"
 projects[uuid][version] = "1.3"

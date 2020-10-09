@@ -1,0 +1,13 @@
+diff --git a/supported/user_import.inc b/supported/user_import.inc
+index 863ce4a..b580b37 100644
+--- a/supported/user_import.inc
++++ b/supported/user_import.inc
+@@ -76,8 +76,6 @@ function _user_import_send_email($account, $password, $profile, $subject, $body,
+     'user'         => $account,
+   );
+ 
+-  _user_import_publication_email($params, $account, $subscribed, $format);
+-
+   $language = user_preferred_language($account);
+ 
+   // Whether or not to automatically send the mail when drupal_mail() is
