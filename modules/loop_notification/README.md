@@ -22,3 +22,8 @@ must install the `htmlmail` module and then go to
 
 See [https://www.drupal.org/node/1200142](https://www.drupal.org/node/1200142)
 for details.
+
+To improve the chances of your mail being received, you can provide a plain text
+version of mails in addition to the HTML version: Go to
+`/admin/config/system/htmlmail` and check “Provide simple plain/text alternative
+of the HTML mail.”
