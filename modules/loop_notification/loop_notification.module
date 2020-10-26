@@ -205,12 +205,26 @@ function loop_notification_loop_notification_message_recipient_alter(
   &$users,
   $node
 ) {
-  // Fetch users who flagged the node.
   $query = db_select('flagging', 'f')
     ->fields('f', ['uid']);
   $query->innerJoin('flag', 'l', 'f.fid = l.fid', []);
-  $query->condition('f.entity_id', $node->nid, '=');
-  $query->condition('f.entity_type', 'node', '=');
+
+  $db_or = db_or();
+
+  // Users who flagged the node.
+  $db_and = db_and();
+  $db_and->condition('f.entity_id', $node->nid, '=');
+  $db_and->condition('f.entity_type', 'node', '=');
+  $db_or->condition($db_and);
+
+  // Users who flagged the node's subject.
+  $subject_term_id = $node->field_subject[LANGUAGE_NONE][0]['tid'];
+  $db_and = db_and();
+  $db_and->condition('f.entity_id', $subject_term_id, '=');
+  $db_and->condition('f.entity_type', 'taxonomy_term', '=');
+  $db_or->condition($db_and);
+
+  $query->condition($db_or);
 
   $result = $query->execute()->fetchCol();
   $users = array_merge($result, $users);
