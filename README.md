@@ -173,6 +173,11 @@ search”.
 * The [user_import](https://www.drupal.org/project/user_import) module can be
   installed and used for importing users from CSV files.
 
+  If you're using the [smtp](https://www.drupal.org/project/smtp) module to send
+  mails and you use the `user_import` module to import and notify users of new
+  account, you should go to `/admin/config/system/mailsystem` and select
+  `LoopNotificationHtmlMail` under `User Import module class`.
+
 ## Adding taxonomies
 
 After installing the Loop profile you should create some taxomony terms in the
