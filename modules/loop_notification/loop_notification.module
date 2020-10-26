@@ -231,42 +231,6 @@ function loop_notification_loop_notification_message_recipient_alter(
 }
 
 /**
- * Implements hook_node_insert().
- *
- * Invoke rules components when creating a new node.
- */
-function loop_notification_node_insert($node) {
-  _loop_notification_notify_users($node, 'insert');
-}
-
-/**
- * Implements hook_node_update().
- *
- * Invoke rules components when updating a node.
- */
-function loop_notification_node_update($node) {
-  _loop_notification_notify_users($node, 'update');
-}
-
-/**
- * Implements hook_comment_insert().
- *
- * Invoke rules components when creating a new comment.
- */
-function loop_notification_comment_insert($comment) {
-  _loop_notification_notify_users(node_load($comment->nid), 'insert', $comment);
-}
-
-/**
- * Implements hook_comment_update().
- *
- * Invoke rules components when updating a comment.
- */
-function loop_notification_comment_update($comment) {
-  _loop_notification_notify_users(node_load($comment->nid), 'update', $comment);
-}
-
-/**
  * Implements hook_cron().
  */
 function loop_notification_cron() {
@@ -322,31 +286,6 @@ function _loop_notification_get_email_tokens() {
   ]);
 
   return $render;
-}
-
-/**
- * Loop through recipients to send notification.
- *
- * @param object $node
- *   The node related to the message about to be created.
- * @param string $action
- *   The action that triggered the notification, insert or update.
- * @param object|null $comment
- *   A comment if the action was triggered by a new or updated comment.
- */
-function _loop_notification_notify_users($node, $action, $comment = NULL) {
-  if (_loop_notification_check_content_type($node)) {
-    // Fetch all recipients.
-    $users = _loop_notification_find_users($node);
-
-    // Only load the entity_author once.
-    $author = $comment ? user_load($comment->uid) : user_load($node->uid);
-
-    // Notify all subscribed users.
-    foreach ($users as $user) {
-      _loop_notification_notify_user($user, $node, $action, $author, $comment);
-    }
-  }
 }
 
 /**
