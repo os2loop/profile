@@ -205,51 +205,29 @@ function loop_notification_loop_notification_message_recipient_alter(
   &$users,
   $node
 ) {
-  // Fetch users who flagged the node.
   $query = db_select('flagging', 'f')
     ->fields('f', ['uid']);
   $query->innerJoin('flag', 'l', 'f.fid = l.fid', []);
-  $query->condition('f.entity_id', $node->nid, '=');
-  $query->condition('f.entity_type', 'node', '=');
+
+  $db_or = db_or();
+
+  // Users who flagged the node.
+  $db_and = db_and();
+  $db_and->condition('f.entity_id', $node->nid, '=');
+  $db_and->condition('f.entity_type', 'node', '=');
+  $db_or->condition($db_and);
+
+  // Users who flagged the node's subject.
+  $subject_term_id = $node->field_subject[LANGUAGE_NONE][0]['tid'];
+  $db_and = db_and();
+  $db_and->condition('f.entity_id', $subject_term_id, '=');
+  $db_and->condition('f.entity_type', 'taxonomy_term', '=');
+  $db_or->condition($db_and);
+
+  $query->condition($db_or);
 
   $result = $query->execute()->fetchCol();
   $users = array_merge($result, $users);
-}
-
-/**
- * Implements hook_node_insert().
- *
- * Invoke rules components when creating a new node.
- */
-function loop_notification_node_insert($node) {
-  _loop_notification_notify_users($node, 'insert');
-}
-
-/**
- * Implements hook_node_update().
- *
- * Invoke rules components when updating a node.
- */
-function loop_notification_node_update($node) {
-  _loop_notification_notify_users($node, 'update');
-}
-
-/**
- * Implements hook_comment_insert().
- *
- * Invoke rules components when creating a new comment.
- */
-function loop_notification_comment_insert($comment) {
-  _loop_notification_notify_users(node_load($comment->nid), 'insert', $comment);
-}
-
-/**
- * Implements hook_comment_update().
- *
- * Invoke rules components when updating a comment.
- */
-function loop_notification_comment_update($comment) {
-  _loop_notification_notify_users(node_load($comment->nid), 'update', $comment);
 }
 
 /**
@@ -308,31 +286,6 @@ function _loop_notification_get_email_tokens() {
   ]);
 
   return $render;
-}
-
-/**
- * Loop through recipients to send notification.
- *
- * @param object $node
- *   The node related to the message about to be created.
- * @param string $action
- *   The action that triggered the notification, insert or update.
- * @param object|null $comment
- *   A comment if the action was triggered by a new or updated comment.
- */
-function _loop_notification_notify_users($node, $action, $comment = NULL) {
-  if (_loop_notification_check_content_type($node)) {
-    // Fetch all recipients.
-    $users = _loop_notification_find_users($node);
-
-    // Only load the entity_author once.
-    $author = $comment ? user_load($comment->uid) : user_load($node->uid);
-
-    // Notify all subscribed users.
-    foreach ($users as $user) {
-      _loop_notification_notify_user($user, $node, $action, $author, $comment);
-    }
-  }
 }
 
 /**
