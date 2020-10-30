@@ -34,6 +34,7 @@
 }
 
 a.question--term.taxonomy-keyword {
+  color: $keyword-color;
   background-color: $keyword-background-color;/*! setting:keyword_background_color */
 
   &:hover {

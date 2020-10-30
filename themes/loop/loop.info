@@ -7,6 +7,7 @@ regions[header] = Header
 regions[navigation] = Navigation
 regions[pagetop] = Page Top
 regions[content] = Content
+regions[login] = Login
 regions[footer] = Footer
 
 ; Scripts
@@ -37,13 +38,8 @@ settings[show_login_for_regular_users] = true
 settings[show_logout_for_regular_users] = true
 settings[show_logout_for_saml_users] = true
 settings[show_breadcrumbs] = false
-settings[header_color] = #41ab51
-settings[header_logo_height] = 3em
-settings[term_background_color] = #ff6138
-settings[term_hover_background_color] = #eb3000
-settings[keyword_background_color] = #007700
-settings[keyword_hover_background_color] = #006600
-settings[content_type_label_color_default] = #41658A
-settings[content_type_label_color_post] = #B05B63
-settings[content_type_label_text_color_default] = #ffffff
-settings[content_type_label_text_color_post] = #ffffff
+settings[loop_skin] = ''
+settings[default_login_service_name] = ''
+settings[default_login_service_path] = user/login
+settings[content_search_visibility] = exclude
+settings[content_search_pages] = contacts

@@ -19,7 +19,7 @@
  *   The node that triggered the notification to be send.
  */
 function hook_loop_notification_message_recipient_alter(array &$users, $node) {
-  $user_ids = array();
+  $user_ids = [];
   $user_ids[] = '1';
   $users += $user_ids;
 }

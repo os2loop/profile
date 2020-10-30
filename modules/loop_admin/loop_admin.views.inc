@@ -12,14 +12,14 @@
  */
 function loop_admin_views_query_alter(&$view, &$query) {
   if ($view->name == "admin_views_node") {
-    $query->where[1]['conditions'][] = array(
+    $query->where[1]['conditions'][] = [
       'field' => "node.type",
-      'value' => array(
+      'value' => [
         'leaf',
         'tree',
-      ),
+      ],
       'operator' => 'not in',
-    );
+    ];
   }
 }
 

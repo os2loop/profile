@@ -45,68 +45,68 @@
       <div class="dashboard--comment-filters">
         <label class="dashboard--filter-label"><?php print t('Show only');?></label>
         <div class="dashboard--filter-links">
-          <?php print l(t('Unanswered questions'), '#', array(
+          <?php print l(t('Unanswered questions'), '#', [
             'external' => TRUE,
-            'attributes' => array(
-              'class' => array(
+            'attributes' => [
+              'class' => [
                 'dashboard--filter-link',
                 'js-dashboard-answers-hide',
                 'is-active',
-              ),
-            ),
-          ));?>
-          <?php print l(t('Answered questions'), '#', array(
+              ],
+            ],
+          ]);?>
+          <?php print l(t('Answered questions'), '#', [
             'external' => TRUE,
-            'attributes' => array(
-              'class' => array(
+            'attributes' => [
+              'class' => [
                 'dashboard--filter-link',
                 'js-dashboard-answers-show',
-              ),
-            ),
-          ));?>
+              ],
+            ],
+          ]);?>
         </div>
       </div>
       <div class="dashboard--sorting">
         <label class="dashboard--filter-label"><?php print t('Sort by');?></label>
         <div class="dashboard--sort-links">
-          <?php print l(t('Newest'), '#', array(
+          <?php print l(t('Newest'), '#', [
             'external' => TRUE,
-            'attributes' => array(
-              'class' => array(
+            'attributes' => [
+              'class' => [
                 'dashboard--sort-link',
                 'is-active',
                 'js-sort-link',
-              ),
-            ),
-          ));?>
-          <?php print l(t('Oldest'), '#', array(
+              ],
+            ],
+          ]);?>
+          <?php print l(t('Oldest'), '#', [
             'external' => TRUE,
-            'attributes' => array(
-              'class' => array(
+            'attributes' => [
+              'class' => [
                 'dashboard--sort-link',
                 'js-sort-link',
-              ),
-            ),
-          ));?>
-          <?php print l(t('Alphabetical'), '#', array(
+              ],
+            ],
+          ]);?>
+          <?php print l(t('Alphabetical'), '#', [
             'external' => TRUE,
-            'attributes' => array(
-              'class' => array(
+            'attributes' => [
+              'class' => [
                 'dashboard--sort-link',
                 'js-sort-link',
                 'js-dashboard-alphabetical',
-              ),
-            ),
-          ));?>
-          <?php print l(t('Number of answers'), '#', array(
+              ],
+            ],
+          ]);?>
+          <?php print l(t('Number of answers'), '#', [
             'external' => TRUE,
-            'attributes' => array(
-              'class' => array(
+            'attributes' => [
+              'class' => [
                 'dashboard--sort-link',
                 'js-dashboard-answers',
-              ),
-            ),
-          ));?>
+              ],
+            ],
+          ]);?>
         </div>
       </div>
     </div>

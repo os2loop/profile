@@ -1,0 +1,399 @@
+<?php
+
+/**
+ * @file
+ * Loop search db.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function loop_search_db_menu() {
+  $items['loop_search_db_nodes'] = [
+    'title' => 'List nodes in JSON format',
+    'page callback' => 'loop_search_db_nodes',
+    'type' => MENU_CALLBACK,
+    'access arguments' => ['access content'],
+  ];
+
+  $items['loop_search_db/%/%'] = [
+    'title' => 'Search nodes in JSON format',
+    'page callback' => 'loop_search_db_callback',
+    'page arguments' => [1, 2],
+    'type' => MENU_CALLBACK,
+    'access arguments' => ['access content'],
+  ];
+
+  return $items;
+}
+
+/**
+ * Perform a search using search API.
+ *
+ * Output results in JSON format.
+ *
+ * @param string $content_type
+ *   The content type to search on.
+ * @param string $terms
+ *   The search terms to use for the query.
+ *
+ * @throws \SearchApiException
+ */
+function loop_search_db_callback($content_type, $terms) {
+  // Create a query against the default Loop search index.
+  $query = search_api_query('db_post');
+
+  // Filter by content type.
+  $query_filter = $query->createFilter();
+  $query_filter->condition('type', $content_type);
+  $query->filter($query_filter);
+
+  // Add the search terms to the query.
+  $query->keys($terms);
+
+  // Execute the query.
+  $query_result = $query->execute();
+
+  $data = [];
+
+  // Build an array of results from the query results.
+  foreach ($query_result['results'] as $result) {
+    $node = $result['entity'];
+    $data[] = [
+      // For better search, use strtolower.
+      'value' => strtolower(trim(trim($node->title), '"')),
+      // Fine human output.
+      'title' => trim($node->title),
+      // Use internal path.
+      'link' => '/' . drupal_get_path_alias('node/' . $node->nid),
+      // For dupDetector.
+      'id' => $node->nid,
+    ];
+  }
+
+  // Return as JSON.
+  drupal_json_output($data);
+}
+
+/**
+ * Return every node of type post in JSON format.
+ *
+ * Outputs JSON object.
+ */
+function loop_search_db_nodes() {
+  // Select nodes.
+  $nodes = db_select('node', 'n')
+    ->fields('n', ['nid', 'title'])
+    ->condition('status', 1)
+    ->condition('type', 'post')
+    ->execute();
+
+  // Build nodes.
+  $data = [];
+  foreach ($nodes as $node) {
+    $data[] = [
+      // For better search, use strtolower.
+      'value' => strtolower(trim(trim($node->title), '"')),
+      // Fine human output.
+      'title' => trim($node->title),
+      // Use internal path.
+      'link' => '/' . drupal_get_path_alias('node/' . $node->nid),
+      // For dupDetector.
+      'id' => $node->nid,
+    ];
+  }
+
+  // Return as JSON.
+  drupal_json_output($data);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function loop_search_db_theme() {
+  return [
+    'loop_search_db_form' => [
+      'render element' => 'form',
+      'template' => 'loop-search-db--form',
+    ],
+    'loop_search_db_facet' => [
+      'template' => 'loop-search-db--facet',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Alter search form for Twitter Typeahead.
+ */
+function loop_search_db_form_search_api_page_search_form_alter(array &$form, array &$form_state) {
+  // Fetch search page id.
+  $default_page_id = db_query("SELECT id FROM {search_api_page} WHERE index_id = 'loop_search_db_index'")->fetchField();
+
+  $form['#attributes']['class'] = 'js--search';
+
+  // Add class to submit.
+  $form['submit_' . $default_page_id]['#attributes']['class'][] = 'typeahead-block--button';
+
+  // Inline styling needed for Twitter Typeahead.
+  $form['keys_' . $default_page_id]['#attributes']['style'] = "position: relative; vertical-align: top; background-color: transparent;";
+
+  // Default placeholder.
+  $form['keys_' . $default_page_id]['#attributes']['placeholder'] = t('E.g. "How do you document a subject"');
+
+  // Yet again, some id and classes for Twitter Typehead.
+  $form['keys_' . $default_page_id]['#attributes']['id'][] = 'typeahead';
+  $form['keys_' . $default_page_id]['#attributes']['class'][] = 'typeahead';
+  $form['keys_' . $default_page_id]['#attributes']['class'][] = 'tt-query';
+
+  // Figure out if we need a default value.
+  $arg = arg();
+  if ($arg[0] == "node" && is_numeric($arg[1])) {
+    // Load correct node.
+    $node = node_load($arg[1]);
+    if ($node->type == 'post') {
+      // Load entity wrapper.
+      $wrapper = entity_metadata_wrapper('node', $node);
+
+      // Get description field.
+      $description = $wrapper->field_description->value();
+
+      // Verify its a string.
+      if (is_string($description)) {
+        // Change default value.
+        $form['keys_' . $default_page_id]['#default_value'] = $description;
+      }
+    }
+  }
+
+  $page = search_api_page_load($default_page_id);
+  // Get search term from query.
+  if (arg(0) === $page->path) {
+    $form['keys_' . $default_page_id]['#default_value'] = arg(1);
+  }
+
+  // Add a submit function to handle facet filters in query string.
+  $form['#submit'][] = 'loop_search_db_search_form_submit';
+
+  // Load facets and values.
+  $index = search_api_index_load('loop_search_db_index');
+  $server = $index->server();
+  $facets = $server->options['indexes'][$index->machine_name];
+
+  // @TODO There must be a better way to pass this to the form template
+  // (i.e. without using the '#facets' hack).
+  $form['#facets']['type'] = [
+    [
+      'filter' => NULL,
+      'text' => t('All'),
+      'active' => FALSE,
+    ],
+    [
+      'filter' => 'loop_documents_document',
+      'text' => t('Documents'),
+      'active' => in_array('loop_documents_document', loop_search_db_get_active_filters('type'), TRUE),
+    ],
+    [
+      'filter' => 'post',
+      'text' => t('Posts'),
+      'active' => in_array('post', loop_search_db_get_active_filters('type'), TRUE),
+    ],
+  ];
+  // The first type facet is active if no other facets are active.
+  $form['#facets']['type'][0]['active'] = empty(array_filter($form['#facets']['type'], function ($facet) {
+    return $facet['active'];
+  }));
+
+  $tree = _loop_search_get_taxonomy_tree('subject');
+  $facet_name = 'field_subject:name';
+  $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
+
+  $tree = _loop_search_get_taxonomy_tree('keyword');
+  $facet_name = 'field_keyword:name';
+  $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
+
+  $form['#sorts'] = [
+    [
+      'text' => t('Best match'),
+      'field' => 'search_api_relevance',
+      'direction' => 'desc',
+    ],
+    [
+      'text' => t('Newest'),
+      'field' => 'created',
+      'direction' => 'desc',
+    ],
+    [
+      'text' => t('Oldest'),
+      'field' => 'created',
+      'direction' => 'asc',
+    ],
+  ];
+  // Add urls and active to sorts.
+  foreach ($form['#sorts'] as &$sort) {
+    $field = $sort['field'];
+    $direction = $sort['direction'];
+    $sort['active'] = _loop_search_is_sort_active($field, $direction);
+    $sort['url'] = _loop_search_get_sort_url($field, $direction);
+  }
+  // The first sort is active if no other sort is active.
+  $form['#sorts'][0]['active'] = empty(array_filter($form['#sorts'], function ($sort) {
+    return $sort['active'];
+  }));
+
+  $form['#theme'] = ['loop_search_db_form'];
+
+  // Load our custom js to enable autocomplete.
+  if (function_exists('loopdk_load_handlebars')) {
+    loopdk_load_handlebars();
+  }
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/typeahead.bundle.js');
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/loop_search_db.js', [
+    'scoop' => 'header',
+    'weight' => 1000,
+  ]);
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/search.js');
+  drupal_add_js(drupal_get_path('module', 'loop_search_db') . '/js/placeholders.js');
+}
+
+/**
+ * Get filters that are currently active for a given facet.
+ *
+ * @param string $facet
+ *   The facet name.
+ *
+ * @return array
+ *   The currently active filters.
+ */
+function loop_search_db_get_active_filters($facet) {
+  $query = drupal_get_query_parameters();
+  $filters = isset($query['f']) && is_array($query['f']) ? $query['f'] : [];
+  return array_map(function ($filter) use ($facet) {
+    return substr(urldecode($filter), strlen($facet) + 1);
+  }, array_filter($filters, function ($filter) use ($facet) {
+    return 0 === strpos(urldecode($filter), $facet . ':');
+  }));
+}
+
+/**
+ * Search page submit handler.
+ */
+function loop_search_db_search_form_submit(array $form, array &$form_state) {
+  if (isset($form_state['redirect'])) {
+    // Add any facet filters to the url query string.
+    $facet_filter = array_filter(drupal_get_query_parameters($_POST)['f'] ?? []);
+    if (!empty($facet_filter)) {
+      $form_state['redirect'] = [
+        $form_state['redirect'],
+        ['query' => ['f' => $facet_filter]],
+      ];
+    }
+  }
+}
+
+/**
+ * Get url for sorting search results.
+ *
+ * @param string $field
+ *   The field to sort by.
+ * @param string $direction
+ *   The direction to sort in.
+ *
+ * @return string
+ *   The sort url.
+ */
+function _loop_search_get_sort_url($field, $direction) {
+  $query = drupal_get_query_parameters();
+  $query['sort'] = $field;
+  $query['order'] = $direction;
+
+  return url(current_path(), ['query' => $query]);
+}
+
+/**
+ * Decide if a given sorting is currently active.
+ *
+ * @param string $field
+ *   The field to sort by.
+ * @param string $direction
+ *   The direction to sort in.
+ *
+ * @return bool
+ *   Whether or not the given sorting is currently active.
+ */
+function _loop_search_is_sort_active($field, $direction) {
+  $query = drupal_get_query_parameters();
+
+  return ($query['sort'] ?? NULL) === $field && ($query['order'] ?? NULL) === $direction;
+}
+
+/**
+ * Get taxonomy terms tree.
+ *
+ * @param string $name
+ *   The taxonomy name.
+ *
+ * @return array|null
+ *   The tree if any.
+ */
+function _loop_search_get_taxonomy_tree($name) {
+  $vocabulary = taxonomy_vocabulary_machine_name_load($name);
+  if (!$vocabulary) {
+    return NULL;
+  }
+  $tree = taxonomy_get_tree($vocabulary->vid);
+
+  return taxonomy_get_nested_tree($tree);
+}
+
+/**
+ * Get taxonomy tree.
+ *
+ * @see https://www.drupal.org/forum/support/post-installation/2010-06-18/solved-how-to-show-all-taxonomy-terms-in-a-hierarchical#comment-3839146
+ */
+function taxonomy_get_nested_tree($terms = [], $max_depth = NULL, $parent = 0, $parents_index = [], $depth = 0) {
+  $tree = [];
+
+  foreach ($terms as $term) {
+    foreach ($term->parents as $term_parent) {
+      if ($term_parent == $parent) {
+        $tree[$term->tid] = $term;
+      }
+      else {
+        $parents_index[$term_parent][$term->tid] = $term;
+      }
+    }
+  }
+
+  foreach ($tree as &$term) {
+    if (isset($parents_index[$term->tid]) && (is_null($max_depth) || $depth < $max_depth)) {
+      $term->children = taxonomy_get_nested_tree($parents_index[$term->tid], $max_depth, $term->tid, $parents_index, $depth + 1);
+    }
+  }
+
+  return $tree;
+}
+
+/**
+ * Build facets form taxonomy terms tree.
+ *
+ * @param string $facet_name
+ *   The facet name.
+ * @param array $tree
+ *   The taxonomy terms tree.
+ *
+ * @return array
+ *   The facets.
+ */
+function _loop_search_build_facets($facet_name, array $tree) {
+  $term_to_facet = static function ($term) use ($facet_name, &$term_to_facet) {
+    return [
+      'filter' => $term->name,
+      'active' => in_array($term->name, loop_search_db_get_active_filters($facet_name), TRUE),
+      'children' => isset($term->children) ? array_map($term_to_facet, $term->children) : NULL,
+    ];
+  };
+
+  return array_map($term_to_facet, $tree);
+}

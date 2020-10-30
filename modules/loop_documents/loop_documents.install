@@ -16,38 +16,40 @@ function loop_documents_install() {
   $name = 'menu-document-author-management';
 
   // Create parent menu item.
-  $parent_item = array(
+  $parent_item = [
     'menu_name' => $name,
     'link_title' => 'Administration',
     'link_path' => 'admin/content',
     'mlid' => 0,
     'expanded' => TRUE,
-  );
+  ];
 
   $parent_item_id = menu_link_save($parent_item);
 
-  $menu_items = array(
-    'node_add' => array(
+  $menu_items = [
+    'node_add' => [
       'menu_name' => $name,
       'link_title' => 'Add content',
       'link_path' => 'node/add',
       'mlid' => 0,
       'plid' => $parent_item_id,
       'weight' => 1,
-    ),
-    'node_list' => array(
+    ],
+    'node_list' => [
       'menu_name' => $name,
       'link_title' => 'Content list',
       'link_path' => 'admin/content',
       'mlid' => 0,
       'plid' => $parent_item_id,
       'weight' => 2,
-    ),
-  );
+    ],
+  ];
 
   foreach ($menu_items as $item) {
     menu_link_save($item);
   }
+
+  loop_documents_reset_editor_configuration();
 }
 
 /**
@@ -74,7 +76,7 @@ function loop_documents_update_7100() {
   drupal_flush_all_caches();
 
   $query = db_select('field_data_field_loop_documents_review_date', 'f')
-    ->fields('f', array('entity_id'))
+    ->fields('f', ['entity_id'])
     ->condition('f.bundle', 'loop_documents_collection');
   $result = $query->execute();
   foreach ($result as $record) {
@@ -96,34 +98,34 @@ function loop_documents_update_7101() {
   $name = 'menu-document-author-management';
 
   // Create parent menu item.
-  $parent_item = array(
+  $parent_item = [
     'menu_name' => $name,
     'link_title' => 'Administration',
     'link_path' => 'admin/content',
     'mlid' => 0,
     'expanded' => TRUE,
-  );
+  ];
 
   $parent_item_id = menu_link_save($parent_item);
 
-  $menu_items = array(
-    'node_add' => array(
+  $menu_items = [
+    'node_add' => [
       'menu_name' => $name,
       'link_title' => 'Add content',
       'link_path' => 'node/add',
       'mlid' => 0,
       'plid' => $parent_item_id,
       'weight' => 1,
-    ),
-    'node_list' => array(
+    ],
+    'node_list' => [
       'menu_name' => $name,
       'link_title' => 'Content list',
       'link_path' => 'admin/content',
       'mlid' => 0,
       'plid' => $parent_item_id,
       'weight' => 2,
-    ),
-  );
+    ],
+  ];
 
   foreach ($menu_items as $item) {
     menu_link_save($item);

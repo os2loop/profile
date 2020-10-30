@@ -35,8 +35,27 @@ function loop_post_wysiwyg_form_comment_form_alter(&$form) {
  * can use the WYSIWYG editor.
  */
 function loop_post_wysiwyg_secure_permissions($role) {
-  $permissions = array('authenticated user' => 'use text format editor');
-  if (isset($permissions[$role])) {
-    return $permissions[$role];
+  $permissions = [
+    'authenticated user' => [
+      'use text format editor',
+      'access media browser',
+      'add media from remote sources',
+    ],
+  ];
+
+  return isset($permissions[$role]) ? $permissions[$role] : NULL;
+}
+
+/**
+ * Implements hook_media_browser_plugins_alter().
+ */
+function loop_post_wysiwyg_media_browser_plugins_alter(&$plugins) {
+  global $user;
+
+  $library_plugin_id = 'media_default--media_browser_1';
+
+  // Only administrators should be allowed to use the media library.
+  if (!(user_access('administrator') || in_array('administrator', $user->roles, TRUE))) {
+    unset($plugins[$library_plugin_id]);
   }
 }

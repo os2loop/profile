@@ -1,0 +1,38 @@
+/**
+ * Contact list module
+ */
+.view-loop-user-contact-list {
+  #edit-search-wrapper {
+    position: relative;
+
+    [type="submit"] {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  th {
+    a {
+      color: inherit;
+    }
+
+    // Sort direction icon
+    img {
+      vertical-align: baseline;
+    }
+  }
+
+  td {
+    vertical-align: top;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}

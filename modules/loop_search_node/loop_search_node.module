@@ -9,15 +9,15 @@
  * Implements hook_menu().
  */
 function loop_search_node_menu() {
-  $items = array();
+  $items = [];
 
-  $items['loop_search_node/not_found'] = array(
+  $items['loop_search_node/not_found'] = [
     'title' => 'No search results',
     'type' => MENU_CALLBACK,
     'page callback' => 'loop_search_node_no_results',
     'access callback' => 'node_access',
-    'access arguments' => array('create', 'post'),
-  );
+    'access arguments' => ['create', 'post'],
+  ];
 
   return $items;
 }
@@ -29,7 +29,7 @@ function loop_search_node_menu() {
  */
 function loop_search_node_comment_insert($comment) {
   if ($comment->nid) {
-    search_api_track_item_change('node', array($comment->nid));
+    search_api_track_item_change('node', [$comment->nid]);
   }
 }
 
@@ -40,7 +40,7 @@ function loop_search_node_comment_insert($comment) {
  */
 function loop_search_node_comment_update($comment) {
   if ($comment->nid) {
-    search_api_track_item_change('node', array($comment->nid));
+    search_api_track_item_change('node', [$comment->nid]);
   }
 }
 
@@ -51,7 +51,7 @@ function loop_search_node_comment_update($comment) {
  */
 function loop_search_node_comment_delete($comment) {
   if ($comment->nid) {
-    search_api_track_item_change('node', array($comment->nid));
+    search_api_track_item_change('node', [$comment->nid]);
   }
 }
 
@@ -71,10 +71,10 @@ function loop_search_node_no_results() {
   // Get "post" node create form.
   $form = drupal_get_form('node_form', $node);
 
-  drupal_json_output(array(
+  drupal_json_output([
     'settings' => $form['field_keyword']['und']['#attached']['js'],
     'form' => drupal_render($form),
-  ));
+  ]);
 }
 
 /**
@@ -97,26 +97,26 @@ function loop_search_node_preprocess_search_node_page_search_box(&$variables) {
   $path = drupal_get_path('module', 'loop_search_node');
 
   // Add the search controller.
-  drupal_add_js($path . '/js/loopSearchBoxController.js', array(
+  drupal_add_js($path . '/js/loopSearchBoxController.js', [
     'type' => 'file',
     'scope' => 'footer',
     'weight' => 7,
     'group' => JS_THEME,
-  ));
+  ]);
 
-  drupal_add_js($path . '/js/loopResultController.js', array(
+  drupal_add_js($path . '/js/loopResultController.js', [
     'type' => 'file',
     'scope' => 'footer',
     'weight' => 7,
     'group' => JS_THEME,
-  ));
+  ]);
 
-  drupal_add_js($path . '/js/angular-locale_da-dk.js', array(
+  drupal_add_js($path . '/js/angular-locale_da-dk.js', [
     'type' => 'file',
     'scope' => 'footer',
     'weight' => 30,
     'group' => JS_THEME,
-  ));
+  ]);
 }
 
 /**
@@ -159,7 +159,7 @@ function loop_search_node_js_alter(&$javascript) {
 function _loop_search_node_scan_templates($path) {
   $dir = DRUPAL_ROOT . '/' . $path;
   $new_files = FALSE;
-  $parsed = variable_get('loop_search_node_templates_parsed', array());
+  $parsed = variable_get('loop_search_node_templates_parsed', []);
 
   $it = new RecursiveDirectoryIterator($dir);
   foreach (new RecursiveIteratorIterator($it) as $file) {
@@ -190,9 +190,12 @@ function loop_search_node_local_rebuild_js_alter(&$translations, $language) {
     INNER JOIN {locales_target} t
       ON s.lid = t.lid
       AND t.language = :language WHERE (s.context = 'angular')
-      AND s.textgroup = :textgroup", array(':language' => $language, ':textgroup' => 'default'));
+      AND s.textgroup = :textgroup", [
+        ':language' => $language,
+        ':textgroup' => 'default',
+      ]);
 
-  $translations = array();
+  $translations = [];
   foreach ($result as $data) {
     $translations[$data->context][$data->source] = $data->translation;
   }
@@ -208,18 +211,18 @@ function loop_search_node_local_rebuild_js_alter(&$translations, $language) {
  *   The settings array for the block.
  */
 function _loop_search_node_box_settings() {
-  return array(
+  return [
     'id' => 1460537555,
     'server' => 'loop_search_node',
     'index' => 'posts',
-    'options' => array(
+    'options' => [
       'match_type' => 'best_fields',
       'match_operator' => 'and',
       'cache_expire' => 0,
       'size' => 8,
       'initial_query_enable' => 0,
       'initial_query_text' => '',
-      'fields' => array(
+      'fields' => [
         'body:summary' => 'body:summary',
         'body:value' => 'body:value',
         'title' => 'title',
@@ -239,28 +242,28 @@ function _loop_search_node_box_settings() {
         'status' => 0,
         'type' => 0,
         'url' => 0,
-      ),
-      'filters' => array(
-        'taxonomy' => array(
+      ],
+      'filters' => [
+        'taxonomy' => [
           'field_subject' => 'field_subject',
-        ),
-        'boolean' => array(),
-      ),
-    ),
-    'filters' => array(
-      'type' => array(
+        ],
+        'boolean' => [],
+      ],
+    ],
+    'filters' => [
+      'type' => [
         'field_subject' => 'or',
-      ),
-    ),
-    'sorting' => array(
-      'field' => array(),
-      'order' => array(),
-    ),
-    'dates' => array(
-      'fields' => array(),
-    ),
-    'intervals' => array(
-      'fields' => array(
+      ],
+    ],
+    'sorting' => [
+      'field' => [],
+      'order' => [],
+    ],
+    'dates' => [
+      'fields' => [],
+    ],
+    'intervals' => [
+      'fields' => [
         'body:summary' => 0,
         'body:value' => 0,
         'title' => 0,
@@ -280,14 +283,14 @@ function _loop_search_node_box_settings() {
         'status' => 0,
         'type' => 0,
         'url' => 0,
-      ),
-    ),
-    'forces' => array(
+      ],
+    ],
+    'forces' => [
       'field' => '_none_',
-      'selected' => array(),
-    ),
-    'highlight' => array(
-      'fields' => array(
+      'selected' => [],
+    ],
+    'highlight' => [
+      'fields' => [
         'body:summary' => 0,
         'body:value' => 0,
         'title' => 'title',
@@ -307,20 +310,20 @@ function _loop_search_node_box_settings() {
         'status' => 0,
         'type' => 0,
         'url' => 0,
-      ),
-    ),
-    'templates' => array(
+      ],
+    ],
+    'templates' => [
       'box' => '/profiles/loopdk/themes/loop/templates/search/angular/search.html',
       'result' => '/profiles/loopdk/themes/loop/templates/search/angular/result.html',
       'pager' => '/profiles/loopdk/themes/loop/templates/search/angular/pager.html',
-    ),
-    'autocomplete' => array(
+    ],
+    'autocomplete' => [
       'index' => 'auto_complete',
       'field' => 'title',
       'minChars' => 2,
       'size' => 10,
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -334,7 +337,7 @@ function loop_search_node_block_info_alter(&$blocks, $theme, $code_blocks) {
 
     // Only authenticated user should see the search block.
     $res = db_select('block_role', 'br')
-      ->fields('br', array('rid'))
+      ->fields('br', ['rid'])
       ->condition('module', 'search_node_page')
       ->execute()
       ->fetchField();
@@ -351,21 +354,21 @@ function loop_search_node_block_info_alter(&$blocks, $theme, $code_blocks) {
  * The search block configuration.
  */
 function _loop_search_node_search_block_settings() {
-  return array(
+  return [
     'weight' => -17,
     'region' => '-1',
     'pages' => "admin\r\nadmin/*\r\nuser/*/edit",
     'status' => 0,
-  );
+  ];
 }
 
 /**
  * The search block configuration.
  */
 function _loop_search_node_search_block_roll_settings() {
-  return array(
+  return [
     'module' => 'search_node_page',
     'delta' => 'search_node_search_box',
     'rid' => 2,
-  );
+  ];
 }

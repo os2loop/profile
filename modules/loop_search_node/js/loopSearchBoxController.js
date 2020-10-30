@@ -34,7 +34,16 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
     /**
      * Set flag when new subject filters are selected.
      */
-    $scope.filterNewSelection = function filterNewSelection() {
+    $scope.filterNewSelection = function filterNewSelection($event) {
+      if ($event && $event.currentTarget) {
+        // Propagate checked to children.
+        var target = $event.currentTarget
+        // https://caniuse.com/?search=closest
+        var selfAndDescendants = target.closest('.search-filters--facets-item').querySelectorAll('input');
+        [].forEach.call(selfAndDescendants, function (item) {
+          item.checked = $event.currentTarget.checked;
+        });
+      }
       $scope.newSubjects = true;
     };
 
@@ -132,7 +141,73 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
       };
 
       // Get filters.
-      $scope.filters = state.filters;
+      var filters = state.filters;
+      if (filters['taxonomy']) {
+        var buildTree = function(items) {
+          var buildTreeInner = function(terms, maxDepth, parent, parentsIndex, depth) {
+            var tree = {};
+
+            for (var i = 0, term; term = terms[i]; i++) {
+              for (var j = 0, termParent; termParent = term.parents[j]; j++) {
+                if (termParent == parent) {
+                  tree[term.tid] = term;
+                }
+                else {
+                  if ('undefined' === typeof parentsIndex[termParent]) {
+                    parentsIndex[termParent] = []
+                  }
+                  parentsIndex[termParent].push(term)
+                }
+              }
+            }
+
+            for (var key in tree) {
+              var term = tree[key]
+              if (parentsIndex[term.tid] && depth < maxDepth) {
+                term.children = buildTreeInner(parentsIndex[term.tid], maxDepth, term.tid, parentsIndex, depth + 1);
+              }
+            }
+
+            // Flatten and sort.
+            var list = [];
+            for (var p in tree) {
+              list.push(tree[p])
+            }
+
+            list.sort(function(t1, t2) {
+              var w1 = parseInt(t1.weight)
+              var w2 = parseInt(t2.weight)
+              if (w1 < w2) {
+                return -1;
+              } else if (w1 > w2) {
+                return 1;
+              }
+              return 0;
+            })
+
+            return list;
+          }
+
+          var list = [];
+          for (var key in items) {
+            var item = items[key]
+            item.term.key = key
+            item.term.value = item.value
+            list.push(item.term)
+          }
+
+          return buildTreeInner(list, 1000, 0, {}, 0)
+        }
+
+        if (filters['taxonomy']['field_subject'] && filters['taxonomy']['field_subject'].items) {
+          filters['taxonomy']['field_subject'].items = buildTree(filters['taxonomy']['field_subject'].items)
+        }
+        if (filters['taxonomy'] && filters['taxonomy']['field_keyword'] && filters['taxonomy']['field_keyword'].items) {
+          filters['taxonomy']['field_keyword'].items = buildTree(filters['taxonomy']['field_keyword'].items)
+        }
+      }
+
+      $scope.filters = filters;
 
       // Set template to use.
       $scope.template = CONFIG.templates.box;

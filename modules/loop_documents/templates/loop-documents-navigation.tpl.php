@@ -35,7 +35,7 @@
       <h2 class="loop-documents--document-meta-title no-margin">
         <?php echo t('Document metadata'); ?>
       </h2>
-      <?php echo theme('loop_documents_document_metadata', array('document' => $node)); ?>
+      <?php echo theme('loop_documents_document_metadata', ['document' => $node]); ?>
     </div>
   <?php endif ?>
 
@@ -46,7 +46,7 @@
 
     <div class="loop-documents--metadata js-toggle-data">
       <?php if (!empty($loop_documents_collection)): ?>
-        <?php echo theme('loop_documents_collection_metadata', array('collection' => $loop_documents_collection)); ?>
+        <?php echo theme('loop_documents_collection_metadata', ['collection' => $loop_documents_collection]); ?>
       <?php endif ?>
     </div>
   </div>
@@ -67,7 +67,7 @@
     <h2 class="loop-documents--document-meta-title no-margin">
       <?php echo t('Document metadata'); ?>
     </h2>
-    <?php echo theme('loop_documents_document_metadata', array('document' => $node)); ?>
+    <?php echo theme('loop_documents_document_metadata', ['document' => $node]); ?>
   </div>
 
 <?php endif ?>

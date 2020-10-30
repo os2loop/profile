@@ -1,5 +1,14 @@
 # Loop Changelog
 
+## Loop 1.8.5
+* Added anonymous permissions to secure permissions.
+
+## Loop 1.8.4
+* Removed saml block from features
+
+## Loop 1.8.3
+* Removed access configuration for anonymous users
+
 ## Loop 1.8.0
 * LOOP-555: Added loop_disable_post module
 * Cleaned up code documentation

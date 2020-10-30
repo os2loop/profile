@@ -11,17 +11,20 @@
 function loop_preprocess_page(&$variables) {
   global $user;
   $arg = arg();
-  if (user_is_logged_in()) {
-    // Prepare system search block for page.tpl.
-    if (module_exists('search_api_page')) {
-      $variables['search'] = module_invoke('search_api_page', 'block_view', 'default');
-    }
-    elseif (module_exists('search_node_page')) {
-      $variables['search'] = module_invoke('search_node_page', 'block_view', 'search_node_search_box');
-      $variables['search']['result'] = module_invoke('search_node_page', 'block_view', 'search_node_search_result');
-    }
-    else {
-      $variables['search'] = module_invoke('search', 'block_view', 'form');
+
+  if (_loop_show_content_search()) {
+    if (user_access('access content')) {
+      // Prepare system search block for page.tpl.
+      if (module_exists('search_api_page')) {
+        $variables['search'] = module_invoke('search_api_page', 'block_view', 'default');
+      }
+      elseif (module_exists('search_node_page')) {
+        $variables['search'] = module_invoke('search_node_page', 'block_view', 'search_node_search_box');
+        $variables['search']['result'] = module_invoke('search_node_page', 'block_view', 'search_node_search_result');
+      }
+      else {
+        $variables['search'] = module_invoke('search', 'block_view', 'form');
+      }
     }
   }
 
@@ -104,7 +107,7 @@ function loop_preprocess_page(&$variables) {
   // We add logout link here to be able to always print it last. (Hence not part
   // of any menu).
   if ($user->uid > 0 && $show_logout) {
-    $variables['logout_link'] = l(t('Logout'), 'user/logout', array('attributes' => array('class' => array('nav--logout'))));
+    $variables['logout_link'] = l(t('Logout'), 'user/logout', ['attributes' => ['class' => ['nav--logout']]]);
   }
 
   // Set title for page types. For some reason it does not work through page
@@ -117,7 +120,7 @@ function loop_preprocess_page(&$variables) {
   }
 
   if (!theme_get_setting('show_breadcrumbs', 'loop')) {
-    drupal_set_breadcrumb(array());
+    drupal_set_breadcrumb([]);
   }
 }
 
@@ -186,7 +189,9 @@ function loop_preprocess_block(&$variables) {
   }
 
   // Are we dealing with the access denied or page not found block?
-  if ($variables['user']->uid == 0 && !in_array(arg(0), array('user', 'loop_saml_redirect')) && $variables['is_front'] == FALSE) {
+  if (!user_access('access content')
+      && !in_array(arg(0), ['user', 'loop_saml_redirect'])
+      && $variables['is_front'] == FALSE) {
     if ($variables['block']->module == 'system' && $variables['block']->delta == 'main') {
       $variables['content'] = '<div class="messages error">' . $variables['content'] . '</div>';
     }
@@ -311,7 +316,10 @@ function loop_menu_local_task($variables) {
       $link['title'] = check_plain($link['title']);
     }
     $link['localized_options']['html'] = TRUE;
-    $link_text = t('!local-task-title!active', array('!local-task-title' => $link['title'], '!active' => $active));
+    $link_text = t('!local-task-title!active', [
+      '!local-task-title' => $link['title'],
+      '!active' => $active,
+    ]);
   }
 
   return '<li class="' . $list_class . '">' . l($link_text, $link['href'], $link['localized_options']) . "</li>\n" . $sub_menu;
@@ -350,14 +358,14 @@ function loop_menu_tree__main_menu($variables) {
   // Add front page link from code
   // due to the notification tab being added to start of menu.
   global $base_root;
-  $variables['tree'] = l(t('Frontpage'), $base_root, array(
-    'attributes' => array(
-      'class' => array(
+  $variables['tree'] = l(t('Frontpage'), $base_root, [
+    'attributes' => [
+      'class' => [
         'nav--frontpage-link',
-      ),
-    ),
+      ],
+    ],
     'html' => 'TRUE',
-  )) . $variables['tree'];
+  ]) . $variables['tree'];
 
   // If loop navigation exists add a mobile drop down navigation.
   if (module_exists('loop_navigation')) {
@@ -369,10 +377,10 @@ function loop_menu_tree__main_menu($variables) {
     // Allow no path (path = #)
     $element['#localized_options']['external'][] = TRUE;
 
-    $img = array(
+    $img = [
       'path' => '/' . $theme_path . '/images/nav-menu-icon.png',
-      'attributes' => array('class' => 'nav--icon'),
-    );
+      'attributes' => ['class' => 'nav--icon'],
+    ];
     // Create the title with image icon.
     $element['#title'] = theme_image($img) . '<span class="nav--text">Menu</span>';
 
@@ -423,19 +431,19 @@ function loop_menu_link__main_menu($variables) {
   // Add images to links depending on the path of the link.
   switch ($element['#href']) {
     case 'user':
-      $img = array(
+      $img = [
         'path' => '/' . $theme_path . '/images/nav-user-icon.png',
-        'attributes' => array('class' => 'nav--icon'),
-      );
+        'attributes' => ['class' => 'nav--icon'],
+      ];
       // Create the title with image icon.
       $element['#title'] = theme_image($img) . '<span class="nav--text">' . $element['#title'] . '</span>';
       break;
 
     case 'node/add/post':
-      $img = array(
+      $img = [
         'path' => '/' . $theme_path . '/images/nav-add-icon.png',
-        'attributes' => array('class' => 'nav--icon'),
-      );
+        'attributes' => ['class' => 'nav--icon'],
+      ];
       // Create the title with image icon.
       $element['#title'] = theme_image($img) . '<span class="nav--text">' . $element['#title'] . '</span>';
       break;
@@ -551,8 +559,8 @@ function loop_menu_link__menu_document_author_management($variables) {
  */
 function loop_fieldset($variables) {
   $element = $variables['element'];
-  element_set_attributes($element, array('id'));
-  _form_set_class($element, array('field-group-fieldset'));
+  element_set_attributes($element, ['id']);
+  _form_set_class($element, ['field-group-fieldset']);
 
   $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
   if (!empty($element['#title'])) {
@@ -630,9 +638,6 @@ function loop_form_user_register_form_alter(&$form) {
   $form['field_area_of_expertise'][$field_expertise_lang]['#attributes']['class'][] = 'js-chosen-select-area-of-expertise';
   $field_profession_lang = $form['field_profession']['#language'];
   $form['field_profession'][$field_profession_lang]['#attributes']['class'][] = 'js-chosen-select-profession';
-
-  // Set page title.
-  // drupal_set_title(t("Create user"));.
 }
 
 /**
@@ -662,18 +667,6 @@ function loop_form_views_exposed_form_alter(&$form) {
     $form['combine']['#attributes']['class'][] = 'dashboard-list--filter-field';
     $form['submit']['#attributes']['class'][] = 'dashboard-list--submit';
   }
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- *
- * Adds custom class names and placeholder attribute and icon prefix to search
- * field.
- */
-function loop_form_search_api_page_search_form_default_alter(&$form) {
-  // Change title text and make sure the label is displayed.
-  $form['keys_1']['#title_display'] = 'before';
-  $form['keys_1']['#title'] = t('Search for an answer');
 }
 
 /**
@@ -712,7 +705,6 @@ function loop_form_comment_form_alter(&$form) {
  * The user profile form.
  */
 function loop_form_user_profile_form_alter(&$form) {
-  $form['account']['status']['#access'] = FALSE;
   $form['account']['#prefix'] = '<fieldset class="field-group-fieldset">';
   $form['account']['#suffix'] = '</fieldset>';
   $form['redirect']['#access'] = FALSE;
@@ -765,21 +757,21 @@ function loop_form_notifications_account_manage_subscriptions_form_alter(&$form)
  * Implements hook_theme().
  */
 function loop_theme($existing, $type, $theme, $path) {
-  return array(
-    'comment_form_prefix' => array(
-      'variables' => array(),
+  return [
+    'comment_form_prefix' => [
+      'variables' => [],
       'path' => drupal_get_path('theme', 'loop') . '/templates/forms',
       'template' => 'comment-form-prefix',
-    ),
-    'user_login' => array(
+    ],
+    'user_login' => [
       'render element' => 'form',
       'path' => drupal_get_path('theme', 'loop') . '/templates/user',
       'template' => 'user-login',
-      'preprocess functions' => array(
+      'preprocess functions' => [
         'loop_preprocess_user_login',
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 }
 
 /**
@@ -810,38 +802,38 @@ function loop_preprocess_user_login(&$variables) {
  *   The list of login services.
  */
 function _loop_get_login_services() {
-  $login_services = array();
+  $login_services = [];
 
   $destination = drupal_get_destination();
   $returnTo = $destination['destination'];
-  $options = array('query' => array('returnTo' => $returnTo));
+  $options = ['query' => ['returnTo' => $returnTo]];
 
   // Add Saml log in services.
   if (function_exists('saml_sp__load_all_idps')) {
     $idps = saml_sp__load_all_idps();
     foreach ($idps as $idp) {
-      $login_services[$idp->machine_name] = array(
+      $login_services[$idp->machine_name] = [
         'name' => $idp->name,
         'url' => url('saml/drupal_login', $options),
-      );
+      ];
     }
   }
 
   // Add UNI•Login service.
   if (module_exists('unilogin')) {
-    $login_services['unilogin'] = array(
+    $login_services['unilogin'] = [
       'name' => t('UNI•Login'),
       'url' => url('unilogin', $options),
-    );
+    ];
   }
 
   if (count($login_services) > 0) {
     // Add "Regular user" login service.
     if (theme_get_setting('show_login_for_regular_users')) {
-      $login_services['loop-login'] = array(
+      $login_services['loop-login'] = [
         'name' => t('Loop login'),
         'url' => request_uri() . '#loop-login',
-      );
+      ];
     }
   }
 
@@ -871,7 +863,7 @@ function loop_preprocess_comment(&$variables) {
     // Fetch the fields needed.
     $variables['place'] = $wrapper->field_location_place->value();
     $fetched_job_title = field_get_items('user', $variables['comment']->account, 'field_job_title');
-    $variables['job_title'] = field_view_value('user', $variables['comment']->account, 'field_job_title', $fetched_job_title[0], array());
+    $variables['job_title'] = field_view_value('user', $variables['comment']->account, 'field_job_title', $fetched_job_title[0], []);
   }
 
   // Fetch files related to the comment.
@@ -897,11 +889,11 @@ function loop_preprocess_comment(&$variables) {
  */
 function loop_preprocess_loop_post_subscription_list(&$vars) {
   $vars['custom_link'] = l($vars['link']['#text'], $vars['link']['#path'],
-                           array(
-                             'attributes' => array('class' => array('block-module--link')),
+                           [
+                             'attributes' => ['class' => ['block-module--link']],
                              'html' => 'TRUE',
-                             'query' => array($vars['link']['#query']),
-                           ));
+                             'query' => [$vars['link']['#query']],
+                           ]);
 
   if ($vars['link']['#text'] == 'Subscribe') {
     $vars['current_type_css'] = 'block-follow-question';
@@ -923,11 +915,11 @@ function loop_textarea($variables) {
   $element['#attributes']['cols'] = $element['#cols'];
   $element['#attributes']['rows'] = $element['#rows'];
 
-  _form_set_class($element, array('form-textarea'));
+  _form_set_class($element, ['form-textarea']);
 
-  $wrapper_attributes = array(
-    'class' => array('form-textarea-wrapper'),
-  );
+  $wrapper_attributes = [
+    'class' => ['form-textarea-wrapper'],
+  ];
 
   $output = '<div' . drupal_attributes($wrapper_attributes) . '>';
   $output .= '<textarea' . drupal_attributes($element['#attributes']) . '>' . check_plain($element['#value']) . '</textarea>';
@@ -964,7 +956,7 @@ function loop_preprocess_views_view(&$vars) {
 
       if ($vars['view']->name == 'loop_questions_by_user_profession') {
         $items = $wrapper->field_profession->value();
-        $user_professions = array();
+        $user_professions = [];
         foreach ($items as $item) {
           if (is_object($item)) {
             $user_professions[] = $item->name;
@@ -976,7 +968,7 @@ function loop_preprocess_views_view(&$vars) {
 
       if ($vars['view']->name == 'loop_questions_by_user_competence') {
         $items = $wrapper->field_area_of_expertise->value();
-        $user_area_of_expertises = array();
+        $user_area_of_expertises = [];
         foreach ($items as $item) {
           if (is_object($item)) {
             $user_area_of_expertises[] = $item->name;
@@ -1012,10 +1004,10 @@ function _loop_print_notification_tab() {
     }
 
     // Add the link image for mobile.
-    $img = array(
+    $img = [
       'path' => '/' . path_to_theme() . '/images/nav-mail-icon.png',
-      'attributes' => array('class' => 'nav--icon'),
-    );
+      'attributes' => ['class' => 'nav--icon'],
+    ];
     // Since it's all quite hackish we need to set the active trail manually
     // for our link. @todo rewrite messages count on menu item.
     $active = '';
@@ -1024,10 +1016,10 @@ function _loop_print_notification_tab() {
     }
     $title = theme_image($img) . '<span class="nav--text">' . t('My account') . '</span>' . $new_messages;
 
-    $menutab = l($title, 'user', array(
-      'attributes' => array('class' => array('nav--link', $active)),
+    $menutab = l($title, 'user', [
+      'attributes' => ['class' => ['nav--link', $active]],
       'html' => 'TRUE',
-    ));
+    ]);
   }
   else {
     $menutab = FALSE;
@@ -1078,13 +1070,16 @@ function _loop_fetch_full_name($user) {
  */
 function _loop_fetch_user_new_notifications() {
   // Fetch all current users messages from the message table.
-  $all_message_count = db_query('SELECT uid FROM message WHERE uid = :uid', array(':uid' => $GLOBALS['user']->uid))->rowCount();
+  $all_message_count = db_query('SELECT uid FROM message WHERE uid = :uid', [':uid' => $GLOBALS['user']->uid])->rowCount();
 
   // Fetch flag id (fid) for the message_read flag.
-  $flag_id = db_query('SELECT fid FROM flag WHERE name = :machine_name', array(':machine_name' => "message_read"))->fetchField();
+  $flag_id = db_query('SELECT fid FROM flag WHERE name = :machine_name', [':machine_name' => "message_read"])->fetchField();
 
   // Fetch all flags of type message_read (fid) that the current user made.
-  $flagged_read_message_count = db_query('SELECT entity_id FROM flagging WHERE uid = :uid AND fid = :fid', array(':uid' => $GLOBALS['user']->uid, ':fid' => $flag_id))->rowCount();
+  $flagged_read_message_count = db_query('SELECT entity_id FROM flagging WHERE uid = :uid AND fid = :fid', [
+    ':uid' => $GLOBALS['user']->uid,
+    ':fid' => $flag_id,
+  ])->rowCount();
 
   // Subtract the two.
   $new_notifications = $all_message_count - $flagged_read_message_count;
@@ -1110,10 +1105,16 @@ function _loop_fetch_author_image($author) {
 
     // Get first name and last name.
     $author_image_field = $wrapper->field_user_image->value();
-    $author_image = theme('image_style', array('style_name' => 'preview', 'path' => $author_image_field['uri']));
+    $author_image = theme('image_style', [
+      'style_name' => 'preview',
+      'path' => $author_image_field['uri'],
+    ]);
     if (empty($author_image_field)) {
       $image_path = 'default-user-icon.png';
-      $author_image = theme('image_style', array('style_name' => 'preview', 'path' => $image_path));
+      $author_image = theme('image_style', [
+        'style_name' => 'preview',
+        'path' => $image_path,
+      ]);
     }
   }
 
@@ -1168,14 +1169,85 @@ function _loop_fetch_files($type, $entity) {
  * Override or insert variables into the html template.
  */
 function loop_preprocess_html(&$vars) {
-  $skin = theme_get_setting('loop_skin');
-  if (!$skin) {
-    $skin = 'styles';
+  $skin = theme_get_setting('loop_skin') ?: 'styles';
+  $skin_path = path_to_theme() . '/css/' . $skin . '.css';
+  if ('custom' === $skin) {
+    $skin_path = theme_get_setting('loop_skin_custom_path');
   }
 
-  drupal_add_css(path_to_theme() . '/css/' . $skin . '.css', array(
+  drupal_add_css($skin_path, [
     'group' => CSS_THEME,
     'weight' => 999,
     'preprocess' => FALSE,
-  ));
+  ]);
+}
+
+/**
+ * Decide if content search box should be shown on current page.
+ *
+ * @return bool
+ *   The if and only if the content search box should be shown.
+ */
+function _loop_show_content_search() {
+  $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
+  $pages = theme_get_setting('content_search_pages') ?? '';
+
+  // Compare the lowercase internal and lowercase path alias (if any).
+  $page_match = drupal_match_path($path, $pages);
+  if ($path != $_GET['q']) {
+    $page_match = $page_match || drupal_match_path($_GET['q'], $pages);
+  }
+
+  $match_type = theme_get_setting('content_search_visibility') ?? 'exclude';
+  if ($match_type == 'include') {
+    return $page_match;
+  }
+  elseif (!empty($pages)) {
+    return !$page_match;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_media_oembed().
+ */
+function loop_preprocess_media_oembed(&$variables) {
+  if (isset($variables['type']) && 'video' === $variables['type']) {
+    $width = $variables['width'];
+    $height = $variables['height'];
+
+    $gcd = _loop_gcd($width, $height);
+    $ratio = [$width / $gcd, $height / $gcd];
+
+    $variables['wrapper_class_names'][] = 'video-wrapper';
+
+    if ([16, 9] === $ratio) {
+      $variables['wrapper_class_names'][] = 'video-wrapper-16-9';
+    }
+  }
+}
+
+/**
+ * Compute greatest common denominator.
+ */
+function _loop_gcd($a, $b) {
+  $a = abs($a);
+  $b = abs($b);
+  if ($a < $b) {
+    list($b, $a) = [$a, $b];
+  }
+  if (0 === $b) {
+    return $a;
+  }
+
+  $r = $a % $b;
+  while ($r > 0) {
+    $a = $b;
+    $b = $r;
+    $r = $a % $b;
+  }
+
+  return $b;
 }

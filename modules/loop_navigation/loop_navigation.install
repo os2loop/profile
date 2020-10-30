@@ -13,11 +13,11 @@ function loop_navigation_disable() {
   $mlid = db_select('menu_links', 'ml')
     ->condition('ml.link_path', '<nolink>')
     ->condition('ml.menu_name', 'main-menu')
-    ->fields('ml', array('mlid'))
+    ->fields('ml', ['mlid'])
     ->execute()
     ->fetchField();
   menu_link_delete($mlid);
 
-  // Delete the menu that he feature provide.
-  menu_delete(array('menu_name' => 'menu-loop-primary-menu'));
+  // Delete the menu that the feature provides.
+  menu_delete(['menu_name' => 'menu-loop-primary-menu']);
 }

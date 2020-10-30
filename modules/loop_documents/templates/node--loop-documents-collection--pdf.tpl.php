@@ -34,13 +34,13 @@
     <div class="loop-documents--metadata">
       <fieldset>
         <legend><?php echo t('Metadata'); ?></legend>
-        <?php foreach (array(
+        <?php foreach ([
           'field_loop_documents_owner',
           'field_loop_documents_version',
           'field_loop_documents_approver',
           'field_loop_documents_approv_date',
           'field_loop_documents_review_date',
-        ) as $field_name) {
+        ] as $field_name) {
           $field = field_view_field('node', $node, $field_name);
           echo render($field);
         }

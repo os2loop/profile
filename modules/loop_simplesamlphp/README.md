@@ -9,7 +9,7 @@ using the normal Drupal login form (unless you visit the /user/login page).
 It also provides a way to map SAML attributes to Loop user profile fields from
 the SimpleSAMLphp Auth configuration page.
 
-# Installation and configuration
+## Installation and configuration
 
 1. [Download SimpleSAMLphp](https://simplesamlphp.org/download).
 

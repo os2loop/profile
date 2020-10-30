@@ -1,1 +1,0 @@
-# Loop external sources content

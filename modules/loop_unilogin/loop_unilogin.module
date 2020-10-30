@@ -24,29 +24,29 @@ function loop_unilogin_update_user_data($user) {
     // Get UNI•Login user id from auth map.
     $unilogin_id = preg_replace('/^unilogin:/', '', $authmaps['unilogin']);
     // Fetch user data from UNI•Login web service w02 [https://goo.gl/voJXHo].
-    $info = unilogin_services_w02_load($unilogin_id, array('hentPerson'));
+    $info = unilogin_services_w02_load($unilogin_id, ['hentPerson']);
 
     // Edit (updates) to be applied to the user.
-    $edit = array();
+    $edit = [];
 
     if (isset($info->hentPerson)) {
       $person = $info->hentPerson;
-      $field_mapping = array(
+      $field_mapping = [
         // UNI•Login field name => Drupal user custom field name.
         'Fornavn' => 'field_first_name',
         'Efternavn' => 'field_last_name',
-      );
+      ];
       foreach ($field_mapping as $person_field => $user_field) {
         if (isset($person->{$person_field})) {
           // Only update empty values.
           if (!isset($user->{$user_field}['und'][0]['value'])) {
-            $edit[$user_field] = array(
-              'und' => array(
-                0 => array(
+            $edit[$user_field] = [
+              'und' => [
+                0 => [
                   'value' => $person->{$person_field},
-                ),
-              ),
-            );
+                ],
+              ],
+            ];
           }
         }
       }
@@ -67,6 +67,6 @@ function loop_unilogin_form_user_login_block_alter(&$form, &$form_state, $form_i
   if (current_path() !== 'user/login') {
     // We want to set the destination explicitly in drupal_goto().
     unset($_GET['destination']);
-    drupal_goto('user/login', array('query' => drupal_get_destination()));
+    drupal_goto('user/login', ['query' => drupal_get_destination()]);
   }
 }

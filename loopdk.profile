@@ -31,6 +31,10 @@ function loopdk_form_install_configure_form_alter(&$form, $form_state) {
   $form['site_information']['site_name']['#default_value'] = 'Loop';
   $form['server_settings']['site_default_country']['#default_value'] = 'DK';
   $form['server_settings']['date_default_timezone']['#default_value'] = 'Europe/Copenhagen';
+  $form['update_notifications']['update_status_module']['#default_value'] = [
+    FALSE,
+    FALSE,
+  ];
 }
 
 /**
@@ -39,52 +43,26 @@ function loopdk_form_install_configure_form_alter(&$form, $form_state) {
  * Dashboard, user pages and translations.
  */
 function loopdk_module_selection_form($form, &$form_state) {
-  $form['addons'] = array(
+  $form['addons'] = [
     '#type' => 'fieldset',
     '#title' => t('Add-ons'),
     '#weight' => 1,
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
-  );
+  ];
 
-  $form['addons']['user_pages'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('User pages'),
-    '#description' => t('Include user display and user sub pages.'),
-    '#default_value' => TRUE,
-  );
-
-  $all_modules = system_rebuild_module_data();
-  // Additional Loop modules to suggest installing:
-  // module name => install (default checkbox value)
-  $loop_modules = array(
-    'loop_configure_theme' => FALSE,
-    'loop_post_wysiwyg' => FALSE,
-  );
-  foreach ($loop_modules as $module => $install) {
-    if (isset($all_modules[$module])) {
-      $module_info = $all_modules[$module]->info;
-      $form['addons'][$module] = array(
-        '#type' => 'checkbox',
-        '#title' => $module_info['name'],
-        '#description' => $module_info['description'],
-        '#default_value' => $install,
-      );
-    }
-  }
-
-  $form['addons']['translation'] = array(
+  $form['addons']['translation'] = [
     '#type' => 'checkbox',
     '#title' => t('Danish translation'),
     '#description' => t('Install and enable Danish translation.'),
-    '#default_value' => FALSE,
-  );
+    '#default_value' => TRUE,
+  ];
 
-  $form['submit'] = array(
+  $form['submit'] = [
     '#type' => 'submit',
     '#value' => st('Continue installation'),
     '#weight' => 20,
-  );
+  ];
 
   return $form;
 }
@@ -93,25 +71,9 @@ function loopdk_module_selection_form($form, &$form_state) {
  * Formula submit function for Loop settings.
  */
 function loopdk_module_selection_form_submit($form, &$form_state) {
-  $dependency_modules = array();
-
   if ($form_state['values']['translation']) {
     variable_set('loopdk_install_translations', TRUE);
   }
-
-  $all_modules = system_rebuild_module_data();
-  foreach ($form_state['values'] as $module => $install) {
-    if (isset($all_modules[$module]) && $install) {
-      $dependency_modules[] = $module;
-    }
-  }
-
-  if ($form_state['values']['user_pages']) {
-    $dependency_modules[] = 'loop_user_page_views';
-    $dependency_modules[] = 'loop_user_related_content_profession';
-    $dependency_modules[] = 'loop_user_related_content_competence';
-  }
-  module_enable($dependency_modules);
 }
 
 /**
@@ -122,43 +84,43 @@ function loopdk_module_selection_form_submit($form, &$form_state) {
  */
 function loopdk_install_tasks(&$install_state) {
 
-  $ret = array(
+  $ret = [
     // Module selection form.
-    'loopdk_module_selection_form' => array(
+    'loopdk_module_selection_form' => [
       'display_name' => 'Module selection',
       'display' => TRUE,
       'type' => 'form',
       'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
-    ),
+    ],
     // Update translations.
-    'loopdk_import_translation' => array(
+    'loopdk_import_translation' => [
       'display_name' => 'Update translations',
       'display' => variable_get('loopdk_install_translations', FALSE),
       'type' => 'batch',
       'run' => variable_get('loopdk_install_translations', FALSE) ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
-    ),
+    ],
     // Update translations.
-    'loopdk_import_contrib_translation' => array(
+    'loopdk_import_contrib_translation' => [
       'display_name' => 'Update contribute translations',
       'display' => variable_get('loopdk_install_translations', FALSE),
       'type' => 'batch',
       'run' => variable_get('loopdk_install_translations', FALSE) ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
-    ),
+    ],
     // Filter and WYSIWYG settings.
-    'loopdk_setup_filter_and_wysiwyg' => array(
+    'loopdk_setup_filter_and_wysiwyg' => [
       'display_name' => st('Setup filter and WYSIWYG'),
       'display' => TRUE,
       'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
       'type' => 'batch',
-    ),
+    ],
     // Round up installation.
-    'loopdk_final_settings' => array(
+    'loopdk_final_settings' => [
       'display_name' => st('Round up installation'),
       'display' => TRUE,
       'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
       'type' => 'normal',
-    ),
-  );
+    ],
+  ];
 
   return $ret;
 }
@@ -176,58 +138,32 @@ function loopdk_import_translation() {
   include_once DRUPAL_ROOT . '/includes/locale.inc';
   locale_add_language('da', NULL, NULL, NULL, '', NULL, TRUE, TRUE);
 
-  $operations = array();
+  // @TODO Get these from files in translations/.
+  $translation_groups = [
+    'default',
+    'facetapi',
+    'field',
+    'menu',
+    'panels',
+    'taxonomy',
+    'views',
+  ];
 
-  // Import our own translations.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'default',
-      '/profiles/loopdk/translations/default.da.po',
-    ),
-  );
+  $operations = array_map(static function ($translation_group) {
+    return [
+      '_loopdk_insert_translation',
+      [
+        $translation_group,
+        '/profiles/loopdk/translations/' . $translation_group . '.da.po',
+      ],
+    ];
+  }, $translation_groups);
 
-  // Import field translation group.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'field',
-      '/profiles/loopdk/translations/field.da.po',
-    ),
-  );
-
-  // Import menu translation group.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'menu',
-      '/profiles/loopdk/translations/menu.da.po',
-    ),
-  );
-
-  // Import panels translation group.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'panels',
-      '/profiles/loopdk/translations/panels.da.po',
-    ),
-  );
-
-  // Import views translation group.
-  $operations[] = array(
-    '_loopdk_insert_translation',
-    array(
-      'views',
-      '/profiles/loopdk/translations/views.da.po',
-    ),
-  );
-
-  $batch = array(
+  $batch = [
     'title' => st('Installing translations'),
     'operations' => $operations,
     'file' => drupal_get_path('profile', 'loopdk') . '/loopdk.callbacks.inc',
-  );
+  ];
 
   return $batch;
 }
@@ -236,18 +172,15 @@ function loopdk_import_translation() {
  * Install contribute modules translations.
  */
 function loopdk_import_contrib_translation() {
-  // Build batch with l10n_update module.
-  $history = l10n_update_get_history();
-  module_load_include('check.inc', 'l10n_update');
-  $available = l10n_update_available_releases();
-  $updates = l10n_update_build_updates($history, $available);
+  module_load_include('inc', 'l10n_update', 'l10n_update.translation');
+  module_load_include('inc', 'l10n_update', 'l10n_update.fetch');
 
-  // Fire of the batch.
-  module_load_include('batch.inc', 'l10n_update');
-  $updates = _l10n_update_prepare_updates($updates, NULL, array());
-  $batch = l10n_update_batch_multiple($updates, LOCALE_IMPORT_KEEP);
+  // Update all projects.
+  $projects = [];
+  $langcodes = ['da'];
+  $options = _l10n_update_default_update_options();
 
-  return $batch;
+  return l10n_update_batch_fetch_build($projects, $langcodes, $options);
 }
 
 /**
@@ -259,46 +192,46 @@ function loopdk_setup_filter_and_wysiwyg() {
   $format->name = 'Editor';
   $format->status = 1;
   $format->weight = 0;
-  $format->filters = array(
-    'filter_html' => array(
+  $format->filters = [
+    'filter_html' => [
       'weight' => -48,
       'status' => 1,
-      'settings' => array(
+      'settings' => [
         'allowed_html' => '<h2> <h3> <h4> <a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <p> <img> <br> <table> <tbody> <tr> <th> <td>',
         'filter_html_help' => 1,
         'filter_html_nofollow' => 0,
-      ),
-    ),
-    'filter_autop' => array(
+      ],
+    ],
+    'filter_autop' => [
       'weight' => -46,
       'status' => 1,
-      'settings' => array(),
-    ),
-    'filter_htmlcorrector' => array(
+      'settings' => [],
+    ],
+    'filter_htmlcorrector' => [
       'weight' => -45,
       'status' => 1,
-      'settings' => array(),
-    ),
-    'shortener' => array(
+      'settings' => [],
+    ],
+    'shortener' => [
       'weight' => -44,
       'status' => 1,
-      'settings' => array(
+      'settings' => [
         'shortener_url_behavior' => 'strict',
         'shortener_url_length' => '72',
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 
   filter_format_save($format);
 
-  $settings = array(
+  $settings = [
     'default' => 1,
     'user_choose' => 0,
     'show_toggle' => 1,
     'theme' => 'advanced',
     'language' => 'en',
-    'buttons' => array(
-      'default' => array(
+    'buttons' => [
+      'default' => [
         'Bold' => 1,
         'Italic' => 1,
         'Underline' => 1,
@@ -307,8 +240,8 @@ function loopdk_setup_filter_and_wysiwyg() {
         'Link' => 1,
         'PasteText' => 1,
         'Styles' => 1,
-      ),
-    ),
+      ],
+    ],
     'toolbar_loc' => 'top',
     'toolbar_align' => 'left',
     'path_loc' => 'bottom',
@@ -325,14 +258,14 @@ function loopdk_setup_filter_and_wysiwyg() {
     'css_classes' => 'Header (h2)=h2.header--big
     Header (h3)=h3.header--medium
     Header (h4)=h4.header--small',
-  );
+  ];
 
   db_merge('wysiwyg')
-    ->key(array('format' => $format->format))
-    ->fields(array(
+    ->key(['format' => $format->format])
+    ->fields([
       'editor' => 'ckeditor',
       'settings' => serialize($settings),
-    ))
+    ])
     ->execute();
 
   $format = new Stdclass();
@@ -341,37 +274,37 @@ function loopdk_setup_filter_and_wysiwyg() {
   $format->cache = 1;
   $format->status = 1;
   $format->weight = -10;
-  $format->filters = array(
-    'filter_url' => array(
+  $format->filters = [
+    'filter_url' => [
       'weight' => -48,
       'status' => 1,
-      'settings' => array(
+      'settings' => [
         'filter_url_length' => 72,
-      ),
-    ),
-    'filter_html' => array(
+      ],
+    ],
+    'filter_html' => [
       'weight' => 0,
       'status' => 1,
-      'settings' => array(
+      'settings' => [
         'allowed_html' => '<br> <p> <a>',
         'filter_html_help' => 0,
         'filter_html_nofollow' => 0,
-      ),
-    ),
-    'filter_autop' => array(
+      ],
+    ],
+    'filter_autop' => [
       'weight' => 0,
       'status' => 1,
-      'settings' => array(),
-    ),
-    'shortener' => array(
+      'settings' => [],
+    ],
+    'shortener' => [
       'weight' => -45,
       'status' => 1,
-      'settings' => array(
+      'settings' => [
         'shortener_url_behavior' => 'strict',
         'shortener_url_length' => '72',
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 
   filter_format_save($format);
 
@@ -381,17 +314,17 @@ function loopdk_setup_filter_and_wysiwyg() {
   $format->cache = 1;
   $format->status = 1;
   $format->weight = -10;
-  $format->filters = array(
-    'filter_html' => array(
+  $format->filters = [
+    'filter_html' => [
       'weight' => 0,
       'status' => 1,
-      'settings' => array(
+      'settings' => [
         'allowed_html' => '<br> <a>',
         'filter_html_help' => 0,
         'filter_html_nofollow' => 0,
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 
   filter_format_save($format);
 
@@ -414,7 +347,7 @@ function loopdk_setup_filter_and_wysiwyg() {
 function loopdk_final_settings() {
   module_load_include('inc', 'features', 'features.export');
 
-  $features = array();
+  $features = [];
   foreach (features_get_features(NULL, TRUE) as $module) {
     switch (features_get_storage($module->name)) {
       case FEATURES_OVERRIDDEN:
@@ -456,17 +389,17 @@ function loopdk_final_settings() {
  * Implements hook_libraries_info().
  */
 function loopdk_libraries_info() {
-  return array(
-    'handlebars' => array(
+  return [
+    'handlebars' => [
       'name' => 'Handlebars.js',
       'vendor url' => 'http://handlebarsjs.com/',
       'download url' => 'https://github.com/wycats/handlebars.js/releases',
       'version' => '1.2.1',
-      'files' => array(
-        'js' => array('handlebars-v1.2.1.js'),
-      ),
-    ),
-  );
+      'files' => [
+        'js' => ['handlebars-v1.2.1.js'],
+      ],
+    ],
+  ];
 }
 
 /**
@@ -487,20 +420,20 @@ function loopdk_load_handlebars() {
  * Add a loop config administration page.
  */
 function loopdk_menu() {
-  $items = array();
+  $items = [];
 
   // This creates a URL that will call this form at "examples/form-example".
-  $items['admin/config/loop'] = array(
+  $items['admin/config/loop'] = [
   // Page title.
     'title' => 'Loop settings',
     'description' => 'Loop specific configuration.',
     'page callback' => 'system_admin_menu_block_page',
-    'access arguments' => array('access administration pages'),
+    'access arguments' => ['access administration pages'],
     // 'path' => drupal_get_path('module', 'system'),
     // 'file' => 'system.admin.inc',.
     'position' => 'left',
     'weight' => '-15',
-  );
+  ];
 
   return $items;
 }

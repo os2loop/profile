@@ -433,13 +433,6 @@ h3,
 h4,
 h5,
 h6 {
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  word-wrap: break-word;
   margin-top: 0;
   margin-bottom: .5em;
   font-family: 1em/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -616,7 +609,7 @@ textarea {
   textarea:focus {
     border: 1px solid #737373;
     color: #404040; }
-  input[type="text"][disabled], [disabled].autocomplete-deluxe-container,
+  input[type="text"][disabled], .autocomplete-deluxe-container[disabled],
   input[type="password"][disabled],
   input[type="date"][disabled],
   input[type="datetime"][disabled],
@@ -1286,6 +1279,14 @@ label {
     .logo--image {
       max-width: 16em; } }
 
+/* Spacing
+   ================================================================================================================== */
+.layout-spacing-top {
+  margin-top: 1.5em !important; }
+
+.layout-spacing-bottom {
+  margin-bottom: 1.5em !important; }
+
 /* Layouts
    ================================================================================================================== */
 .layout-full-width, .layout-frontpage, .layout-dashboard, .layout-default, .layout-default-inverted, .layout-alternative, .layout-no-wrapper {
@@ -1760,6 +1761,16 @@ label {
   padding-left: 0;
   padding-right: 0; }
 
+footer .block {
+  float: left;
+  width: 100%; }
+  @media only screen and (min-width: 45em) {
+    footer .block {
+      width: 33%; }
+      footer .block:last-child {
+        float: right;
+        text-align: right; } }
+
 /**
  * Navigation
  * This file includes multiple nesting elements. This is due to the fact that we use the same primary menu twice (Mobile and header.)
@@ -1781,7 +1792,9 @@ label {
     text-align: center; }
   .nav--wrapper .nav-dropdown--header,
   .nav--wrapper .nav--toggle-mobile-nav,
-  .nav--wrapper .nav--link, .nav--wrapper .nav--frontpage-link, .nav--wrapper .nav--logout {
+  .nav--wrapper .nav--link,
+  .nav--wrapper .nav--frontpage-link,
+  .nav--wrapper .nav--logout {
     position: relative;
     display: inline-block;
     height: 2.75em;
@@ -1798,32 +1811,48 @@ label {
     .nav--wrapper .nav-dropdown--header:link, .nav--wrapper .nav-dropdown--header:visited,
     .nav--wrapper .nav--toggle-mobile-nav:link,
     .nav--wrapper .nav--toggle-mobile-nav:visited,
-    .nav--wrapper .nav--link:link, .nav--wrapper .nav--frontpage-link:link, .nav--wrapper .nav--logout:link,
-    .nav--wrapper .nav--link:visited, .nav--wrapper .nav--frontpage-link:visited, .nav--wrapper .nav--logout:visited {
+    .nav--wrapper .nav--link:link,
+    .nav--wrapper .nav--frontpage-link:link,
+    .nav--wrapper .nav--logout:link,
+    .nav--wrapper .nav--link:visited,
+    .nav--wrapper .nav--frontpage-link:visited,
+    .nav--wrapper .nav--logout:visited {
       color: #fff;
       text-decoration: none; }
     .nav--wrapper .nav-dropdown--header:hover,
     .nav--wrapper .nav--toggle-mobile-nav:hover,
-    .nav--wrapper .nav--link:hover, .nav--wrapper .nav--frontpage-link:hover, .nav--wrapper .nav--logout:hover {
+    .nav--wrapper .nav--link:hover,
+    .nav--wrapper .nav--frontpage-link:hover,
+    .nav--wrapper .nav--logout:hover {
       background-color: #006fca; }
     .nav--wrapper .nav-dropdown--header.active-trail, .nav--wrapper .nav-dropdown--header.active,
     .nav--wrapper .nav--toggle-mobile-nav.active-trail,
     .nav--wrapper .nav--toggle-mobile-nav.active,
-    .nav--wrapper .nav--link.active-trail, .nav--wrapper .active-trail.nav--frontpage-link, .nav--wrapper .active-trail.nav--logout,
-    .nav--wrapper .nav--link.active, .nav--wrapper .active.nav--frontpage-link, .nav--wrapper .active.nav--logout {
+    .nav--wrapper .nav--link.active-trail,
+    .nav--wrapper .active-trail.nav--frontpage-link,
+    .nav--wrapper .active-trail.nav--logout,
+    .nav--wrapper .nav--link.active,
+    .nav--wrapper .active.nav--frontpage-link,
+    .nav--wrapper .active.nav--logout {
       background-color: #f2f2f2;
       color: #003764; }
       .nav--wrapper .nav-dropdown--header.active-trail:hover, .nav--wrapper .nav-dropdown--header.active:hover,
       .nav--wrapper .nav--toggle-mobile-nav.active-trail:hover,
       .nav--wrapper .nav--toggle-mobile-nav.active:hover,
-      .nav--wrapper .nav--link.active-trail:hover, .nav--wrapper .active-trail.nav--frontpage-link:hover, .nav--wrapper .active-trail.nav--logout:hover,
-      .nav--wrapper .nav--link.active:hover, .nav--wrapper .active.nav--frontpage-link:hover, .nav--wrapper .active.nav--logout:hover {
+      .nav--wrapper .nav--link.active-trail:hover,
+      .nav--wrapper .active-trail.nav--frontpage-link:hover,
+      .nav--wrapper .active-trail.nav--logout:hover,
+      .nav--wrapper .nav--link.active:hover,
+      .nav--wrapper .active.nav--frontpage-link:hover,
+      .nav--wrapper .active.nav--logout:hover {
         background-color: #005397;
         color: #f2f2f2; }
     @media only screen and (min-width: 35em) {
       .nav--wrapper .nav-dropdown--header,
       .nav--wrapper .nav--toggle-mobile-nav,
-      .nav--wrapper .nav--link, .nav--wrapper .nav--frontpage-link, .nav--wrapper .nav--logout {
+      .nav--wrapper .nav--link,
+      .nav--wrapper .nav--frontpage-link,
+      .nav--wrapper .nav--logout {
         height: 3.25em;
         margin-left: 1em;
         width: 3.25em;
@@ -1831,7 +1860,9 @@ label {
     @media only screen and (min-width: 43em) {
       .nav--wrapper .nav-dropdown--header,
       .nav--wrapper .nav--toggle-mobile-nav,
-      .nav--wrapper .nav--link, .nav--wrapper .nav--frontpage-link, .nav--wrapper .nav--logout {
+      .nav--wrapper .nav--link,
+      .nav--wrapper .nav--frontpage-link,
+      .nav--wrapper .nav--logout {
         padding-right: 1.25em;
         padding-left: 1.25em;
         height: auto;
@@ -2440,9 +2471,7 @@ This file is generated by `grunt build`, do not edit it by hand.
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 144dpi) {
   .chosen-rtl .chosen-search input[type="text"], .chosen-rtl .chosen-search .autocomplete-deluxe-container,
   .chosen-container-single .chosen-single abbr,
-  .chosen-container-single .chosen-single div b,
-  .chosen-container-single .chosen-search input[type="text"],
-  .chosen-container-single .chosen-search .autocomplete-deluxe-container,
+  .chosen-container-single .chosen-single div b, .chosen-container-single .chosen-search input[type="text"], .chosen-container-single .chosen-search .autocomplete-deluxe-container,
   .chosen-container-multi .chosen-choices .search-choice .search-choice-close,
   .chosen-container .chosen-results-scroll-down span,
   .chosen-container .chosen-results-scroll-up span {
@@ -3749,6 +3778,15 @@ a.question--term {
     .search-filters--sort .search-filters--label {
       font-size: .85em; }
 
+a.search-filters--label {
+  text-decoration: none;
+  color: #003764; }
+
+label.search-filters--label {
+  margin: 0; }
+  label.search-filters--label input {
+    visibility: hidden; }
+
 /**
  *
  * Search node results.
@@ -3878,6 +3916,7 @@ a.question--term {
   font-size: .85em; }
 
 a.question--term.taxonomy-keyword {
+  color: #fff;
   background-color: #007700;
   /* setting:keyword_background_color */ }
   a.question--term.taxonomy-keyword:hover {
@@ -3968,8 +4007,8 @@ a.question--term.taxonomy-keyword {
   @media only screen and (min-width: 28em) {
     .typeahead-block--button {
       position: absolute;
-      bottom: 0;
-      right: 0;
+      top: 56px;
+      right: 20px;
       padding-top: .5em;
       padding-bottom: .65em;
       width: auto;
@@ -4524,14 +4563,17 @@ a.question--term.taxonomy-keyword {
     .dashboard--content-statistics-table, .dashboard--content-overview {
       width: 33%; } }
   .dashboard--content-statistics-table th, .dashboard--content-overview th,
-  .dashboard--content-statistics-table td, .dashboard--content-overview td {
+  .dashboard--content-statistics-table td,
+  .dashboard--content-overview td {
     width: 75%; }
   .dashboard--content-statistics-table td:last-child, .dashboard--content-overview td:last-child,
-  .dashboard--content-statistics-table th:last-child, .dashboard--content-overview th:last-child {
+  .dashboard--content-statistics-table th:last-child,
+  .dashboard--content-overview th:last-child {
     text-align: center;
     width: 25%; }
   .dashboard--content-statistics-table thead, .dashboard--content-overview thead,
-  .dashboard--content-statistics-table tbody, .dashboard--content-overview tbody {
+  .dashboard--content-statistics-table tbody,
+  .dashboard--content-overview tbody {
     display: inline-table;
     min-height: 4em;
     width: 100%; }
@@ -4695,6 +4737,81 @@ a.question--term.taxonomy-keyword {
 .loop-documents--content h2, .loop-documents--content h3 {
   font-weight: bold;
   margin-bottom: 0; }
+
+/**
+ * Contact list module
+ */
+.view-loop-user-contact-list #edit-search-wrapper {
+  position: relative; }
+  .view-loop-user-contact-list #edit-search-wrapper [type="submit"] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+
+.view-loop-user-contact-list th a {
+  color: inherit; }
+
+.view-loop-user-contact-list th img {
+  vertical-align: baseline; }
+
+.view-loop-user-contact-list td {
+  vertical-align: top; }
+  .view-loop-user-contact-list td a {
+    color: inherit;
+    text-decoration: none; }
+
+.video-wrapper-16-9 {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0; }
+  .video-wrapper-16-9 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+/**
+Contact list display.
+ */
+.view-loop-user-contact-list .view-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.view-loop-user-contact-list .profile {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 100%;
+  height: 100%;
+  padding: 1em;
+  box-sizing: border-box; }
+  @media only screen and (min-width: 600px) {
+    .view-loop-user-contact-list .profile {
+      flex: 0 1 50%; } }
+  @media only screen and (min-width: 1200px) {
+    .view-loop-user-contact-list .profile {
+      flex: 0 1 25%; } }
+
+.view-loop-user-contact-list .views-field-field-user-image {
+  margin-bottom: 1em;
+  max-width: 250px; }
+  .view-loop-user-contact-list .views-field-field-user-image img {
+    border: 1px solid #999; }
+
+.view-loop-user-contact-list .views-field-nothing-1 {
+  font-weight: bold; }
+
+.view-loop-user-contact-list .views-field-field-job-title {
+  margin-bottom: .5em; }
+
+.view-loop-user-contact-list .views-field-field-phone-number {
+  margin-bottom: .5em; }
 
 /**
  * Active Tags module

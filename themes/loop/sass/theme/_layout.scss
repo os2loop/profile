@@ -56,6 +56,15 @@
   }
 }
 
+/* Spacing
+   ================================================================================================================== */
+.layout-spacing-top {
+  margin-top: $margin-bottom!important;
+}
+
+.layout-spacing-bottom {
+  margin-bottom: $margin-bottom!important;
+}
 
 
 /* Layouts
@@ -154,6 +163,42 @@
       @include zen-grid-item(12, 1);
 
       padding-left: 0;
+    }
+  }
+
+  > div {
+    // Spacing between blocks.
+    & + div {
+      margin-top: 1.5em;
+    }
+
+    h2 {
+      font-size: 1em;
+      font-weight: bold;
+    }
+  }
+}
+
+.view-id-latest_news {
+  .views-row {
+    display: flex;
+    flex-wrap: nowrap;
+
+    > div {
+      white-space: nowrap;
+
+      &:first-child {
+        flex-grow: 1;
+
+        // Show only one line of text.
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &:last-child {
+        flex-grow: 0;
+        text-align: right;
+      }
     }
   }
 }
@@ -339,5 +384,21 @@
   .layout-element-delta,
   .layout-element-epsilon {
     @include zen-nested-container;
+  }
+}
+
+footer {
+  .block {
+    float: left;
+    width: 100%;
+
+    @include breakpoint(45em) {
+      width: 33%;
+
+      &:last-child {
+        float: right;
+        text-align: right;
+      }
+    }
   }
 }

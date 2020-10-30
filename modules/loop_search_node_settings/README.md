@@ -1,6 +1,8 @@
+# Loop search node settings
+
 This module contains a default configuration for search node.
 
-The API keys and indexes can be overridden in the settings.php using these 
+The API keys and indexes can be overridden in the settings.php using these
 variables.
 
 ```php
@@ -12,7 +14,14 @@ $conf['search_api_loop_search_node_index_posts'] = '';
 $conf['search_api_loop_search_node_index_auto_complete'] = '';
 ```
 
-# Search node mappings`
+## Enabling search filters
+
+Go to
+`/admin/structure/block/manage/search_node_page/search_node_search_box/configure`,
+find “search filters” and enable the filters you want to use.
+
+## Search node mappings
+
 This is the mappings/configuration used inside serarch node.
 
 ```json
