@@ -142,6 +142,7 @@ function loop_search_node_settings_default_search_api_index() {
         "created" : { "type" : "date" },
         "field_description:value" : { "type" : "text" },
         "field_external_link:url" : { "type" : "uri" },
+        "field_keyword" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_keyword:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_profession:name" : { "type" : "list\\u003Ctext\\u003E" },
         "field_subject" : { "type" : "integer", "entity_type" : "taxonomy_term" },
@@ -184,13 +185,20 @@ function loop_search_node_settings_default_search_api_index() {
           "settings" : { "fields" : { "title" : true } }
         },
         "search_api_html_filter" : {
-          "status" : 0,
+          "status" : 1,
           "weight" : "10",
           "settings" : {
-            "fields" : { "title" : true },
+            "fields" : {
+              "title" : true,
+              "comments" : true,
+              "body:value" : true,
+              "body:summary" : true,
+              "field_description:value" : true,
+              "comments:comment_body:value" : true
+            },
             "title" : 0,
             "alt" : 1,
-            "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
+            "tags" : ""
           }
         },
         "search_api_transliteration" : {

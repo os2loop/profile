@@ -12,3 +12,18 @@
 * Provides an alter hook to alter the list of users who should receive
   messages on node add/edit and comment add.
 * Provides admin page for configuring notifications on content types.
+
+## Using SMTP and HTML mails
+
+If you're using the smtp module to send notification emails containing HTML, you
+must install the `htmlmail` module and then go to
+`/admin/config/system/mailsystem` and select `LoopNotificationHtmlMail` for both
+"Site-wide default MailSystemInterface class" and "Mime Mail module class".
+
+See [https://www.drupal.org/node/1200142](https://www.drupal.org/node/1200142)
+for details.
+
+To improve the chances of your mail being received, you can provide a plain text
+version of mails in addition to the HTML version: Go to
+`/admin/config/system/htmlmail` and check “Provide simple plain/text alternative
+of the HTML mail.”

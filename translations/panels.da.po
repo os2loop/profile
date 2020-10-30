@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2020-06-19 12:50+0200\n"
-"PO-Revision-Date: 2020-06-19 12:50+0200\n"
+"POT-Creation-Date: 2020-09-30 14:50+0200\n"
+"PO-Revision-Date: 2020-09-30 14:50+0200\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -42,6 +42,16 @@ msgstr "Indhold af %user:field_first_name %user:field_last_name"
 msgctxt "display_configuration:5c4610bd-d98d-4392-833f-1c60080f8cba:title"
 msgid "Dashboard"
 msgstr "Kontrolpanel"
+
+#: panels:pane_configuration:8d69457f-e73e-4036-a817-04b562ff17c1:override_title_text
+msgctxt "pane_configuration:8d69457f-e73e-4036-a817-04b562ff17c1:override_title_text"
+msgid "Del med en ven"
+msgstr "Del indlæg"
+
+#: panels:pane_configuration:8d69457f-e73e-4036-a817-04b562ff17c1:title
+msgctxt "pane_configuration:8d69457f-e73e-4036-a817-04b562ff17c1:title"
+msgid "Del med en ven"
+msgstr "Del indlæg"
 
 #: panels:display_configuration:24c2a122-e628-4285-8035-99f5feb65405:title
 msgctxt "display_configuration:24c2a122-e628-4285-8035-99f5feb65405:title"

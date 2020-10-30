@@ -761,6 +761,29 @@ function loop_notification_default_page_manager_pages() {
   $display->content['new-cfacbf95-ee75-4774-b13b-cb810741c397'] = $pane;
   $display->panels['beta'][0] = 'new-cfacbf95-ee75-4774-b13b-cb810741c397';
   $pane = new stdClass();
+  $pane->pid = 'new-2519c722-7667-43a2-9fe4-c4ee74dddf85';
+  $pane->panel = 'beta';
+  $pane->type = 'block';
+  $pane->subtype = 'loop_notification-loop_notification_settings_block';
+  $pane->shown = TRUE;
+  $pane->access = array();
+  $pane->configuration = array(
+    'override_title' => 0,
+    'override_title_text' => '',
+    'override_title_heading' => 'h2',
+  );
+  $pane->cache = array();
+  $pane->style = array(
+    'settings' => NULL,
+  );
+  $pane->css = array();
+  $pane->extras = array();
+  $pane->position = 1;
+  $pane->locks = array();
+  $pane->uuid = '2519c722-7667-43a2-9fe4-c4ee74dddf85';
+  $display->content['new-2519c722-7667-43a2-9fe4-c4ee74dddf85'] = $pane;
+  $display->panels['beta'][1] = 'new-2519c722-7667-43a2-9fe4-c4ee74dddf85';
+  $pane = new stdClass();
   $pane->pid = 'new-d0c473d3-099e-4a41-8422-d8451ebb327c';
   $pane->panel = 'beta';
   $pane->type = 'views_panes';
@@ -774,11 +797,11 @@ function loop_notification_default_page_manager_pages() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 1;
+  $pane->position = 2;
   $pane->locks = array();
   $pane->uuid = 'd0c473d3-099e-4a41-8422-d8451ebb327c';
   $display->content['new-d0c473d3-099e-4a41-8422-d8451ebb327c'] = $pane;
-  $display->panels['beta'][1] = 'new-d0c473d3-099e-4a41-8422-d8451ebb327c';
+  $display->panels['beta'][2] = 'new-d0c473d3-099e-4a41-8422-d8451ebb327c';
   $pane = new stdClass();
   $pane->pid = 'new-4e3a42bd-0a95-4e34-b24c-5022026f8c81';
   $pane->panel = 'beta';
@@ -793,11 +816,11 @@ function loop_notification_default_page_manager_pages() {
   );
   $pane->css = array();
   $pane->extras = array();
-  $pane->position = 2;
+  $pane->position = 3;
   $pane->locks = array();
   $pane->uuid = '4e3a42bd-0a95-4e34-b24c-5022026f8c81';
   $display->content['new-4e3a42bd-0a95-4e34-b24c-5022026f8c81'] = $pane;
-  $display->panels['beta'][2] = 'new-4e3a42bd-0a95-4e34-b24c-5022026f8c81';
+  $display->panels['beta'][3] = 'new-4e3a42bd-0a95-4e34-b24c-5022026f8c81';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

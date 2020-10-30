@@ -82,9 +82,10 @@ jQuery(document).ready(function($) {
     return a.hostname;
   }
 
-  $('.search-filters--subjects-wrapper').toggle(false)
-  $('.search-filters--subject-wrapper').on('click', function () {
-    var $target = $('.search-filters--subjects-wrapper')
+  var $facetsContainer = $('.search-filters--facets')
+  $facetsContainer.toggle(false)
+  $('.search-filters--facets-wrapper').on('click', function () {
+    var $target = $facetsContainer
     $target.toggle($target.is(":hidden"))
   })
 

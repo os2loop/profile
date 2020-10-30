@@ -409,6 +409,7 @@ function loop_admin_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'loop_documents_collection' => 'loop_documents_collection',
+    'loop_documents_document' => 'loop_documents_document',
     'external_sources' => 'external_sources',
     'post' => 'post',
   );
@@ -442,6 +443,7 @@ function loop_admin_views_default_views() {
     2 => array(),
     3 => array(),
   );
+  $handler->display->display_options['filters']['field_revision_date_value']['form_type'] = 'date_popup';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

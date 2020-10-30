@@ -31,6 +31,84 @@ function loop_notification_default_rules_configuration() {
       ]
     }
   }');
+  $items['loop_notification_create_notification_on_collection_create'] = entity_import('rules_config', '{ "loop_notification_create_notification_on_collection_create" : {
+      "LABEL" : "Create notification on collection create",
+      "PLUGIN" : "rule set",
+      "OWNER" : "rules",
+      "REQUIRES" : [ "loop_notification", "rules" ],
+      "USES VARIABLES" : {
+        "active_user_object" : { "label" : "Active user objject", "type" : "user" },
+        "node_author" : { "label" : "node_author", "type" : "user" },
+        "node" : { "label" : "node", "type" : "node" }
+      },
+      "RULES" : [
+        { "RULE" : {
+            "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } },
+            "IF" : [
+              { "NOT data_is" : { "data" : [ "active-user-object" ], "value" : [ "node-author" ] } }
+            ],
+            "DO" : [
+              { "entity_create" : {
+                  "USING" : {
+                    "type" : "message",
+                    "param_type" : "document_collection_added",
+                    "param_user" : [ "active-user-object" ]
+                  },
+                  "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } }
+                }
+              },
+              { "data_set" : {
+                  "data" : [ "entity-created:field-message-node-reference" ],
+                  "value" : [ "node" ]
+                }
+              },
+              { "entity_save" : { "data" : [ "entity-created" ], "immediate" : 1 } }
+            ],
+            "LABEL" : "Create notification"
+          }
+        }
+      ]
+    }
+  }');
+  $items['loop_notification_create_notification_on_collection_edit'] = entity_import('rules_config', '{ "loop_notification_create_notification_on_collection_edit" : {
+      "LABEL" : "Create notification on collection edit",
+      "PLUGIN" : "rule set",
+      "OWNER" : "rules",
+      "REQUIRES" : [ "loop_notification", "rules" ],
+      "USES VARIABLES" : {
+        "active_user_object" : { "label" : "Active user objject", "type" : "user" },
+        "node_author" : { "label" : "node_author", "type" : "user" },
+        "node" : { "label" : "node", "type" : "node" }
+      },
+      "RULES" : [
+        { "RULE" : {
+            "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } },
+            "IF" : [
+              { "NOT data_is" : { "data" : [ "active-user-object" ], "value" : [ "node-author" ] } }
+            ],
+            "DO" : [
+              { "entity_create" : {
+                  "USING" : {
+                    "type" : "message",
+                    "param_type" : "document_collection_edited",
+                    "param_user" : [ "active-user-object" ]
+                  },
+                  "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } }
+                }
+              },
+              { "data_set" : {
+                  "data" : [ "entity-created:field-message-node-reference" ],
+                  "value" : [ "node" ]
+                }
+              },
+              { "entity_save" : { "data" : [ "entity-created" ], "immediate" : 1 } }
+            ],
+            "LABEL" : "Create notification"
+          }
+        }
+      ]
+    }
+  }');
   $items['loop_notification_create_notification_on_comment_edit'] = entity_import('rules_config', '{ "loop_notification_create_notification_on_comment_edit" : {
       "LABEL" : "Create notification on comment edit",
       "PLUGIN" : "rule set",
@@ -60,6 +138,84 @@ function loop_notification_default_rules_configuration() {
               { "data_set" : {
                   "data" : [ "entity-created:field-message-node-reference" ],
                   "value" : [ "comment:node" ]
+                }
+              },
+              { "entity_save" : { "data" : [ "entity-created" ], "immediate" : 1 } }
+            ],
+            "LABEL" : "Create notification"
+          }
+        }
+      ]
+    }
+  }');
+  $items['loop_notification_create_notification_on_document_create'] = entity_import('rules_config', '{ "loop_notification_create_notification_on_document_create" : {
+      "LABEL" : "Create notification on document create",
+      "PLUGIN" : "rule set",
+      "OWNER" : "rules",
+      "REQUIRES" : [ "loop_notification", "rules" ],
+      "USES VARIABLES" : {
+        "active_user_object" : { "label" : "Active user objject", "type" : "user" },
+        "node_author" : { "label" : "node_author", "type" : "user" },
+        "node" : { "label" : "node", "type" : "node" }
+      },
+      "RULES" : [
+        { "RULE" : {
+            "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } },
+            "IF" : [
+              { "NOT data_is" : { "data" : [ "active-user-object" ], "value" : [ "node-author" ] } }
+            ],
+            "DO" : [
+              { "entity_create" : {
+                  "USING" : {
+                    "type" : "message",
+                    "param_type" : "document_added",
+                    "param_user" : [ "active-user-object" ]
+                  },
+                  "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } }
+                }
+              },
+              { "data_set" : {
+                  "data" : [ "entity-created:field-message-node-reference" ],
+                  "value" : [ "node" ]
+                }
+              },
+              { "entity_save" : { "data" : [ "entity-created" ], "immediate" : 1 } }
+            ],
+            "LABEL" : "Create notification"
+          }
+        }
+      ]
+    }
+  }');
+  $items['loop_notification_create_notification_on_document_edit'] = entity_import('rules_config', '{ "loop_notification_create_notification_on_document_edit" : {
+      "LABEL" : "Create notification on document edit",
+      "PLUGIN" : "rule set",
+      "OWNER" : "rules",
+      "REQUIRES" : [ "loop_notification", "rules" ],
+      "USES VARIABLES" : {
+        "active_user_object" : { "label" : "Active user objject", "type" : "user" },
+        "node_author" : { "label" : "node_author", "type" : "user" },
+        "node" : { "label" : "node", "type" : "node" }
+      },
+      "RULES" : [
+        { "RULE" : {
+            "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } },
+            "IF" : [
+              { "NOT data_is" : { "data" : [ "active-user-object" ], "value" : [ "node-author" ] } }
+            ],
+            "DO" : [
+              { "entity_create" : {
+                  "USING" : {
+                    "type" : "message",
+                    "param_type" : "document_edited",
+                    "param_user" : [ "active-user-object" ]
+                  },
+                  "PROVIDE" : { "entity_created" : { "entity_created" : "Created entity" } }
+                }
+              },
+              { "data_set" : {
+                  "data" : [ "entity-created:field-message-node-reference" ],
+                  "value" : [ "node" ]
                 }
               },
               { "entity_save" : { "data" : [ "entity-created" ], "immediate" : 1 } }
@@ -148,121 +304,35 @@ function loop_notification_default_rules_configuration() {
       ]
     }
   }');
-  $items['loop_notification_send_mail'] = entity_import('rules_config', '{ "loop_notification_send_mail" : {
-      "LABEL" : "Send mail to subscribers",
-      "PLUGIN" : "rule",
+  $items['rules_autosubscribe_node_loop_documents_collection_author'] = entity_import('rules_config', '{ "rules_autosubscribe_node_loop_documents_collection_author" : {
+      "LABEL" : "Autosubscribe node loop_documents_collection author",
+      "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
-      "REQUIRES" : [ "loop_notification", "rules", "mimemail" ],
-      "USES VARIABLES" : {
-        "node" : { "label" : "node", "type" : "node" },
-        "user" : { "label" : "user", "type" : "user" },
-        "comment" : { "label" : "comment", "type" : "comment" }
-      },
-      "IF" : [
-        { "NOT data_is" : { "data" : [ "user:uid" ], "value" : [ "comment:author:uid" ] } }
-      ],
+      "REQUIRES" : [ "flag", "rules" ],
+      "ON" : { "node_insert--loop_documents_collection" : { "bundle" : "loop_documents_collection" } },
       "DO" : [
-        { "mimemail" : {
-            "USING" : {
-              "key" : "Mail on message creation",
-              "to" : "[user:mail]",
-              "from_mail" : "[site:mail]",
-              "subject" : "[loop:loop_notification_send_mail_subject]",
-              "body" : "[loop:loop_notification_send_mail_body]",
-              "attachments" : [ "" ],
-              "language" : [ "" ]
-            },
-            "PROVIDE" : { "send_status" : { "send_status" : "Send status" } }
+        { "flag_flagnode" : {
+            "flag" : "subscribe_node",
+            "node" : [ "node" ],
+            "flagging_user" : [ "node:author" ],
+            "permission_check" : 0
           }
         }
       ]
     }
   }');
-  $items['loop_notification_send_mail_to_subscribers_on_comment_edit'] = entity_import('rules_config', '{ "loop_notification_send_mail_to_subscribers_on_comment_edit" : {
-      "LABEL" : "Send mail to subscribers on comment edit",
-      "PLUGIN" : "rule",
+  $items['rules_autosubscribe_node_loop_documents_document_author'] = entity_import('rules_config', '{ "rules_autosubscribe_node_loop_documents_document_author" : {
+      "LABEL" : "Autosubscribe node loop_documents_document author",
+      "PLUGIN" : "reaction rule",
       "OWNER" : "rules",
-      "REQUIRES" : [ "loop_notification", "rules", "mimemail" ],
-      "USES VARIABLES" : {
-        "node" : { "label" : "node", "type" : "node" },
-        "user" : { "label" : "user", "type" : "user" },
-        "comment" : { "label" : "comment", "type" : "comment" }
-      },
-      "IF" : [
-        { "NOT data_is" : { "data" : [ "user:uid" ], "value" : [ "comment:author:uid" ] } }
-      ],
+      "REQUIRES" : [ "flag", "rules" ],
+      "ON" : { "node_insert--loop_documents_document" : { "bundle" : "loop_documents_document" } },
       "DO" : [
-        { "mimemail" : {
-            "USING" : {
-              "key" : "Mail on message creation",
-              "to" : "[user:mail]",
-              "from_mail" : "[site:mail]",
-              "subject" : "[loop:loop_notification_send_mail_to_subscribers_on_comment_edit_subject]",
-              "body" : "[loop:loop_notification_send_mail_to_subscribers_on_comment_edit_body]",
-              "attachments" : [ "" ],
-              "language" : [ "" ]
-            },
-            "PROVIDE" : { "send_status" : { "send_status" : "Send status" } }
-          }
-        }
-      ]
-    }
-  }');
-  $items['loop_notification_send_mail_to_subscribers_on_node_create'] = entity_import('rules_config', '{ "loop_notification_send_mail_to_subscribers_on_node_create" : {
-      "LABEL" : "Send mail to subscribers on node create",
-      "PLUGIN" : "rule",
-      "OWNER" : "rules",
-      "REQUIRES" : [ "loop_notification", "rules", "mimemail" ],
-      "USES VARIABLES" : {
-        "node" : { "label" : "node", "type" : "node" },
-        "user" : { "label" : "user", "type" : "user" },
-        "comment" : { "label" : "comment", "type" : "comment" }
-      },
-      "IF" : [
-        { "NOT data_is" : { "data" : [ "user:uid" ], "value" : [ "node:author:uid" ] } }
-      ],
-      "DO" : [
-        { "mimemail" : {
-            "USING" : {
-              "key" : "Mail on message creation",
-              "to" : "[user:mail]",
-              "from_mail" : "[site:mail]",
-              "subject" : "[loop:loop_notification_send_mail_to_subscribers_on_node_create_subject]",
-              "body" : "[loop:loop_notification_send_mail_to_subscribers_on_node_create_body]",
-              "attachments" : [ "" ],
-              "language" : [ "" ]
-            },
-            "PROVIDE" : { "send_status" : { "send_status" : "Send status" } }
-          }
-        }
-      ]
-    }
-  }');
-  $items['loop_notification_send_mail_to_subscribers_on_node_edit'] = entity_import('rules_config', '{ "loop_notification_send_mail_to_subscribers_on_node_edit" : {
-      "LABEL" : "Send mail to subscribers on node edit",
-      "PLUGIN" : "rule",
-      "OWNER" : "rules",
-      "REQUIRES" : [ "loop_notification", "rules", "mimemail" ],
-      "USES VARIABLES" : {
-        "node" : { "label" : "node", "type" : "node" },
-        "user" : { "label" : "user", "type" : "user" },
-        "comment" : { "label" : "comment", "type" : "comment" }
-      },
-      "IF" : [
-        { "NOT data_is" : { "data" : [ "user:uid" ], "value" : [ "node:author:uid" ] } }
-      ],
-      "DO" : [
-        { "mimemail" : {
-            "USING" : {
-              "key" : "Mail on message creation",
-              "to" : "[user:mail]",
-              "from_mail" : "[site:mail]",
-              "subject" : "[loop:loop_notification_send_mail_to_subscribers_on_node_edit_subject]",
-              "body" : "[loop:loop_notification_send_mail_to_subscribers_on_node_edit_body]",
-              "attachments" : [ "" ],
-              "language" : [ "" ]
-            },
-            "PROVIDE" : { "send_status" : { "send_status" : "Send status" } }
+        { "flag_flagnode" : {
+            "flag" : "subscribe_node",
+            "node" : [ "node" ],
+            "flagging_user" : [ "node:author" ],
+            "permission_check" : 0
           }
         }
       ]

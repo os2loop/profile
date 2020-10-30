@@ -116,6 +116,9 @@ function loop_search_db_theme() {
       'render element' => 'form',
       'template' => 'loop-search-db--form',
     ],
+    'loop_search_db_facet' => [
+      'template' => 'loop-search-db--facet',
+    ],
   ];
 }
 
@@ -202,23 +205,13 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
     return $facet['active'];
   }));
 
-  $query = new EntityFieldQuery();
-  $result = $query
-    ->entityCondition('entity_type', 'taxonomy_term')
-    ->entityCondition('bundle', 'subject')
-    ->execute();
-  $terms = taxonomy_term_load_multiple(array_column($result['taxonomy_term'] ?? [], 'tid'));
-  usort($terms, static function ($a, $b) {
-    return $a->name <=> $b->name;
-  });
-
+  $tree = _loop_search_get_taxonomy_tree('subject');
   $facet_name = 'field_subject:name';
-  $form['#facets'][$facet_name] = array_map(static function ($term) use ($facet_name) {
-    return [
-      'filter' => $term->name,
-      'active' => in_array($term->name, loop_search_db_get_active_filters($facet_name), TRUE),
-    ];
-  }, $terms);
+  $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
+
+  $tree = _loop_search_get_taxonomy_tree('keyword');
+  $facet_name = 'field_keyword:name';
+  $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
 
   $form['#sorts'] = [
     [
@@ -333,4 +326,74 @@ function _loop_search_is_sort_active($field, $direction) {
   $query = drupal_get_query_parameters();
 
   return ($query['sort'] ?? NULL) === $field && ($query['order'] ?? NULL) === $direction;
+}
+
+/**
+ * Get taxonomy terms tree.
+ *
+ * @param string $name
+ *   The taxonomy name.
+ *
+ * @return array|null
+ *   The tree if any.
+ */
+function _loop_search_get_taxonomy_tree($name) {
+  $vocabulary = taxonomy_vocabulary_machine_name_load($name);
+  if (!$vocabulary) {
+    return NULL;
+  }
+  $tree = taxonomy_get_tree($vocabulary->vid);
+
+  return taxonomy_get_nested_tree($tree);
+}
+
+/**
+ * Get taxonomy tree.
+ *
+ * @see https://www.drupal.org/forum/support/post-installation/2010-06-18/solved-how-to-show-all-taxonomy-terms-in-a-hierarchical#comment-3839146
+ */
+function taxonomy_get_nested_tree($terms = [], $max_depth = NULL, $parent = 0, $parents_index = [], $depth = 0) {
+  $tree = [];
+
+  foreach ($terms as $term) {
+    foreach ($term->parents as $term_parent) {
+      if ($term_parent == $parent) {
+        $tree[$term->tid] = $term;
+      }
+      else {
+        $parents_index[$term_parent][$term->tid] = $term;
+      }
+    }
+  }
+
+  foreach ($tree as &$term) {
+    if (isset($parents_index[$term->tid]) && (is_null($max_depth) || $depth < $max_depth)) {
+      $term->children = taxonomy_get_nested_tree($parents_index[$term->tid], $max_depth, $term->tid, $parents_index, $depth + 1);
+    }
+  }
+
+  return $tree;
+}
+
+/**
+ * Build facets form taxonomy terms tree.
+ *
+ * @param string $facet_name
+ *   The facet name.
+ * @param array $tree
+ *   The taxonomy terms tree.
+ *
+ * @return array
+ *   The facets.
+ */
+function _loop_search_build_facets($facet_name, array $tree) {
+  $term_to_facet = static function ($term) use ($facet_name, &$term_to_facet) {
+    return [
+      'filter' => $term->name,
+      'active' => in_array($term->name, loop_search_db_get_active_filters($facet_name), TRUE),
+      'children' => isset($term->children) ? array_map($term_to_facet, $term->children) : NULL,
+    ];
+  };
+
+  return array_map($term_to_facet, $tree);
 }

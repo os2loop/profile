@@ -849,7 +849,7 @@ label {
   margin-bottom: 0;
   margin-top: 1.5em; }
 
-.page-user .button--action:last-child, .page-user .form-submit:last-child, .page-user .block-follow-question .flag-action:last-child, .block-follow-question .page-user .flag-action:last-child, .page-user .search-box-block--button:last-child, .page-user .search-filters--action:last-child, .page-user .typeahead-block--button:last-child, .page-user .loop-documents--collection-print a:last-child, .loop-documents--collection-print .page-user a:last-child {
+.page-user .button--action:last-child, .page-user .form-submit:last-child, .page-user .block-follow-question .flag-action:last-child, .block-follow-question .page-user .flag-action:last-child, .page-user .search-box-block--button:last-child, .page-user .search-filters--action:last-child, .page-user .typeahead-block--button:last-child, .page-user .loop-documents--collection-print a:last-child, .loop-documents--collection-print .page-user a:last-child, .page-user .loop-documents--document-print a:last-child, .loop-documents--document-print .page-user a:last-child {
   margin-bottom: 0.75em; }
 
 .page-user .user-form--password-link {
@@ -866,7 +866,7 @@ label {
  *
  * @author magnify
  */
-.button--action, .form-submit, .block-follow-question .flag-action, .search-box-block--button, .search-filters--action, .typeahead-block--button, .loop-documents--collection-print a, .button--neutral, #user-register-form #edit-field-user-image-und-0-upload-button,
+.button--action, .form-submit, .block-follow-question .flag-action, .search-box-block--button, .search-filters--action, .typeahead-block--button, .loop-documents--collection-print a, .loop-documents--document-print a, .button--neutral, #user-register-form #edit-field-user-image-und-0-upload-button,
 .user-profile-form #edit-field-user-image-und-0-upload-button, .comments--editor-actions .comments--editor-actions-edit, .question--editor-actions .question--editor-actions-edit, .edit-user--image-button-add, .button--warning, .comments--editor-actions .comments--editor-actions-delete, .block-follow-question .unflag-action, .question--editor-actions .question--editor-actions-delete, .edit-user--image-button-remove, .at-add-btn {
   display: inline-block;
   font-size: 1.25em;
@@ -882,24 +882,24 @@ label {
   -ms-border-radius: 0.4em;
   -o-border-radius: 0.4em;
   border-radius: 0.4em; }
-  .button--action:focus, .form-submit:focus, .block-follow-question .flag-action:focus, .search-box-block--button:focus, .search-filters--action:focus, .typeahead-block--button:focus, .loop-documents--collection-print a:focus, .button--neutral:focus, #user-register-form #edit-field-user-image-und-0-upload-button:focus,
-  .user-profile-form #edit-field-user-image-und-0-upload-button:focus, .comments--editor-actions .comments--editor-actions-edit:focus, .question--editor-actions .question--editor-actions-edit:focus, .edit-user--image-button-add:focus, .button--warning:focus, .comments--editor-actions .comments--editor-actions-delete:focus, .block-follow-question .unflag-action:focus, .question--editor-actions .question--editor-actions-delete:focus, .edit-user--image-button-remove:focus, .at-add-btn:focus, .button--action:hover, .form-submit:hover, .block-follow-question .flag-action:hover, .search-box-block--button:hover, .search-filters--action:hover, .typeahead-block--button:hover, .loop-documents--collection-print a:hover, .button--neutral:hover, #user-register-form #edit-field-user-image-und-0-upload-button:hover,
-  .user-profile-form #edit-field-user-image-und-0-upload-button:hover, .comments--editor-actions .comments--editor-actions-edit:hover, .question--editor-actions .question--editor-actions-edit:hover, .edit-user--image-button-add:hover, .button--warning:hover, .comments--editor-actions .comments--editor-actions-delete:hover, .block-follow-question .unflag-action:hover, .question--editor-actions .question--editor-actions-delete:hover, .edit-user--image-button-remove:hover, .at-add-btn:hover, .button--action:active, .form-submit:active, .block-follow-question .flag-action:active, .search-box-block--button:active, .search-filters--action:active, .typeahead-block--button:active, .loop-documents--collection-print a:active, .button--neutral:active, #user-register-form #edit-field-user-image-und-0-upload-button:active,
+  .button--action:focus, .form-submit:focus, .block-follow-question .flag-action:focus, .search-box-block--button:focus, .search-filters--action:focus, .typeahead-block--button:focus, .loop-documents--collection-print a:focus, .loop-documents--document-print a:focus, .button--neutral:focus, #user-register-form #edit-field-user-image-und-0-upload-button:focus,
+  .user-profile-form #edit-field-user-image-und-0-upload-button:focus, .comments--editor-actions .comments--editor-actions-edit:focus, .question--editor-actions .question--editor-actions-edit:focus, .edit-user--image-button-add:focus, .button--warning:focus, .comments--editor-actions .comments--editor-actions-delete:focus, .block-follow-question .unflag-action:focus, .question--editor-actions .question--editor-actions-delete:focus, .edit-user--image-button-remove:focus, .at-add-btn:focus, .button--action:hover, .form-submit:hover, .block-follow-question .flag-action:hover, .search-box-block--button:hover, .search-filters--action:hover, .typeahead-block--button:hover, .loop-documents--collection-print a:hover, .loop-documents--document-print a:hover, .button--neutral:hover, #user-register-form #edit-field-user-image-und-0-upload-button:hover,
+  .user-profile-form #edit-field-user-image-und-0-upload-button:hover, .comments--editor-actions .comments--editor-actions-edit:hover, .question--editor-actions .question--editor-actions-edit:hover, .edit-user--image-button-add:hover, .button--warning:hover, .comments--editor-actions .comments--editor-actions-delete:hover, .block-follow-question .unflag-action:hover, .question--editor-actions .question--editor-actions-delete:hover, .edit-user--image-button-remove:hover, .at-add-btn:hover, .button--action:active, .form-submit:active, .block-follow-question .flag-action:active, .search-box-block--button:active, .search-filters--action:active, .typeahead-block--button:active, .loop-documents--collection-print a:active, .loop-documents--document-print a:active, .button--neutral:active, #user-register-form #edit-field-user-image-und-0-upload-button:active,
   .user-profile-form #edit-field-user-image-und-0-upload-button:active, .comments--editor-actions .comments--editor-actions-edit:active, .question--editor-actions .question--editor-actions-edit:active, .edit-user--image-button-add:active, .button--warning:active, .comments--editor-actions .comments--editor-actions-delete:active, .block-follow-question .unflag-action:active, .question--editor-actions .question--editor-actions-delete:active, .edit-user--image-button-remove:active, .at-add-btn:active {
     text-decoration: none; }
-  .button--action:last-child, .form-submit:last-child, .block-follow-question .flag-action:last-child, .search-box-block--button:last-child, .search-filters--action:last-child, .typeahead-block--button:last-child, .loop-documents--collection-print a:last-child, .button--neutral:last-child, #user-register-form #edit-field-user-image-und-0-upload-button:last-child,
+  .button--action:last-child, .form-submit:last-child, .block-follow-question .flag-action:last-child, .search-box-block--button:last-child, .search-filters--action:last-child, .typeahead-block--button:last-child, .loop-documents--collection-print a:last-child, .loop-documents--document-print a:last-child, .button--neutral:last-child, #user-register-form #edit-field-user-image-und-0-upload-button:last-child,
   .user-profile-form #edit-field-user-image-und-0-upload-button:last-child, .comments--editor-actions .comments--editor-actions-edit:last-child, .question--editor-actions .question--editor-actions-edit:last-child, .edit-user--image-button-add:last-child, .button--warning:last-child, .comments--editor-actions .comments--editor-actions-delete:last-child, .block-follow-question .unflag-action:last-child, .question--editor-actions .question--editor-actions-delete:last-child, .edit-user--image-button-remove:last-child, .at-add-btn:last-child {
     margin: 0 0 0.5em; }
 
-.button--action, .form-submit, .block-follow-question .flag-action, .search-box-block--button, .search-filters--action, .typeahead-block--button, .loop-documents--collection-print a {
+.button--action, .form-submit, .block-follow-question .flag-action, .search-box-block--button, .search-filters--action, .typeahead-block--button, .loop-documents--collection-print a, .loop-documents--document-print a {
   background-color: #5d80c2;
   border: 1px solid #4166ab;
   color: #fff;
   text-shadow: 1px 1px 0 #335086; }
-  .button--action:link, .form-submit:link, .block-follow-question .flag-action:link, .search-box-block--button:link, .search-filters--action:link, .typeahead-block--button:link, .loop-documents--collection-print a:link, .button--action:visited, .form-submit:visited, .block-follow-question .flag-action:visited, .search-box-block--button:visited, .search-filters--action:visited, .typeahead-block--button:visited, .loop-documents--collection-print a:visited {
+  .button--action:link, .form-submit:link, .block-follow-question .flag-action:link, .search-box-block--button:link, .search-filters--action:link, .typeahead-block--button:link, .loop-documents--collection-print a:link, .loop-documents--document-print a:link, .button--action:visited, .form-submit:visited, .block-follow-question .flag-action:visited, .search-box-block--button:visited, .search-filters--action:visited, .typeahead-block--button:visited, .loop-documents--collection-print a:visited, .loop-documents--document-print a:visited {
     color: #fff;
     text-decoration: none; }
-  .button--action:hover, .form-submit:hover, .block-follow-question .flag-action:hover, .search-box-block--button:hover, .search-filters--action:hover, .typeahead-block--button:hover, .loop-documents--collection-print a:hover {
+  .button--action:hover, .form-submit:hover, .block-follow-question .flag-action:hover, .search-box-block--button:hover, .search-filters--action:hover, .typeahead-block--button:hover, .loop-documents--collection-print a:hover, .loop-documents--document-print a:hover {
     background-color: #4166ab; }
 
 .button--neutral, #user-register-form #edit-field-user-image-und-0-upload-button,
@@ -1059,7 +1059,7 @@ label {
    ================================================================================================================== */
 .comment--flag.is-sticky:before, .messages.status:before, .comment--flag:before, .user-profile--answers-best-count:before, .at-term:after, .messages.error:before, .message--flag:before, .search-result--comments:before, .question--number-of-comments:before, .search-node-result--comments:before, .user-profile--answers-count:before, .messages.warning:before, .nav-mobile .nav--link:before, .nav-mobile .nav--wrapper .nav--frontpage-link:before, .nav--wrapper .nav-mobile .nav--frontpage-link:before, .nav-mobile .nav--logout:before,
 .nav-mobile .nav-dropdown--header:before,
-.nav-mobile .nav-dropdown--link:before, .block-module--user-links-item a:before, .block-module--my-content-item a:before, .guide--nav-list-item .active:before, .loop-documents--collection-title a:before, .loop-documents--collection-title span:before, .loop-documents--collection-meta-title:after, .loop-documents--collection-navigation ul li a:before, .loop-documents--collection-meta-title.is-shown:after, .loop-documents--metadata.is-shown .loop-documents--collection-meta-title:after, .nav-dropdown .nav-dropdown--header::after, .search-filters--subject-wrapper-label::after, .twitter-typeahead:before, .dashboard-list--filter:before, .dashboard-list--icon:before, .dashboard-list--question-title:before, .comments--abuse a:before, .question--links a:before {
+.nav-mobile .nav-dropdown--link:before, .block-module--user-links-item a:before, .block-module--my-content-item a:before, .guide--nav-list-item .active:before, .loop-documents--collection-title a:before, .loop-documents--collection-title span:before, .loop-documents--collection-meta-title:after, .loop-documents--collection-navigation ul li a:before, .loop-documents--collection-meta-title.is-shown:after, .loop-documents--metadata.is-shown .loop-documents--collection-meta-title:after, .nav-dropdown .nav-dropdown--header::after, .search-filters--facets-wrapper-label::after, .twitter-typeahead:before, .dashboard-list--filter:before, .dashboard-list--icon:before, .dashboard-list--question-title:before, .comments--abuse a:before, .question--links a:before {
   display: inline-block;
   font-family: "loop-icons";
   line-height: 100%; }
@@ -1069,7 +1069,7 @@ label {
 .nav-mobile .nav-dropdown--link:before, .block-module--user-links-item a:before, .block-module--my-content-item a:before, .comments--abuse a:before, .comment--flag:before, .guide--nav-list-item .active:before, .question--links a:before, .search-result--comments:before, .question--number-of-comments:before, .search-node-result--comments:before, .user-profile--answers-count:before, .user-profile--answers-best-count:before, .dashboard-list--filter:before, .dashboard-list--icon:before, .dashboard-list--question-title:before, .loop-documents--collection-title a:before, .loop-documents--collection-title span:before, .loop-documents--collection-navigation ul li a:before, .messages.status:before, .messages.warning:before, .messages.error:before {
   margin-right: .35em; }
 
-.nav-dropdown .nav-dropdown--header::after, .search-filters--subject-wrapper-label::after, .at-term:after {
+.nav-dropdown .nav-dropdown--header::after, .search-filters--facets-wrapper-label::after, .at-term:after {
   margin-left: .35em; }
 
 .comment--flag.is-sticky:before {
@@ -1101,7 +1101,7 @@ label {
 .loop-documents--collection-meta-title.is-shown:after, .loop-documents--metadata.is-shown .loop-documents--collection-meta-title:after {
   content: '\e802'; }
 
-.nav-dropdown .nav-dropdown--header::after, .search-filters--subject-wrapper-label::after {
+.nav-dropdown .nav-dropdown--header::after, .search-filters--facets-wrapper-label::after {
   content: '\e813'; }
 
 .twitter-typeahead:before {
@@ -1119,7 +1119,7 @@ label {
 .comments--abuse a:before, .question--links a:before {
   content: '\e812'; }
 
-.nav-dropdown .nav-dropdown--header::after, .search-filters--subject-wrapper-label::after {
+.nav-dropdown .nav-dropdown--header::after, .search-filters--facets-wrapper-label::after {
   position: absolute;
   line-height: 0;
   top: 50%;
@@ -1420,6 +1420,26 @@ label {
     _overflow: hidden;
     _overflow-y: visible;
     padding-left: 0; } }
+
+.layout-frontpage > div + div {
+  margin-top: 1.5em; }
+
+.layout-frontpage > div h2 {
+  font-size: 1em;
+  font-weight: bold; }
+
+.view-id-latest_news .views-row {
+  display: flex;
+  flex-wrap: nowrap; }
+  .view-id-latest_news .views-row > div {
+    white-space: nowrap; }
+    .view-id-latest_news .views-row > div:first-child {
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .view-id-latest_news .views-row > div:last-child {
+      flex-grow: 0;
+      text-align: right; }
 
 .layout-dashboard .layout-element-alpha {
   border-bottom: 1px solid #e6e6e6;
@@ -2854,8 +2874,9 @@ This file is generated by `grunt build`, do not edit it by hand.
 .editing--revision-date .views-exposed-form label {
   display: none; }
 
-.editing--revision-date .views-exposed-form .views-widget > div {
-  float: left; }
+.editing--revision-date .views-exposed-form .views-widget > div > div {
+  float: left;
+  margin-right: 1em; }
 
 .editing--revision-date .views-exposed-form .description {
   clear: left;
@@ -3589,7 +3610,7 @@ a.question--term {
  */
 /* Placeholders related to this document
    ========================================================================== */
-.search-filters--label, .search-filters--subject-wrapper-label {
+.search-filters--label, .search-filters--facets-wrapper-label {
   background: #fff;
   border-top: 1px solid;
   border-bottom: 1px solid;
@@ -3600,7 +3621,7 @@ a.question--term {
   flex: 1 0 auto;
   padding: .5em;
   text-align: center; }
-  .search-filters--label:first-child, .search-filters--subject-wrapper-label:first-child {
+  .search-filters--label:first-child, .search-filters--facets-wrapper-label:first-child {
     border-left: 1px solid;
     border-color: #4166ab;
     -webkit-border-radius: 0.4em 0 0 0.4em;
@@ -3608,19 +3629,19 @@ a.question--term {
     -ms-border-radius: 0.4em 0 0 0.4em;
     -o-border-radius: 0.4em 0 0 0.4em;
     border-radius: 0.4em 0 0 0.4em; }
-  .search-filters--label:last-child, .search-filters--subject-wrapper-label:last-child {
+  .search-filters--label:last-child, .search-filters--facets-wrapper-label:last-child {
     -webkit-border-radius: 0 0.4em 0.4em 0;
     -moz-border-radius: 0 0.4em 0.4em 0;
     -ms-border-radius: 0 0.4em 0.4em 0;
     -o-border-radius: 0 0.4em 0.4em 0;
     border-radius: 0 0.4em 0.4em 0; }
-  .search-filters--label:first-child:last-child, .search-filters--subject-wrapper-label:first-child:last-child {
+  .search-filters--label:first-child:last-child, .search-filters--facets-wrapper-label:first-child:last-child {
     -webkit-border-radius: 0.4em;
     -moz-border-radius: 0.4em;
     -ms-border-radius: 0.4em;
     -o-border-radius: 0.4em;
     border-radius: 0.4em; }
-  .is-active.search-filters--label, .is-active.search-filters--subject-wrapper-label {
+  .is-active.search-filters--label, .is-active.search-filters--facets-wrapper-label {
     background: #4166ab;
     color: #fff; }
 
@@ -3653,14 +3674,14 @@ a.question--term {
     @media only screen and (min-width: 43em) {
       .search-filters--type {
         flex: 0 0 60%; } }
-  .search-filters--subject-wrapper {
+  .search-filters--facets-wrapper {
     display: flex;
     flex: 0 0 100%;
     margin: 2em 0; }
     @media only screen and (min-width: 43em) {
-      .search-filters--subject-wrapper {
+      .search-filters--facets-wrapper {
         flex: 0 1 35%; } }
-  .search-filters--subjects {
+  .search-filters--facets {
     background: #fff;
     box-sizing: border-box;
     flex: 0 0 100%;
@@ -3672,18 +3693,20 @@ a.question--term {
     -ms-border-radius: 0.4em;
     -o-border-radius: 0.4em;
     border-radius: 0.4em; }
-    .search-filters--subjects-inner {
+    .search-filters--facets-facet-items {
       display: flex;
       flex-wrap: wrap; }
-    .search-filters--subjects-item {
+    .search-filters--facets-item {
       flex: 1 0 100%; }
       @media only screen and (min-width: 800px) {
-        .search-filters--subjects-item {
+        .search-filters--facets-item {
           flex: 0 1 50%; } }
       @media only screen and (min-width: 1000px) {
-        .search-filters--subjects-item {
+        .search-filters--facets-item {
           flex: 0 1 33%; } }
-      .search-filters--subjects-item-inner {
+      .search-filters--facets-item-depth-0 {
+        font-weight: bold; }
+      .search-filters--facets-item-inner {
         box-sizing: border-box;
         display: flex;
         height: 60px;
@@ -3691,7 +3714,7 @@ a.question--term {
         padding-left: 21px;
         padding-right: 2em;
         padding-top: 1em; }
-        .search-filters--subjects-item-inner input[type=checkbox] {
+        .search-filters--facets-item-inner input[type=checkbox] {
           -webkit-appearance: none;
           -moz-appearance: none;
           flex: 0 0 20px;
@@ -3703,22 +3726,24 @@ a.question--term {
           border: 1px solid #4166ab;
           border-radius: .3em;
           border-color: #4166ab; }
-          .search-filters--subjects-item-inner input[type=checkbox]:focus {
+          .search-filters--facets-item-inner input[type=checkbox]:focus {
             border-color: #4166ab; }
-          .search-filters--subjects-item-inner input[type=checkbox]:checked {
+          .search-filters--facets-item-inner input[type=checkbox]:checked {
             border: 2px solid #4166ab;
             background-color: #4166ab;
             background-image: url("../icons/check.svg");
             background-repeat: no-repeat;
             background-size: 15px 15px;
             background-position: center center; }
-          .search-filters--subjects-item-inner input[type=checkbox]:focus {
+          .search-filters--facets-item-inner input[type=checkbox]:focus {
             outline: none; }
-          .search-filters--subjects-item-inner input[type=checkbox]:checked {
+          .search-filters--facets-item-inner input[type=checkbox]:checked {
             border-color: #4166ab;
             background-color: #4166ab; }
-        .search-filters--subjects-item-inner input {
+        .search-filters--facets-item-inner input {
           margin-left: -21px; }
+    .search-filters--facets-children {
+      padding-left: 1em; }
   .search-filters--arrow {
     position: absolute;
     top: -30px;
@@ -3736,9 +3761,9 @@ a.question--term {
     top: .85em;
     right: 1em;
     max-width: .85em; }
-  .search-filters--subjects-wrapper {
+  .search-filters--facets-wrapper {
     width: 100%; }
-  .search-filters--subject-wrapper-label {
+  .search-filters--facets-wrapper-label {
     position: relative;
     -webkit-border-radius: 0.4em;
     -moz-border-radius: 0.4em;
@@ -3806,7 +3831,10 @@ label.search-filters--label {
   font-size: 18px;
   text-decoration: none;
   margin-bottom: 1em;
-  line-height: 1em; }
+  line-height: 1em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
   .search-node-result--link:hover {
     color: #4166ab; }
 
@@ -4616,6 +4644,23 @@ a.question--term.taxonomy-keyword {
     .view-loop-user-taxonomy-subscriptions .subscriptions--item {
       flex: 0 1 50%; } }
 
+.view-loop-user-taxonomy-subscriptions > .view-content > .item-list li {
+  list-style: none; }
+  .view-loop-user-taxonomy-subscriptions > .view-content > .item-list li a {
+    font-weight: bold; }
+  .view-loop-user-taxonomy-subscriptions > .view-content > .item-list li li a {
+    font-weight: normal; }
+
+.view-loop-user-taxonomy-subscriptions > .view-content > .item-list > ul {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap; }
+  .view-loop-user-taxonomy-subscriptions > .view-content > .item-list > ul > li {
+    flex: 0 0 100%; }
+    @media only screen and (min-width: 1000px) {
+      .view-loop-user-taxonomy-subscriptions > .view-content > .item-list > ul > li {
+        flex: 0 1 50%; } }
+
 .view-loop-user-subscriptions .subscriptions--item {
   flex: 0 0 100%;
   margin: 1em 0; }
@@ -4713,7 +4758,7 @@ a.question--term.taxonomy-keyword {
 .loop-documents--collection-navigation ul li {
   padding-top: .5em; }
 
-.loop-documents--collection-print a {
+.loop-documents--collection-print a, .loop-documents--document-print a {
   box-sizing: border-box;
   color: #fff;
   font-size: 1em;

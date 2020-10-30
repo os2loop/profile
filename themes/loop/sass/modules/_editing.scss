@@ -38,8 +38,10 @@
       display: none;
     }
 
-    .views-widget > div {
+    // Inline revision date range.
+    .views-widget > div > div {
       float: left;
+      margin-right: 1em;
     }
 
     .description {
