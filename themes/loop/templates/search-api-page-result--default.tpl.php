@@ -56,7 +56,9 @@
     <?php if (isset($item->field_subject[LANGUAGE_NONE][0]['tid'])): ?>
       <?php $subject = taxonomy_term_load($item->field_subject[LANGUAGE_NONE][0]['tid']); ?>
       <div class="search-node-result--data-wrapper-subject"><?php print t('Subject'); ?>:
-        <div class="search-node-result--subject" data-filter-update="<?php print htmlspecialchars(json_encode(['field_subject', $subject->name])); ?>"><?php print $subject->name; ?></div>
+        <div class="search-node-result--subject" data-filter-update="<?php
+print htmlspecialchars(json_encode(['field_subject', $subject->name]));
+?>"><?php print $subject->name; ?></div>
       </div>
     <?php endif; ?>
 

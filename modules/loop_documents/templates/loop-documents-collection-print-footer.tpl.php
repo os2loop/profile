@@ -52,7 +52,10 @@
           <?php endif ?>
        </div>
        <div class="page-numbers">
-         <div id="page-number"><?php echo t('Page @page of @total_pages', array('@page' => '[page]', '@total_pages' => '[topage]')); ?></div>
+         <div id="page-number"><?php echo t('Page @page of @total_pages', [
+                                 '@page' => '[page]',
+                                 '@total_pages' => '[topage]',
+                                 ]); ?></div>
        </div>
     </div>
   </body>

@@ -33,7 +33,7 @@ projects[ckeditor_link][subdir] = "contrib"
 projects[ckeditor_link][version] = "2.4"
 
 projects[date][subdir] = "contrib"
-projects[date][version] = "2.10"
+projects[date][version] = "2.x-dev"
 
 projects[diff][subdir] = "contrib"
 projects[diff][version] = "3.4"
@@ -79,6 +79,9 @@ projects[globalredirect][version] = "1.6"
 
 projects[html5_tools][subdir] = "contrib"
 projects[html5_tools][version] = "1.3"
+
+projects[htmlmail][subdir] = "contrib"
+projects[htmlmail][version] = "2.71"
 
 projects[i18n][subdir] = "contrib"
 projects[i18n][version] = "1.27"
@@ -221,6 +224,7 @@ projects[search_node_page][subdir] = "contrib"
 projects[search_node_page][download][type] = "git"
 projects[search_node_page][download][url] = "http://github.com/search-node/search_node_page.git"
 projects[search_node_page][download][tag] = "7.x-1.3.5"
+projects[search_node_page][patch][] = "https://github.com/search-node/search_node_page/compare/7.x-1.3.5...rimi-itk:feature/pass-term-along.patch"
 
 projects[secure_permissions][subdir] = "contrib"
 projects[secure_permissions][version] = "1.6"
@@ -262,6 +266,10 @@ projects[token][patch] = "https://www.drupal.org/files/issues/token-field_descri
 projects[transliteration][subdir] = "contrib"
 projects[transliteration][version] = "3.2"
 
+projects[user_import][subdir] = "contrib"
+projects[user_import][version] = "3.x-dev"
+projects[user_import][patch][] = "https://raw.githubusercontent.com/os2loop/profile/release/patches/user_import-_user_import_publication_email.patch"
+
 projects[uuid][subdir] = "contrib"
 projects[uuid][version] = "1.3"
 
@@ -286,6 +294,9 @@ projects[views_bulk_operations][version] = "3.6"
 
 projects[views_flag_refresh][subdir] = "contrib"
 projects[views_flag_refresh][version] = "1.3"
+
+projects[views_tree][subdir] = "contrib"
+projects[views_tree][version] = "2.0"
 
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.6"

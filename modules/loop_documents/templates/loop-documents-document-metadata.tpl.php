@@ -1,4 +1,4 @@
-<?php
+<?php // @codingStandardsIgnoreFile
 
 /**
  * @file
@@ -7,13 +7,14 @@
 ?>
 <?php
 $metadata_values = array_map(function ($field_name) use ($document) {
-  $field = field_view_field('node', $document, $field_name, array('label' => 'hidden'));
+  $field = field_view_field('node', $document, $field_name, ['label' => 'hidden']);
+
   return render($field);
-}, array(
+}, [
   'author' => 'field_loop_documents_author',
   'keyword' => 'field_keyword',
   'subject' => 'field_subject',
-));
+]);
 ?>
 
 <div class="loop-documents--document-metadata">
@@ -40,3 +41,7 @@ $metadata_values = array_map(function ($field_name) use ($document) {
     <?php echo $metadata_values['subject']; ?>
   </div>
 <?php endif ?>
+
+<div class="loop-documents--document-print">
+    <?php echo l(t('Print document'), 'entityprint/node/' . $document->nid); ?>
+</div>

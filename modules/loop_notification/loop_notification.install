@@ -9,7 +9,7 @@
  * Implements hook_install().
  */
 function loop_notification_install() {
-  $defaults = array(
+  $defaults = [
     'loop_notification_send_mail_subject' => 'Nyt svar til spørgsmålet “[node:title|trim(52)]”',
     'loop_notification_send_mail_body' => '<h2>Nyt svar til spørgsmålet [node:title]</h2>
 <p>Kære [user:field-first-name] [user:field-last-name]</p>
@@ -54,7 +54,7 @@ Du kan styre dine abonnementer fra din brugerprofil',
 <br />
 Dette er en automatisk meddelelse fra Loop, og kan ikke besvares.<br />
 Du kan styre dine abonnementer fra din brugerprofil',
-  );
+  ];
 
   foreach ($defaults as $key => $value) {
     variable_set($key, $value);
@@ -65,7 +65,7 @@ Du kan styre dine abonnementer fra din brugerprofil',
  * Enable notifications for post type as default.
  */
 function loop_notification_update_7001() {
-  $value = array(
+  $value = [
     'external_sources' => 0,
     'index' => 0,
     'instruction' => 0,
@@ -73,7 +73,7 @@ function loop_notification_update_7001() {
     'post' => 'post',
     'page' => 0,
     'tree' => 0,
-  );
+  ];
 
   variable_set('loop_notification_content_types', $value);
 }
@@ -82,9 +82,9 @@ function loop_notification_update_7001() {
  * Set default e-mail templates in configuration.
  */
 function loop_notification_update_7002() {
-  features_revert(array('loop_notification' => array('rules_config')));
+  features_revert(['loop_notification' => ['rules_config']]);
 
-  $defaults = array(
+  $defaults = [
     'loop_notification_send_mail_subject' => 'Nyt svar til spørgsmålet “[node:title|trim(52)]”',
     'loop_notification_send_mail_body' => '<h2>Nyt svar til spørgsmålet [node:title]</h2>
 <p>Kære [user:field-first-name] [user:field-last-name]</p>
@@ -129,7 +129,7 @@ Du kan styre dine abonnementer fra din brugerprofil',
 <br />
 Dette er en automatisk meddelelse fra Loop, og kan ikke besvares.<br />
 Du kan styre dine abonnementer fra din brugerprofil',
-  );
+  ];
 
   foreach ($defaults as $key => $value) {
     variable_set($key, $value);
@@ -140,13 +140,13 @@ Du kan styre dine abonnementer fra din brugerprofil',
  * Delete old user menu item.
  */
 function loop_notification_update_7003() {
-  $mlid = array();
+  $mlid = [];
   $path = 'user';
   $name = 'main-menu';
   $menu_info = db_select('menu_links', 'ml')
     ->condition('ml.link_path', $path)
     ->condition('ml.menu_name', $name)
-    ->fields('ml', array('mlid', 'plid'))
+    ->fields('ml', ['mlid', 'plid'])
     ->execute()
     ->fetchAll();
 
@@ -156,4 +156,158 @@ function loop_notification_update_7003() {
       menu_link_delete($mlid_value);
     }
   }
+}
+
+/**
+ * Implements hook_schema().
+ */
+function loop_notification_schema() {
+  $schema['loop_notification_user_settings'] = [
+    'description' => 'User settings for notifications.',
+    'fields' => [
+      'uid' => ['type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE],
+      'enabled' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+        'size' => 'tiny',
+      ],
+      'update_interval' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '604800',
+      ],
+    ],
+  ];
+  return $schema;
+}
+
+/**
+ * Change mail notification templates.
+ */
+function loop_notification_update_7004() {
+  $defaults = [
+    'loop_notification_send_mail_subject' => 'Nyt fra [site:name]',
+    'loop_notification_send_mail_body' => '<h2>Nyt fra [site:name]</h2>
+[loop-notification:if_answer_new]
+<p>Spørgsmål med nye svar:[loop-notification:answer_new]</p>
+[loop-notification:endif_answer_new]
+
+[loop-notification:if_answer_changes]
+<p>Spørgsmål med redigerede svar:[loop-notification:answer_changes]</p>
+[loop-notification:endif_answer_changes]
+
+[loop-notification:if_question_new]
+<p>Nye spørgsmål:[loop-notification:question_new]</p>
+[loop-notification:endif_question_new]
+
+[loop-notification:if_question_changes]
+<p>Redigerede spørgsmål:[loop-notification:question_changes]</p>
+[loop-notification:endif_question_changes]
+
+[loop-notification:if_document_collection_new]
+<p>Nye dokumentsamlinger:[loop-notification:document_collection_new]</p>
+[loop-notification:endif_document_collection_new]
+
+[loop-notification:if_document_collection_changes]
+<p>Ændrede dokumentsamlinger:[loop-notification:document_collection_changes]</p>
+[loop-notification:endif_document_collection_changes]
+
+[loop-notification:if_document_new]
+<p>Nye dokumenter[loop-notification:document_new]</p>
+[loop-notification:endif_document_new]
+
+[loop-notification:if_document_changes]
+<p>Ændrede dokumenter:[loop-notification:document_changes]</p>
+[loop-notification:endif_document_changes]
+
+<p>Med venlig hilsen<br/>
+[site:name]</p>
+
+<p>Dette er en automatisk meddelelse fra Loop, og kan ikke besvares.</p>
+<p>Du kan styre dine abonnementer fra din brugerprofil</p>',
+  ];
+
+  foreach ($defaults as $key => $value) {
+    variable_set($key, $value);
+  }
+
+  $remove = [
+    'loop_notification_send_mail_to_subscribers_on_comment_edit_subject',
+    'loop_notification_send_mail_to_subscribers_on_comment_edit_body',
+    'loop_notification_send_mail_to_subscribers_on_node_create_subject',
+    'loop_notification_send_mail_to_subscribers_on_node_create_body',
+    'loop_notification_send_mail_to_subscribers_on_node_edit_subject',
+    'loop_notification_send_mail_to_subscribers_on_node_edit_body',
+  ];
+
+  foreach ($remove as $value) {
+    variable_del($value);
+  }
+}
+
+/**
+ * Add loop_notification_user_settings table.
+ */
+function loop_notification_update_7005() {
+  $table = [
+    'description' => 'User settings for notifications.',
+    'fields' => [
+      'uid' => ['type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE],
+      'enabled' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+        'size' => 'tiny',
+      ],
+      'update_interval' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '604800',
+      ],
+    ],
+  ];
+  db_create_table('loop_notification_user_settings', $table);
+}
+
+/**
+ * Update document and collection notification messages.
+ */
+function loop_notification_update_7006() {
+  foreach ([
+    ['loop_documents_collection', 'node_added', 'document_collection_added'],
+    ['loop_documents_collection', 'node_edited', 'document_collection_edited'],
+    ['loop_documents_document', 'node_added', 'document_added'],
+    ['loop_documents_document', 'node_edited', 'document_edited'],
+  ] as list($node_type, $old_message_type, $new_message_type)) {
+    db_query(
+      '
+UPDATE message
+  JOIN field_data_field_message_node_reference
+	ON field_data_field_message_node_reference.entity_id = message.mid
+  JOIN node
+    ON node.nid = field_data_field_message_node_reference.field_message_node_reference_target_id
+   SET message.type = :new_message_type
+ WHERE 1=1
+   AND node.type = :node_type
+   AND message.type = :old_message_type
+',
+      [
+        'node_type' => $node_type,
+        'old_message_type' => $old_message_type,
+        'new_message_type' => $new_message_type,
+      ]
+    );
+  }
+}
+
+/**
+ * Reset cache for "message" entities.
+ */
+function loop_notification_update_7007() {
+  entity_get_controller('message')->resetCache();
 }

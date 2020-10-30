@@ -25,8 +25,8 @@
     <div class="block-module--inner">
       <h2 class="block-module--my-content-header"><?php print $title;?> </h2>
       <ul class="block-module--my-content-list">
-        <li class="block-module--my-content-item"><?php echo l($question_title, 'user/' . $profile->uid . '/nodes', array('attributes' => array('class' => array('block-module--link'))));?></li>
-        <li class="block-module--my-content-item"><?php echo l($comments_title, 'user/' . $profile->uid . '/user-comments', array('attributes' => array('class' => array('block-module--link'))));?></li>
+        <li class="block-module--my-content-item"><?php echo l($question_title, 'user/' . $profile->uid . '/nodes', ['attributes' => ['class' => ['block-module--link']]]);?></li>
+        <li class="block-module--my-content-item"><?php echo l($comments_title, 'user/' . $profile->uid . '/user-comments', ['attributes' => ['class' => ['block-module--link']]]);?></li>
       </ul>
     </div>
   </aside>

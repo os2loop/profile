@@ -57,7 +57,7 @@
     </div>
   <?php else : ?>
     <h4 class="notification--empty">
-      <?php print t('You have !count notifications', array('!count' => '<span class="notification--inline">0</span>')); ?>
+      <?php print t('You have !count notifications', ['!count' => '<span class="notification--inline">0</span>']); ?>
     </h4>
   <?php endif; ?>
 

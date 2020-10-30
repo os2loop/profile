@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2020-06-19 12:50+0200\n"
-"PO-Revision-Date: 2020-06-19 12:50+0200\n"
+"POT-Creation-Date: 2020-09-30 14:50+0200\n"
+"PO-Revision-Date: 2020-09-30 14:50+0200\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 #: field:field_profession:post:description
 msgctxt "field_profession:post:description"
 msgid "Add your professions"
-msgstr "Vælg de kompetencer du tror kan svare på spørgsmålet"
+msgstr "Vælg de kompetencer du tror der kan svare på indlægget"
 
 #: field:field_location_address:user:label
 msgctxt "field_location_address:user:label"
@@ -51,7 +51,7 @@ msgstr "Kommentar"
 #: field:field_description:post:description
 msgctxt "field_description:post:description"
 msgid "Enter your question or observation."
-msgstr "Skriv dit spørgsmål eller observation."
+msgstr "Skriv dit indlæg her "
 
 #: field:field_external_link:external_sources:label
 msgctxt "field_external_link:external_sources:label"
@@ -78,6 +78,11 @@ msgctxt "field_last_name:user:label"
 msgid "Last name"
 msgstr "Efternavn"
 
+#: field:field_organization:user:label
+msgctxt "field_organization:user:label"
+msgid "Organization"
+msgstr "Organisation"
+
 #: field:field_phone_number:user:label
 msgctxt "field_phone_number:user:label"
 msgid "Phone number"
@@ -91,7 +96,7 @@ msgstr "Sted / Afdeling"
 #: field:field_description:post:label
 msgctxt "field_description:post:label"
 msgid "Post"
-msgstr "Spørgsmål"
+msgstr "Indlæg"
 
 #: field:field_location_postal_code:user:label
 msgctxt "field_location_postal_code:user:label"
@@ -116,7 +121,12 @@ msgstr "Kompetencer"
 #: field:field_subject:post:description
 msgctxt "field_subject:post:description"
 msgid "Select a subject."
-msgstr "Vælg det emne som spørgsmålet vedrører"
+msgstr "Vælg det emne som indlægget vedrører"
+
+#: field:field_show_in_contact_list:user:label
+msgctxt "field_show_in_contact_list:user:label"
+msgid "Show in contact list"
+msgstr "Vis profil på medlemsliste"
 
 #: field:field_subject:external_sources:label
 msgctxt "field_subject:external_sources:label"
@@ -131,7 +141,7 @@ msgstr "Emne"
 #: field:field_keyword:post:description
 msgctxt "field_keyword:post:description"
 msgid "Type in keyword(s)."
-msgstr "Indtast nøgleord som passer til spørgsmålet"
+msgstr "Indtast nøgleord som passer til indlægget"
 
 #: field:field_user_image:user:label
 msgctxt "field_user_image:user:label"

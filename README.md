@@ -32,9 +32,9 @@ going through the regular Drupal installation process.
 
 **Note**: During the installation you may experience the error “Call to
 undefined function field_attach_load()”. See
-https://www.drupal.org/project/drupal/issues/481758 for troubleshooting this
-error. Most notably, using a database name with a length less than 8 may remedy
-the problem.
+[https://www.drupal.org/project/drupal/issues/481758](https://www.drupal.org/project/drupal/issues/481758)
+for troubleshooting this error. Most notably, using a database name with a
+length less than 8 may remedy the problem.
 
 By default only the core features are enabled so you should visit the features
 overview and enable any additional features you need.
@@ -102,6 +102,10 @@ is added or existing content is updated.
 Go to `/admin/config/loop/notifications` to define which content types to send
 out notification for and to define mail notification templates.
 
+See [Using SMTP and HTML
+mails](modules/loop_notification/README.md#using-smtp-and-html-mails) if you're
+using the [smtp](https://www.drupal.org/project/smtp) module.
+
 #### Optional Loop modules
 
 After installing the base Loop profile, you can install additional modules (go
@@ -134,12 +138,21 @@ Install one of the Loop search modules to enable search in the site:
     settings for the search module
 * [loop_search_node](modules/loop_search_node/README.md): Search using [Search
   node](https://github.com/search-node)
-  * Install Loop search node settings (loop_search_node_settings) to get the
-    default settings for the search module
+  * Install Loop search node settings
+    ([loop_search_node_settings](modules/loop_search_node_settings/README.md))
+    to get the default settings for the search module. Check out [the
+    instructions](modules/loop_search_node_settings/README.md) to configure and
+    fine-tune the module after installation.
 
 **Note**: After installing a search module you may want to go to
 `/admin/config/search/search_api` and delete the default search index (the one
 named “Default node index”) which is not used by Loop.
+
+###### Showing the search block
+
+By default, the search block is displayed on all pages, but this can be changed
+in the Loop theme settings (`/admin/appearance/settings/loop`) under “Content
+search”.
 
 ##### Miscellaneous
 
@@ -154,6 +167,16 @@ named “Default node index”) which is not used by Loop.
   module](modules/loop_saml/README.md) if installing it).
 * [Loop user contact list](modules/loop_user_contact_list/README.md): Shows a
   contact list
+
+##### Other useful modules
+
+* The [user_import](https://www.drupal.org/project/user_import) module can be
+  installed and used for importing users from CSV files.
+
+  If you're using the [smtp](https://www.drupal.org/project/smtp) module to send
+  mails and you use the `user_import` module to import and notify users of new
+  account, you should go to `/admin/config/system/mailsystem` and select
+  `LoopNotificationHtmlMail` under `User Import module class`.
 
 ## Adding taxonomies
 

@@ -9,13 +9,13 @@
  * Implements hook_drush_command().
  */
 function loop_documents_drush_command() {
-  $commands['loop-documents-reset-editor-configuration'] = array(
+  $commands['loop-documents-reset-editor-configuration'] = [
     'description' => 'Reset wysiyg editor configuration.',
-    'examples' => array(
+    'examples' => [
       'drush loop-documents:editor-reset' => 'Reset editor configuration.',
-    ),
+    ],
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE,
-  );
+  ];
 
   return $commands;
 }

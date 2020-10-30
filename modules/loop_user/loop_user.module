@@ -11,30 +11,30 @@ include_once 'loop_user.features.inc';
  * Implements hook_views_api().
  */
 function loop_user_views_api() {
-  return array('api' => 3.0);
+  return ['api' => 3.0];
 }
 
 /**
  * Implements hook_block_info().
  */
 function loop_user_block_info() {
-  return array(
-    'loop_user_my_content' => array(
+  return [
+    'loop_user_my_content' => [
       'info' => t('User my content'),
       'cache' => DRUPAL_CACHE_PER_PAGE,
-    ),
-    'loop_user_best_answers' => array(
+    ],
+    'loop_user_best_answers' => [
       'info' => t('User best answers'),
       'cache' => DRUPAL_CACHE_PER_PAGE,
-    ),
-  );
+    ],
+  ];
 }
 
 /**
  * Implements hook_block_view().
  */
 function loop_user_block_view($delta = '') {
-  $block = array();
+  $block = [];
 
   switch ($delta) {
     case 'loop_user_my_content':
@@ -46,7 +46,7 @@ function loop_user_block_view($delta = '') {
         else {
           $profile = FALSE;
         }
-        $variables = array('profile' => $profile);
+        $variables = ['profile' => $profile];
         $block['content'] = theme('loop_user_my_content', $variables);
       }
       else {
@@ -73,16 +73,16 @@ function loop_user_block_view($delta = '') {
  * Implements hook_theme().
  */
 function loop_user_theme() {
-  return array(
-    'loop_user_my_content' => array(
-      'variables' => array(),
+  return [
+    'loop_user_my_content' => [
+      'variables' => [],
       'template' => 'templates/loop-user--my-content',
-    ),
-    'loop_user_best_answers' => array(
-      'variables' => array(),
+    ],
+    'loop_user_best_answers' => [
+      'variables' => [],
       'template' => 'templates/loop-user--best-answers',
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -115,8 +115,8 @@ function _loop_user_fetch_user_answers($uid) {
     ->execute()
     ->fetchAllAssoc('cid');
 
-  $top_comments = array();
-  $nids = array();
+  $top_comments = [];
+  $nids = [];
   foreach ($flags as $flag) {
     // Find comment.
     $comment = (isset($comments[$flag->entity_id])) ? $comments[$flag->entity_id] : FALSE;
@@ -128,21 +128,21 @@ function _loop_user_fetch_user_answers($uid) {
 
     // Add comment to user.
     if ($comment->uid == $uid) {
-      $top_comments[] = array(
+      $top_comments[] = [
         'comment' => $comment,
         'flag' => $flags[$comment->cid],
-      );
+      ];
     }
 
     $nids[] = $comment->nid;
   }
 
   // Send data back.
-  $answers_array = array(
+  $answers_array = [
     'answers_count' => count($user_comments),
     'top_answers' => $top_comments,
     'top_answers_count' => count($top_comments),
-  );
+  ];
 
   return $answers_array;
 }
@@ -176,8 +176,8 @@ function loop_user_account_form_validate($form, &$form_state) {
       if ($error = loop_user_validate_name($form_state['values']['name'])) {
         form_set_error('name', $error);
       }
-      elseif ((bool) db_select('users')->fields('users', array('uid'))->condition('uid', $account->uid, '<>')->condition('name', db_like($form_state['values']['name']), 'LIKE')->range(0, 1)->execute()->fetchField()) {
-        form_set_error('name', t('The name %name is already taken.', array('%name' => $form_state['values']['name'])));
+      elseif ((bool) db_select('users')->fields('users', ['uid'])->condition('uid', $account->uid, '<>')->condition('name', db_like($form_state['values']['name']), 'LIKE')->range(0, 1)->execute()->fetchField()) {
+        form_set_error('name', t('The name %name is already taken.', ['%name' => $form_state['values']['name']]));
       }
     }
 
@@ -191,13 +191,16 @@ function loop_user_account_form_validate($form, &$form_state) {
     if ($error = user_validate_mail($form_state['values']['mail'])) {
       form_set_error('mail', $error);
     }
-    elseif ((bool) db_select('users')->fields('users', array('uid'))->condition('uid', $account->uid, '<>')->condition('mail', db_like($form_state['values']['mail']), 'LIKE')->range(0, 1)->execute()->fetchField()) {
+    elseif ((bool) db_select('users')->fields('users', ['uid'])->condition('uid', $account->uid, '<>')->condition('mail', db_like($form_state['values']['mail']), 'LIKE')->range(0, 1)->execute()->fetchField()) {
       // Format error message dependent on whether the user is logged in or not.
       if ($GLOBALS['user']->uid) {
-        form_set_error('mail', t('The e-mail address %email is already taken.', array('%email' => $form_state['values']['mail'])));
+        form_set_error('mail', t('The e-mail address %email is already taken.', ['%email' => $form_state['values']['mail']]));
       }
       else {
-        form_set_error('mail', t('The e-mail address %email is already registered. <a href="@password">Have you forgotten your password?</a>', array('%email' => $form_state['values']['mail'], '@password' => url('user/password'))));
+        form_set_error('mail', t('The e-mail address %email is already registered. <a href="@password">Have you forgotten your password?</a>', [
+          '%email' => $form_state['values']['mail'],
+          '@password' => url('user/password'),
+        ]));
       }
     }
 
@@ -211,7 +214,7 @@ function loop_user_account_form_validate($form, &$form_state) {
 
       $user_schema = drupal_get_schema('users');
       if (drupal_strlen($form_state['values']['signature']) > $user_schema['fields']['signature']['length']) {
-        form_set_error('signature', t('The signature is too long: it must be %max characters or less.', array('%max' => $user_schema['fields']['signature']['length'])));
+        form_set_error('signature', t('The signature is too long: it must be %max characters or less.', ['%max' => $user_schema['fields']['signature']['length']]));
       }
     }
   }
@@ -261,6 +264,9 @@ function loop_user_validate_name($name) {
     return t('The username contains an illegal character.');
   }
   if (drupal_strlen($name) > USERNAME_MAX_LENGTH) {
-    return t('The username %name is too long: it must be %max characters or less.', array('%name' => $name, '%max' => USERNAME_MAX_LENGTH));
+    return t('The username %name is too long: it must be %max characters or less.', [
+      '%name' => $name,
+      '%max' => USERNAME_MAX_LENGTH,
+    ]);
   }
 }

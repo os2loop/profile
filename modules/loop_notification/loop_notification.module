@@ -13,17 +13,108 @@ include_once 'loop_notification.features.inc';
  * A menu item linking to an administration form.
  */
 function loop_notification_menu() {
-  $items = array();
+  $items = [];
 
-  $items['admin/config/loop/notifications'] = array(
+  $items['admin/config/loop/notifications'] = [
     'title' => 'Loop notification settings',
     'description' => 'Settings related to the notification module.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('loop_notification_config_form'),
-    'access arguments' => array('access administration pages'),
-  );
+    'page arguments' => ['loop_notification_config_form'],
+    'access arguments' => ['access administration pages'],
+  ];
 
   return $items;
+}
+
+/**
+ * Implements hook_form().
+ *
+ * A form for managing a user's notification settings.
+ */
+function loop_notification_user_form($form, &$form_state) {
+  $current_user_id = $GLOBALS['user']->uid;
+
+  $query = db_query("SELECT * FROM {loop_notification_user_settings} WHERE uid = :uid", ['uid' => $current_user_id]);
+  $record = $query->fetchObject();
+
+  $form['loop_notification_enable_notifications'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Enable notification'),
+    '#description' => t('Enable to receive an email with notification updates.'),
+    '#default_value' => (!$record || $record->enabled) ? 1 : 0,
+  ];
+
+  $updateIntervals = [
+    60 * 60 * 24 => t('Once per day'),
+    60 * 60 * 24 * 7 => t('Once per week'),
+  ];
+  $form['loop_notification_notification_interval'] = [
+    '#type' => 'radios',
+    '#title' => t('Notification interval'),
+    '#default_value' => $record->update_interval ?? 60 * 60 * 24,
+    '#options' => $updateIntervals,
+    '#description' => t('Choose how often you want to receive notifications.'),
+    '#access' => TRUE,
+  ];
+
+  $form['submit_button'] = [
+    '#type' => 'submit',
+    '#value' => t('Save notification settings'),
+  ];
+
+  return $form;
+}
+
+/**
+ * Validation for user's notification settings form.
+ */
+function loop_notification_user_form_validate($form, &$form_state) {
+  if (!($form_state['values']['loop_notification_notification_interval'] > 0)) {
+    form_set_error('loop_notification_notification_interval', t('Notification interval must be higher than 0.'));
+  }
+}
+
+/**
+ * Handles user_form submit.
+ */
+function loop_notification_user_form_submit($form, &$form_state) {
+  $current_user_id = $GLOBALS['user']->uid;
+
+  db_merge('loop_notification_user_settings')
+    ->key(['uid' => $current_user_id])
+    ->fields([
+      'enabled' => $form_state['values']['loop_notification_enable_notifications'],
+      'update_interval' => $form_state['values']['loop_notification_notification_interval'],
+    ])
+    ->execute();
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function loop_notification_block_info() {
+  $blocks['loop_notification_settings_block'] = [
+    'info' => t('Loop notification user settings block'),
+  ];
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function loop_notification_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = [];
+
+  switch ($delta) {
+    case 'loop_notification_settings_block':
+      $block['subject'] = t('Loop notification user settings');
+      $form = drupal_get_form('loop_notification_user_form');
+      $block['content'] = drupal_render($form);
+      break;
+  }
+  return $block;
 }
 
 /**
@@ -34,110 +125,136 @@ function loop_notification_menu() {
 function loop_notification_config_form($form) {
   $checkboxes = node_type_get_names();
 
-  $form['loop_notification_wrapper'] = array(
+  $form['loop_notification_wrapper'] = [
     '#type' => 'fieldset',
     '#title' => 'Enable notifications',
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-  );
+  ];
 
-  $form['loop_notification_wrapper']['loop_notification_content_types'] = array(
+  $form['loop_notification_wrapper']['loop_notification_content_types'] = [
     '#type' => 'checkboxes',
     '#options' => $checkboxes,
     '#default_value' => variable_get('loop_notification_content_types'),
     '#title' => 'Select content types',
     '#description' => t('Select the content types where you want notifications enabled.'),
-  );
+  ];
 
-  $form['loop_notification_email_wrapper'] = array(
+  $form['loop_notification_wrapper']['loop_notification_default_interval'] = [
+    '#type' => 'numberfield',
+    '#required' => TRUE,
+    '#default_value' => variable_get('loop_notification_default_interval'),
+    '#title' => t('Notification default interval'),
+    '#description' => t('Default number of seconds between notification updates. Used if the user has not chosen a value.'),
+  ];
+
+  $form['loop_notification_wrapper']['loop_notification_evaluation_interval'] = [
+    '#type' => 'numberfield',
+    '#required' => TRUE,
+    '#default_value' => variable_get('loop_notification_evaluation_interval'),
+    '#title' => t('Notification evaluation interval'),
+    '#description' => t('How often should the notification evaluation run (in seconds)?'),
+  ];
+
+  $form['loop_notification_email_wrapper'] = [
     '#type' => 'fieldset',
     '#title' => t('Loop e-mail templates'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#description' => t('Loop e-mail templates. See below for a list of available tokens.'),
-  );
+  ];
 
-  $form['loop_notification_email_wrapper']['info'] = array(
-    '#markup' => t('Sender name and e-mail are set in <a href="@url">Mime Mail settings</a>.', array('@url' => url('admin/config/system/mimemail'))),
+  $form['loop_notification_email_wrapper']['info'] = [
+    '#markup' => t('Sender name and e-mail are set in <a href="@url">Mime Mail settings</a>.', ['@url' => url('admin/config/system/mimemail')]),
     '#prefix' => '<p><em>',
     '#suffix' => '</em></p>',
-  );
+  ];
 
-  $form['loop_notification_email_wrapper']['templates'] = array(
+  $form['loop_notification_email_wrapper']['templates'] = [
     '#type' => 'vertical_tabs',
-  );
+  ];
 
-  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail'] = array(
+  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail'] = [
     '#type' => 'fieldset',
     '#title' => t('Send mail to subscribers'),
 
-    'loop_notification_send_mail_subject' => array(
+    'loop_notification_send_mail_subject' => [
       '#type' => 'textfield',
       '#default_value' => variable_get('loop_notification_send_mail_subject'),
       '#title' => t('Subject'),
-    ),
+    ],
 
-    'loop_notification_send_mail_body' => array(
+    'loop_notification_send_mail_body' => [
       '#type' => 'textarea',
       '#default_value' => variable_get('loop_notification_send_mail_body'),
       '#title' => t('Body'),
-    ),
-  );
-
-  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_comment_edit'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Send mail to subscribers on comment edit'),
-
-    'loop_notification_send_mail_to_subscribers_on_comment_edit_subject' => array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_comment_edit_subject'),
-      '#title' => t('Subject'),
-    ),
-
-    'loop_notification_send_mail_to_subscribers_on_comment_edit_body' => array(
-      '#type' => 'textarea',
-      '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_comment_edit_body'),
-      '#title' => t('Body'),
-    ),
-  );
-
-  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_node_create'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Send mail to subscribers on node create'),
-
-    'loop_notification_send_mail_to_subscribers_on_node_create_subject' => array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_node_create_subject'),
-      '#title' => t('Subject'),
-    ),
-
-    'loop_notification_send_mail_to_subscribers_on_node_create_body' => array(
-      '#type' => 'textarea',
-      '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_node_create_body'),
-      '#title' => t('Body'),
-    ),
-  );
-
-  $form['loop_notification_email_wrapper']['templates']['loop_notification_send_mail_to_subscribers_on_node_edit'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Send mail to subscribers on node edit'),
-
-    'loop_notification_send_mail_to_subscribers_on_node_edit_subject' => array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_node_edit_subject'),
-      '#title' => t('Subject'),
-    ),
-
-    'loop_notification_send_mail_to_subscribers_on_node_edit_body' => array(
-      '#type' => 'textarea',
-      '#default_value' => variable_get('loop_notification_send_mail_to_subscribers_on_node_edit_body'),
-      '#title' => t('Body'),
-    ),
-  );
+    ],
+  ];
 
   $form['loop_notification_email_wrapper']['tokens'] = _loop_notification_get_email_tokens();
 
   return system_settings_form($form);
+}
+
+/**
+ * Implements hook_loop_notification_message_recipient_alter().
+ *
+ * Modify the array of message recipients.
+ */
+function loop_notification_loop_notification_message_recipient_alter(
+  &$users,
+  $node
+) {
+  $query = db_select('flagging', 'f')
+    ->fields('f', ['uid']);
+  $query->innerJoin('flag', 'l', 'f.fid = l.fid', []);
+
+  $db_or = db_or();
+
+  // Users who flagged the node.
+  $db_and = db_and();
+  $db_and->condition('f.entity_id', $node->nid, '=');
+  $db_and->condition('f.entity_type', 'node', '=');
+  $db_or->condition($db_and);
+
+  // Users who flagged the node's subject.
+  $subject_term_id = $node->field_subject[LANGUAGE_NONE][0]['tid'];
+  $db_and = db_and();
+  $db_and->condition('f.entity_id', $subject_term_id, '=');
+  $db_and->condition('f.entity_type', 'taxonomy_term', '=');
+  $db_or->condition($db_and);
+
+  $query->condition($db_or);
+
+  $result = $query->execute()->fetchCol();
+  $users = array_merge($result, $users);
+}
+
+/**
+ * Implements hook_cron().
+ */
+function loop_notification_cron() {
+  $last_cron = (int) variable_get('loop_notification_last_cron');
+  $cron_interval = (int) variable_get('loop_notification_evaluation_interval');
+
+  $now = time();
+
+  if (is_null($cron_interval)) {
+    // Defaults to once pr. day.
+    $cron_interval = 60 * 60 * 24;
+  }
+
+  // Default last cron to now, to avoid sending old notifications.
+  if (is_null($last_cron)) {
+    $last_cron = $now;
+    variable_set('loop_notification_last_cron', $last_cron);
+  }
+
+  if ($last_cron + $cron_interval < $now) {
+    _loop_notification_send_notifications();
+
+    variable_set('loop_notification_last_cron', time());
+  }
 }
 
 /**
@@ -146,111 +263,29 @@ function loop_notification_config_form($form) {
  * These are provided by the Rules module.
  */
 function _loop_notification_get_email_tokens() {
-  $render = RulesTokenEvaluator::help(array(
-    'site' => array(
+  $render = RulesTokenEvaluator::help([
+    'loop_notification' => [
+      'label' => 'Loop notification',
+      'type' => 'loop_notification',
+    ],
+    'site' => [
       'type' => 'site',
       'label' => 'Site information',
       'description' => 'Site-wide settings and other global information.',
-      'property info alter' => array(
+      'property info alter' => [
         0 => 'RulesData',
         1 => 'addSiteMetadata',
-      ),
-      'property info' => array(),
+      ],
+      'property info' => [],
       'optional' => TRUE,
-    ),
-    'node' => array(
-      'label' => 'node',
-      'type' => 'node',
-    ),
-    'user' => array(
+    ],
+    'user' => [
       'label' => 'user',
       'type' => 'user',
-    ),
-    'comment' => array(
-      'label' => 'comment',
-      'type' => 'comment',
-    ),
-  ));
+    ],
+  ]);
 
   return $render;
-}
-
-/**
- * Implements hook_node_insert().
- *
- * Invoke rules components when creating a new node.
- */
-function loop_notification_node_insert($node) {
-  _loop_notification_notify_users($node, 'insert');
-}
-
-/**
- * Implements hook_node_update().
- *
- * Invoke rules components when updating a node.
- */
-function loop_notification_node_update($node) {
-  _loop_notification_notify_users($node, 'update');
-}
-
-/**
- * Implements hook_comment_insert().
- *
- * Invoke rules components when creating a new comment.
- */
-function loop_notification_comment_insert($comment) {
-  _loop_notification_notify_users(node_load($comment->nid), 'insert', $comment);
-}
-
-/**
- * Implements hook_comment_update().
- *
- * Invoke rules components when updating a comment.
- */
-function loop_notification_comment_update($comment) {
-  _loop_notification_notify_users(node_load($comment->nid), 'update', $comment);
-}
-
-/**
- * Implements hook_loop_notification_message_recipient_alter().
- *
- * Modify the array of message recipients.
- */
-function loop_notification_loop_notification_message_recipient_alter(&$users, $node) {
-  // Fetch users who flagged the node.
-  $query = db_select('flagging', 'f')
-    ->fields('f', array('uid'));
-  $query->innerJoin('flag', 'l', 'f.fid = l.fid', array());
-  $query->condition('f.entity_id', $node->nid, '=');
-  $query->condition('f.entity_type', 'node', '=');
-
-  $result = $query->execute()->fetchCol();
-  $users = array_merge($result, $users);
-}
-
-/**
- * Loop through recipients to send notification.
- *
- * @param object $node
- *   The node related to the message about to be created.
- * @param string $action
- *   The action that triggered the notification, insert or update.
- * @param object|null $comment
- *   A comment if the action was triggered by a new or updated comment.
- */
-function _loop_notification_notify_users($node, $action, $comment = NULL) {
-  if (_loop_notification_check_content_type($node)) {
-    // Fetch all recipients.
-    $users = _loop_notification_find_users($node);
-
-    // Only load the entity_author once.
-    $author = $comment ? user_load($comment->uid) : user_load($node->uid);
-
-    // Notify all subscribed users.
-    foreach ($users as $user) {
-      _loop_notification_notify_user($user, $node, $action, $author, $comment);
-    }
-  }
 }
 
 /**
@@ -263,14 +298,14 @@ function _loop_notification_notify_users($node, $action, $comment = NULL) {
  *   The list of user entities that should receive the notification.
  */
 function _loop_notification_find_users($node) {
-  $user_ids = array();
+  $user_ids = [];
   // Allow other modules to modify the list of recipients.
   drupal_alter('loop_notification_message_recipient', $user_ids, $node);
 
   // Remove recurring users.
   $user_ids = array_unique($user_ids);
 
-  $users = array();
+  $users = [];
   foreach ($user_ids as $id) {
     // Load the user object.
     $users[] = user_load($id);
@@ -297,27 +332,38 @@ function _loop_notification_notify_user($user, $node, $action, $author, $comment
   if ($comment) {
     if ($action == 'insert') {
       // Insert comment notification.
-      rules_invoke_component('rules_create_notification', $user, $author, $comment);
-      rules_invoke_component('loop_notification_send_mail', $node, $user, $comment);
+      rules_invoke_component('rules_create_notification', $user, $author,
+        $comment);
     }
     else {
       // Update comment notification.
-      rules_invoke_component('loop_notification_create_notification_on_comment_edit', $user, $author, $comment);
-      rules_invoke_component('loop_notification_send_mail_to_subscribers_on_comment_edit', $node, $user, $comment);
+      rules_invoke_component('loop_notification_create_notification_on_comment_edit',
+        $user, $author, $comment);
     }
-
   }
-  // Create messages and mails related to node actions.
+  // Create messages related to node actions.
   else {
     if ($action == 'insert') {
       // Insert node notification.
-      rules_invoke_component('loop_notification_create_notification_on_node_create', $user, $author, $node);
-      rules_invoke_component('loop_notification_send_mail_to_subscribers_on_node_create', $node, $user, $node);
+      $component = 'loop_notification_create_notification_on_node_create';
+      if ('loop_documents_document' === $node->type) {
+        $component = 'loop_notification_create_notification_on_document_create';
+      }
+      elseif ('loop_documents_collection' === $node->type) {
+        $component = 'loop_notification_create_notification_on_collection_create';
+      }
+      rules_invoke_component($component, $user, $author, $node);
     }
     else {
       // Update node notification.
-      rules_invoke_component('loop_notification_create_notification_on_node_edit', $user, $author, $node);
-      rules_invoke_component('loop_notification_send_mail_to_subscribers_on_node_edit', $node, $user, $node);
+      $component = 'loop_notification_create_notification_on_node_edit';
+      if ('loop_documents_document' === $node->type) {
+        $component = 'loop_notification_create_notification_on_document_edit';
+      }
+      elseif ('loop_documents_collection' === $node->type) {
+        $component = 'loop_notification_create_notification_on_collection_edit';
+      }
+      rules_invoke_component($component, $user, $author, $node);
     }
   }
 }
@@ -338,24 +384,498 @@ function _loop_notification_check_content_type($node) {
 }
 
 /**
+ * Get nodes that have been changes since $modification_limit.
+ *
+ * @param int $modification_limit
+ *   The unix timestamp from which to get modifications from.
+ *
+ * @return array
+ *   Array of nodes that have been modified since $modification_limit.
+ */
+function _loop_notification_modified_nodes($modification_limit) {
+  $nodes = [];
+
+  $query = new EntityFieldQuery();
+
+  try {
+    $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('status', NODE_PUBLISHED)
+      ->propertyCondition('changed', $modification_limit, '>');
+  }
+  catch (EntityFieldQueryException $e) {
+    // Ignore error. Return empty array.
+    // @TODO: Write error to log.
+    return $nodes;
+  }
+
+  $result = $query->execute();
+
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    $nodes = entity_load('node', $nids);
+  }
+
+  return $nodes;
+}
+
+/**
+ * Get all comments that where created after $loop_notification_last_cron.
+ *
+ * @param int $loop_notification_last_cron
+ *   The timestamp to delimit search.
+ *
+ * @return array
+ *   Array of comments.
+ */
+function _loop_notification_new_comments($loop_notification_last_cron) {
+  $result = db_query('SELECT nid FROM {comment} WHERE created > :timestamp AND status = :status', [
+    ':timestamp' => $loop_notification_last_cron,
+    ':status' => COMMENT_PUBLISHED,
+  ])
+    ->fetchCol();
+
+  return array_values(array_unique($result));
+}
+
+/**
+ * Get modified comments.
+ *
+ * Get all comments that where modified (but not created) after
+ * $loop_notification_last_cron.
+ *
+ * @param int $loop_notification_last_cron
+ *   The timestamp to delimit search.
+ *
+ * @return array
+ *   Array of comments.
+ */
+function _loop_notification_modified_comments($loop_notification_last_cron) {
+  $result = db_query('SELECT nid FROM {comment} WHERE changed > :timestamp AND created < :timestamp AND status = :status', [
+    ':timestamp' => $loop_notification_last_cron,
+    ':status' => COMMENT_PUBLISHED,
+  ])
+    ->fetchCol();
+
+  return array_values(array_unique($result));
+}
+
+/**
+ * Create a list element of the link to a node.
+ *
+ * @param StdClass $node
+ *   The node to link to.
+ *
+ * @return string
+ *   String of list element html.
+ */
+function _loop_notification_create_list_element(StdClass $node) {
+  $link = l($node->title, $alias = drupal_get_path_alias('node/' . $node->nid), ['absolute' => TRUE]);
+
+  return '<li>' . $link . '</li>';
+}
+
+/**
+ * Updated the relevant arrays for handling a changes.
+ *
+ * @param int $nid
+ *   The node id to add.
+ * @param array $users_to_notify
+ *   The users to notify.
+ * @param array $node_array
+ *   Array of nodes linked to created/changed.
+ * @param array $list_array
+ *   The array of list elements.
+ * @param int $timestamp
+ *   The time to compare interval overlaps with.
+ * @param array $loop_notification_last_user_notifications
+ *   Array of timestamps with uid as key.
+ * @param array $content_types
+ *   Array of content_types to receive notifications for.
+ * @param array $user_notification_settings
+ *   Array of user notification settings.
+ */
+function _loop_notification_handle_nodes($nid, array &$users_to_notify, array &$node_array, array &$list_array, $timestamp, array $loop_notification_last_user_notifications, array $content_types, array $user_notification_settings) {
+  $node = node_load($nid);
+
+  // Make sure notifications are activated for the given node type.
+  if (empty($content_types[$node->type]) || !$content_types[$node->type]) {
+    return;
+  }
+
+  $users = _loop_notification_find_users($node);
+
+  $node_array[$nid] = $node;
+
+  $list_array[$nid] = _loop_notification_create_list_element($node);
+
+  foreach ($users as $user) {
+    // Default to sending the mail, unless the explicit set to false.
+    if (isset($user_notification_settings[$user->uid]) &&
+        $user_notification_settings[$user->uid]->enabled == 0) {
+      continue;
+    }
+
+    $user_notification_interval = isset($user_notification_settings[$user->uid]->update_interval)
+      ? (int) $user_notification_settings[$user->uid]->update_interval
+      // Default to once pr. day.
+      : (variable_get('loop_notification_default_interval') ?: 60 * 60 * 24);
+
+    // Make sure that a new user don't get notification from before the user was created.
+    $last_user_notification = $loop_notification_last_user_notifications[$user->uid] ?? $user->created;
+    if ($timestamp > $last_user_notification + $user_notification_interval) {
+      $users_to_notify[$user->uid][$node->nid] = $node->nid;
+    }
+  }
+}
+
+/**
+ * Send notifications.
+ *
+ * Sends notifications to all users of changes to the content they subscribe to
+ * that has changed or been created, since the last notification mail was sent.
+ */
+function _loop_notification_send_notifications() {
+  $now = time();
+
+  $query = db_query("SELECT * FROM {loop_notification_user_settings}");
+  $user_notification_settings = $query->fetchAllAssoc('uid');
+
+  // Get the last time notifications where sent.
+  $loop_notification_last_cron = variable_get('loop_notification_last_cron');
+
+  // Get mail templates.
+  $mail_template = variable_get('loop_notification_send_mail_body');
+  $mail_subject = variable_get('loop_notification_send_mail_subject');
+
+  // Get the content types where notifications are enabled.
+  $content_types = variable_get('loop_notification_content_types');
+
+  // Get the last user notifications time.
+  $loop_notification_last_user_notifications = variable_get('loop_notification_last_user_notifications');
+  if (is_null($loop_notification_last_user_notifications)) {
+    $loop_notification_last_user_notifications = [];
+  }
+
+  $node_array = [];
+  $nodes_changed = [];
+  $nodes_created = [];
+
+  $comment_array = [];
+  $comments_changed = [];
+  $comments_created = [];
+
+  // Users that should be notified.
+  $user_nodes = [];
+
+  // Handle each created_nodes_to_send comment.
+  $nids_with_new_comments = _loop_notification_new_comments($loop_notification_last_cron);
+  foreach ($nids_with_new_comments as $nid) {
+    _loop_notification_handle_nodes($nid, $user_nodes, $comment_array, $comments_created, $now, $loop_notification_last_user_notifications, $content_types, $user_notification_settings);
+  }
+
+  // Handle each changed_nodes_to_send comment.
+  $nids_with_modified_comments = _loop_notification_modified_comments($loop_notification_last_cron);
+  foreach ($nids_with_modified_comments as $nid) {
+    _loop_notification_handle_nodes($nid, $user_nodes, $comment_array, $comments_changed, $now, $loop_notification_last_user_notifications, $content_types, $user_notification_settings);
+  }
+
+  // Handle each created_nodes_to_send/changed_nodes_to_send node.
+  $modified_nodes = _loop_notification_modified_nodes($loop_notification_last_cron);
+  foreach ($modified_nodes as $node) {
+    // Sort by created_nodes_to_send/changed_nodes_to_send.
+    if ($node->created > $loop_notification_last_cron) {
+      if (!isset($nodes_created[$node->type])) {
+        $nodes_created[$node->type] = [];
+      }
+      _loop_notification_handle_nodes($node->nid, $user_nodes, $node_array, $nodes_created[$node->type], $now, $loop_notification_last_user_notifications, $content_types, $user_notification_settings);
+    }
+    else {
+      if (!isset($nodes_changed[$node->type])) {
+        $nodes_changed[$node->type] = [];
+      }
+      _loop_notification_handle_nodes($node->nid, $user_nodes, $node_array, $nodes_changed[$node->type], $now, $loop_notification_last_user_notifications, $content_types, $user_notification_settings);
+    }
+  }
+
+  // Create notification mail to each user that have notifications waiting.
+  foreach ($user_nodes as $user_key => $user_nids) {
+    $changed_nodes_to_send = [
+      'post' => [],
+      'loop_documents_collection' => [],
+      'loop_documents_document' => [],
+    ];
+    $created_nodes_to_send = [
+      'post' => [],
+      'loop_documents_collection' => [],
+      'loop_documents_document' => [],
+    ];
+    $created_comments_to_send = [];
+    $changed_comments_to_send = [];
+
+    // Extract changes to user.
+    foreach ($user_nids as $nid) {
+      $node = $node_array[$nid];
+
+      if (isset($nodes_changed[$node->type][$nid])) {
+        $changed_nodes_to_send[$node->type][] = $nodes_changed[$node->type][$nid];
+      }
+      elseif (isset($nodes_created[$node->type][$nid])) {
+        $created_nodes_to_send[$node->type][] = $nodes_created[$node->type][$nid];
+      }
+
+      if (in_array($nid, $nids_with_new_comments)) {
+        $created_comments_to_send[] = $comments_created[$nid];
+      }
+
+      if (in_array($nid, $nids_with_modified_comments)) {
+        $changed_comments_to_send[] = $comments_changed[$nid];
+      }
+    }
+
+    $loop_notification_tokens = [
+      'answer_new' => '<ul>' . implode('', $created_comments_to_send) . '</ul>',
+      'answer_changes' => '<ul>' . implode('', $changed_comments_to_send) . '</ul>',
+      'question_new' => '<ul>' . implode('', $created_nodes_to_send['post']) . '</ul>',
+      'question_changes' => '<ul>' . implode('', $changed_nodes_to_send['post']) . '</ul>',
+      'document_collection_new' => '<ul>' . implode('', $created_nodes_to_send['loop_documents_collection']) . '</ul>',
+      'document_collection_changes' => '<ul>' . implode('', $changed_nodes_to_send['loop_documents_collection']) . '</ul>',
+      'document_new' => '<ul>' . implode('', $created_nodes_to_send['loop_documents_document']) . '</ul>',
+      'document_changes' => '<ul>' . implode('', $changed_nodes_to_send['loop_documents_document']) . '</ul>',
+    ];
+
+    // Load the user.
+    $user = user_load($user_key);
+
+    $if_tokens = [
+      'answer_new' => count($created_comments_to_send) > 0,
+      'answer_changes' => count($changed_comments_to_send) > 0,
+      'question_new' => count($created_nodes_to_send['post']) > 0,
+      'question_changes' => count($changed_nodes_to_send['post']) > 0,
+      'document_collection_new' => count($created_nodes_to_send['loop_documents_collection']) > 0,
+      'document_collection_changes' => count($changed_nodes_to_send['loop_documents_collection']) > 0,
+      'document_new' => count($created_nodes_to_send['loop_documents_document']) > 0,
+      'document_changes' => count($changed_nodes_to_send['loop_documents_document']) > 0,
+    ];
+
+    // Replace loop if tokens.
+    $body = _loop_notification_replace_loop_tokens($mail_template, $if_tokens);
+    $subject = _loop_notification_replace_loop_tokens($mail_subject, $if_tokens);
+
+    // Trigger token replacements with loop_notification data.
+    $body = token_replace($body, [
+      'user' => $user,
+      'loop_notification' => $loop_notification_tokens,
+    ]);
+    $subject = token_replace($subject, [
+      'user' => $user,
+      'loop_notification' => $loop_notification_tokens,
+    ]);
+
+    _loop_notification_mail_send($subject, $body, $user);
+
+    // Update the time when the user has last received notifications.
+    $loop_notification_last_user_notifications[$user_key] = $now;
+  }
+
+  variable_set('loop_notification_last_user_notifications',
+    $loop_notification_last_user_notifications);
+}
+
+/**
+ * Replace if tokens.
+ *
+ * @param string $text
+ *   The text to replace in.
+ *
+ * @return mixed|string
+ *   The resulting string.
+ */
+function _loop_notification_replace_loop_tokens($text, $if_tokens) {
+  foreach ($if_tokens as $key => $show_if) {
+    $start_token = '[loop-notification:if_' . $key . ']';
+    $end_token = '[loop-notification:endif_' . $key . ']';
+
+    if ($show_if) {
+      $text = str_replace($start_token, '', $text);
+      $text = str_replace($end_token, '', $text);
+    }
+    else {
+      $index_start_token = strpos($text, $start_token);
+      $index_end_token = strpos($text, $end_token);
+
+      if ($index_start_token !== FALSE && $index_end_token !== FALSE) {
+        $text = substr($text, 0, $index_start_token) . substr($text, $index_end_token + strlen($end_token), strlen($text));
+      }
+    }
+  }
+
+  return $text;
+}
+
+/**
+ * Send a notification mail.
+ *
+ * @param string $subject
+ *   The subject.
+ * @param string $message
+ *   The message.
+ * @param object $account
+ *   The receiver.
+ * @param string $from
+ *   The sender.
+ */
+function _loop_notification_mail_send($subject, $message, $account, $from = NULL) {
+  $params = [
+    'subject' => $subject,
+    'body' => $message,
+  ];
+
+  $result = drupal_mail('loop_notification', 'notify', $account->mail,
+    user_preferred_language($account), $params, $from, TRUE);
+  if ($result['result'] != TRUE) {
+    watchdog('loop_notification', 'Mail error', [], WATCHDOG_ERROR);
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function loop_notification_mail($key, &$message, $params) {
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Type'] = 'multipart/mixed;';
+  $message['headers']['Content-Type'] = 'text/html;';
+
+  $message['subject'] = $params['subject'];
+  $message['body'][] = $params['body'];
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function loop_notification_token_info() {
+  $info['types']['loop_notification'] = [
+    'name' => t('Loop Notification'),
+  ];
+  $info['tokens']['loop_notification']['answer_new'] = [
+    'name' => t('New answers'),
+    'description' => t("New answers to questions."),
+  ];
+  $info['tokens']['loop_notification']['answer_changes'] = [
+    'name' => t('Changed answers'),
+    'description' => t("Changed answers to questions."),
+  ];
+  $info['tokens']['loop_notification']['question_new'] = [
+    'name' => t('New questions'),
+    'description' => t("New questions added."),
+  ];
+  $info['tokens']['loop_notification']['question_changes'] = [
+    'name' => t('Changed questions'),
+    'description' => t("Changed questions."),
+  ];
+  $info['tokens']['loop_notification']['document_collection_new'] = [
+    'name' => t('New document collections'),
+    'description' => t("New document collections added."),
+  ];
+  $info['tokens']['loop_notification']['document_collection_changes'] = [
+    'name' => t('Changed document collections'),
+    'description' => t("Changed document collections."),
+  ];
+  $info['tokens']['loop_notification']['document_new'] = [
+    'name' => t('New documents'),
+    'description' => t("New documents added."),
+  ];
+  $info['tokens']['loop_notification']['document_changes'] = [
+    'name' => t('Changed documents'),
+    'description' => t("Changed documents."),
+  ];
+
+  $info['tokens']['loop_notification']['if_answer_new'] = [
+    'name' => t('If answer new start token'),
+    'description' => t("If answer new start token. Set at start of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['endif_answer_new'] = [
+    'name' => t('If answer new end token'),
+    'description' => t("If answer new end token. Set at end of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['if_answer_changes'] = [
+    'name' => t('If answer changes start token'),
+    'description' => t("If answer new start token. Set at start of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['endif_answer_changes'] = [
+    'name' => t('If answer changes end token'),
+    'description' => t("If answer new end token. Set at end of if-token block."),
+  ];
+
+  $info['tokens']['loop_notification']['if_question_new'] = [
+    'name' => t('If question new start token'),
+    'description' => t("If question new start token. Set at start of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['endif_question_new'] = [
+    'name' => t('If question new end token'),
+    'description' => t("If question new end token. Set at end of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['if_question_changes'] = [
+    'name' => t('If question changes start token'),
+    'description' => t("If question new start token. Set at start of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['endif_question_changes'] = [
+    'name' => t('If question changes end token'),
+    'description' => t("If question new end token. Set at end of if-token block."),
+  ];
+
+  $info['tokens']['loop_notification']['if_document_collection_new'] = [
+    'name' => t('If document collection new start token'),
+    'description' => t("If document collection new start token. Set at start of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['endif_document_collection_new'] = [
+    'name' => t('If document collection new end token'),
+    'description' => t("If document collection new end token. Set at end of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['if_document_collection_changes'] = [
+    'name' => t('If document collection changes start token'),
+    'description' => t("If document collection changes start token. Set at start of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['endif_document_collection_changes'] = [
+    'name' => t('If document collection changes end token'),
+    'description' => t("If document collection changes end token. Set at end of if-token block."),
+  ];
+
+  $info['tokens']['loop_notification']['if_document_new'] = [
+    'name' => t('If document new start token'),
+    'description' => t("If document  new start token. Set at start of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['endif_document_new'] = [
+    'name' => t('If document new end token'),
+    'description' => t("If document  new end token. Set at end of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['if_document_changes'] = [
+    'name' => t('If document changes start token'),
+    'description' => t("If document  changes start token. Set at start of if-token block."),
+  ];
+  $info['tokens']['loop_notification']['endif_document_changes'] = [
+    'name' => t('If document changes end token'),
+    'description' => t("If document  changes end token. Set at end of if-token block."),
+  ];
+
+  return $info;
+}
+
+/**
  * Implements hook_tokens().
  */
-function loop_notification_tokens($type, $tokens, array $data = array(), array $options = array()) {
+function loop_notification_tokens(
+  $type,
+  $tokens,
+  array $data = [],
+  array $options = []
+) {
   $replacements = [];
-  if ('node' === $type) {
-    $node = $data['node'];
-    foreach ($tokens as $name => $original) {
-      // Process tokens on the form [node:field|trim(max_length)].
-      if (preg_match('/^(?<field_name>[^|]+)\|trim\((?<max_length>\d+)\)$/', $name, $matches)) {
-        $field_name = $matches['field_name'];
-        $string = $node->{$field_name};
-        if (isset($string[LANGUAGE_NONE][0]['value'])) {
-          $string = $string[LANGUAGE_NONE][0]['value'];
-        }
-        $string = strip_tags($string);
-        $max_length = (int) $matches['max_length'];
 
-        $replacements[$original] = truncate_utf8($string, $max_length, TRUE, TRUE);
+  if ($type == 'loop-notification' && !empty($data['loop_notification'])) {
+    $token_data = $data['loop_notification'];
+    foreach ($tokens as $name => $original) {
+      if (isset($token_data[$name])) {
+        $replacements[$original] = $token_data[$name];
       }
     }
   }

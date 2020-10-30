@@ -1,16 +1,21 @@
 <?php
 
 /**
+ * @file
+ * Module file for itk_cookieinformation.
+ */
+
+/**
  * Implements hook_init().
  */
 function itk_cookieinformation_init() {
-  drupal_add_js('https://policy.app.cookieinformation.com/uc.js', array(
+  drupal_add_js('https://policy.app.cookieinformation.com/uc.js', [
     'type' => 'external',
     'group' => JS_LIBRARY - 1000,
     'every_page' => TRUE,
     'scope' => 'header',
     'weight' => -10000,
-  ));
+  ]);
 }
 
 /**
@@ -26,7 +31,7 @@ function itk_cookieinformation_preprocess_html_tag(&$vars) {
     }
 
     // Add consent check to google analytics.
-    if(strpos($vars['element']['#attributes']['src'], 'google_analytics/googleanalytics.js')) {
+    if (strpos($vars['element']['#attributes']['src'], 'google_analytics/googleanalytics.js')) {
       $src = $vars['element']['#attributes']['src'];
       $vars['element']['#attributes']['data-consent-src'] = $src;
       $vars['element']['#attributes']['src'] = '';
@@ -34,10 +39,10 @@ function itk_cookieinformation_preprocess_html_tag(&$vars) {
     }
 
     // Add consent check to google analytics inline script.
-    if(strpos($vars['element']['#value'], 'GoogleAnalyticsObject')) {
+    if (strpos($vars['element']['#value'], 'GoogleAnalyticsObject')) {
       $value = $vars['element']['#value'];
-      $vars['element']['#value'] = "window.addEventListener('CookieInformationConsentGiven', function (event) { 
-if (CookieInformation.getConsentGivenFor('cookie_cat_marketing')) {" . $value . "} 
+      $vars['element']['#value'] = "window.addEventListener('CookieInformationConsentGiven', function (event) {
+if (CookieInformation.getConsentGivenFor('cookie_cat_marketing')) {" . $value . "}
 }, false);";
     }
   }

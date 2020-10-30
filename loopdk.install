@@ -20,7 +20,7 @@ function loopdk_install() {
   $admin_theme = 'seven';
 
   // Enable themes.
-  theme_enable(array($default_theme, $admin_theme));
+  theme_enable([$default_theme, $admin_theme]);
 
   // Enable $default_theme.
   variable_set('theme_default', $default_theme);
@@ -70,20 +70,20 @@ function loopdk_page_not_found() {
   $node->title = 'Page not found';
   $node->type = 'page';
   $node->language = 'und';
-  $node->field_ding_page_body = array(
-    'und' => array(
-      array(
+  $node->field_ding_page_body = [
+    'und' => [
+      [
         'value' => 'Page not found',
         'format' => 'editor',
         'safe_value' => '<p>Page not found</p>',
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 
-  $node->path = array(
+  $node->path = [
     'alias' => 'page-not-found',
     'language' => 'und',
-  );
+  ];
 
   node_save($node);
 
@@ -101,20 +101,20 @@ function loopdk_access_denied_page() {
   $node->title = 'Access denied';
   $node->type = 'page';
   $node->language = 'und';
-  $node->field_ding_page_body = array(
-    'und' => array(
-      array(
+  $node->field_ding_page_body = [
+    'und' => [
+      [
         'value' => 'Access denied',
         'format' => 'editor',
         'safe_value' => '<p>Access denied</p>',
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 
-  $node->path = array(
+  $node->path = [
     'alias' => 'access_denied',
     'language' => 'und',
-  );
+  ];
 
   node_save($node);
 
@@ -151,15 +151,15 @@ function loopdk_update_7002() {
  * Delete nodes and content types for leaf, tree and index.
  */
 function loopdk_update_7003() {
-  $types = array(
+  $types = [
     'leaf',
     'index',
     'tree',
-  );
+  ];
   foreach ($types as $type) {
     // First, delete nodes.
     $results = db_select('node', 'n')
-      ->fields('n', array('nid'))
+      ->fields('n', ['nid'])
       ->condition('type', $type)
       ->execute();
     foreach ($results as $result) {
@@ -167,13 +167,13 @@ function loopdk_update_7003() {
     }
     if (!empty($nids)) {
       node_delete_multiple($nids);
-      drupal_set_message(t('%count nodes has been deleted.', array('%count' => count($nids))));
+      drupal_set_message(t('%count nodes has been deleted.', ['%count' => count($nids)]));
     }
     // Then, delete content type.
     if (node_type_load($type)) {
       node_type_delete($type);
       variable_del('node_preview_' . $type);
-      drupal_set_message(t('%type content type has been deleted.', array('%type' => $type)));
+      drupal_set_message(t('%type content type has been deleted.', ['%type' => $type]));
     }
   }
   node_types_rebuild();
@@ -181,8 +181,8 @@ function loopdk_update_7003() {
 
   // Uninstall module.
   if (module_exists('loop_external_data')) {
-    module_disable(array('loop_external_data'));
-    drupal_uninstall_modules(array('loop_external_data'));
+    module_disable(['loop_external_data']);
+    drupal_uninstall_modules(['loop_external_data']);
   }
 }
 
