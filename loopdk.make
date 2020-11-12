@@ -192,8 +192,8 @@ projects[rules][version] = "2.12"
 projects[saml_sp][subdir] = "contrib"
 projects[saml_sp][version] = "2.2"
 ; Custom SAML SP hooks
-projects[saml_sp][patch][] = "https://raw.githubusercontent.com/os2loop/profile/master/patches/saml_sp_drupal_login-alter_user_hooks.patch"
-projects[saml_sp][patch][] = "https://raw.githubusercontent.com/os2loop/profile/master/patches/saml_sp_remove_make_file.patch"
+projects[saml_sp][patch][] = "https://raw.githubusercontent.com/os2loop/profile/main/patches/saml_sp_drupal_login-alter_user_hooks.patch"
+projects[saml_sp][patch][] = "https://raw.githubusercontent.com/os2loop/profile/main/patches/saml_sp_remove_make_file.patch"
 
 projects[search_api][subdir] = "contrib"
 projects[search_api][version] = "1.26"
@@ -268,7 +268,7 @@ projects[transliteration][version] = "3.2"
 
 projects[user_import][subdir] = "contrib"
 projects[user_import][version] = "3.x-dev"
-projects[user_import][patch][] = "https://raw.githubusercontent.com/os2loop/profile/release/patches/user_import-_user_import_publication_email.patch"
+projects[user_import][patch][] = "https://raw.githubusercontent.com/os2loop/profile/main/patches/user_import-_user_import_publication_email.patch"
 
 projects[uuid][subdir] = "contrib"
 projects[uuid][version] = "1.3"
