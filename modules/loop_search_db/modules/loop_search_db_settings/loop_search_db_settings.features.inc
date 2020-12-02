@@ -178,7 +178,8 @@ function loop_search_db_settings_default_search_api_page() {
       "result_page_search_form" : 1,
       "get_per_page" : 0,
       "view_mode" : "search_api_page_result",
-      "empty_behavior" : "blocks"
+      "language_filter" : [],
+      "empty_behavior" : "results"
     },
     "enabled" : "1"
   }');
