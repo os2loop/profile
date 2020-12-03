@@ -209,9 +209,9 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
   $facet_name = 'field_subject:name';
   $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
 
-  $tree = _loop_search_get_taxonomy_tree('keyword');
-  $facet_name = 'field_keyword:name';
-  $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
+  // $tree = _loop_search_get_taxonomy_tree('keyword');
+  // $facet_name = 'field_keyword:name';
+  // $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
 
   $form['#sorts'] = [
     [
