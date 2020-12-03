@@ -291,8 +291,8 @@ function loop_search_db_settings_default_search_api_sort() {
     "enabled" : "1",
     "weight" : "0",
     "identifier" : "loop_search_db_index__created",
-    "default_sort" : "1",
-    "default_sort_no_terms" : "1",
+    "default_sort" : "0",
+    "default_sort_no_terms" : "0",
     "default_order" : "desc",
     "options" : { "field_name" : "Date created" }
   }');
@@ -303,8 +303,8 @@ function loop_search_db_settings_default_search_api_sort() {
     "enabled" : "1",
     "weight" : "0",
     "identifier" : "loop_search_db_index__search_api_relevance",
-    "default_sort" : "0",
-    "default_sort_no_terms" : "0",
+    "default_sort" : "1",
+    "default_sort_no_terms" : "1",
     "default_order" : "desc",
     "options" : { "field_name" : "search_api_relevance" }
   }');
