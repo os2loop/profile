@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * loop_notification.rules_defaults.inc

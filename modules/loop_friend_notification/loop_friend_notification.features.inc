@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * loop_friend_notification.features.inc
@@ -32,9 +33,8 @@ function loop_friend_notification_default_message_type() {
     "arguments" : null,
     "message_text" : { "da" : [
         {
-          "value" : "Brugeren [message:field-sender] vil gerne g\\u00f8re dig opm\\u00e6rksom p\\u00e5 tr\\u00e5den \\u003Ca href=\\u0022[message:field-message-node-reference:url:absolute]\\u0022\\u003E[message:field-node:title]\\u003C\\/a\\u003E.",
-          "format" : "html",
-          "safe_value" : "Brugeren [message:field-sender] vil gerne g\\u00f8re dig opm\\u00e6rksom p\\u00e5 tr\\u00e5den \\u003Ca href=\\u0022[message:field-message-node-reference:url:absolute]\\u0022\\u003E[message:field-node:title]\\u003C\\/a\\u003E."
+          "value" : "Brugeren [message:field-sender] vil gerne g\\u00f8re dig opm\\u00e6rksom p\\u00e5 tr\\u00e5den \\u003Ca href=\\u0022[site:url]node\\/[message:field-node:nid]\\u0022\\u003E[message:field-node:title]\\u003C\\/a\\u003E.",
+          "format" : "messages"
         }
       ]
     }
