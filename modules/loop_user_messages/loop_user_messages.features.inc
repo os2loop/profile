@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * loop_user_messages.features.inc
