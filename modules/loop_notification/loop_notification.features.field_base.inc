@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * loop_notification.features.field_base.inc

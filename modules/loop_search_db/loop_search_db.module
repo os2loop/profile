@@ -209,9 +209,9 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
   $facet_name = 'field_subject:name';
   $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
 
-  $tree = _loop_search_get_taxonomy_tree('keyword');
-  $facet_name = 'field_keyword:name';
-  $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
+  // $tree = _loop_search_get_taxonomy_tree('keyword');
+  // $facet_name = 'field_keyword:name';
+  // $form['#facets'][$facet_name] = _loop_search_build_facets($facet_name, $tree);
 
   $form['#sorts'] = [
     [
@@ -235,10 +235,10 @@ function loop_search_db_form_search_api_page_search_form_alter(array &$form, arr
     $field = $sort['field'];
     $direction = $sort['direction'];
     $sort['active'] = _loop_search_is_sort_active($field, $direction);
-    $sort['url'] = _loop_search_get_sort_url($field, $direction);
+    $sort['url'] = _loop_search_get_sort_url($field, $direction, $page);
   }
   // The first sort is active if no other sort is active.
-  $form['#sorts'][0]['active'] = empty(array_filter($form['#sorts'], function ($sort) {
+  $form['#sorts'][0]['active'] = $form['#sorts'][0]['active'] || empty(array_filter($form['#sorts'], function ($sort) {
     return $sort['active'];
   }));
 
@@ -299,16 +299,18 @@ function loop_search_db_search_form_submit(array $form, array &$form_state) {
  *   The field to sort by.
  * @param string $direction
  *   The direction to sort in.
+ * @param Entity $search_page
+ *   The search page.
  *
  * @return string
  *   The sort url.
  */
-function _loop_search_get_sort_url($field, $direction) {
+function _loop_search_get_sort_url($field, $direction, Entity $search_page = null) {
   $query = drupal_get_query_parameters();
   $query['sort'] = $field;
   $query['order'] = $direction;
 
-  return url(current_path(), ['query' => $query]);
+  return url($search_page->path ?? current_path(), ['query' => $query]);
 }
 
 /**

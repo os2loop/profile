@@ -143,6 +143,10 @@ projects[message_notify][version] = "2.5"
 projects[message_subscribe][subdir] = "contrib"
 projects[message_subscribe][version] = "1.0-rc2"
 
+;; @see https://www.drupal.org/project/message/issues/1774218#comment-11806231
+projects[message_token_filter][subdir] = "contrib"
+projects[message_token_filter][version] = "1.0"
+
 projects[mimemail][subdir] = "contrib"
 projects[mimemail][version] = "1.1"
 

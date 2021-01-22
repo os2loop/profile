@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * loop_user_messages.views_default.inc
@@ -72,7 +73,7 @@ function loop_user_messages_views_default_views() {
   $handler->display->display_options['fields']['message_render']['table'] = 'message';
   $handler->display->display_options['fields']['message_render']['field'] = 'message_render';
   $handler->display->display_options['fields']['message_render']['label'] = '';
-  $handler->display->display_options['fields']['message_render']['alter']['max_length'] = '128';
+  $handler->display->display_options['fields']['message_render']['alter']['max_length'] = '196';
   $handler->display->display_options['fields']['message_render']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['message_render']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['message_render']['element_wrapper_type'] = 'div';

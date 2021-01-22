@@ -35,15 +35,6 @@ angular.module('searchBoxApp').controller('loopSearchBoxController', ['CONFIG', 
      * Set flag when new subject filters are selected.
      */
     $scope.filterNewSelection = function filterNewSelection($event) {
-      if ($event && $event.currentTarget) {
-        // Propagate checked to children.
-        var target = $event.currentTarget
-        // https://caniuse.com/?search=closest
-        var selfAndDescendants = target.closest('.search-filters--facets-item').querySelectorAll('input');
-        [].forEach.call(selfAndDescendants, function (item) {
-          item.checked = $event.currentTarget.checked;
-        });
-      }
       $scope.newSubjects = true;
     };
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * loop_notification.features.inc
@@ -79,21 +80,20 @@ function loop_notification_default_message_type() {
       "token options" : { "clear" : 0 },
       "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" }
     },
-    "language" : "en",
+    "language" : "da",
     "arguments" : null,
     "message_text" : {
       "da" : [
         {
-          "value" : "Der er kommet et nyt svar til sp\\u00f8rgsm\\u00e5let: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "Der er kommet et nyt svar til sp\\u00f8rgsm\\u00e5let: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
+          "value" : "Der er kommet et nyt svar til sp\\u00f8rgsm\\u00e5let: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
+          "format" : "messages"
         }
       ],
       "en" : [
         {
-          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
+          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
         }
       ]
     }
@@ -113,16 +113,15 @@ function loop_notification_default_message_type() {
     "message_text" : {
       "da" : [
         {
-          "value" : "Et svar til sp\\u00f8rgsm\\u00e5let: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E er blevet \\u00e6ndret",
-          "format" : "html",
-          "safe_value" : "Et svar til sp\\u00f8rgsm\\u00e5let: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E er blevet \\u00e6ndret"
+          "value" : "Et svar til sp\\u00f8rgsm\\u00e5let: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E er blevet \\u00e6ndret",
+          "format" : "messages"
         }
       ],
       "en" : [
         {
-          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
+          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
         }
       ]
     }
@@ -142,16 +141,15 @@ function loop_notification_default_message_type() {
     "message_text" : {
       "da" : [
         {
-          "value" : "Et dokument er blevet oprettet: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "Et dokument er blevet oprettet: \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
+          "value" : "Et dokument er blevet oprettet: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
+          "format" : "messages"
         }
       ],
       "en" : [
         {
-          "value" : "A document has been added: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "A document has been added: \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
+          "value" : "A document has been added: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "A document has been added: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
         }
       ]
     }
@@ -171,16 +169,16 @@ function loop_notification_default_message_type() {
     "message_text" : {
       "da" : [
         {
-          "value" : "En dokumentsamling er blevet oprettet: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "En dokumentsamling er blevet oprettet: \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
+          "value" : "En dokumentsamling er blevet oprettet: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "En dokumentsamling er blevet oprettet: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
         }
       ],
       "en" : [
         {
-          "value" : "A document collection has been added: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "A document collection has been added: \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
+          "value" : "A document collection has been added: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "A document collection has been added: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
         }
       ]
     }
@@ -200,16 +198,15 @@ function loop_notification_default_message_type() {
     "message_text" : {
       "da" : [
         {
-          "value" : "En dokumentsamling er blevet \\u00e6ndret: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "En dokumentsamling er blevet \\u00e6ndret: \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
+          "value" : "En dokumentsamling er blevet \\u00e6ndret: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
+          "format" : "messages"
         }
       ],
       "en" : [
         {
-          "value" : "A document collection has been edited: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "A document collection has been edited: \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
+          "value" : "A document collection has been edited: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "A document collection has been edited: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
         }
       ]
     }
@@ -229,16 +226,15 @@ function loop_notification_default_message_type() {
     "message_text" : {
       "da" : [
         {
-          "value" : "Et dokument er blevet \\u00e6ndret: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "Et dokument er blevet \\u00e6ndret: \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
+          "value" : "Et dokument er blevet \\u00e6ndret: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
+          "format" : "messages"
         }
       ],
       "en" : [
         {
-          "value" : "A document has been edited: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "A document has been edited: \\u003Ca href=\\u0022url]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
+          "value" : "A document has been edited: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "A document has been edited: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:title]\\u003C\\/a\\u003E"
         }
       ]
     }
@@ -258,16 +254,15 @@ function loop_notification_default_message_type() {
     "message_text" : {
       "da" : [
         {
-          "value" : "Der er kommet et nyt sp\\u00f8rgsm\\u00e5l til et emne du f\\u00f8lger \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "Der er kommet et nyt sp\\u00f8rgsm\\u00e5l til et emne du f\\u00f8lger \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
+          "value" : "Der er kommet et nyt sp\\u00f8rgsm\\u00e5l til et emne du f\\u00f8lger \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
+          "format" : "messages"
         }
       ],
       "en" : [
         {
-          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
+          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
         }
       ]
     }
@@ -287,16 +282,15 @@ function loop_notification_default_message_type() {
     "message_text" : {
       "da" : [
         {
-          "value" : "Et sp\\u00f8rgsm\\u00e5l du f\\u00f8lger er blevet \\u00e6ndret \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "Et sp\\u00f8rgsm\\u00e5l du f\\u00f8lger er blevet \\u00e6ndret \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
+          "value" : "Et sp\\u00f8rgsm\\u00e5l du f\\u00f8lger er blevet \\u00e6ndret \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
+          "format" : "messages"
         }
       ],
       "en" : [
         {
-          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
-          "format" : "html",
-          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022\\/node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
+          "value" : "There is a new reply to the question: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E",
+          "format" : "messages",
+          "safe_value" : "There is a new reply to the question: \\u003Ca href=\\u0022[site:url]node\\/[message:field-message-node-reference:nid]\\u0022\\u003E[message:field-message-node-reference:field_description]\\u003C\\/a\\u003E"
         }
       ]
     }

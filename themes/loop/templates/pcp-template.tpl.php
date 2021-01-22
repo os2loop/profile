@@ -23,6 +23,8 @@
   .pcp-percent-bar.<?php print $entity_type . '-' . $bundle; ?> { width: <?php print $current_percent; ?>%; }
 </style>
 
+<?php if ($current_percent < 100): ?>
+
 <aside class="block--pcp">
   <div class="block-module--inner">
     <h2 class="block-module--my-content-header"><?php print t('Finish your profile') ?></h2>
@@ -43,3 +45,5 @@
     <?php endif;?>
   </div>
 </aside>
+
+<?php endif ?>
