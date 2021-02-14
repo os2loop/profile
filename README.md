@@ -69,6 +69,11 @@ to add this role).
 drush user-add-role administrator admin
 ```
 
+#### Translations
+
+Go to `/admin/config/regional/i18n/strings` and make sure that “English” is
+selected as “Source language” for string translations.
+
 #### Menus
 
 To make menus fall into place, go to `/admin/structure/features/loop_post`,
