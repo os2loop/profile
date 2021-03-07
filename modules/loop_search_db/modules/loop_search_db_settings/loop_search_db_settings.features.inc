@@ -198,7 +198,7 @@ function loop_search_db_settings_default_search_api_server() {
     "class" : "search_api_db_service",
     "options" : {
       "database" : "default:default",
-      "min_chars" : "3",
+      "min_chars" : "1",
       "partial_matches" : 0,
       "indexes" : { "loop_search_db_index" : {
           "search_api_language" : {
