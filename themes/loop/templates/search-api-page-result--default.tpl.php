@@ -65,8 +65,10 @@ print htmlspecialchars(json_encode(['field_subject', $subject->name]));
     <div class="search-node-result--meta-data-date">
       <?php print format_date($item->created, 'custom', 'd. M Y'); ?>
     </div>
-    <div class="search-node-result--data-wrapper">
-      <?php print l(format_plural($item->comment_count, '1 answer', '@count answers'), $url['path'], ['attributes' => ['class' => ['search-result--comments']]]); ?>
-    </div>
+    <?php if ('post' === $item->type): ?>
+      <div class="search-node-result--data-wrapper">
+        <?php print l(format_plural($item->comment_count, '1 answer', '@count answers'), $url['path'], ['attributes' => ['class' => ['search-result--comments']]]); ?>
+      </div>
+    <?php endif ?>
   </div>
 </div>
