@@ -303,7 +303,7 @@ projects[views_tree][subdir] = "contrib"
 projects[views_tree][version] = "2.0"
 
 projects[wysiwyg][subdir] = "contrib"
-projects[wysiwyg][version] = "2.6"
+projects[wysiwyg][version] = "2.9"
 
 ; Libraries
 libraries[angular][download][type] = "get"
